@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.3">
+<eagle version="8.2.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="yes"/>
@@ -5364,7 +5364,6 @@
 <rectangle x1="27.409140625" y1="32.026859375" x2="27.698696875" y2="32.042096875" layer="210"/>
 <rectangle x1="27.424378125" y1="32.0421" x2="27.622496875" y2="32.0573375" layer="210"/>
 <rectangle x1="27.424378125" y1="32.0573375" x2="27.531059375" y2="32.072575" layer="210"/>
-<text x="0" y="-0.0762" size="0.03048125" layer="210" font="vector">/Users/zacman/Documents/Graphics/KickSat/kicksatlogo4-silkscreen.bmp</text>
 </plain>
 <libraries>
 <library name="TI_launchpad">
@@ -6095,6 +6094,9 @@ This Sunstone Circuits 2 Layer .DRU has been set to cover our minimum requiremen
 <autorouter>
 <pass name="Default">
 <param name="RoutingGrid" value="50mil"/>
+<param name="AutoGrid" value="1"/>
+<param name="Efforts" value="0"/>
+<param name="TopRouterVariant" value="1"/>
 <param name="tpViaShape" value="round"/>
 <param name="PrefDir.1" value="|"/>
 <param name="PrefDir.2" value="0"/>
@@ -6191,7 +6193,10 @@ This Sunstone Circuits 2 Layer .DRU has been set to cover our minimum requiremen
 <element name="JP2" library="SparkFun" package="1X03_LOCK" value="" x="32.0134" y="37.6094"/>
 <element name="JP3" library="SparkFun" package="1X05_LOCK" value="" x="3.81" y="45.085" rot="R270"/>
 <element name="JP4" library="SparkFun" package="1X05_LOCK" value="" x="6.35" y="34.925" rot="R90"/>
-<element name="JP5" library="SparkFun" package="1X03_LOCK" value="" x="41.91" y="47.625"/>
+<element name="JP5" library="SparkFun" package="1X03_LOCK" value="" x="41.91" y="47.625" smashed="yes">
+<attribute name="NAME" x="41.036240625" y="44.30268125" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="40.64" y="44.45" size="1.27" layer="27"/>
+</element>
 </elements>
 <signals>
 <signal name="VCC">
