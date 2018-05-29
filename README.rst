@@ -1,15 +1,34 @@
+=============
 PCB Satellite
 =============
-Space Technologies at Cal
+Space Technologies at Cal (https://stac.berkeley.edu)
 
 University of California, Berkeley
 
-https://stac.berkeley.edu
 
-Samples from https://github.com/kicksat
+Getting Started
+===============
+Clone this repository. Then:
+
+Eagle
+-----
+#. Obtain the `STAC Eagle library <https://github.com/space-technologies-at-california/electronics>`_ by running::
+   
+    git submodule init
+    git submodule update
+
+#. `Add the library to Eagle <https://www.instructables.com/id/Adding-a-Library-to-Eagle-CAD/>`_.
+
+Firmware
+--------
+#. Install `Energia <http://energia.nu/download/>`_.
+
+#. Obtain a programmer. We use the MSP430F5529 LaunchPad to program our sprite
+   using Spy-Bi-Wire (SBW), but any SBW-compatible programmer should work.
+
 
 Directory Structure
--------------------
+===================
 - ./eagle : Contains all necessary Eagle files for the sprite board
 
   - ./eagle/sprite-test: Contains the version of the sprite manufacture by 
@@ -20,12 +39,9 @@ Directory Structure
     working on. Our sprite began from the attitude-sprite designed by Zac
     Mancherster here: https://github.com/kicksat/attitude-sprite
 
-  - ./eagle/electronics: This is a clone of
-    https://github.com/space-technologies-at-california/electronics . It
-    contains parts used by other stac board. Please add any parts to the
-    stac.lbr file contained there. For instructions on how to setup eagle to 
-    point to this library, see here:
-    https://www.instructables.com/id/Adding-a-Library-to-Eagle-CAD/
+  - ./eagle/electronics: STAC Eagle library submodule. See Eagle_. Please add
+    any parts to the stac.lbr file contained there.
+    
 
 - ./firmware : Contains all the firmware for the sprite
 
