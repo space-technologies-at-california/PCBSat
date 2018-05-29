@@ -14,9 +14,14 @@ Directory Structure
     Bay Area Circuits as a test board. It is largely based on the sprite
     verison created by Zac Manchester here: https://github.com/kicksat/sprite
 
-    -./eagel/final-sprite: Contains the version of the sprite we are currently
+    -./eagle/final-sprite: Contains the version of the sprite we are currently
     working on. Our sprite began from the attitude-sprite designed by Zac
     Mancherster here: https://github.com/kicksat/attitude-sprite
+
+    -./eagle/electronics: This is a clone of
+    https://github.com/space-technologies-at-california/electronics . It
+    contains parts used by other stac board. Please add any parts to the
+    stac.lbr file contained there.  
 
 - ./firmware : Contains all the firmware for the sprite
 

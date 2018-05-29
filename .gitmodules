@@ -1,0 +1,3 @@
+[submodule "eagle/electronics"]
+	path = eagle/electronics
+	url = https://github.com/space-technologies-at-california/electronics.git
