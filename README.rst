@@ -21,7 +21,9 @@ Directory Structure
     -./eagle/electronics: This is a clone of
     https://github.com/space-technologies-at-california/electronics . It
     contains parts used by other stac board. Please add any parts to the
-    stac.lbr file contained there.  
+    stac.lbr file contained there. For instructions on how to setup eagle to 
+    point to this library, see here:
+    https://www.instructables.com/id/Adding-a-Library-to-Eagle-CAD/
 
 - ./firmware : Contains all the firmware for the sprite
 
