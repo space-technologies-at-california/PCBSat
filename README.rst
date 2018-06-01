@@ -55,4 +55,4 @@ Directory Structure
 
 - ./gerbers : Contains the gerbers for the sprites. 
 
-[Getting Started with Sprite Development Kit](https://github.com/kicksat/sprite/wiki/Getting-started-with-the-Sprite-Development-Kit)
+`Getting Started with Sprite Development Kit<https://github.com/kicksat/sprite/wiki/Getting-started-with-the-Sprite-Development-Kit>`_
