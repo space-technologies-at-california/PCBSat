@@ -22,8 +22,9 @@ Eagle
 Firmware
 --------
 #. Install `Energia <http://energia.nu/download/>`_.
-   Install alt: clone branch 'Branch_CC430_RF_support' from https://github.com/zacmanchester/Energia.git 
+   Install alt (unsupported board): clone branch 'Branch_CC430_RF_support' from https://github.com/zacmanchester/Energia.git 
    for SpriteRadio, SpriteGyro, SpriteMag support.
+   Consider different library or porting to our current board?
 
 #. Install ant.
 
