@@ -22,13 +22,14 @@ Eagle
 Firmware
 --------
 #. Install `Energia <http://energia.nu/download/>`_.
-Install alt: clone branch 'Branch_CC430_RF_support' from https://github.com/zacmanchester/Energia.git 
-for SpriteRadio, SpriteGyro, SpriteMag support.
+   Install alt: clone branch 'Branch_CC430_RF_support' from https://github.com/zacmanchester/Energia.git 
+   for SpriteRadio, SpriteGyro, SpriteMag support.
 
 #. Install ant.
 
-#. navigate to the build folder. To boot up Energia, run ::
-   ant run
+#. navigate to the build folder. To boot up Energia, run::
+
+    ant run
 
 #. Obtain a programmer. We use the MSP430F5529 LaunchPad to program our sprite
    using Spy-Bi-Wire (SBW), but any SBW-compatible programmer should work.
