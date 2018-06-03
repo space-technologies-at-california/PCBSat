@@ -42,3 +42,6 @@ eagle.epf
 *.eps
 
 ~$*
+
+*.swp
+tags
