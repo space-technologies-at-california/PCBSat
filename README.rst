@@ -62,6 +62,7 @@ Directory Structure
   - ./eagle/electronics: STAC Eagle library submodule. See Eagle_. Please add
     any parts to the stac.lbr file contained there.
     
+- ./simulation : Contains all the simulation netlists and other data 
 
 - ./firmware : Contains all the firmware for the sprite
 
