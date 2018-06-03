@@ -35,6 +35,17 @@ Firmware
 #. Obtain a programmer. We use the MSP430F5529 LaunchPad to program our sprite
    using Spy-Bi-Wire (SBW), but any SBW-compatible programmer should work.
 
+Programming
+~~~~~~~~~~~
+#. Disconnect the 5V, 3V, GND, SBW RST and TST jumpers from the LaunchPad.
+
+#. Connect the 3V, GND, SBW RST and TST jumpers on the ezFET-lite side to the
+   target.
+
+#. Set target to CC430F5135 or CC430F5137.
+
+#. Program as you would a EE 16A microcontroller.
+
 
 Directory Structure
 ===================
@@ -56,4 +67,4 @@ Directory Structure
 
 - ./gerbers : Contains the gerbers for the sprites. 
 
-`Getting Started with Sprite Development Kit<https://github.com/kicksat/sprite/wiki/Getting-started-with-the-Sprite-Development-Kit>`_
+`Getting Started with Sprite Development Kit <https://github.com/kicksat/sprite/wiki/Getting-started-with-the-Sprite-Development-Kit>`_
