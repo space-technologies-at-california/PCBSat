@@ -10,7 +10,7 @@ MSP430_SUPPORT_DIR?=${MSP430_TOOLCHAIN}/include
 # The rest should be fine:
 CC=msp430-gcc
 CFLAGS=-mmcu=${DEVICE} -I ${MSP430_SUPPORT_DIR}
-LDFLAGS=-L ${MSP430_SUPPORT_DIR}
+LDFLAGS=-L ${MSP430_SUPPORT_DIR}/../lib/ldscripts
 RM=rm -f
 
 all: ${MAIN}

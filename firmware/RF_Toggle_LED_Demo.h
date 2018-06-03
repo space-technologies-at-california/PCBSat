@@ -74,9 +74,12 @@
  *
  *
  * --/COPYRIGHT--*/
-#include "cc430x513x.h"
+#include "cc430f5137.h"
 #include "RF1A.h"
 #include "hal_pmm.h"
+
+#define _even_in_range(x,y) (x)
+#define __even_in_range(x,y) _even_in_range(x,y)
 
 /*******************
  * Function Definition
