@@ -4,9 +4,9 @@
 #### Energia Setup
 1. Download Energia from: http://energia.nu/download/
 2. Go to `/Applications/Energia.app/Contents/Java/hardware/energia/msp430/boards.txt`
-3. Copy the contents in [boards_addition.txt]() from this repo into the end of the `boards.txt` file
+3. Copy the contents in [boards_addition.txt](https://github.com/space-technologies-at-california/PCBSat/blob/master/tools/energia/boards_addition.txt ) from this repo into the end of the `boards.txt` file
 4. Go to `/Applications/Energia.app/Contents/Java/hardware/energia/msp430/variants`
-5. Copy the [Sprite_5] and [Sprite_7] folders into the `variants` directory
+5. Copy the [Sprite_5](https://github.com/space-technologies-at-california/PCBSat/blob/master/tools/energia/Sprite_5) and [Sprite_7](https://github.com/space-technologies-at-california/PCBSat/blob/master/tools/energia/Sprite_7 ) folders into the `variants` directory
 ..* There should be a `Board.mk` and `pins_energia.h` file in both Sprite directories
 6. Check to make sure you have a woking version of `mspdebug` in the `/Applications/Energia.app/Contents/Java/hardware/tools/msp430/bin` directory
 ..* You can do this by running `./mspdebug tilib` from the same directory and checking to make sure the debugger starts up
