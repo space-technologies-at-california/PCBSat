@@ -43,5 +43,10 @@ eagle.epf
 
 ~$*
 
+*.DS_Store
 *.swp
 tags
+
+# Pick and Place files
+*.mn?
+
