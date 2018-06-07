@@ -10632,8 +10632,6 @@ Source: http://www.vishay.com/docs/10129/hpc0201a.pdf</description>
 <part name="P+13" library="SparkFun" deviceset="VCC" device=""/>
 <part name="L1" library="SparkFun" deviceset="INDUCTOR" device="0603" value="12 nH"/>
 <part name="P+10" library="SparkFun" deviceset="VCC" device=""/>
-<part name="C6" library="SparkFun" deviceset="CAP" device="0603-CAP" value="100nF"/>
-<part name="C5" library="SparkFun" deviceset="CAP" device="0603-CAP" value="10nF"/>
 <part name="GND22" library="SparkFun" deviceset="GND" device=""/>
 <part name="GND23" library="SparkFun" deviceset="GND" device=""/>
 <part name="D1" library="SparkFun" deviceset="LED" device="0603"/>
@@ -10703,9 +10701,9 @@ Source: http://www.vishay.com/docs/10129/hpc0201a.pdf</description>
 <part name="GND30" library="SparkFun" deviceset="GND" device=""/>
 <part name="R14" library="SparkFun" deviceset="RESISTOR" device="0603-RES" value="1K"/>
 <part name="P+15" library="SparkFun" deviceset="VCC" device=""/>
-<part name="R15" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1"/>
-<part name="R16" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1"/>
-<part name="R17" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1"/>
+<part name="R15" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="600K"/>
+<part name="R16" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="120K"/>
+<part name="R17" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="910K"/>
 <part name="GND3" library="SparkFun" deviceset="GND" device=""/>
 <part name="R18" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1"/>
 <part name="R19" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1"/>
@@ -10716,8 +10714,14 @@ Source: http://www.vishay.com/docs/10129/hpc0201a.pdf</description>
 <part name="U$5" library="STAC" deviceset="LPS4018-223M" device=""/>
 <part name="VCC2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCCINT" device=""/>
 <part name="GND31" library="SparkFun" deviceset="GND" device=""/>
-<part name="C17" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0402" package3d_urn="urn:adsk.eagle:package:26136/1"/>
-<part name="C16" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0402" package3d_urn="urn:adsk.eagle:package:26136/1"/>
+<part name="C17" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0402" package3d_urn="urn:adsk.eagle:package:26136/1" value="10u"/>
+<part name="C16" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0402" package3d_urn="urn:adsk.eagle:package:26136/1" value="10n"/>
+<part name="C18" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0402" package3d_urn="urn:adsk.eagle:package:26136/1" value="4.7u"/>
+<part name="C19" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0402" package3d_urn="urn:adsk.eagle:package:26136/1" value="0.1u"/>
+<part name="C5" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0402" package3d_urn="urn:adsk.eagle:package:26136/1" value="10n"/>
+<part name="C6" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0402" package3d_urn="urn:adsk.eagle:package:26136/1" value="100n"/>
+<part name="R24" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="7K"/>
+<part name="GND32" library="SparkFun" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -10732,7 +10736,7 @@ Source: http://www.vishay.com/docs/10129/hpc0201a.pdf</description>
 <text x="213.36" y="-314.96" size="2.54" layer="97">Hunter Adams
 vha3@cornell.edu</text>
 <text x="210.82" y="-304.8" size="3.048" layer="97">Design By:</text>
-<text x="152.4" y="-73.66" size="5.08" layer="97">Power</text>
+<text x="182.88" y="-73.66" size="5.08" layer="97">Power</text>
 <wire x1="149.86" y1="-167.64" x2="304.8" y2="-167.64" width="0.6096" layer="97" style="longdash"/>
 <text x="76.2" y="-264.16" size="1.778" layer="91">Rated up to VCCIO</text>
 <text x="73.66" y="-193.04" size="1.778" layer="91">1. Choose Imax ~ Pmax / VCCIO
@@ -10776,12 +10780,10 @@ vha3@cornell.edu</text>
 <instance part="P+8" gate="1" x="43.18" y="-203.2"/>
 <instance part="P+9" gate="1" x="60.96" y="-218.44"/>
 <instance part="P+13" gate="1" x="-25.4" y="-182.88"/>
-<instance part="L1" gate="G$1" x="261.62" y="-144.78" rot="MR270"/>
+<instance part="L1" gate="G$1" x="259.08" y="-144.78" rot="MR270"/>
 <instance part="P+10" gate="1" x="251.46" y="-142.24" rot="MR0"/>
-<instance part="C6" gate="G$1" x="281.94" y="-152.4" rot="MR0"/>
-<instance part="C5" gate="G$1" x="274.32" y="-152.4" rot="MR0"/>
-<instance part="GND22" gate="1" x="281.94" y="-157.48" rot="MR0"/>
-<instance part="GND23" gate="1" x="274.32" y="-157.48" rot="MR0"/>
+<instance part="GND22" gate="1" x="281.94" y="-160.02" rot="MR0"/>
+<instance part="GND23" gate="1" x="274.32" y="-160.02" rot="MR0"/>
 <instance part="D1" gate="G$1" x="-53.34" y="-236.22"/>
 <instance part="GND10" gate="1" x="-53.34" y="-246.38"/>
 <instance part="R5" gate="G$1" x="-53.34" y="-226.06" rot="R90"/>
@@ -10821,7 +10823,7 @@ vha3@cornell.edu</text>
 <instance part="U$3" gate="G$1" x="281.94" y="-142.24"/>
 <instance part="VCC1" gate="G$1" x="271.78" y="-88.9"/>
 <instance part="U$4" gate="G$1" x="195.58" y="-101.6"/>
-<instance part="P+1" gate="1" x="233.68" y="-78.74"/>
+<instance part="P+1" gate="1" x="248.92" y="-78.74"/>
 <instance part="SUPPLY1" gate="G$1" x="228.6" y="-78.74"/>
 <instance part="U2" gate="A" x="91.44" y="-233.68"/>
 <instance part="GND17" gate="1" x="116.84" y="-284.48" rot="MR0"/>
@@ -10864,6 +10866,12 @@ vha3@cornell.edu</text>
 <instance part="GND31" gate="1" x="210.82" y="-162.56"/>
 <instance part="C17" gate="G$1" x="294.64" y="-106.68"/>
 <instance part="C16" gate="G$1" x="162.56" y="-116.84"/>
+<instance part="C18" gate="G$1" x="241.3" y="-101.6"/>
+<instance part="C19" gate="G$1" x="248.92" y="-101.6"/>
+<instance part="C5" gate="G$1" x="274.32" y="-149.86"/>
+<instance part="C6" gate="G$1" x="281.94" y="-149.86"/>
+<instance part="R24" gate="G$1" x="167.64" y="-83.82" rot="R180"/>
+<instance part="GND32" gate="1" x="160.02" y="-83.82" rot="R270"/>
 </instances>
 <busses>
 </busses>
@@ -10882,7 +10890,6 @@ vha3@cornell.edu</text>
 <pinref part="P+10" gate="1" pin="VCC"/>
 <wire x1="251.46" y1="-142.24" x2="251.46" y2="-144.78" width="0.1524" layer="91"/>
 <pinref part="L1" gate="G$1" pin="1"/>
-<wire x1="254" y1="-144.78" x2="251.46" y2="-144.78" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="X1" gate="G$1" pin="VCC"/>
@@ -10968,8 +10975,8 @@ vha3@cornell.edu</text>
 </segment>
 <segment>
 <pinref part="U$4" gate="G$1" pin="SYS"/>
-<wire x1="213.36" y1="-99.06" x2="233.68" y2="-99.06" width="0.1524" layer="91"/>
-<wire x1="233.68" y1="-99.06" x2="233.68" y2="-78.74" width="0.1524" layer="91"/>
+<wire x1="213.36" y1="-99.06" x2="248.92" y2="-99.06" width="0.1524" layer="91"/>
+<wire x1="248.92" y1="-99.06" x2="248.92" y2="-78.74" width="0.1524" layer="91"/>
 <pinref part="P+1" gate="1" pin="VCC"/>
 </segment>
 <segment>
@@ -11022,12 +11029,9 @@ vha3@cornell.edu</text>
 <pinref part="GND2" gate="1" pin="GND"/>
 </segment>
 <segment>
-<pinref part="C6" gate="G$1" pin="2"/>
-<pinref part="GND22" gate="1" pin="GND"/>
-</segment>
-<segment>
-<pinref part="C5" gate="G$1" pin="2"/>
 <pinref part="GND23" gate="1" pin="GND"/>
+<wire x1="274.32" y1="-157.48" x2="274.32" y2="-154.94" width="0.1524" layer="91"/>
+<pinref part="C5" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <pinref part="D1" gate="G$1" pin="C"/>
@@ -11051,6 +11055,13 @@ vha3@cornell.edu</text>
 <pinref part="U$4" gate="G$1" pin="SETBK"/>
 <wire x1="213.36" y1="-119.38" x2="231.14" y2="-119.38" width="0.1524" layer="91"/>
 <junction x="231.14" y="-119.38"/>
+<pinref part="C19" gate="G$1" pin="2"/>
+<wire x1="248.92" y1="-106.68" x2="248.92" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="248.92" y1="-119.38" x2="241.3" y2="-119.38" width="0.1524" layer="91"/>
+<pinref part="C18" gate="G$1" pin="2"/>
+<wire x1="241.3" y1="-119.38" x2="241.3" y2="-106.68" width="0.1524" layer="91"/>
+<junction x="241.3" y="-119.38"/>
+<wire x1="241.3" y1="-119.38" x2="231.14" y2="-119.38" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND13" gate="1" pin="GND"/>
@@ -11194,6 +11205,18 @@ vha3@cornell.edu</text>
 <wire x1="210.82" y1="-154.94" x2="210.82" y2="-160.02" width="0.1524" layer="91"/>
 <junction x="210.82" y="-154.94"/>
 <pinref part="GND31" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="GND22" gate="1" pin="GND"/>
+<wire x1="281.94" y1="-154.94" x2="281.94" y2="-157.48" width="0.1524" layer="91"/>
+<pinref part="C6" gate="G$1" pin="2"/>
+</segment>
+<segment>
+<wire x1="177.8" y1="-137.16" x2="177.8" y2="-134.62" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="R24" gate="G$1" pin="2"/>
+<pinref part="GND32" gate="1" pin="GND"/>
 </segment>
 </net>
 <net name="UART_RX" class="0">
@@ -11419,16 +11442,16 @@ vha3@cornell.edu</text>
 </segment>
 <segment>
 <pinref part="L1" gate="G$1" pin="2"/>
-<pinref part="C5" gate="G$1" pin="1"/>
 <wire x1="274.32" y1="-147.32" x2="274.32" y2="-144.78" width="0.1524" layer="91"/>
 <junction x="274.32" y="-144.78"/>
-<pinref part="C6" gate="G$1" pin="1"/>
-<wire x1="281.94" y1="-144.78" x2="281.94" y2="-147.32" width="0.1524" layer="91"/>
 <wire x1="281.94" y1="-144.78" x2="274.32" y2="-144.78" width="0.1524" layer="91"/>
-<wire x1="274.32" y1="-144.78" x2="269.24" y2="-144.78" width="0.1524" layer="91"/>
+<wire x1="274.32" y1="-144.78" x2="266.7" y2="-144.78" width="0.1524" layer="91"/>
 <pinref part="U$3" gate="G$1" pin="VCCA"/>
 <wire x1="281.94" y1="-144.78" x2="281.94" y2="-142.24" width="0.1524" layer="91"/>
+<wire x1="281.94" y1="-147.32" x2="281.94" y2="-144.78" width="0.1524" layer="91"/>
 <junction x="281.94" y="-144.78"/>
+<pinref part="C5" gate="G$1" pin="1"/>
+<pinref part="C6" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="VCCINT" class="0">
@@ -11707,26 +11730,29 @@ vha3@cornell.edu</text>
 </net>
 <net name="REG_D0" class="0">
 <segment>
-<pinref part="U$4" gate="G$1" pin="REG_D0"/>
-<wire x1="177.8" y1="-83.82" x2="160.02" y2="-83.82" width="0.1524" layer="91"/>
-<label x="162.56" y="-83.82" size="1.778" layer="95"/>
-</segment>
-<segment>
 <pinref part="U1" gate="G$1" pin="3"/>
 <wire x1="-20.32" y1="-193.04" x2="-33.02" y2="-193.04" width="0.1524" layer="91"/>
 <label x="-33.02" y="-193.04" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="U$4" gate="G$1" pin="REG_D0"/>
+<wire x1="177.8" y1="-83.82" x2="177.8" y2="-76.2" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="-76.2" x2="157.48" y2="-76.2" width="0.1524" layer="91"/>
+<label x="162.56" y="-76.2" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="REG_D1" class="0">
-<segment>
-<pinref part="U$4" gate="G$1" pin="REG_D1"/>
-<wire x1="177.8" y1="-86.36" x2="160.02" y2="-86.36" width="0.1524" layer="91"/>
-<label x="162.56" y="-86.36" size="1.778" layer="95"/>
-</segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="4"/>
 <wire x1="-20.32" y1="-195.58" x2="-33.02" y2="-195.58" width="0.1524" layer="91"/>
 <label x="-33.02" y="-195.58" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$4" gate="G$1" pin="REG_D1"/>
+<wire x1="177.8" y1="-86.36" x2="175.26" y2="-86.36" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="-86.36" x2="175.26" y2="-78.74" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="-78.74" x2="157.48" y2="-78.74" width="0.1524" layer="91"/>
+<label x="162.56" y="-78.74" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$18" class="0">
@@ -11831,11 +11857,6 @@ vha3@cornell.edu</text>
 </net>
 <net name="VID" class="0">
 <segment>
-<pinref part="U$4" gate="G$1" pin="VID"/>
-<wire x1="177.8" y1="-88.9" x2="160.02" y2="-88.9" width="0.1524" layer="91"/>
-<label x="162.56" y="-88.9" size="1.778" layer="95"/>
-</segment>
-<segment>
 <pinref part="U1" gate="G$1" pin="23"/>
 <wire x1="-20.32" y1="-243.84" x2="-33.02" y2="-243.84" width="0.1524" layer="91"/>
 <label x="-30.48" y="-243.84" size="1.778" layer="95"/>
@@ -11851,6 +11872,14 @@ vha3@cornell.edu</text>
 <pinref part="U1" gate="G$1" pin="24"/>
 <wire x1="-20.32" y1="-246.38" x2="-33.02" y2="-246.38" width="0.1524" layer="91"/>
 <label x="-30.48" y="-246.38" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="N$16" class="0">
+<segment>
+<pinref part="R24" gate="G$1" pin="1"/>
+<wire x1="172.72" y1="-83.82" x2="172.72" y2="-88.9" width="0.1524" layer="91"/>
+<pinref part="U$4" gate="G$1" pin="VID"/>
+<wire x1="172.72" y1="-88.9" x2="177.8" y2="-88.9" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
