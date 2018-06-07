@@ -19189,16 +19189,6 @@ Pull-up required on NFAULT</text>
 </net>
 </nets>
 </sheet>
-<sheet>
-<plain>
-</plain>
-<instances>
-</instances>
-<busses>
-</busses>
-<nets>
-</nets>
-</sheet>
 </sheets>
 <errors>
 <approved hash="104,1,129.54,99.06,U1,7,N$4,,,"/>
