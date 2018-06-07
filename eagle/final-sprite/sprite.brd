@@ -6472,6 +6472,18 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <element name="R9" library="SparkFun" package="0603-RES" value="15R" x="-4.8" y="-107.6"/>
 <element name="R10" library="SparkFun" package="0603-RES" value="15R" x="-4.8" y="-110.6"/>
 <element name="R11" library="SparkFun" package="0603-RES" value="1K" x="-4.8" y="-113.6"/>
+<element name="U3" library="STAC" package="RTE16_1P66X1P66" value="DRV8833CRTER" x="-3.7" y="-118.2">
+<attribute name="AUTHOR" value="Ultra-Librarian" x="-3.7" y="-118.2" size="1.778" layer="27" display="off"/>
+<attribute name="CHECKED" value="Kevin Zheng" x="-3.7" y="-118.2" size="1.778" layer="27" display="off"/>
+<attribute name="DIGI-KEY_PN" value="296-40079-1-ND" x="-3.7" y="-118.2" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="DRV8833CRTER" x="-3.7" y="-118.2" size="1.778" layer="27" display="off"/>
+<attribute name="VENDOR" value="Texas Instruments" x="-3.7" y="-118.2" size="1.778" layer="27" display="off"/>
+</element>
+<element name="C14" library="SparkFun" package="0603-CAP" value="10uF" x="-4.8" y="-122.5"/>
+<element name="C15" library="SparkFun" package="0603-CAP" value="2.2uF" x="0.6" y="-122.5"/>
+<element name="R12" library="SparkFun" package="0603-RES" value="15R" x="-4.8" y="-125.5"/>
+<element name="R13" library="SparkFun" package="0603-RES" value="15R" x="0.6" y="-125.5"/>
+<element name="R14" library="SparkFun" package="0603-RES" value="1K" x="-4.8" y="-128.5"/>
 </elements>
 <signals>
 <signal name="VCC">
@@ -6508,6 +6520,8 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <contactref element="U1" pad="45"/>
 <contactref element="U$4" pad="16"/>
 <contactref element="R11" pad="2"/>
+<contactref element="R14" pad="2"/>
+<wire x1="-3.95" y1="-113.6" x2="-3.95" y2="-128.5" width="0" layer="19" extent="1-1"/>
 <wire x1="-0.82" y1="-90.15" x2="-3.95" y2="-113.6" width="0" layer="19" extent="1-1"/>
 <wire x1="0.45" y1="-84.8" x2="-0.82" y2="-90.15" width="0" layer="19" extent="1-1"/>
 <wire x1="-1" y1="-81.3" x2="0.45" y2="-84.8" width="0" layer="19" extent="1-1"/>
@@ -6608,6 +6622,18 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <contactref element="C13" pad="2"/>
 <contactref element="R9" pad="1"/>
 <contactref element="R10" pad="1"/>
+<contactref element="U3" pad="11"/>
+<contactref element="U3" pad="17"/>
+<contactref element="C14" pad="2"/>
+<contactref element="C15" pad="2"/>
+<contactref element="R12" pad="1"/>
+<contactref element="R13" pad="1"/>
+<wire x1="-3.95" y1="-122.5" x2="-5.65" y2="-125.5" width="0" layer="19" extent="1-1"/>
+<wire x1="-3.7" y1="-118.2" x2="-3.95" y2="-122.5" width="0" layer="19" extent="1-1"/>
+<wire x1="-2.225" y1="-117.95" x2="-3.7" y2="-118.2" width="0" layer="19" extent="1-1"/>
+<wire x1="-0.25" y1="-125.5" x2="-3.95" y2="-122.5" width="0" layer="19" extent="1-1"/>
+<wire x1="1.45" y1="-122.5" x2="-0.25" y2="-125.5" width="0" layer="19" extent="1-1"/>
+<wire x1="-5.65" y1="-110.6" x2="-3.7" y2="-118.2" width="0" layer="19" extent="1-1"/>
 <wire x1="-5.65" y1="-107.6" x2="-5.65" y2="-110.6" width="0" layer="19" extent="1-1"/>
 <wire x1="-3.95" y1="-104.6" x2="-5.65" y2="-107.6" width="0" layer="19" extent="1-1"/>
 <wire x1="-3.95" y1="-101.6" x2="-3.95" y2="-104.6" width="0" layer="19" extent="1-1"/>
@@ -6836,6 +6862,10 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <contactref element="U$4" pad="15"/>
 <contactref element="C12" pad="1"/>
 <contactref element="U2" pad="10"/>
+<contactref element="C14" pad="1"/>
+<contactref element="U3" pad="10"/>
+<wire x1="-2.225" y1="-118.45" x2="-5.65" y2="-122.5" width="0" layer="19" extent="1-1"/>
+<wire x1="-5.65" y1="-101.6" x2="-2.225" y2="-118.45" width="0" layer="19" extent="1-1"/>
 <wire x1="-2.225" y1="-97.55" x2="-5.65" y2="-101.6" width="0" layer="19" extent="1-1"/>
 <wire x1="-0.82" y1="-91.15" x2="-2.225" y2="-97.55" width="0" layer="19" extent="1-1"/>
 <wire x1="-0.82" y1="-90.65" x2="-0.82" y2="-91.15" width="0" layer="19" extent="1-1"/>
@@ -6862,9 +6892,13 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 </signal>
 <signal name="COIL3_IN1">
 <contactref element="U1" pad="2"/>
+<contactref element="U3" pad="14"/>
+<wire x1="9.077815625" y1="22.1402" x2="-3.4499375" y2="-116.725" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="COIL3_IN2">
 <contactref element="U1" pad="1"/>
+<contactref element="U3" pad="13"/>
+<wire x1="8.7242625" y1="21.786646875" x2="-2.9498125" y2="-116.725" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$8">
 <contactref element="C13" pad="1"/>
@@ -6878,6 +6912,8 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 </signal>
 <signal name="COIL3_EN">
 <contactref element="U1" pad="48"/>
+<contactref element="U3" pad="15"/>
+<wire x1="7.875734375" y1="21.786646875" x2="-3.9500625" y2="-116.725" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="COIL12_FAULT_B">
 <contactref element="U1" pad="13"/>
@@ -6888,6 +6924,10 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 </signal>
 <signal name="COIL3_FAULT_B">
 <contactref element="U1" pad="12"/>
+<contactref element="U3" pad="6"/>
+<contactref element="R14" pad="1"/>
+<wire x1="-3.9500625" y1="-119.675" x2="-5.65" y2="-128.5" width="0" layer="19" extent="1-1"/>
+<wire x1="12.61335" y1="25.675734375" x2="-3.9500625" y2="-119.675" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$9">
 <contactref element="R9" pad="2"/>
@@ -6898,6 +6938,21 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <contactref element="R10" pad="2"/>
 <contactref element="U2" pad="1"/>
 <wire x1="-5.175" y1="-96.55" x2="-3.95" y2="-110.6" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$13">
+<contactref element="C15" pad="1"/>
+<contactref element="U3" pad="12"/>
+<wire x1="-2.225" y1="-117.45" x2="-0.25" y2="-122.5" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$14">
+<contactref element="R12" pad="2"/>
+<contactref element="U3" pad="4"/>
+<wire x1="-5.175" y1="-118.95" x2="-3.95" y2="-125.5" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$15">
+<contactref element="R13" pad="2"/>
+<contactref element="U3" pad="1"/>
+<wire x1="-5.175" y1="-117.45" x2="1.45" y2="-125.5" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>
