@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.0.0">
+<eagle version="9.0.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -3337,10 +3337,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <sheets>
 <sheet>
 <plain>
-<wire x1="-73.66" y1="-167.64" x2="149.86" y2="-167.64" width="0.6096" layer="97" style="longdash"/>
+<wire x1="-73.66" y1="-167.64" x2="66.04" y2="-167.64" width="0.6096" layer="97" style="longdash"/>
+<wire x1="66.04" y1="-167.64" x2="149.86" y2="-167.64" width="0.6096" layer="97" style="longdash"/>
 <wire x1="149.86" y1="-167.64" x2="149.86" y2="-66.04" width="0.6096" layer="97" style="longdash"/>
-<wire x1="149.86" y1="-167.64" x2="149.86" y2="-317.5" width="0.6096" layer="97" style="longdash"/>
-<text x="-17.78" y="-73.66" size="2.54" layer="97">Accelerometer, Magnetometer, Gyroscope</text>
 <text x="93.98" y="-73.66" size="2.54" layer="97">Sun Sensors</text>
 <text x="-71.12" y="-73.66" size="5.08" layer="97">Sensing:</text>
 <text x="-71.12" y="-177.8" size="5.08" layer="97">CORE:</text>
@@ -3356,12 +3355,13 @@ vha3@cornell.edu</text>
 
 2. Set Rmax = 200 mV / Ichop
 (see p. 22)</text>
+<wire x1="66.04" y1="-314.96" x2="66.04" y2="-167.64" width="0.6096" layer="97" style="longdash"/>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="271.78" y="-132.08"/>
 <instance part="GND16" gate="1" x="292.1" y="-86.36"/>
 <instance part="P+4" gate="1" x="292.1" y="-73.66"/>
-<instance part="JP3" gate="G$1" x="139.7" y="-302.26" rot="R180"/>
+<instance part="JP3" gate="G$1" x="-33.02" y="-304.8" rot="R180"/>
 <instance part="P1" gate="G$1" x="279.4" y="-73.66"/>
 <instance part="P2" gate="G$1" x="279.4" y="-83.82"/>
 <instance part="S1" gate="G$1" x="248.92" y="-116.84" rot="R90"/>
@@ -3378,13 +3378,13 @@ vha3@cornell.edu</text>
 <instance part="GND6" gate="1" x="-60.96" y="-213.36"/>
 <instance part="GND8" gate="1" x="33.02" y="-266.7"/>
 <instance part="P+2" gate="1" x="43.18" y="-193.04"/>
-<instance part="JP2" gate="G$1" x="139.7" y="-292.1" rot="R180"/>
-<instance part="ANT-N" gate="G$1" x="81.28" y="-226.06"/>
-<instance part="ANT-P" gate="G$1" x="96.52" y="-226.06"/>
-<instance part="R2" gate="G$1" x="119.38" y="-287.02" rot="R90"/>
-<instance part="C4" gate="G$1" x="124.46" y="-289.56"/>
-<instance part="GND2" gate="1" x="124.46" y="-281.94" rot="R180"/>
-<instance part="P+5" gate="1" x="119.38" y="-281.94"/>
+<instance part="JP2" gate="G$1" x="-33.02" y="-294.64" rot="R180"/>
+<instance part="ANT-N" gate="G$1" x="-15.24" y="-297.18"/>
+<instance part="ANT-P" gate="G$1" x="0" y="-297.18"/>
+<instance part="R2" gate="G$1" x="-53.34" y="-289.56" rot="R90"/>
+<instance part="C4" gate="G$1" x="-48.26" y="-292.1"/>
+<instance part="GND2" gate="1" x="-48.26" y="-284.48" rot="R180"/>
+<instance part="P+5" gate="1" x="-53.34" y="-284.48"/>
 <instance part="P+8" gate="1" x="43.18" y="-203.2"/>
 <instance part="P+9" gate="1" x="60.96" y="-218.44"/>
 <instance part="P+13" gate="1" x="-25.4" y="-182.88"/>
@@ -3723,8 +3723,8 @@ vha3@cornell.edu</text>
 <net name="UART_RX" class="0">
 <segment>
 <pinref part="JP3" gate="G$1" pin="2"/>
-<wire x1="132.08" y1="-304.8" x2="129.54" y2="-304.8" width="0.1524" layer="91"/>
-<label x="129.54" y="-304.8" size="1.778" layer="95" rot="MR0"/>
+<wire x1="-40.64" y1="-307.34" x2="-43.18" y2="-307.34" width="0.1524" layer="91"/>
+<label x="-43.18" y="-307.34" size="1.778" layer="95" rot="MR0"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="6"/>
@@ -3735,8 +3735,8 @@ vha3@cornell.edu</text>
 <net name="UART_TX" class="0">
 <segment>
 <pinref part="JP3" gate="G$1" pin="1"/>
-<wire x1="132.08" y1="-302.26" x2="129.54" y2="-302.26" width="0.1524" layer="91"/>
-<label x="129.54" y="-302.26" size="1.778" layer="95" rot="MR0"/>
+<wire x1="-40.64" y1="-304.8" x2="-43.18" y2="-304.8" width="0.1524" layer="91"/>
+<label x="-43.18" y="-304.8" size="1.778" layer="95" rot="MR0"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="5"/>
@@ -3877,13 +3877,13 @@ vha3@cornell.edu</text>
 <segment>
 <pinref part="JP2" gate="G$1" pin="1"/>
 <pinref part="C4" gate="G$1" pin="2"/>
-<wire x1="124.46" y1="-292.1" x2="132.08" y2="-292.1" width="0.1524" layer="91"/>
+<wire x1="-48.26" y1="-294.64" x2="-40.64" y2="-294.64" width="0.1524" layer="91"/>
 <pinref part="R2" gate="G$1" pin="1"/>
-<wire x1="124.46" y1="-292.1" x2="119.38" y2="-292.1" width="0.1524" layer="91"/>
-<junction x="124.46" y="-292.1"/>
-<wire x1="119.38" y1="-292.1" x2="109.22" y2="-292.1" width="0.1524" layer="91"/>
-<junction x="119.38" y="-292.1"/>
-<label x="109.22" y="-292.1" size="1.778" layer="95"/>
+<wire x1="-48.26" y1="-294.64" x2="-53.34" y2="-294.64" width="0.1524" layer="91"/>
+<junction x="-48.26" y="-294.64"/>
+<wire x1="-53.34" y1="-294.64" x2="-63.5" y2="-294.64" width="0.1524" layer="91"/>
+<junction x="-53.34" y="-294.64"/>
+<label x="-63.5" y="-294.64" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="TST" class="0">
@@ -3894,8 +3894,8 @@ vha3@cornell.edu</text>
 </segment>
 <segment>
 <pinref part="JP2" gate="G$1" pin="2"/>
-<wire x1="132.08" y1="-294.64" x2="109.22" y2="-294.64" width="0.1524" layer="91"/>
-<label x="109.22" y="-294.64" size="1.778" layer="95"/>
+<wire x1="-40.64" y1="-297.18" x2="-63.5" y2="-297.18" width="0.1524" layer="91"/>
+<label x="-63.5" y="-297.18" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="RF_N" class="0">
@@ -3906,8 +3906,8 @@ vha3@cornell.edu</text>
 </segment>
 <segment>
 <pinref part="ANT-N" gate="G$1" pin="IN"/>
-<wire x1="81.28" y1="-231.14" x2="81.28" y2="-236.22" width="0.1524" layer="91"/>
-<label x="81.28" y="-236.22" size="1.778" layer="95"/>
+<wire x1="-15.24" y1="-302.26" x2="-15.24" y2="-307.34" width="0.1524" layer="91"/>
+<label x="-15.24" y="-307.34" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="RF_P" class="0">
@@ -3918,8 +3918,8 @@ vha3@cornell.edu</text>
 </segment>
 <segment>
 <pinref part="ANT-P" gate="G$1" pin="IN"/>
-<wire x1="96.52" y1="-236.22" x2="96.52" y2="-231.14" width="0.1524" layer="91"/>
-<label x="96.52" y="-236.22" size="1.778" layer="95"/>
+<wire x1="0" y1="-307.34" x2="0" y2="-302.26" width="0.1524" layer="91"/>
+<label x="0" y="-307.34" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="VCCA" class="0">
