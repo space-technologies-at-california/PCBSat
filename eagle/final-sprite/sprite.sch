@@ -3327,10 +3327,12 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND18" library="SparkFun" deviceset="GND" device=""/>
 <part name="C13" library="SparkFun" deviceset="CAP" device="0603-CAP" value="2.2uF"/>
 <part name="GND19" library="SparkFun" deviceset="GND" device=""/>
-<part name="R9" library="SparkFun" deviceset="RESISTOR" device="0603-RES" value="270R"/>
-<part name="R10" library="SparkFun" deviceset="RESISTOR" device="0603-RES" value="270R"/>
+<part name="R9" library="SparkFun" deviceset="RESISTOR" device="0603-RES" value="15R"/>
+<part name="R10" library="SparkFun" deviceset="RESISTOR" device="0603-RES" value="15R"/>
 <part name="GND24" library="SparkFun" deviceset="GND" device=""/>
 <part name="GND25" library="SparkFun" deviceset="GND" device=""/>
+<part name="R11" library="SparkFun" deviceset="RESISTOR" device="0603-RES" value="1K"/>
+<part name="P+3" library="SparkFun" deviceset="VCC" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -3348,7 +3350,12 @@ vha3@cornell.edu</text>
 <text x="210.82" y="-304.8" size="3.048" layer="97">Design By:</text>
 <text x="152.4" y="-73.66" size="5.08" layer="97">Power</text>
 <wire x1="149.86" y1="-167.64" x2="304.8" y2="-167.64" width="0.6096" layer="97" style="longdash"/>
-<text x="187.96" y="-248.92" size="1.778" layer="91">Rated up to VCCIO</text>
+<text x="167.64" y="-241.3" size="1.778" layer="91">Rated up to VCCIO</text>
+<text x="251.46" y="-259.08" size="1.778" layer="91">1. Choose Imax ~ Pmax / VCCIO
+(Imax is maximum instantenous current)
+
+2. Set Rmax = 200 mV / Ichop
+(see p. 22)</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="271.78" y="-132.08"/>
@@ -3429,17 +3436,19 @@ vha3@cornell.edu</text>
 <instance part="GND3" gate="1" x="187.96" y="-132.08"/>
 <instance part="P+1" gate="1" x="226.06" y="-78.74"/>
 <instance part="SUPPLY1" gate="G$1" x="220.98" y="-78.74"/>
-<instance part="U2" gate="A" x="203.2" y="-218.44"/>
-<instance part="GND17" gate="1" x="228.6" y="-269.24" rot="MR0"/>
-<instance part="SUPPLY2" gate="G$1" x="213.36" y="-195.58"/>
-<instance part="C12" gate="G$1" x="213.36" y="-200.66"/>
-<instance part="GND18" gate="1" x="213.36" y="-205.74" rot="MR0"/>
-<instance part="C13" gate="G$1" x="198.12" y="-254"/>
-<instance part="GND19" gate="1" x="198.12" y="-259.08" rot="MR0"/>
-<instance part="R9" gate="G$1" x="256.54" y="-259.08" rot="R90"/>
-<instance part="R10" gate="G$1" x="266.7" y="-256.54" rot="R90"/>
-<instance part="GND24" gate="1" x="256.54" y="-269.24" rot="MR0"/>
-<instance part="GND25" gate="1" x="266.7" y="-269.24" rot="MR0"/>
+<instance part="U2" gate="A" x="182.88" y="-210.82"/>
+<instance part="GND17" gate="1" x="208.28" y="-261.62" rot="MR0"/>
+<instance part="SUPPLY2" gate="G$1" x="193.04" y="-187.96"/>
+<instance part="C12" gate="G$1" x="193.04" y="-193.04"/>
+<instance part="GND18" gate="1" x="193.04" y="-198.12" rot="MR0"/>
+<instance part="C13" gate="G$1" x="177.8" y="-246.38"/>
+<instance part="GND19" gate="1" x="177.8" y="-251.46" rot="MR0"/>
+<instance part="R9" gate="G$1" x="236.22" y="-251.46" rot="R90"/>
+<instance part="R10" gate="G$1" x="246.38" y="-248.92" rot="R90"/>
+<instance part="GND24" gate="1" x="236.22" y="-261.62" rot="MR0"/>
+<instance part="GND25" gate="1" x="246.38" y="-261.62" rot="MR0"/>
+<instance part="R11" gate="G$1" x="254" y="-233.68" rot="R90"/>
+<instance part="P+3" gate="1" x="254" y="-228.6"/>
 </instances>
 <busses>
 </busses>
@@ -3547,6 +3556,10 @@ vha3@cornell.edu</text>
 <wire x1="205.74" y1="-99.06" x2="226.06" y2="-99.06" width="0.1524" layer="91"/>
 <wire x1="226.06" y1="-99.06" x2="226.06" y2="-78.74" width="0.1524" layer="91"/>
 <pinref part="P+1" gate="1" pin="VCC"/>
+</segment>
+<segment>
+<pinref part="R11" gate="G$1" pin="2"/>
+<pinref part="P+3" gate="1" pin="VCC"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -3680,12 +3693,12 @@ vha3@cornell.edu</text>
 </segment>
 <segment>
 <pinref part="U2" gate="A" pin="GND"/>
-<wire x1="226.06" y1="-261.62" x2="226.06" y2="-264.16" width="0.1524" layer="91"/>
-<wire x1="226.06" y1="-264.16" x2="228.6" y2="-264.16" width="0.1524" layer="91"/>
+<wire x1="205.74" y1="-254" x2="205.74" y2="-256.54" width="0.1524" layer="91"/>
+<wire x1="205.74" y1="-256.54" x2="208.28" y2="-256.54" width="0.1524" layer="91"/>
 <pinref part="U2" gate="A" pin="EPAD"/>
-<wire x1="228.6" y1="-264.16" x2="231.14" y2="-264.16" width="0.1524" layer="91"/>
-<wire x1="231.14" y1="-264.16" x2="231.14" y2="-261.62" width="0.1524" layer="91"/>
-<wire x1="228.6" y1="-264.16" x2="228.6" y2="-266.7" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="-256.54" x2="210.82" y2="-256.54" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="-256.54" x2="210.82" y2="-254" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="-256.54" x2="208.28" y2="-259.08" width="0.1524" layer="91"/>
 <pinref part="GND17" gate="1" pin="GND"/>
 </segment>
 <segment>
@@ -3699,12 +3712,12 @@ vha3@cornell.edu</text>
 <segment>
 <pinref part="R9" gate="G$1" pin="1"/>
 <pinref part="GND24" gate="1" pin="GND"/>
-<wire x1="256.54" y1="-264.16" x2="256.54" y2="-266.7" width="0.1524" layer="91"/>
+<wire x1="236.22" y1="-256.54" x2="236.22" y2="-259.08" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R10" gate="G$1" pin="1"/>
 <pinref part="GND25" gate="1" pin="GND"/>
-<wire x1="266.7" y1="-261.62" x2="266.7" y2="-266.7" width="0.1524" layer="91"/>
+<wire x1="246.38" y1="-254" x2="246.38" y2="-259.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="UART_RX" class="0">
@@ -4001,9 +4014,9 @@ vha3@cornell.edu</text>
 <segment>
 <pinref part="C12" gate="G$1" pin="1"/>
 <pinref part="SUPPLY2" gate="G$1" pin="VCCIO"/>
-<wire x1="213.36" y1="-195.58" x2="228.6" y2="-195.58" width="0.1524" layer="91"/>
+<wire x1="193.04" y1="-187.96" x2="208.28" y2="-187.96" width="0.1524" layer="91"/>
 <pinref part="U2" gate="A" pin="VM"/>
-<wire x1="228.6" y1="-195.58" x2="228.6" y2="-205.74" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="-187.96" x2="208.28" y2="-198.12" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="COIL1_IN1" class="0">
@@ -4014,8 +4027,8 @@ vha3@cornell.edu</text>
 </segment>
 <segment>
 <pinref part="U2" gate="A" pin="AIN1"/>
-<wire x1="205.74" y1="-220.98" x2="187.96" y2="-220.98" width="0.1524" layer="91"/>
-<label x="187.96" y="-220.98" size="1.778" layer="95"/>
+<wire x1="185.42" y1="-213.36" x2="167.64" y2="-213.36" width="0.1524" layer="91"/>
+<label x="167.64" y="-213.36" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="COIL1_IN2" class="0">
@@ -4026,8 +4039,8 @@ vha3@cornell.edu</text>
 </segment>
 <segment>
 <pinref part="U2" gate="A" pin="AIN2"/>
-<wire x1="205.74" y1="-223.52" x2="187.96" y2="-223.52" width="0.1524" layer="91"/>
-<label x="187.96" y="-223.52" size="1.778" layer="95"/>
+<wire x1="185.42" y1="-215.9" x2="167.64" y2="-215.9" width="0.1524" layer="91"/>
+<label x="167.64" y="-215.9" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="COIL2_IN1" class="0">
@@ -4038,8 +4051,8 @@ vha3@cornell.edu</text>
 </segment>
 <segment>
 <pinref part="U2" gate="A" pin="BIN1"/>
-<wire x1="205.74" y1="-228.6" x2="187.96" y2="-228.6" width="0.1524" layer="91"/>
-<label x="187.96" y="-228.6" size="1.778" layer="95"/>
+<wire x1="185.42" y1="-220.98" x2="167.64" y2="-220.98" width="0.1524" layer="91"/>
+<label x="167.64" y="-220.98" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="COIL2_IN2" class="0">
@@ -4050,8 +4063,8 @@ vha3@cornell.edu</text>
 </segment>
 <segment>
 <pinref part="U2" gate="A" pin="BIN2"/>
-<wire x1="205.74" y1="-231.14" x2="187.96" y2="-231.14" width="0.1524" layer="91"/>
-<label x="187.96" y="-231.14" size="1.778" layer="95"/>
+<wire x1="185.42" y1="-223.52" x2="167.64" y2="-223.52" width="0.1524" layer="91"/>
+<label x="167.64" y="-223.52" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="COIL3_IN1" class="0">
@@ -4071,9 +4084,9 @@ vha3@cornell.edu</text>
 <net name="N$8" class="0">
 <segment>
 <pinref part="C13" gate="G$1" pin="1"/>
-<wire x1="198.12" y1="-248.92" x2="198.12" y2="-243.84" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="-241.3" x2="177.8" y2="-236.22" width="0.1524" layer="91"/>
 <pinref part="U2" gate="A" pin="VINT"/>
-<wire x1="198.12" y1="-243.84" x2="205.74" y2="-243.84" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="-236.22" x2="185.42" y2="-236.22" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="COIL12_EN" class="0">
@@ -4084,8 +4097,8 @@ vha3@cornell.edu</text>
 </segment>
 <segment>
 <pinref part="U2" gate="A" pin="NSLEEP"/>
-<wire x1="205.74" y1="-236.22" x2="187.96" y2="-236.22" width="0.1524" layer="91"/>
-<label x="187.96" y="-236.22" size="1.778" layer="95"/>
+<wire x1="185.42" y1="-228.6" x2="167.64" y2="-228.6" width="0.1524" layer="91"/>
+<label x="167.64" y="-228.6" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="COIL3_EN" class="0">
@@ -4095,40 +4108,44 @@ vha3@cornell.edu</text>
 <label x="30.48" y="-187.96" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="COIL12_FAULT" class="0">
+<net name="COIL12_FAULT_B" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="13"/>
-<wire x1="-20.32" y1="-218.44" x2="-38.1" y2="-218.44" width="0.1524" layer="91"/>
-<label x="-38.1" y="-218.44" size="1.778" layer="95"/>
+<wire x1="-20.32" y1="-218.44" x2="-43.18" y2="-218.44" width="0.1524" layer="91"/>
+<label x="-43.18" y="-218.44" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U2" gate="A" pin="NFAULT"/>
-<wire x1="251.46" y1="-248.92" x2="279.4" y2="-248.92" width="0.1524" layer="91"/>
-<label x="287.02" y="-246.38" size="1.778" layer="95" rot="R180"/>
-<wire x1="279.4" y1="-248.92" x2="287.02" y2="-248.92" width="0.1524" layer="91"/>
+<wire x1="231.14" y1="-241.3" x2="254" y2="-241.3" width="0.1524" layer="91"/>
+<wire x1="254" y1="-241.3" x2="259.08" y2="-241.3" width="0.1524" layer="91"/>
+<wire x1="259.08" y1="-241.3" x2="266.7" y2="-241.3" width="0.1524" layer="91"/>
+<wire x1="266.7" y1="-241.3" x2="279.4" y2="-241.3" width="0.1524" layer="91"/>
+<pinref part="R11" gate="G$1" pin="1"/>
+<wire x1="254" y1="-238.76" x2="254" y2="-241.3" width="0.1524" layer="91"/>
+<label x="259.08" y="-241.3" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="COIL3_FAULT" class="0">
+<net name="COIL3_FAULT_B" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="12"/>
-<wire x1="-20.32" y1="-215.9" x2="-38.1" y2="-215.9" width="0.1524" layer="91"/>
-<label x="-38.1" y="-215.9" size="1.778" layer="95"/>
+<wire x1="-20.32" y1="-215.9" x2="-43.18" y2="-215.9" width="0.1524" layer="91"/>
+<label x="-43.18" y="-215.9" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$9" class="0">
 <segment>
 <pinref part="R9" gate="G$1" pin="2"/>
 <pinref part="U2" gate="A" pin="BISEN"/>
-<wire x1="256.54" y1="-254" x2="256.54" y2="-241.3" width="0.1524" layer="91"/>
-<wire x1="256.54" y1="-241.3" x2="251.46" y2="-241.3" width="0.1524" layer="91"/>
+<wire x1="236.22" y1="-246.38" x2="236.22" y2="-233.68" width="0.1524" layer="91"/>
+<wire x1="236.22" y1="-233.68" x2="231.14" y2="-233.68" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$10" class="0">
 <segment>
 <pinref part="R10" gate="G$1" pin="2"/>
 <pinref part="U2" gate="A" pin="AISEN"/>
-<wire x1="266.7" y1="-251.46" x2="266.7" y2="-238.76" width="0.1524" layer="91"/>
-<wire x1="266.7" y1="-238.76" x2="251.46" y2="-238.76" width="0.1524" layer="91"/>
+<wire x1="246.38" y1="-243.84" x2="246.38" y2="-231.14" width="0.1524" layer="91"/>
+<wire x1="246.38" y1="-231.14" x2="231.14" y2="-231.14" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
