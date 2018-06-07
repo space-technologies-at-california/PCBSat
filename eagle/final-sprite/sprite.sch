@@ -3950,6 +3950,48 @@ vha3@cornell.edu</text>
 <pinref part="SUPPLY1" gate="G$1" pin="VCCIO"/>
 </segment>
 </net>
+<net name="COIL1_IN1" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="20"/>
+<wire x1="-20.32" y1="-236.22" x2="-33.02" y2="-236.22" width="0.1524" layer="91"/>
+<label x="-33.02" y="-236.22" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="COIL1_IN2" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="19"/>
+<wire x1="-20.32" y1="-233.68" x2="-33.02" y2="-233.68" width="0.1524" layer="91"/>
+<label x="-33.02" y="-233.68" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="COIL2_IN1" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="18"/>
+<wire x1="-20.32" y1="-231.14" x2="-33.02" y2="-231.14" width="0.1524" layer="91"/>
+<label x="-33.02" y="-231.14" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="COIL2_IN2" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="17"/>
+<wire x1="-20.32" y1="-228.6" x2="-33.02" y2="-228.6" width="0.1524" layer="91"/>
+<label x="-33.02" y="-228.6" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="COIL3_IN1" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="2"/>
+<wire x1="-20.32" y1="-190.5" x2="-33.02" y2="-190.5" width="0.1524" layer="91"/>
+<label x="-33.02" y="-190.5" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="COIL3_IN2" class="0">
+<segment>
+<pinref part="U1" gate="G$1" pin="1"/>
+<wire x1="-20.32" y1="-187.96" x2="-33.02" y2="-187.96" width="0.1524" layer="91"/>
+<label x="-33.02" y="-187.96" size="1.778" layer="95"/>
+</segment>
+</net>
 </nets>
 </sheet>
 <sheet>

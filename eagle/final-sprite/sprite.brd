@@ -6822,6 +6822,24 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <signal name="VM">
 <contactref element="U2" pad="10"/>
 </signal>
+<signal name="COIL1_IN1">
+<contactref element="U1" pad="20"/>
+</signal>
+<signal name="COIL1_IN2">
+<contactref element="U1" pad="19"/>
+</signal>
+<signal name="COIL2_IN1">
+<contactref element="U1" pad="18"/>
+</signal>
+<signal name="COIL2_IN2">
+<contactref element="U1" pad="17"/>
+</signal>
+<signal name="COIL3_IN1">
+<contactref element="U1" pad="2"/>
+</signal>
+<signal name="COIL3_IN2">
+<contactref element="U1" pad="1"/>
+</signal>
 </signals>
 </board>
 </drawing>
