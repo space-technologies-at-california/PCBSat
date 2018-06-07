@@ -6467,6 +6467,10 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <attribute name="MANUFACTURER_PART_NUMBER" value="DRV8833CRTER" x="-3.7" y="-97.3" size="1.778" layer="27" display="off"/>
 <attribute name="VENDOR" value="Texas Instruments" x="-3.7" y="-97.3" size="1.778" layer="27" display="off"/>
 </element>
+<element name="C12" library="SparkFun" package="0603-CAP" value="10uF" x="-4.8" y="-101.6"/>
+<element name="C13" library="SparkFun" package="0603-CAP" value="2.2uF" x="-4.8" y="-104.6"/>
+<element name="R9" library="SparkFun" package="0603-RES" value="270R" x="-4.8" y="-107.6"/>
+<element name="R10" library="SparkFun" package="0603-RES" value="270R" x="-4.8" y="-110.6"/>
 </elements>
 <signals>
 <signal name="VCC">
@@ -6596,6 +6600,16 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <contactref element="U$4" pad="12"/>
 <contactref element="U$4" pad="25"/>
 <contactref element="U2" pad="11"/>
+<contactref element="U2" pad="17"/>
+<contactref element="C12" pad="2"/>
+<contactref element="C13" pad="2"/>
+<contactref element="R9" pad="1"/>
+<contactref element="R10" pad="1"/>
+<wire x1="-5.65" y1="-107.6" x2="-5.65" y2="-110.6" width="0" layer="19" extent="1-1"/>
+<wire x1="-3.95" y1="-104.6" x2="-5.65" y2="-107.6" width="0" layer="19" extent="1-1"/>
+<wire x1="-3.95" y1="-101.6" x2="-3.95" y2="-104.6" width="0" layer="19" extent="1-1"/>
+<wire x1="-3.7" y1="-97.3" x2="-3.95" y2="-101.6" width="0" layer="19" extent="1-1"/>
+<wire x1="-2.225" y1="-97.05" x2="-3.7" y2="-97.3" width="0" layer="19" extent="1-1"/>
 <wire x1="-1.55" y1="-92.38" x2="-2.225" y2="-97.05" width="0" layer="19" extent="1-1"/>
 <wire x1="-2.8" y1="-90.4" x2="-1.55" y2="-92.38" width="0" layer="19" extent="1-1"/>
 <wire x1="-4.05" y1="-92.38" x2="-2.8" y2="-90.4" width="0" layer="19" extent="1-1"/>
@@ -6817,28 +6831,68 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <signal name="VCCIO">
 <contactref element="U$4" pad="14"/>
 <contactref element="U$4" pad="15"/>
-<wire x1="-0.82" y1="-90.65" x2="-0.82" y2="-91.15" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="VM">
+<contactref element="C12" pad="1"/>
 <contactref element="U2" pad="10"/>
+<wire x1="-2.225" y1="-97.55" x2="-5.65" y2="-101.6" width="0" layer="19" extent="1-1"/>
+<wire x1="-0.82" y1="-91.15" x2="-2.225" y2="-97.55" width="0" layer="19" extent="1-1"/>
+<wire x1="-0.82" y1="-90.65" x2="-0.82" y2="-91.15" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="COIL1_IN1">
 <contactref element="U1" pad="20"/>
+<contactref element="U2" pad="14"/>
+<wire x1="10.138475" y1="28.9991375" x2="-3.4499375" y2="-95.825" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="COIL1_IN2">
 <contactref element="U1" pad="19"/>
+<contactref element="U2" pad="13"/>
+<wire x1="10.492028125" y1="28.645584375" x2="-2.9498125" y2="-95.825" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="COIL2_IN1">
 <contactref element="U1" pad="18"/>
+<contactref element="U2" pad="7"/>
+<wire x1="10.845584375" y1="28.292028125" x2="-3.4499375" y2="-98.775" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="COIL2_IN2">
 <contactref element="U1" pad="17"/>
+<contactref element="U2" pad="8"/>
+<wire x1="11.1991375" y1="27.938475" x2="-2.9498125" y2="-98.775" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="COIL3_IN1">
 <contactref element="U1" pad="2"/>
 </signal>
 <signal name="COIL3_IN2">
 <contactref element="U1" pad="1"/>
+</signal>
+<signal name="N$8">
+<contactref element="C13" pad="1"/>
+<contactref element="U2" pad="12"/>
+<wire x1="-2.225" y1="-96.55" x2="-5.65" y2="-104.6" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="COIL12_EN">
+<contactref element="U1" pad="16"/>
+<contactref element="U2" pad="15"/>
+<wire x1="11.552690625" y1="27.584921875" x2="-3.9500625" y2="-95.825" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="COIL3_EN">
+<contactref element="U1" pad="48"/>
+</signal>
+<signal name="COIL12_FAULT">
+<contactref element="U1" pad="13"/>
+<contactref element="U2" pad="6"/>
+<wire x1="12.61335" y1="26.5242625" x2="-3.9500625" y2="-98.775" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="COIL3_FAULT">
+<contactref element="U1" pad="12"/>
+</signal>
+<signal name="N$9">
+<contactref element="R9" pad="2"/>
+<contactref element="U2" pad="4"/>
+<wire x1="-5.175" y1="-98.05" x2="-3.95" y2="-107.6" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$10">
+<contactref element="R10" pad="2"/>
+<contactref element="U2" pad="1"/>
+<wire x1="-5.175" y1="-96.55" x2="-3.95" y2="-110.6" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>
