@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.0.1">
+<eagle version="9.0.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -18009,15 +18009,12 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="GND19" library="SparkFun" deviceset="GND" device=""/>
 <part name="GND24" library="SparkFun" deviceset="GND" device=""/>
 <part name="GND25" library="SparkFun" deviceset="GND" device=""/>
-<part name="P+3" library="SparkFun" deviceset="VCC" device=""/>
 <part name="U3" library="STAC" deviceset="DRV8833CRTER" device=""/>
 <part name="GND26" library="SparkFun" deviceset="GND" device=""/>
 <part name="SUPPLY3" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="VCCIO" device=""/>
 <part name="GND27" library="SparkFun" deviceset="GND" device=""/>
 <part name="GND28" library="SparkFun" deviceset="GND" device=""/>
-<part name="GND29" library="SparkFun" deviceset="GND" device=""/>
 <part name="GND30" library="SparkFun" deviceset="GND" device=""/>
-<part name="P+15" library="SparkFun" deviceset="VCC" device=""/>
 <part name="R15" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="750K"/>
 <part name="R16" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="130K"/>
 <part name="R17" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="910K"/>
@@ -18054,12 +18051,9 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:23547/2" value="15R"/>
 <part name="C2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0402" package3d_urn="urn:adsk.eagle:package:23626/1" value="2.2uF"/>
 <part name="R8" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:23547/2" value="15R"/>
-<part name="R9" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:23547/2" value="1K"/>
 <part name="C9" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0402" package3d_urn="urn:adsk.eagle:package:23626/1" value="10uF"/>
 <part name="C10" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0402" package3d_urn="urn:adsk.eagle:package:23626/1" value="2.2uF"/>
-<part name="R10" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:23547/2" value="1K"/>
 <part name="R11" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:23547/2" value="1K"/>
-<part name="R26" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:23547/2" value="1K"/>
 <part name="R12" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="7K"/>
 <part name="GND32" library="SparkFun" deviceset="GND" device=""/>
 <part name="C5" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0402" package3d_urn="urn:adsk.eagle:package:26136/1" value="10n"/>
@@ -18092,6 +18086,8 @@ vha3@cornell.edu</text>
 <text x="190.5" y="-264.16" size="1.778" layer="91">Rated up to VCCIO</text>
 <text x="185.42" y="-246.38" size="1.778" layer="91">Internal pull-downs</text>
 <text x="256.54" y="-248.92" size="1.778" layer="91">Open</text>
+<text x="-12.7" y="-264.16" size="1.778" layer="91">FIRMWARE:
+Pull-up required on NFAULT</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="271.78" y="-127"/>
@@ -18159,15 +18155,12 @@ vha3@cornell.edu</text>
 <instance part="GND19" gate="1" x="86.36" y="-274.32" rot="MR0"/>
 <instance part="GND24" gate="1" x="144.78" y="-284.48" rot="MR0"/>
 <instance part="GND25" gate="1" x="154.94" y="-284.48" rot="MR0"/>
-<instance part="P+3" gate="1" x="162.56" y="-251.46"/>
 <instance part="U3" gate="A" x="205.74" y="-233.68"/>
 <instance part="GND26" gate="1" x="231.14" y="-284.48" rot="MR0"/>
 <instance part="SUPPLY3" gate="G$1" x="215.9" y="-210.82"/>
 <instance part="GND27" gate="1" x="215.9" y="-220.98" rot="MR0"/>
 <instance part="GND28" gate="1" x="200.66" y="-274.32" rot="MR0"/>
-<instance part="GND29" gate="1" x="259.08" y="-284.48" rot="MR0"/>
 <instance part="GND30" gate="1" x="269.24" y="-284.48" rot="MR0"/>
-<instance part="P+15" gate="1" x="276.86" y="-251.46"/>
 <instance part="R15" gate="G$1" x="170.18" y="-124.46" rot="R90"/>
 <instance part="R16" gate="G$1" x="154.94" y="-124.46" rot="R90"/>
 <instance part="R17" gate="G$1" x="154.94" y="-104.14" rot="R90"/>
@@ -18204,12 +18197,9 @@ vha3@cornell.edu</text>
 <instance part="R1" gate="G$1" x="154.94" y="-271.78" rot="R90"/>
 <instance part="C2" gate="G$1" x="86.36" y="-266.7"/>
 <instance part="R8" gate="G$1" x="144.78" y="-274.32" rot="R90"/>
-<instance part="R9" gate="G$1" x="162.56" y="-256.54" rot="R90"/>
 <instance part="C9" gate="G$1" x="215.9" y="-213.36"/>
 <instance part="C10" gate="G$1" x="200.66" y="-266.7"/>
-<instance part="R10" gate="G$1" x="259.08" y="-274.32" rot="R90"/>
 <instance part="R11" gate="G$1" x="269.24" y="-271.78" rot="R90"/>
-<instance part="R26" gate="G$1" x="276.86" y="-256.54" rot="R90"/>
 <instance part="R12" gate="G$1" x="167.64" y="-83.82" rot="R180"/>
 <instance part="GND32" gate="1" x="160.02" y="-83.82" rot="R270"/>
 <instance part="C5" gate="G$1" x="274.32" y="-149.86"/>
@@ -18327,14 +18317,6 @@ vha3@cornell.edu</text>
 <segment>
 <pinref part="P+5" gate="1" pin="VCC"/>
 <pinref part="R5" gate="G$1" pin="2"/>
-</segment>
-<segment>
-<pinref part="P+3" gate="1" pin="VCC"/>
-<pinref part="R9" gate="G$1" pin="2"/>
-</segment>
-<segment>
-<pinref part="P+15" gate="1" pin="VCC"/>
-<pinref part="R26" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -18479,11 +18461,6 @@ vha3@cornell.edu</text>
 <wire x1="233.68" y1="-279.4" x2="233.68" y2="-276.86" width="0.1524" layer="91"/>
 <wire x1="231.14" y1="-279.4" x2="231.14" y2="-281.94" width="0.1524" layer="91"/>
 <pinref part="GND26" gate="1" pin="GND"/>
-</segment>
-<segment>
-<pinref part="GND29" gate="1" pin="GND"/>
-<wire x1="259.08" y1="-279.4" x2="259.08" y2="-281.94" width="0.1524" layer="91"/>
-<pinref part="R10" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <pinref part="GND30" gate="1" pin="GND"/>
@@ -19013,10 +18990,8 @@ vha3@cornell.edu</text>
 <segment>
 <pinref part="U2" gate="A" pin="NFAULT"/>
 <wire x1="139.7" y1="-264.16" x2="162.56" y2="-264.16" width="0.1524" layer="91"/>
-<wire x1="162.56" y1="-264.16" x2="187.96" y2="-264.16" width="0.1524" layer="91"/>
-<wire x1="162.56" y1="-261.62" x2="162.56" y2="-264.16" width="0.1524" layer="91"/>
-<label x="167.64" y="-264.16" size="1.778" layer="95"/>
-<pinref part="R9" gate="G$1" pin="1"/>
+<wire x1="162.56" y1="-264.16" x2="177.8" y2="-264.16" width="0.1524" layer="91"/>
+<label x="157.48" y="-264.16" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="COIL3_FAULT_B" class="0">
@@ -19028,10 +19003,8 @@ vha3@cornell.edu</text>
 <segment>
 <pinref part="U3" gate="A" pin="NFAULT"/>
 <wire x1="254" y1="-264.16" x2="276.86" y2="-264.16" width="0.1524" layer="91"/>
-<wire x1="276.86" y1="-264.16" x2="302.26" y2="-264.16" width="0.1524" layer="91"/>
-<wire x1="276.86" y1="-261.62" x2="276.86" y2="-264.16" width="0.1524" layer="91"/>
-<label x="281.94" y="-264.16" size="1.778" layer="95"/>
-<pinref part="R26" gate="G$1" pin="1"/>
+<wire x1="276.86" y1="-264.16" x2="292.1" y2="-264.16" width="0.1524" layer="91"/>
+<label x="271.78" y="-264.16" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$9" class="0">
@@ -19056,14 +19029,6 @@ vha3@cornell.edu</text>
 <pinref part="U3" gate="A" pin="VINT"/>
 <wire x1="200.66" y1="-259.08" x2="208.28" y2="-259.08" width="0.1524" layer="91"/>
 <pinref part="C10" gate="G$1" pin="1"/>
-</segment>
-</net>
-<net name="N$14" class="0">
-<segment>
-<pinref part="U3" gate="A" pin="BISEN"/>
-<wire x1="259.08" y1="-269.24" x2="259.08" y2="-256.54" width="0.1524" layer="91"/>
-<wire x1="259.08" y1="-256.54" x2="254" y2="-256.54" width="0.1524" layer="91"/>
-<pinref part="R10" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$15" class="0">
