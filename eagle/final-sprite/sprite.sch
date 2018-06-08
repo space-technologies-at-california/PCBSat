@@ -18088,6 +18088,15 @@ vha3@cornell.edu</text>
 <text x="256.54" y="-248.92" size="1.778" layer="91">Open</text>
 <text x="-12.7" y="-264.16" size="1.778" layer="91">FIRMWARE:
 Pull-up required on NFAULT</text>
+<text x="182.88" y="-78.74" size="1.778" layer="91">Regulated voltage output 1.5
+(see Table 7)</text>
+<text x="182.88" y="-142.24" size="1.778" layer="91">Top row connectivity seems incorrect...
+Should be voltage dividers</text>
+<text x="91.44" y="-132.08" size="1.778" layer="91">Not connected... remove?</text>
+<text x="-17.78" y="-104.14" size="1.778" layer="91">16 V</text>
+<text x="48.26" y="-88.9" size="1.778" layer="91">Eliminate pull-up</text>
+<text x="27.94" y="-116.84" size="1.778" layer="91">No interrupts?
+What's Data ENable?</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="271.78" y="-127"/>
