@@ -5,7 +5,7 @@ WINDOW 0 8 -72 Bottom 2
 WINDOW 3 8 72 Top 2
 SYMATTR Prefix X
 SYMATTR Value DRV8837
-SYMATTR ModelFile C:\Users\Hugh\Documents\PCBSat\ltspice\drv8837.lib
+SYMATTR ModelFile .\drv8837.lib
 PIN -64 -16 LEFT 8
 PINATTR PinName IN1
 PINATTR SpiceOrder 1
