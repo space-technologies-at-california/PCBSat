@@ -1,0 +1,141 @@
+* DRV8837
+*****************************************************************************
+* (C) Copyright 2013 Texas Instruments Incorporated. All rights reserved.
+*****************************************************************************
+** This model is designed as an aid for customers of Texas Instruments.
+** TI and its licensors and suppliers make no warranties, either expressed
+** or implied, with respect to this model, including the warranties of
+** merchantability or fitness for a particular purpose.  The model is
+** provided solely on an "as is" basis.  The entire risk as to its quality
+** and performance is with the customer.
+*****************************************************************************
+*
+** Released by: WEBENCH(R) Design Center, Texas Instruments Inc.
+* Part: DRV8837
+* Date: 07/10/2017
+* Model Type: All In One
+* Simulator: PSPICE
+* Simulator Version: 16.2.0.p001
+* EVM Order Number: N/A
+* EVM Users Guide: N/A
+* Datasheet: SLVSBA4E
+* 
+* Model Version: 1.1
+* 
+*****************************************************************************
+* 
+* Updates: 
+* 
+* Version 1.0 : Release to Web
+* Version 1.1 : Remove internal connection between VCC & VM
+
+*****************************************************************************
+* 
+* Notes: 
+* 
+*****************************************************************************
+*$
+.SUBCKT DRV8837 IN1 IN2 VCC VM GND OUT1 OUT2
+RIN1        IN1 GND 100k
+RIN2        IN2 GND 100k
+XU_IN1      VCC IN1 IN2a 0 NOT
+XU_IN2      VCC IN2 IN1a 0 NOT
+XU10        VCC VM VHA VB VHB VA OUT1 OUT2 VCC B 0 HBRIDGE
+XU16        VCC 19 20 VBN 0 AND_2
+XU15        VCC IN2a IN1a 20 0 OR_2
+XU14        VCC VB 19 0 NOT
+XU13        VCC 21 22 VAN 0 AND_2
+XU12        VCC IN2a IN1a 22 0 OR_2
+XU4         VCC IN2a IN1a 27 0 AND_2_1INV
+XU9         VCC IN1a IN2a 28 0 AND_2_1INV
+XU8         VCC 28 VAN VHB 0 OR_2
+XU7         VCC 27 VBN VHA 0 OR_2
+XU6         VCC VA 21 0 NOT
+VHYS        HYS 0 0.075
+XU2         VREF GND  HYS VCC 0 VF2 COMPARATOR_HYS
+XU1         VF2 33 VCC 0 VF1 COMPARATOR
++ PARAMS: GAIN=100K
+XU3         VCC 0 33 TRI_GEN
++ PARAMS: DIV=2
+XU5         VCC IN1a IN2a VF1 VF1 B VA VB 0 DRV8837_LOGIC
+VREFE       VREF 0 1.285
+.ENDS
+*$
+.SUBCKT HBRIDGE  AVDD PVDD VHA VLA VHB VLB VOA VOB SDB SSS VSS 
+ESD  VSDBX  0  VALUE = {IF(V(SDB)>1.3,1,0)}
+ESS  VSSSX  0  VALUE = {IF(V(SSS)>1.3,1,0)}
+EBETA  VBETA  0  VALUE = {4.4444}
+GAH  PVDD  VOA  VALUE = { V(PVDD,VOA)*IF(V(VHA,0) >= 1.3,1,0)*V(VBETA,0)*V(VSDBX,0)*V(VSSSX,0) }
+RAH  PVDD  VOA  100
+DAH  VOA  PVDD  IDEAL_DIODE
+GAL  VOA  VSS  VALUE = { V(VOA,VSS)*(IF(V(VLA,0) >= 1.3,1,0)*V(VSSSX,0) + V(AVDD,0)*(1 - V(VSSSX,0)))*V(VBETA,0)*V(VSDBX,0) }
+RAL  VOA  VSS  100
+DAL  VSS  VOA  IDEAL_DIODE
+CAH  PVDD VOA  25P
+CAL  VOA  VSS  25P
+GBH  PVDD  VOB  VALUE = { V(PVDD,VOB)*IF(V(VHB,0) >= 1.3,1,0)*V(VBETA,0)*V(VSDBX,0)*V(VSSSX,0) }
+RBH  PVDD  VOB  100
+DBH  VOB  PVDD  IDEAL_DIODE
+GBL  VOB  VSS  VALUE = { V(VOB,VSS)*(IF(V(VLB,0) >= 1.3,1,0)*V(VSSSX,0) + V(AVDD,0)*(1 - V(VSSSX,0)))*V(VBETA,0)*V(VSDBX,0) }
+RBL  VOB  VSS  100
+DBL  VSS  VOB  IDEAL_DIODE
+CBH  PVDD VOB  25P
+CBL  VOB  VSS  25P
+.MODEL IDEAL_DIODE D (N = 0.0001)
+.ENDS HBRIDGE 
+*$
+.SUBCKT AND_2  VDD A B Y VSS 
+ECM  VCM  0  VALUE = {(V(VDD,0)+V(VSS,0))*0.5}
+EA  VA  0  VALUE = {IF(V(A)>=V(VCM),1,0)}
+EB  VB  0  VALUE = {IF(V(B)>=V(VCM),1,0)}
+EY  Y  0  VALUE = {IF(V(VA)*V(VB)>0.5,V(VDD),V(VSS))}
+.ENDS AND_2 
+*$
+.SUBCKT OR_2  VDD A B Y VSS 
+EA  VA  0  VALUE = {IF(V(A)>=V(VCM),1,0)}
+EB  VB  0  VALUE = {IF(V(B)>=V(VCM),1,0)}
+ECM  VCM  0  VALUE = {(V(VDD,0)+V(VSS,0))*0.5}
+EY  YX  0  VALUE = {IF(V(VA) + V(VB)>0.5,V(VDD),V(VSS))}
+RY  YX  YY  1
+CY  YY  0   1e-12
+EO  Y  0  YY  0  1
+.ENDS OR_2 
+*$
+.SUBCKT NOT  VDD VI VO VSS 
+ESLICE VO 0  VALUE = {IF(V(VI)>=V(VCM),V(VSS),V(VDD))}
+ECM  VCM  0  VALUE = {(V(VDD,0)+V(VSS,0))*0.5}
+.ENDS NOT 
+*$
+.SUBCKT AND_2_1INV  VDD A B Y VSS 
+ECM  VCM  0  VALUE = {(V(VDD,0)+V(VSS,0))*0.5}
+EA  VA  0  VALUE = {IF(V(A)>=V(VCM),0,1)}
+EB  VB  0  VALUE = {IF(V(B)>=V(VCM),1,0)}
+EY  Y  0  VALUE = {IF(V(VA)*V(VB)>0.5,V(VDD),V(VSS))}
+.ENDS AND_2_1INV 
+*$
+.SUBCKT COMPARATOR   VP VM VDD VSS VO
++ PARAMS: GAIN = 100K
+ECOMPARATOR   VO 0 VALUE = {LIMIT(V(VP,VM)*GAIN,V(VDD),V(VSS))} 
+.ENDS
+*$
+.SUBCKT COMPARATOR_HYS VP VM HYS VDD VSS OUT
+EIN VP1 VM1 VP VM 1 
+EHYS VP1 VP2 VALUE { IF( V(1) > (V(VDD) + V(VSS))*0.5,-V(HYS),0) }
+EOUT OUT 0 VALUE { IF( V(VP2)>V(VM1), V(VDD) ,V(VSS)) }
+R1 OUT 1 1
+C1 1 0 5n
+RVP1 VP1 0 1K
+.ENDS COMPARATOR_HYS
+*$
+.SUBCKT TRI_GEN  VDD VSS VOTR PARAMS: DIV = 6
+VTR 1 0 PULSE (-1 1 0 11.25U 11.25US 0 22.5US)
+EADJUST VOTR 0 VALUE = {V(1,0)*V(VDD,0)/DIV + (V(VDD,0)+V(VSS,0))*0.5}
+.ENDS TRI_GEN 
+*$
+.SUBCKT DRV8837_LOGIC  VDD IN1 IN2 A B BRAKE VA VB VSS
+EBRAKE  BRAKE 0 VALUE = {IF(V(IN1) >= V(VDD)*0.46 & V(IN2) >= V(VDD)*0.46,V(VSS),V(VDD))} ; BRAKE ENABLE LOW
+EVHA    VA 0 VALUE = {IF(V(IN1) >= V(VDD)*0.46, V(A),0)}
+EVHB    VB 0 VALUE = {IF(V(IN2) >= V(VDD)*0.46, V(B),0)}
+.ENDS
+*$
+
