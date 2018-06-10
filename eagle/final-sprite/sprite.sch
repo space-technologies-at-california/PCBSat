@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.0.1">
+<eagle version="9.0.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -18182,20 +18182,6 @@ C3</text>
 <wire x1="139.7" y1="-276.86" x2="139.7" y2="-274.32" width="0.1524" layer="91"/>
 <wire x1="147.32" y1="-276.86" x2="139.7" y2="-276.86" width="0.1524" layer="91"/>
 <junction x="139.7" y="-276.86"/>
-</segment>
-</net>
-<net name="COIL12_FAULT_B" class="0">
-<segment>
-<wire x1="-20.32" y1="-218.44" x2="-43.18" y2="-218.44" width="0.1524" layer="91"/>
-<label x="-43.18" y="-218.44" size="1.778" layer="95"/>
-<pinref part="U1" gate="G$1" pin="13"/>
-</segment>
-</net>
-<net name="COIL3_FAULT_B" class="0">
-<segment>
-<wire x1="-20.32" y1="-215.9" x2="-43.18" y2="-215.9" width="0.1524" layer="91"/>
-<label x="-43.18" y="-215.9" size="1.778" layer="95"/>
-<pinref part="U1" gate="G$1" pin="12"/>
 </segment>
 </net>
 <net name="REG_D0" class="0">
