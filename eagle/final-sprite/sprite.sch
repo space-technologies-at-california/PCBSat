@@ -1592,6 +1592,25 @@ DIN A3, landscape with location and doc. field</description>
 <smd name="8" x="0.985" y="0.75" dx="0.76" dy="0.27" layer="1" roundness="25"/>
 <smd name="9" x="0" y="0" dx="0.81" dy="1.7" layer="1" cream="no"/>
 </package>
+<package name="PCBSAT-TORQUECOIL">
+<smd name="1" x="-5" y="3" dx="2" dy="1" layer="1"/>
+<smd name="2" x="5" y="3" dx="2" dy="1" layer="1"/>
+<wire x1="-7.5" y1="1.5" x2="7.5" y2="1.5" width="0.127" layer="51"/>
+<wire x1="7.5" y1="1.5" x2="7.5" y2="-1.5" width="0.127" layer="51"/>
+<wire x1="7.5" y1="-1.5" x2="-7.5" y2="-1.5" width="0.127" layer="51"/>
+<wire x1="-7.5" y1="-1.5" x2="-7.5" y2="1.5" width="0.127" layer="51"/>
+<wire x1="6" y1="3" x2="11" y2="3" width="0.127" layer="21"/>
+<wire x1="11" y1="3" x2="11" y2="-3" width="0.127" layer="21"/>
+<wire x1="11" y1="-3" x2="6" y2="-3" width="0.127" layer="21"/>
+<wire x1="6" y1="-3" x2="6" y2="3" width="0.127" layer="21"/>
+<wire x1="-6" y1="3" x2="-11" y2="3" width="0.127" layer="21"/>
+<wire x1="-11" y1="3" x2="-11" y2="-3" width="0.127" layer="21"/>
+<wire x1="-11" y1="-3" x2="-6" y2="-3" width="0.127" layer="21"/>
+<wire x1="-6" y1="-3" x2="-6" y2="3" width="0.127" layer="21"/>
+<rectangle x1="-8" y1="-3" x2="8" y2="3" layer="41"/>
+<text x="-3" y="3" size="1.27" layer="25">&gt;Name</text>
+<text x="-3" y="-4" size="1.27" layer="27">&gt;Value</text>
+</package>
 </packages>
 <symbols>
 <symbol name="ADP5092">
@@ -1832,6 +1851,17 @@ DIN A3, landscape with location and doc. field</description>
 <text x="-10.16" y="-10.16" size="1.27" layer="95">&gt;Name</text>
 <text x="-10.16" y="7.62" size="1.27" layer="95">&gt;Value</text>
 </symbol>
+<symbol name="PCBSAT-TORQUECOIL">
+<wire x1="0" y1="0" x2="-2.54" y2="0" width="0.254" layer="94" curve="-180"/>
+<wire x1="2.54" y1="0" x2="0" y2="0" width="0.254" layer="94" curve="-180"/>
+<wire x1="-2.54" y1="0" x2="-5.08" y2="0" width="0.254" layer="94" curve="-180"/>
+<wire x1="5.08" y1="0" x2="2.54" y2="0" width="0.254" layer="94" curve="-180"/>
+<wire x1="-5.08" y1="-2.54" x2="5.08" y2="-2.54" width="0.254" layer="94"/>
+<pin name="P$1" x="-5.08" y="0" visible="off" length="point"/>
+<pin name="P$2" x="5.08" y="0" visible="off" length="point" rot="R180"/>
+<text x="-5.08" y="0" size="1.27" layer="95">&gt;Name</text>
+<text x="-5.08" y="-5.08" size="1.27" layer="95">&gt;Value</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="ADP5092" prefix="U">
@@ -2071,6 +2101,22 @@ DIN A3, landscape with location and doc. field</description>
 <connect gate="G$1" pin="TP" pad="9"/>
 <connect gate="G$1" pin="VCC" pad="8"/>
 <connect gate="G$1" pin="VM" pad="1"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="PCBSAT-TORQUECOIL" prefix="L">
+<gates>
+<gate name="G$1" symbol="PCBSAT-TORQUECOIL" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="PCBSAT-TORQUECOIL">
+<connects>
+<connect gate="G$1" pin="P$1" pad="1"/>
+<connect gate="G$1" pin="P$2" pad="2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -13987,11 +14033,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="R8" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="910K"/>
 <part name="R7" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="130K"/>
 <part name="GND15" library="SparkFun" deviceset="GND" device=""/>
-<part name="R19" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="5M"/>
+<part name="R19" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="4.53M"/>
 <part name="R15" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1"/>
 <part name="R16" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1"/>
 <part name="R17" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1"/>
-<part name="R18" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="5M"/>
+<part name="R18" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="5.49M"/>
 <part name="L1" library="STAC" deviceset="LPS4018-223M" device=""/>
 <part name="VCC1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCCINT" device=""/>
 <part name="GND24" library="SparkFun" deviceset="GND" device=""/>
@@ -14059,6 +14105,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="R11" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="15R"/>
 <part name="R12" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="15R"/>
 <part name="R22" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="15R"/>
+<part name="L3" library="STAC" deviceset="PCBSAT-TORQUECOIL" device=""/>
+<part name="L4" library="STAC" deviceset="PCBSAT-TORQUECOIL" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -14080,14 +14128,25 @@ stac.berkeley.edu</text>
 VSYS = VBAT = 2.2-2.7V</text>
 <text x="-27.94" y="-124.46" size="1.778" layer="97">16 V</text>
 <text x="45.72" y="-236.22" size="1.778" layer="97" rot="R90">1% REQ</text>
-<text x="218.44" y="-215.9" size="3.81" layer="97">All Caps 3.3V
+<text x="223.52" y="-243.84" size="3.81" layer="97">All Caps 3.3V
 Except C21 (16V)
-All Passives 0402
+All Passives 0402 
+All Passives (5%)
+Except R4, R15 - R21 (1%) 
 Subject to Change
-R11, R12, R22
-C3</text>
+R2, R11, R12, R22
+R7, R8
+C3
+MPPT Max efficiency:
+R7/(R7 + R8) = 87%</text>
 <wire x1="208.28" y1="-297.18" x2="208.28" y2="-167.64" width="0.6096" layer="97" style="longdash"/>
 <text x="215.9" y="-177.8" size="5.08" layer="97">Design Notes</text>
+<wire x1="124.46" y1="-294.64" x2="124.46" y2="-292.1" width="0.1524" layer="97" curve="-180"/>
+<wire x1="124.46" y1="-292.1" x2="124.46" y2="-289.56" width="0.1524" layer="97" curve="-180"/>
+<wire x1="124.46" y1="-289.56" x2="124.46" y2="-287.02" width="0.1524" layer="97" curve="-180"/>
+<wire x1="124.46" y1="-287.02" x2="124.46" y2="-284.48" width="0.1524" layer="97" curve="-180"/>
+<text x="106.68" y="-292.1" size="1.27" layer="97">PCB Spiral Inductor
+Layers 2 and 3</text>
 </plain>
 <instances>
 <instance part="GND27" gate="1" x="271.78" y="-144.78"/>
@@ -14205,6 +14264,8 @@ C3</text>
 <instance part="R11" gate="G$1" x="132.08" y="-205.74" rot="R180"/>
 <instance part="R12" gate="G$1" x="132.08" y="-243.84" rot="R180"/>
 <instance part="R22" gate="G$1" x="132.08" y="-284.48" rot="R180"/>
+<instance part="L3" gate="G$1" x="121.92" y="-210.82" rot="R270"/>
+<instance part="L4" gate="G$1" x="121.92" y="-248.92" rot="R270"/>
 </instances>
 <busses>
 </busses>
@@ -15118,8 +15179,9 @@ C3</text>
 <segment>
 <pinref part="U4" gate="G$1" pin="O2"/>
 <wire x1="144.78" y1="-210.82" x2="137.16" y2="-210.82" width="0.1524" layer="91"/>
-<wire x1="137.16" y1="-210.82" x2="137.16" y2="-213.36" width="0.1524" layer="91"/>
-<wire x1="137.16" y1="-213.36" x2="127" y2="-213.36" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="-210.82" x2="137.16" y2="-215.9" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="-215.9" x2="121.92" y2="-215.9" width="0.1524" layer="91"/>
+<pinref part="L3" gate="G$1" pin="P$2"/>
 </segment>
 </net>
 <net name="N$26" class="0">
@@ -15134,8 +15196,9 @@ C3</text>
 <segment>
 <pinref part="U6" gate="G$1" pin="O2"/>
 <wire x1="144.78" y1="-248.92" x2="137.16" y2="-248.92" width="0.1524" layer="91"/>
-<wire x1="137.16" y1="-248.92" x2="137.16" y2="-251.46" width="0.1524" layer="91"/>
-<wire x1="137.16" y1="-251.46" x2="127" y2="-251.46" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="-248.92" x2="137.16" y2="-254" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="-254" x2="121.92" y2="-254" width="0.1524" layer="91"/>
+<pinref part="L4" gate="G$1" pin="P$2"/>
 </segment>
 </net>
 <net name="N$13" class="0">
@@ -15150,8 +15213,11 @@ C3</text>
 <segment>
 <pinref part="U7" gate="G$1" pin="O2"/>
 <wire x1="144.78" y1="-289.56" x2="137.16" y2="-289.56" width="0.1524" layer="91"/>
-<wire x1="137.16" y1="-289.56" x2="137.16" y2="-292.1" width="0.1524" layer="91"/>
-<wire x1="137.16" y1="-292.1" x2="127" y2="-292.1" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="-289.56" x2="137.16" y2="-294.64" width="0.1524" layer="91"/>
+<wire x1="137.16" y1="-294.64" x2="124.46" y2="-294.64" width="0.1524" layer="91"/>
+<pinref part="R22" gate="G$1" pin="2"/>
+<wire x1="127" y1="-284.48" x2="124.46" y2="-284.48" width="0.1524" layer="91"/>
+<wire x1="124.46" y1="-284.48" x2="124.46" y2="-294.64" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="VCCA" class="0">
@@ -15219,6 +15285,20 @@ C3</text>
 <pinref part="R14" gate="G$1" pin="1"/>
 <wire x1="193.04" y1="-99.06" x2="198.12" y2="-99.06" width="0.1524" layer="91"/>
 <label x="160.02" y="-121.92" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="N$4" class="0">
+<segment>
+<pinref part="L3" gate="G$1" pin="P$1"/>
+<pinref part="R11" gate="G$1" pin="2"/>
+<wire x1="121.92" y1="-205.74" x2="127" y2="-205.74" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$9" class="0">
+<segment>
+<pinref part="L4" gate="G$1" pin="P$1"/>
+<pinref part="R12" gate="G$1" pin="2"/>
+<wire x1="121.92" y1="-243.84" x2="127" y2="-243.84" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
