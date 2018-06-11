@@ -14823,9 +14823,9 @@ Layers 2 and 3</text>
 <label x="27.94" y="-111.76" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="-20.32" y1="-193.04" x2="-33.02" y2="-193.04" width="0.1524" layer="91"/>
-<label x="-33.02" y="-193.04" size="1.778" layer="95"/>
-<pinref part="U1" gate="G$1" pin="3"/>
+<wire x1="-20.32" y1="-195.58" x2="-33.02" y2="-195.58" width="0.1524" layer="91"/>
+<label x="-33.02" y="-195.58" size="1.778" layer="95"/>
+<pinref part="U1" gate="G$1" pin="4"/>
 </segment>
 </net>
 <net name="INT2" class="0">
@@ -14835,9 +14835,9 @@ Layers 2 and 3</text>
 <label x="27.94" y="-114.3" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="-20.32" y1="-195.58" x2="-33.02" y2="-195.58" width="0.1524" layer="91"/>
-<label x="-33.02" y="-195.58" size="1.778" layer="95"/>
-<pinref part="U1" gate="G$1" pin="4"/>
+<wire x1="-20.32" y1="-193.04" x2="-33.02" y2="-193.04" width="0.1524" layer="91"/>
+<label x="-33.02" y="-193.04" size="1.778" layer="95"/>
+<pinref part="U1" gate="G$1" pin="3"/>
 </segment>
 </net>
 <net name="DRDY" class="0">
