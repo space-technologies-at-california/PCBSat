@@ -1593,23 +1593,23 @@ DIN A3, landscape with location and doc. field</description>
 <smd name="9" x="0" y="0" dx="0.81" dy="1.7" layer="1" cream="no"/>
 </package>
 <package name="PCBSAT-TORQUECOIL">
-<smd name="1" x="-5" y="3" dx="2" dy="1" layer="1"/>
-<smd name="2" x="5" y="3" dx="2" dy="1" layer="1"/>
-<wire x1="-7.5" y1="1.5" x2="7.5" y2="1.5" width="0.127" layer="51"/>
-<wire x1="7.5" y1="1.5" x2="7.5" y2="-1.5" width="0.127" layer="51"/>
-<wire x1="7.5" y1="-1.5" x2="-7.5" y2="-1.5" width="0.127" layer="51"/>
-<wire x1="-7.5" y1="-1.5" x2="-7.5" y2="1.5" width="0.127" layer="51"/>
-<wire x1="6" y1="3" x2="11" y2="3" width="0.127" layer="21"/>
-<wire x1="11" y1="3" x2="11" y2="-3" width="0.127" layer="21"/>
-<wire x1="11" y1="-3" x2="6" y2="-3" width="0.127" layer="21"/>
-<wire x1="6" y1="-3" x2="6" y2="3" width="0.127" layer="21"/>
-<wire x1="-6" y1="3" x2="-11" y2="3" width="0.127" layer="21"/>
-<wire x1="-11" y1="3" x2="-11" y2="-3" width="0.127" layer="21"/>
-<wire x1="-11" y1="-3" x2="-6" y2="-3" width="0.127" layer="21"/>
-<wire x1="-6" y1="-3" x2="-6" y2="3" width="0.127" layer="21"/>
-<rectangle x1="-8" y1="-3" x2="8" y2="3" layer="41"/>
-<text x="-3" y="3" size="1.27" layer="25">&gt;Name</text>
-<text x="-3" y="-4" size="1.27" layer="27">&gt;Value</text>
+<smd name="1" x="-9" y="0" dx="2" dy="1" layer="1"/>
+<smd name="2" x="9" y="0" dx="2" dy="1" layer="1"/>
+<wire x1="-7.5" y1="1.125" x2="7.5" y2="1.125" width="0.127" layer="51"/>
+<wire x1="7.5" y1="1.125" x2="7.5" y2="-1.125" width="0.127" layer="51"/>
+<wire x1="7.5" y1="-1.125" x2="-7.5" y2="-1.125" width="0.127" layer="51"/>
+<wire x1="-7.5" y1="-1.125" x2="-7.5" y2="1.125" width="0.127" layer="51"/>
+<wire x1="6" y1="1" x2="10" y2="1" width="0.127" layer="21"/>
+<wire x1="10" y1="1" x2="10" y2="-3" width="0.127" layer="21"/>
+<wire x1="10" y1="-3" x2="6" y2="-3" width="0.127" layer="21"/>
+<wire x1="6" y1="-3" x2="6" y2="1" width="0.127" layer="21"/>
+<wire x1="-6" y1="1" x2="-10" y2="1" width="0.127" layer="21"/>
+<wire x1="-10" y1="1" x2="-10" y2="-3" width="0.127" layer="21"/>
+<wire x1="-10" y1="-3" x2="-6" y2="-3" width="0.127" layer="21"/>
+<wire x1="-6" y1="-3" x2="-6" y2="1" width="0.127" layer="21"/>
+<text x="-1" y="-3" size="1.27" layer="25">&gt;Name</text>
+<text x="-7" y="-3" size="1.27" layer="27">&gt;Value</text>
+<rectangle x1="-8" y1="-1" x2="8" y2="1" layer="41"/>
 </package>
 </packages>
 <symbols>
@@ -13718,226 +13718,6 @@ Source: AVX .. aphvc.pdf</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="SparkFun-Connectors" urn="urn:adsk.eagle:library:513">
-<description>&lt;h3&gt;SparkFun Connectors&lt;/h3&gt;
-This library contains electrically-functional connectors. 
-&lt;br&gt;
-&lt;br&gt;
-We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
-&lt;br&gt;
-&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
-&lt;br&gt;
-&lt;br&gt;
-&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
-&lt;br&gt;
-&lt;br&gt;
-You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
-<packages>
-<package name="PAD.02X.02" urn="urn:adsk.eagle:footprint:37959/1" library_version="1">
-<description>&lt;h3&gt;Electrically Conductive Pad 0.02" Square&lt;/h3&gt;
-Used as a test point connection for pogo pins or other debugging tools. 
-&lt;p&gt;Specifications:
-&lt;li&gt;Area: 0.02" x 0.02"&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;
-&lt;p&gt;Example device(s):
-&lt;ul&gt;&lt;li&gt;TEST_POINT&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<smd name="P$1" x="0" y="0" dx="0.508" dy="0.508" layer="1"/>
-</package>
-<package name="PAD.03X.03" urn="urn:adsk.eagle:footprint:37960/1" library_version="1">
-<description>&lt;h3&gt;Electrically Conductive Pad 0.03" Circle&lt;/h3&gt;
-Used as a test point connection for pogo pins or other debugging tools. 
-&lt;p&gt;Specifications:
-&lt;li&gt;Area: 0.03" x 0.03"&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;
-&lt;p&gt;Example device(s):
-&lt;ul&gt;&lt;li&gt;TEST_POINT&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<smd name="P$1" x="0" y="0" dx="0.762" dy="0.762" layer="1" roundness="100" cream="no"/>
-</package>
-<package name="PAD.03X.05" urn="urn:adsk.eagle:footprint:37961/1" library_version="1">
-<description>&lt;h3&gt;Electrically Conductive Pad 0.05" Circle&lt;/h3&gt;
-Used as a test point connection for pogo pins or other debugging tools. 
-&lt;p&gt;Specifications:
-&lt;li&gt;Area: 0.05" x 0.05"&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;
-&lt;p&gt;Example device(s):
-&lt;ul&gt;&lt;li&gt;TEST_POINT&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<smd name="P$1" x="0" y="0" dx="1.27" dy="1.27" layer="1" roundness="100" cream="no"/>
-</package>
-<package name="PAD.03X.04" urn="urn:adsk.eagle:footprint:37962/1" library_version="1">
-<description>&lt;h3&gt;Electrically Conductive Pad 0.04" Circle&lt;/h3&gt;
-Used as a test point connection for pogo pins or other debugging tools. 
-&lt;p&gt;Specifications:
-&lt;li&gt;Area: 0.04" x 0.04"&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;
-&lt;p&gt;Example device(s):
-&lt;ul&gt;&lt;li&gt;TEST_POINT&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<smd name="P$1" x="0" y="0" dx="1.016" dy="1.016" layer="1" roundness="100" cream="no"/>
-</package>
-<package name="TP_15TH" urn="urn:adsk.eagle:footprint:37963/1" library_version="1">
-<description>&lt;h3&gt;Electrically Conductive Via 0.015" Drill&lt;/h3&gt;
-Used as a test point connection for pogo pins or other debugging tools. 
-&lt;p&gt;Specifications:
-&lt;li&gt;Area:0.015"&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;
-&lt;p&gt;Example device(s):
-&lt;ul&gt;&lt;li&gt;TEST_POINT&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<pad name="P$1" x="0" y="0" drill="0.381" diameter="0.6096" stop="no"/>
-<circle x="0" y="0" radius="0.381" width="0" layer="30"/>
-</package>
-</packages>
-<packages3d>
-<package3d name="PAD.02X.02" urn="urn:adsk.eagle:package:38284/1" type="box" library_version="1">
-<description>Electrically Conductive Pad 0.02" Square
-Used as a test point connection for pogo pins or other debugging tools. 
-Specifications:
-Area: 0.02" x 0.02"
-
-Example device(s):
-TEST_POINT
-</description>
-<packageinstances>
-<packageinstance name="PAD.02X.02"/>
-</packageinstances>
-</package3d>
-<package3d name="PAD.03X.03" urn="urn:adsk.eagle:package:38286/1" type="box" library_version="1">
-<description>Electrically Conductive Pad 0.03" Circle
-Used as a test point connection for pogo pins or other debugging tools. 
-Specifications:
-Area: 0.03" x 0.03"
-
-Example device(s):
-TEST_POINT
-</description>
-<packageinstances>
-<packageinstance name="PAD.03X.03"/>
-</packageinstances>
-</package3d>
-<package3d name="PAD.03X.05" urn="urn:adsk.eagle:package:38285/1" type="box" library_version="1">
-<description>Electrically Conductive Pad 0.05" Circle
-Used as a test point connection for pogo pins or other debugging tools. 
-Specifications:
-Area: 0.05" x 0.05"
-
-Example device(s):
-TEST_POINT
-</description>
-<packageinstances>
-<packageinstance name="PAD.03X.05"/>
-</packageinstances>
-</package3d>
-<package3d name="PAD.03X.04" urn="urn:adsk.eagle:package:38287/1" type="box" library_version="1">
-<description>Electrically Conductive Pad 0.04" Circle
-Used as a test point connection for pogo pins or other debugging tools. 
-Specifications:
-Area: 0.04" x 0.04"
-
-Example device(s):
-TEST_POINT
-</description>
-<packageinstances>
-<packageinstance name="PAD.03X.04"/>
-</packageinstances>
-</package3d>
-<package3d name="TP_15TH" urn="urn:adsk.eagle:package:38288/1" type="box" library_version="1">
-<description>Electrically Conductive Via 0.015" Drill
-Used as a test point connection for pogo pins or other debugging tools. 
-Specifications:
-Area:0.015"
-
-Example device(s):
-TEST_POINT
-</description>
-<packageinstances>
-<packageinstance name="TP_15TH"/>
-</packageinstances>
-</package3d>
-</packages3d>
-<symbols>
-<symbol name="TEST-POINT" urn="urn:adsk.eagle:symbol:37958/1" library_version="1">
-<wire x1="2.54" y1="0" x2="0" y2="0" width="0.1524" layer="94"/>
-<wire x1="3.302" y1="0.762" x2="3.302" y2="-0.762" width="0.1524" layer="94" curve="180"/>
-<text x="-2.54" y="2.54" size="1.778" layer="95" font="vector">&gt;Name</text>
-<text x="-2.54" y="-2.54" size="1.778" layer="96" font="vector">&gt;Value</text>
-<pin name="1" x="0" y="0" visible="off" length="point" rot="R180"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="TEST-POINT" urn="urn:adsk.eagle:component:38391/1" prefix="TP" library_version="1">
-<description>&lt;h3&gt;SparkFun Test Points&lt;/h3&gt;
-&lt;p&gt;Bare copper test points for troubleshooting or In-Circuit-Testing. These are used by our Production team for verifying production board runs using pogo-pins on test beds.&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;SparkFun Products:&lt;/b&gt;
-&lt;ul&gt;&lt;li&gt;&lt;a href=”https://www.sparkfun.com/products/13284”&gt;SparkFun LSM9DS1 Breakout&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=”https://www.sparkfun.com/products/13714”&gt;SparkFun PSOC&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/13879"&gt;SparkFun Load Cell Amplifier&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="TEST-POINT" x="0" y="0"/>
-</gates>
-<devices>
-<device name="2" package="PAD.02X.02">
-<connects>
-<connect gate="G$1" pin="1" pad="P$1"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:38284/1"/>
-</package3dinstances>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="3" package="PAD.03X.03">
-<connects>
-<connect gate="G$1" pin="1" pad="P$1"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:38286/1"/>
-</package3dinstances>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="3X5" package="PAD.03X.05">
-<connects>
-<connect gate="G$1" pin="1" pad="P$1"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:38285/1"/>
-</package3dinstances>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="3X4" package="PAD.03X.04">
-<connects>
-<connect gate="G$1" pin="1" pad="P$1"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:38287/1"/>
-</package3dinstances>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="TP_15TH_THRU" package="TP_15TH">
-<connects>
-<connect gate="G$1" pin="1" pad="P$1"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:38288/1"/>
-</package3dinstances>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="SparkFun-PowerSymbols" urn="urn:adsk.eagle:library:530">
 <description>&lt;h3&gt;SparkFun Power Symbols&lt;/h3&gt;
 This library contains power, ground, and voltage-supply symbols.
@@ -14025,7 +13805,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="P+12" library="SparkFun" deviceset="VCC" device=""/>
 <part name="GND14" library="SparkFun" deviceset="GND" device=""/>
 <part name="GND12" library="SparkFun" deviceset="GND" device=""/>
-<part name="GND19" library="SparkFun" deviceset="GND" device=""/>
 <part name="GND25" library="SparkFun" deviceset="GND" device=""/>
 <part name="GND20" library="SparkFun" deviceset="GND" device=""/>
 <part name="GND26" library="SparkFun" deviceset="GND" device=""/>
@@ -14050,9 +13829,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="C2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0402" package3d_urn="urn:adsk.eagle:package:23626/1" value="2.2n"/>
 <part name="C7" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0402" package3d_urn="urn:adsk.eagle:package:23626/1" value="470n"/>
 <part name="C6" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0402" package3d_urn="urn:adsk.eagle:package:23626/1" value="10n"/>
-<part name="C8" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0402" package3d_urn="urn:adsk.eagle:package:23626/1" value="2.2u"/>
+<part name="C8" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0402" package3d_urn="urn:adsk.eagle:package:23626/1" value="10u"/>
 <part name="C12" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0402" package3d_urn="urn:adsk.eagle:package:23626/1" value="10u"/>
-<part name="C16" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-US" device="C0402" package3d_urn="urn:adsk.eagle:package:23626/1" value="2.2u"/>
 <part name="GND13" library="SparkFun" deviceset="GND" device=""/>
 <part name="GND22" library="SparkFun" deviceset="GND" device=""/>
 <part name="C14" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0402" package3d_urn="urn:adsk.eagle:package:26136/1" value="4.7u"/>
@@ -14068,9 +13846,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="R21" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="5.6M"/>
 <part name="P+2" library="SparkFun" deviceset="VCC" device=""/>
 <part name="GND4" library="SparkFun" deviceset="GND" device=""/>
-<part name="TP1" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="TEST-POINT" device="2" package3d_urn="urn:adsk.eagle:package:38284/1"/>
-<part name="TP2" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="TEST-POINT" device="2" package3d_urn="urn:adsk.eagle:package:38284/1"/>
-<part name="TP3" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="TEST-POINT" device="2" package3d_urn="urn:adsk.eagle:package:38284/1"/>
 <part name="A1" library="STAC" deviceset="SPRITEANTENNA_ANTENNA" device=""/>
 <part name="A2" library="STAC" deviceset="SPRITEANTENNA_ANTENNA" device=""/>
 <part name="X1" library="STAC" deviceset="SPRITEPIN_SPRITE_PIN" device=""/>
@@ -14184,7 +13959,6 @@ Layers 2 and 3</text>
 <instance part="P+12" gate="1" x="193.04" y="-88.9"/>
 <instance part="GND14" gate="1" x="157.48" y="-223.52" rot="MR0"/>
 <instance part="GND12" gate="1" x="162.56" y="-198.12" rot="MR270"/>
-<instance part="GND19" gate="1" x="162.56" y="-276.86" rot="MR270"/>
 <instance part="GND25" gate="1" x="157.48" y="-261.62" rot="MR0"/>
 <instance part="GND20" gate="1" x="162.56" y="-236.22" rot="MR270"/>
 <instance part="GND26" gate="1" x="157.48" y="-302.26" rot="MR0"/>
@@ -14211,7 +13985,6 @@ Layers 2 and 3</text>
 <instance part="C6" gate="G$1" x="30.48" y="-256.54"/>
 <instance part="C8" gate="G$1" x="149.86" y="-198.12" rot="R90"/>
 <instance part="C12" gate="G$1" x="149.86" y="-236.22" rot="R90"/>
-<instance part="C16" gate="G$1" x="149.86" y="-276.86" rot="R90"/>
 <instance part="GND13" gate="1" x="101.6" y="-106.68" rot="R270"/>
 <instance part="GND22" gate="1" x="177.8" y="-119.38"/>
 <instance part="C14" gate="G$1" x="185.42" y="-124.46"/>
@@ -14227,9 +14000,6 @@ Layers 2 and 3</text>
 <instance part="R21" gate="G$1" x="243.84" y="-147.32" rot="R90"/>
 <instance part="P+2" gate="1" x="-43.18" y="-284.48"/>
 <instance part="GND4" gate="1" x="-43.18" y="-312.42"/>
-<instance part="TP1" gate="G$1" x="45.72" y="-256.54"/>
-<instance part="TP2" gate="G$1" x="55.88" y="-83.82" rot="R90"/>
-<instance part="TP3" gate="G$1" x="60.96" y="-83.82" rot="R90"/>
 <instance part="A1" gate="G$1" x="-15.24" y="-297.18"/>
 <instance part="A2" gate="G$1" x="0" y="-297.18"/>
 <instance part="X1" gate="G$1" x="279.4" y="-73.66"/>
@@ -14539,11 +14309,6 @@ Layers 2 and 3</text>
 <wire x1="154.94" y1="-236.22" x2="160.02" y2="-236.22" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="GND19" gate="1" pin="GND"/>
-<pinref part="C16" gate="G$1" pin="2"/>
-<wire x1="160.02" y1="-276.86" x2="154.94" y2="-276.86" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="U4" gate="G$1" pin="GND"/>
 <wire x1="144.78" y1="-213.36" x2="139.7" y2="-213.36" width="0.1524" layer="91"/>
 <wire x1="139.7" y1="-213.36" x2="139.7" y2="-220.98" width="0.1524" layer="91"/>
@@ -14615,13 +14380,8 @@ Layers 2 and 3</text>
 </net>
 <net name="N$12" class="0">
 <segment>
-<wire x1="30.48" y1="-261.62" x2="38.1" y2="-261.62" width="0.1524" layer="91"/>
+<wire x1="30.48" y1="-261.62" x2="40.64" y2="-261.62" width="0.1524" layer="91"/>
 <pinref part="C6" gate="G$1" pin="2"/>
-<pinref part="TP1" gate="G$1" pin="1"/>
-<wire x1="38.1" y1="-261.62" x2="40.64" y2="-261.62" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="-256.54" x2="38.1" y2="-256.54" width="0.1524" layer="91"/>
-<wire x1="38.1" y1="-256.54" x2="38.1" y2="-261.62" width="0.1524" layer="91"/>
-<junction x="38.1" y="-261.62"/>
 <pinref part="U3" gate="G$1" pin="OUT"/>
 </segment>
 </net>
@@ -14643,12 +14403,8 @@ Layers 2 and 3</text>
 <wire x1="25.4" y1="-93.98" x2="33.02" y2="-93.98" width="0.1524" layer="91"/>
 <wire x1="33.02" y1="-93.98" x2="33.02" y2="-91.44" width="0.1524" layer="91"/>
 <junction x="33.02" y="-93.98"/>
-<wire x1="33.02" y1="-93.98" x2="60.96" y2="-93.98" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="-93.98" x2="68.58" y2="-93.98" width="0.1524" layer="91"/>
 <label x="60.96" y="-93.98" size="1.778" layer="95"/>
-<pinref part="TP3" gate="G$1" pin="1"/>
-<wire x1="60.96" y1="-93.98" x2="60.96" y2="-83.82" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="-93.98" x2="60.96" y2="-93.98" width="0.1524" layer="91"/>
-<junction x="60.96" y="-93.98"/>
 <pinref part="R5" gate="G$1" pin="2"/>
 </segment>
 </net>
@@ -14661,14 +14417,10 @@ Layers 2 and 3</text>
 <segment>
 <pinref part="U2" gate="G$1" pin="SCL/SPC"/>
 <wire x1="25.4" y1="-96.52" x2="45.72" y2="-96.52" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="-96.52" x2="55.88" y2="-96.52" width="0.1524" layer="91"/>
-<wire x1="55.88" y1="-96.52" x2="68.58" y2="-96.52" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="-96.52" x2="68.58" y2="-96.52" width="0.1524" layer="91"/>
 <wire x1="45.72" y1="-91.44" x2="45.72" y2="-96.52" width="0.1524" layer="91"/>
 <junction x="45.72" y="-96.52"/>
 <label x="60.96" y="-96.52" size="1.778" layer="95"/>
-<pinref part="TP2" gate="G$1" pin="1"/>
-<wire x1="55.88" y1="-83.82" x2="55.88" y2="-96.52" width="0.1524" layer="91"/>
-<junction x="55.88" y="-96.52"/>
 <pinref part="R3" gate="G$1" pin="2"/>
 </segment>
 </net>
@@ -14856,10 +14608,10 @@ Layers 2 and 3</text>
 <wire x1="177.8" y1="-109.22" x2="172.72" y2="-109.22" width="0.1524" layer="91"/>
 <junction x="172.72" y="-109.22"/>
 <pinref part="C13" gate="G$1" pin="1"/>
-<pinref part="R13" gate="G$1" pin="1"/>
-<wire x1="177.8" y1="-99.06" x2="172.72" y2="-99.06" width="0.1524" layer="91"/>
-<junction x="172.72" y="-99.06"/>
 <pinref part="VCC3" gate="G$1" pin="VCCIO"/>
+<pinref part="R13" gate="G$1" pin="1"/>
+<wire x1="172.72" y1="-99.06" x2="177.8" y2="-99.06" width="0.1524" layer="91"/>
+<junction x="172.72" y="-99.06"/>
 </segment>
 <segment>
 <pinref part="U4" gate="G$1" pin="VM"/>
@@ -14884,12 +14636,8 @@ Layers 2 and 3</text>
 <segment>
 <pinref part="U7" gate="G$1" pin="VM"/>
 <wire x1="144.78" y1="-284.48" x2="139.7" y2="-284.48" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="-284.48" x2="139.7" y2="-276.86" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="-284.48" x2="139.7" y2="-274.32" width="0.1524" layer="91"/>
 <pinref part="VCC8" gate="G$1" pin="VCCIO"/>
-<pinref part="C16" gate="G$1" pin="1"/>
-<wire x1="139.7" y1="-276.86" x2="139.7" y2="-274.32" width="0.1524" layer="91"/>
-<wire x1="147.32" y1="-276.86" x2="139.7" y2="-276.86" width="0.1524" layer="91"/>
-<junction x="139.7" y="-276.86"/>
 </segment>
 </net>
 <net name="REG_D0" class="0">
@@ -15104,9 +14852,9 @@ Layers 2 and 3</text>
 <label x="170.18" y="-292.1" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="18"/>
-<wire x1="-20.32" y1="-231.14" x2="-33.02" y2="-231.14" width="0.1524" layer="91"/>
-<label x="-33.02" y="-231.14" size="1.778" layer="95"/>
+<pinref part="U1" gate="G$1" pin="2"/>
+<wire x1="-20.32" y1="-190.5" x2="-33.02" y2="-190.5" width="0.1524" layer="91"/>
+<label x="-33.02" y="-190.5" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="PWM1" class="0">
@@ -15126,9 +14874,9 @@ Layers 2 and 3</text>
 <label x="170.18" y="-289.56" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="17"/>
-<wire x1="-20.32" y1="-228.6" x2="-33.02" y2="-228.6" width="0.1524" layer="91"/>
-<label x="-33.02" y="-228.6" size="1.778" layer="95"/>
+<pinref part="U1" gate="G$1" pin="1"/>
+<wire x1="-20.32" y1="-187.96" x2="-33.02" y2="-187.96" width="0.1524" layer="91"/>
+<label x="-33.02" y="-187.96" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="EN_1" class="0">
@@ -15278,13 +15026,13 @@ Layers 2 and 3</text>
 <junction x="185.42" y="-121.92"/>
 <pinref part="C15" gate="G$1" pin="1"/>
 <junction x="193.04" y="-121.92"/>
-<pinref part="R13" gate="G$1" pin="2"/>
 <wire x1="193.04" y1="-99.06" x2="193.04" y2="-88.9" width="0.1524" layer="91"/>
-<wire x1="187.96" y1="-99.06" x2="193.04" y2="-99.06" width="0.1524" layer="91"/>
 <junction x="193.04" y="-99.06"/>
 <pinref part="R14" gate="G$1" pin="1"/>
 <wire x1="193.04" y1="-99.06" x2="198.12" y2="-99.06" width="0.1524" layer="91"/>
 <label x="160.02" y="-121.92" size="1.778" layer="95"/>
+<pinref part="R13" gate="G$1" pin="2"/>
+<wire x1="187.96" y1="-99.06" x2="193.04" y2="-99.06" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$4" class="0">
