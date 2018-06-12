@@ -1401,7 +1401,7 @@ DIN A3, landscape with location and doc. field</description>
 <package name="LPS4018-223M">
 <smd name="P$1" x="-1.765" y="0" dx="0.87" dy="1.15" layer="1"/>
 <smd name="P$2" x="1.765" y="0" dx="0.87" dy="1.15" layer="1"/>
-<polygon width="0.01" layer="1">
+<polygon width="0.2" layer="29">
 <vertex x="-1.33" y="0.575"/>
 <vertex x="-0.75" y="1.17"/>
 <vertex x="-0.75" y="1.945"/>
@@ -1418,20 +1418,20 @@ DIN A3, landscape with location and doc. field</description>
 <vertex x="2.202" y="0.579"/>
 </polygon>
 <polygon width="0.01" layer="1">
-<vertex x="1.334" y="-0.581"/>
-<vertex x="0.754" y="-1.176"/>
-<vertex x="0.754" y="-1.951"/>
-<vertex x="1.644" y="-1.951"/>
-<vertex x="2.204" y="-1.401"/>
-<vertex x="2.204" y="-0.581"/>
+<vertex x="1.334" y="-0.571"/>
+<vertex x="0.754" y="-1.166"/>
+<vertex x="0.754" y="-1.941"/>
+<vertex x="1.644" y="-1.941"/>
+<vertex x="2.204" y="-1.391"/>
+<vertex x="2.204" y="-0.571"/>
 </polygon>
 <polygon width="0.01" layer="1">
-<vertex x="-1.328" y="-0.585"/>
+<vertex x="-1.328" y="-0.575"/>
 <vertex x="-0.748" y="-1.18"/>
 <vertex x="-0.748" y="-1.955"/>
 <vertex x="-1.638" y="-1.955"/>
 <vertex x="-2.198" y="-1.405"/>
-<vertex x="-2.198" y="-0.585"/>
+<vertex x="-2.198" y="-0.575"/>
 </polygon>
 <text x="-2.807" y="2.041" size="1" layer="25">&gt;Name</text>
 <text x="-2.795" y="-3.046" size="1" layer="27">&gt;Value</text>
@@ -1440,9 +1440,41 @@ DIN A3, landscape with location and doc. field</description>
 <wire x1="-1" y1="2" x2="-2" y2="1" width="0.127" layer="51"/>
 <wire x1="-2" y1="1" x2="-2" y2="-1" width="0.127" layer="51"/>
 <wire x1="-2" y1="-1" x2="-1" y2="-2" width="0.127" layer="51"/>
-<wire x1="-1" y1="-2" x2="1" y2="-2" width="0.127" layer="51"/>
-<wire x1="1" y1="-2" x2="2" y2="-1" width="0.127" layer="51"/>
-<wire x1="2" y1="-1" x2="2" y2="1" width="0.127" layer="51"/>
+<wire x1="-1" y1="-2" x2="1" y2="-1.99" width="0.127" layer="51"/>
+<wire x1="1" y1="-1.99" x2="2" y2="-0.99" width="0.127" layer="51"/>
+<wire x1="2" y1="-0.99" x2="2" y2="1" width="0.127" layer="51"/>
+<polygon width="0.2" layer="29">
+<vertex x="-1.328" y="-0.575"/>
+<vertex x="-0.748" y="-1.18"/>
+<vertex x="-0.748" y="-1.955"/>
+<vertex x="-1.638" y="-1.955"/>
+<vertex x="-2.198" y="-1.405"/>
+<vertex x="-2.198" y="-0.575"/>
+</polygon>
+<polygon width="0.2" layer="29">
+<vertex x="1.334" y="-0.571"/>
+<vertex x="0.754" y="-1.166"/>
+<vertex x="0.754" y="-1.941"/>
+<vertex x="1.644" y="-1.941"/>
+<vertex x="2.204" y="-1.391"/>
+<vertex x="2.204" y="-0.571"/>
+</polygon>
+<polygon width="0.01" layer="1">
+<vertex x="-1.33" y="0.565"/>
+<vertex x="-0.75" y="1.16"/>
+<vertex x="-0.75" y="1.935"/>
+<vertex x="-1.64" y="1.935"/>
+<vertex x="-2.2" y="1.385"/>
+<vertex x="-2.2" y="0.565"/>
+</polygon>
+<polygon width="0.2" layer="29">
+<vertex x="1.332" y="0.569"/>
+<vertex x="0.752" y="1.164"/>
+<vertex x="0.752" y="1.939"/>
+<vertex x="1.642" y="1.939"/>
+<vertex x="2.202" y="1.389"/>
+<vertex x="2.202" y="0.569"/>
+</polygon>
 </package>
 <package name="SPRITEANTENNA_ANTENNA">
 <pad name="IN1" x="0" y="0" drill="0.6" diameter="1.27" shape="square" rot="R180"/>
@@ -1840,8 +1872,8 @@ DIN A3, landscape with location and doc. field</description>
 <wire x1="10.16" y1="-7.62" x2="-10.16" y2="-7.62" width="0.254" layer="94"/>
 <wire x1="-10.16" y1="-7.62" x2="-10.16" y2="7.62" width="0.254" layer="94"/>
 <pin name="VM" x="-12.7" y="5.08" length="short"/>
-<pin name="O1" x="-12.7" y="2.54" length="short"/>
-<pin name="O2" x="-12.7" y="0" length="short"/>
+<pin name="O1" x="-12.7" y="2.54" length="short" swaplevel="1"/>
+<pin name="O2" x="-12.7" y="0" length="short" swaplevel="1"/>
 <pin name="GND" x="-12.7" y="-2.54" length="short"/>
 <pin name="VCC" x="12.7" y="5.08" length="short" rot="R180"/>
 <pin name="SLP" x="12.7" y="2.54" length="short" rot="R180"/>
@@ -14606,9 +14638,9 @@ Layers 2 and 3</text>
 <label x="157.48" y="-116.84" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="25.4" y1="-193.04" x2="40.64" y2="-193.04" width="0.1524" layer="91"/>
-<label x="30.48" y="-193.04" size="1.778" layer="95"/>
-<pinref part="U1" gate="G$1" pin="46"/>
+<pinref part="U1" gate="G$1" pin="17"/>
+<wire x1="-20.32" y1="-228.6" x2="-33.02" y2="-228.6" width="0.1524" layer="91"/>
+<label x="-33.02" y="-228.6" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="VCCIO" class="0">
@@ -14679,9 +14711,9 @@ Layers 2 and 3</text>
 <label x="106.68" y="-101.6" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U1" gate="G$1" pin="16"/>
-<wire x1="-20.32" y1="-226.06" x2="-33.02" y2="-226.06" width="0.1524" layer="91"/>
-<label x="-33.02" y="-226.06" size="1.778" layer="95"/>
+<pinref part="U1" gate="G$1" pin="13"/>
+<wire x1="-20.32" y1="-218.44" x2="-33.02" y2="-218.44" width="0.1524" layer="91"/>
+<label x="-33.02" y="-218.44" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$18" class="0">
@@ -14934,16 +14966,16 @@ Layers 2 and 3</text>
 </net>
 <net name="N$8" class="0">
 <segment>
-<pinref part="U4" gate="G$1" pin="O1"/>
-<wire x1="144.78" y1="-208.28" x2="137.16" y2="-208.28" width="0.1524" layer="91"/>
+<pinref part="U4" gate="G$1" pin="O2"/>
+<wire x1="144.78" y1="-210.82" x2="137.16" y2="-208.28" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="-205.74" x2="137.16" y2="-208.28" width="0.1524" layer="91"/>
 <pinref part="R11" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="N$14" class="0">
 <segment>
-<pinref part="U4" gate="G$1" pin="O2"/>
-<wire x1="144.78" y1="-210.82" x2="137.16" y2="-210.82" width="0.1524" layer="91"/>
+<pinref part="U4" gate="G$1" pin="O1"/>
+<wire x1="144.78" y1="-208.28" x2="137.16" y2="-210.82" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="-210.82" x2="137.16" y2="-215.9" width="0.1524" layer="91"/>
 <wire x1="137.16" y1="-215.9" x2="121.92" y2="-215.9" width="0.1524" layer="91"/>
 <pinref part="L3" gate="G$1" pin="P$2"/>
