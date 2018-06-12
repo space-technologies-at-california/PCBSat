@@ -9,9 +9,9 @@
 </settings>
 <grid distance="0.1" unitdist="mm" unit="mm" style="lines" multiple="10" display="yes" altdistance="0.1" altunitdist="mm" altunit="mm"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
-<layer number="2" name="Route2" color="1" fill="3" visible="yes" active="yes"/>
-<layer number="3" name="Route3" color="4" fill="3" visible="no" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="2" name="Route2" color="1" fill="3" visible="no" active="yes"/>
+<layer number="3" name="Route3" color="4" fill="3" visible="yes" active="yes"/>
 <layer number="4" name="Route4" color="1" fill="4" visible="no" active="no"/>
 <layer number="5" name="Route5" color="4" fill="4" visible="no" active="no"/>
 <layer number="6" name="Route6" color="1" fill="8" visible="no" active="no"/>
@@ -24,7 +24,7 @@
 <layer number="13" name="Route13" color="4" fill="5" visible="no" active="no"/>
 <layer number="14" name="Route14" color="1" fill="6" visible="no" active="no"/>
 <layer number="15" name="Route15" color="4" fill="6" visible="no" active="no"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
@@ -8404,12 +8404,10 @@ Generated on 6/10/18</description>
 <via x="7.9" y="9.8" extent="3-16" drill="0.1016"/>
 <wire x1="7.9" y1="9.8" x2="7.885" y2="9.815" width="0.2032" layer="16"/>
 <wire x1="7.885" y1="9.815" x2="7.885" y2="10.45" width="0.2032" layer="16"/>
-<wire x1="11.75" y1="28.8" x2="11.75" y2="29.9" width="0.2032" layer="16"/>
-<wire x1="11.75" y1="29.9" x2="11.75" y2="30.1" width="0.2032" layer="16"/>
+<wire x1="11.75" y1="28.8" x2="11.75" y2="30.1" width="0.2032" layer="16"/>
 <wire x1="8.15" y1="27.18" x2="8.2914" y2="27.3214" width="0.2032" layer="16"/>
 <wire x1="8.2914" y1="27.3214" x2="8.2914" y2="27.7943" width="0.2032" layer="16"/>
-<wire x1="8.2914" y1="27.7943" x2="10.3971" y2="29.9" width="0.2032" layer="16"/>
-<wire x1="10.3971" y1="29.9" x2="11.75" y2="29.9" width="0.2032" layer="16"/>
+<wire x1="8.2914" y1="27.7943" x2="9.1971" y2="28.7" width="0.2032" layer="16"/>
 <wire x1="25.725" y1="29.305" x2="28.255" y2="29.305" width="0.2032" layer="1"/>
 <wire x1="28.255" y1="29.305" x2="28.55" y2="29.6" width="0.2032" layer="1"/>
 <wire x1="25.44739375" y1="28.357" x2="25.373" y2="28.28260625" width="0.2032" layer="1"/>
@@ -8427,13 +8425,42 @@ Generated on 6/10/18</description>
 <via x="3.8" y="13.6" extent="1-2" drill="0.1016"/>
 <wire x1="3.8" y1="13.6" x2="4.15" y2="13.6" width="0.1524" layer="1"/>
 <wire x1="4.15" y1="13.6" x2="4.35" y2="13.4" width="0.1524" layer="1"/>
+<polygon width="0.1524" layer="3">
+<vertex x="11" y="4"/>
+<vertex x="0" y="4"/>
+<vertex x="0" y="29"/>
+<vertex x="6" y="29"/>
+<vertex x="6" y="35"/>
+<vertex x="35" y="35"/>
+<vertex x="35" y="21"/>
+<vertex x="11" y="21"/>
+</polygon>
+<via x="7.4" y="32.9" extent="1-16" drill="0.1016"/>
+<via x="14" y="31.7" extent="1-16" drill="0.1016"/>
+<via x="16.5" y="29.6" extent="1-16" drill="0.1016"/>
+<via x="15.6" y="28.6" extent="1-16" drill="0.1016"/>
+<via x="14.3" y="27.4" extent="1-16" drill="0.1016"/>
+<via x="13.3" y="31.5" extent="1-16" drill="0.1016"/>
+<via x="4.8" y="21.9" extent="1-16" drill="0.1016"/>
+<via x="3.7" y="22.6" extent="1-16" drill="0.1016"/>
+<via x="3.6" y="20.7" extent="1-16" drill="0.1016"/>
+<via x="1.5" y="19.3" extent="1-16" drill="0.1016"/>
+<via x="3.7" y="18.8" extent="1-16" drill="0.1016"/>
+<via x="1.5" y="17.6" extent="1-16" drill="0.1016"/>
+<via x="1.3" y="8.5" extent="1-16" drill="0.1016"/>
+<wire x1="9.1971" y1="28.7" x2="10.2" y2="28.6971" width="0.2032" layer="16"/>
+<wire x1="10.2" y1="28.6971" x2="10.9" y2="28.7" width="0.2032" layer="16"/>
+<via x="10.9" y="28.7" extent="3-16" drill="0.1016"/>
+<wire x1="10.9" y1="28.7" x2="11" y2="28.8" width="0.2032" layer="16"/>
+<wire x1="11" y1="28.8" x2="11.75" y2="28.8" width="0.2032" layer="16"/>
+<via x="3.3" y="14.1" extent="1-16" drill="0.1016"/>
+<via x="5.4" y="9.4" extent="1-16" drill="0.1016"/>
+<via x="5.2" y="7.8" extent="1-16" drill="0.1016"/>
 <wire x1="25.725" y1="29.305" x2="24.715" y2="29.275" width="0" layer="19" extent="1-1"/>
 <wire x1="25.725" y1="28.445" x2="25.725" y2="29.305" width="0" layer="19" extent="1-1"/>
-<wire x1="10.3971" y1="29.9" x2="9.43136875" y2="29.70624375" width="0" layer="19" extent="1-16"/>
 <wire x1="6.815075" y1="22.84730625" x2="5.400859375" y2="24.261521875" width="0" layer="19" extent="1-1"/>
 <wire x1="4.693753125" y1="27.23136875" x2="2.35" y2="25.8" width="0" layer="19" extent="1-1"/>
 <wire x1="11.1991375" y1="24.261521875" x2="8.15" y2="27.18" width="0" layer="19" extent="1-16"/>
-<wire x1="7.885" y1="10.45" x2="4.35" y2="13.4" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="GND">
 <contactref element="LED1" pad="C"/>
@@ -9434,6 +9461,9 @@ Generated on 6/10/18</description>
 <wire x1="34" y1="32.9" x2="34" y2="29.8" width="0.2032" layer="16"/>
 <wire x1="34" y1="29.8" x2="33.55" y2="29.35" width="0.2032" layer="16"/>
 <wire x1="33.55" y1="29.35" x2="32.8" y2="29.35" width="0.2032" layer="16"/>
+</signal>
+<signal name="N$17">
+<via x="16.3" y="31.6" extent="1-16" drill="0.1016"/>
 </signal>
 </signals>
 </board>
