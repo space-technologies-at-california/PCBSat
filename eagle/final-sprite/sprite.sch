@@ -1643,6 +1643,15 @@ DIN A3, landscape with location and doc. field</description>
 <text x="-7" y="-3" size="1.27" layer="27">&gt;Value</text>
 <rectangle x1="-8" y1="-1" x2="8" y2="1" layer="41"/>
 </package>
+<package name="TRISOLX-STRAIGHT-RS">
+<wire x1="-11.90913125" y1="4.43918125" x2="-11.90913125" y2="-2.60081875" width="0.0762" layer="21"/>
+<wire x1="-11.90913125" y1="-2.60081875" x2="14.49086875" y2="-2.60081875" width="0.0762" layer="21"/>
+<wire x1="14.49086875" y1="-2.60081875" x2="9.570190625" y2="2.55625" width="0.0762" layer="21"/>
+<wire x1="9.570190625" y1="2.55625" x2="4.32686875" y2="4.43918125" width="0.0762" layer="21"/>
+<wire x1="4.32686875" y1="4.43918125" x2="-11.90913125" y2="4.43918125" width="0.0762" layer="21"/>
+<smd name="P$1" x="-12.446" y="0.508" dx="1.27" dy="0.635" layer="1" rot="R90"/>
+<smd name="P$2" x="-10.033" y="0.889" dx="6.4516" dy="3.2512" layer="1" rot="R90"/>
+</package>
 </packages>
 <symbols>
 <symbol name="ADP5092">
@@ -2007,6 +2016,15 @@ DIN A3, landscape with location and doc. field</description>
 <connects>
 <connect gate="G$1" pin="A" pad="P$3"/>
 <connect gate="G$1" pin="C" pad="P$2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="STRAIGHT-RS" package="TRISOLX-STRAIGHT-RS">
+<connects>
+<connect gate="G$1" pin="A" pad="P$2"/>
+<connect gate="G$1" pin="C" pad="P$1"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -13883,10 +13901,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="X1" library="STAC" deviceset="SPRITEPIN_SPRITE_PIN" device=""/>
 <part name="X2" library="STAC" deviceset="SPRITEPIN_SPRITE_PIN" device=""/>
 <part name="B1" library="STAC" deviceset="UMAC_UMAC" device=""/>
-<part name="D1" library="STAC" deviceset="TRISOLX-WING" device=""/>
-<part name="D2" library="STAC" deviceset="TRISOLX-WING" device=""/>
-<part name="D3" library="STAC" deviceset="TRISOLX-WING" device=""/>
-<part name="D4" library="STAC" deviceset="TRISOLX-WING" device=""/>
+<part name="D2" library="STAC" deviceset="TRISOLX-WING" device="STRAIGHT-RS" value="TRISOLX-WINGSTRAIGHT-RS"/>
+<part name="D3" library="STAC" deviceset="TRISOLX-WING" device="STRAIGHT-RS" value="TRISOLX-WINGSTRAIGHT-RS"/>
+<part name="D4" library="STAC" deviceset="TRISOLX-WING" device="STRAIGHT-RS" value="TRISOLX-WINGSTRAIGHT-RS"/>
 <part name="U3" library="STAC" deviceset="SPRITETCXO_TCXO_7Z" device=""/>
 <part name="U1" library="STAC" deviceset="CC430F513X" device=""/>
 <part name="VCC3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCCIO" device=""/>
@@ -13914,6 +13931,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="R22" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0402" package3d_urn="urn:adsk.eagle:package:26058/1" value="15R"/>
 <part name="L3" library="STAC" deviceset="PCBSAT-TORQUECOIL" device=""/>
 <part name="L4" library="STAC" deviceset="PCBSAT-TORQUECOIL" device=""/>
+<part name="D1" library="STAC" deviceset="TRISOLX-WING" device="STRAIGHT-RS" value="TRISOLX-WINGSTRAIGHT-RS"/>
 </parts>
 <sheets>
 <sheet>
@@ -14037,7 +14055,6 @@ Layers 2 and 3</text>
 <instance part="X1" gate="G$1" x="279.4" y="-73.66"/>
 <instance part="X2" gate="G$1" x="279.4" y="-83.82"/>
 <instance part="B1" gate="G$1" x="175.26" y="-134.62"/>
-<instance part="D1" gate="G$1" x="256.54" y="-132.08" rot="R90"/>
 <instance part="D2" gate="G$1" x="266.7" y="-132.08" rot="R90"/>
 <instance part="D3" gate="G$1" x="276.86" y="-132.08" rot="R90"/>
 <instance part="D4" gate="G$1" x="287.02" y="-132.08" rot="R90"/>
@@ -14068,6 +14085,7 @@ Layers 2 and 3</text>
 <instance part="R22" gate="G$1" x="132.08" y="-284.48" rot="R180"/>
 <instance part="L3" gate="G$1" x="121.92" y="-210.82" rot="R270"/>
 <instance part="L4" gate="G$1" x="121.92" y="-248.92" rot="R270"/>
+<instance part="D1" gate="G$1" x="256.54" y="-132.08" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -14204,10 +14222,10 @@ Layers 2 and 3</text>
 <wire x1="294.64" y1="-129.54" x2="294.64" y2="-142.24" width="0.1524" layer="91"/>
 <wire x1="294.64" y1="-142.24" x2="287.02" y2="-142.24" width="0.1524" layer="91"/>
 <junction x="287.02" y="-142.24"/>
-<pinref part="D1" gate="G$1" pin="A"/>
 <pinref part="D2" gate="G$1" pin="A"/>
 <pinref part="D3" gate="G$1" pin="A"/>
 <pinref part="D4" gate="G$1" pin="A"/>
+<pinref part="D1" gate="G$1" pin="A"/>
 </segment>
 <segment>
 <pinref part="GND28" gate="1" pin="GND"/>
@@ -14587,10 +14605,10 @@ Layers 2 and 3</text>
 <wire x1="294.64" y1="-121.92" x2="294.64" y2="-111.76" width="0.1524" layer="91"/>
 <wire x1="294.64" y1="-111.76" x2="287.02" y2="-111.76" width="0.1524" layer="91"/>
 <junction x="287.02" y="-111.76"/>
-<pinref part="D1" gate="G$1" pin="C"/>
 <pinref part="D2" gate="G$1" pin="C"/>
 <pinref part="D3" gate="G$1" pin="C"/>
 <pinref part="D4" gate="G$1" pin="C"/>
+<pinref part="D1" gate="G$1" pin="C"/>
 </segment>
 <segment>
 <pinref part="R7" gate="G$1" pin="2"/>
