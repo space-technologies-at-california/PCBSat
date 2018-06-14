@@ -2023,8 +2023,8 @@ DIN A3, landscape with location and doc. field</description>
 </device>
 <device name="STRAIGHT-RS" package="TRISOLX-STRAIGHT-RS">
 <connects>
-<connect gate="G$1" pin="A" pad="P$2"/>
-<connect gate="G$1" pin="C" pad="P$1"/>
+<connect gate="G$1" pin="A" pad="P$1"/>
+<connect gate="G$1" pin="C" pad="P$2"/>
 </connects>
 <technologies>
 <technology name=""/>
