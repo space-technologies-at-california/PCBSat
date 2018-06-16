@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name sprite-eagle-import)(type Legacy)(uri ${KIPRJMOD}/sprite-eagle-import.lib)(options "")(descr ""))
+)

@@ -1,0 +1,6 @@
+*.bak
+*.bck
+*.dsn
+*.kicad_pcb-bak
+*.zip
+output/
