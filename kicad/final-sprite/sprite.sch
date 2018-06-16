@@ -2129,4 +2129,6 @@ Wire Wire Line
 	9150 9500 9700 9500
 Wire Wire Line
 	9150 9600 9700 9600
+Text Label 8700 2800 0    50   ~ 0
+SWN
 $EndSCHEMATC
