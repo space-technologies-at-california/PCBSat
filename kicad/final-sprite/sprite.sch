@@ -2104,22 +2104,10 @@ F 3 "~" H 8750 9200 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	8850 9100 8850 9050
-$Comp
-L Connector:Test_Point TP1
-U 1 1 5B35E6CA
-P 8550 10000
-F 0 "TP1" H 8608 10120 50  0000 L CNN
-F 1 "Test_Point" H 8608 10029 50  0000 L CNN
-F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 8750 10000 50  0001 C CNN
-F 3 "~" H 8750 10000 50  0001 C CNN
-	1    8550 10000
-	1    0    0    1   
-$EndComp
 Wire Wire Line
 	9150 10000 8550 10000
 Wire Wire Line
 	8550 10000 8550 9200
-Connection ~ 8550 10000
 Wire Wire Line
 	8550 9200 9150 9200
 Wire Wire Line
