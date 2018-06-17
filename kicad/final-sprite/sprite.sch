@@ -54,8 +54,6 @@ Wire Wire Line
 Wire Wire Line
 	6400 7000 6400 6800
 Connection ~ 6400 7000
-Text Label 5000 7000 0    10   ~ 0
-VCC
 Wire Wire Line
 	5000 6300 5700 6300
 Wire Wire Line
@@ -247,10 +245,6 @@ Connection ~ 13200 4300
 Text Label 13200 4200 0    10   ~ 0
 GND
 Wire Wire Line
-	6200 10100 6200 10200
-Text Label 6200 10100 0    10   ~ 0
-GND
-Wire Wire Line
 	6500 10100 6500 10200
 Text Label 6500 10100 0    10   ~ 0
 GND
@@ -270,8 +264,6 @@ Text Label 10100 6000 0    10   ~ 0
 GND
 Wire Wire Line
 	10100 7500 10300 7500
-Text Label 10100 7500 0    10   ~ 0
-GND
 Wire Wire Line
 	9700 6600 9500 6600
 Wire Wire Line
@@ -386,7 +378,7 @@ Connection ~ 5500 2400
 Wire Wire Line
 	5000 6400 5300 6400
 Text Label 5025 6400 0    70   ~ 0
-RST
+~RST
 Wire Wire Line
 	1500 9800 1800 9800
 Wire Wire Line
@@ -394,7 +386,7 @@ Wire Wire Line
 Wire Wire Line
 	2000 9800 2400 9800
 Text Label 1500 9800 0    70   ~ 0
-RST
+~RST
 Connection ~ 2000 9800
 Connection ~ 1800 9800
 Wire Wire Line
@@ -535,19 +527,15 @@ Wire Wire Line
 Text Label 9700 9400 0    10   ~ 0
 VCCIO
 Wire Wire Line
-	8800 2400 8800 2100
-Wire Wire Line
 	8800 2100 8000 2100
 Text Label 8200 2100 0    70   ~ 0
 REG_D0
 Wire Wire Line
 	3200 7000 2700 7000
 Text Label 2700 7000 0    70   ~ 0
-REG_D0
+REG_D1
 Wire Wire Line
 	8800 2500 8700 2500
-Wire Wire Line
-	8700 2500 8700 2200
 Wire Wire Line
 	8700 2200 8000 2200
 Text Label 8200 2200 0    70   ~ 0
@@ -555,7 +543,7 @@ REG_D1
 Wire Wire Line
 	3200 6800 2700 6800
 Text Label 2700 6800 0    70   ~ 0
-REG_D1
+REG_D0
 Wire Wire Line
 	7900 3800 7900 3400
 Wire Wire Line
@@ -753,19 +741,10 @@ Wire Wire Line
 Connection ~ 5400 7300
 Connection ~ 5400 7600
 Connection ~ 5400 7200
-Text Label 5000 7200 0    10   ~ 0
-VCCA
-Wire Wire Line
-	5900 9700 6200 9700
-Wire Wire Line
-	6200 9700 6200 9800
-Wire Wire Line
-	6200 9700 6500 9700
 Wire Wire Line
 	6500 9700 6500 9800
 Wire Wire Line
 	6500 9700 6500 9600
-Connection ~ 6200 9700
 Connection ~ 6500 9700
 Text Label 5900 9700 0    10   ~ 0
 VCCA
@@ -903,17 +882,6 @@ F 3 "" H 5700 6200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L sprite-eagle-import:VCC #P+09
-U 1 0 B2DC4156A813F830
-P 6400 6800
-F 0 "#P+09" H 6400 6800 50  0001 C CNN
-F 1 "VCC" H 6360 6940 59  0000 L BNN
-F 2 "" H 6400 6800 50  0001 C CNN
-F 3 "" H 6400 6800 50  0001 C CNN
-	1    6400 6800
-	1    0    0    -1  
-$EndComp
-$Comp
 L sprite-eagle-import:VCC #P+03
 U 1 0 4985FDE44F0D6BCD
 P 3000 5400
@@ -955,17 +923,6 @@ F 1 "GND" H 6400 10200 59  0000 L BNN
 F 2 "" H 6500 10300 50  0001 C CNN
 F 3 "" H 6500 10300 50  0001 C CNN
 	1    6500 10300
-	-1   0    0    -1  
-$EndComp
-$Comp
-L sprite-eagle-import:GND #GND016
-U 1 0 C691AFEA4CC6CA08
-P 6200 10300
-F 0 "#GND016" H 6200 10300 50  0001 C CNN
-F 1 "GND" H 6100 10200 59  0000 L BNN
-F 2 "" H 6200 10300 50  0001 C CNN
-F 3 "" H 6200 10300 50  0001 C CNN
-	1    6200 10300
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -1517,17 +1474,6 @@ F 2 "sprite:R0402" H 8400 2400 50  0001 C CNN
 F 3 "" H 8400 2400 50  0001 C CNN
 	1    8400 2400
 	-1   0    0    1   
-$EndComp
-$Comp
-L sprite-eagle-import:C-EUC0402 C10
-U 1 0 6551BB3D2910DE9F
-P 6200 9900
-F 0 "C10" H 6260 9915 59  0000 L BNN
-F 1 "100n" H 6260 9715 59  0000 L BNN
-F 2 "sprite:C0402" H 6200 9900 50  0001 C CNN
-F 3 "" H 6200 9900 50  0001 C CNN
-	1    6200 9900
-	1    0    0    -1  
 $EndComp
 $Comp
 L sprite-eagle-import:C-EUC0402 C11
@@ -2119,4 +2065,21 @@ Wire Wire Line
 	9150 9600 9700 9600
 Text Label 8700 2800 0    50   ~ 0
 SWN
+Wire Wire Line
+	8700 2500 8700 2200
+Wire Wire Line
+	8800 2400 8800 2100
+$Comp
+L sprite-eagle-import:VCCA #U$?
+U 1 0 5B2CFFE1
+P 6400 6800
+F 0 "#U$?" H 6400 6800 50  0001 C CNN
+F 1 "VCCA" H 6400 6910 59  0000 C BNN
+F 2 "" H 6400 6800 50  0001 C CNN
+F 3 "" H 6400 6800 50  0001 C CNN
+	1    6400 6800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5900 9700 6500 9700
 $EndSCHEMATC

@@ -1,9 +1,9 @@
-(module LGA24-8X4 (layer F.Cu) (tedit 5B25A76D)
+(module LGA24-8X4 (layer F.Cu) (tedit 5B25A969)
   (descr "<h3>24-pin LGA 8x4 pins</h3>\n<p>Footprint: 3.5 x 3mm</p>\n<p>Used by:\n<ul><li>LSM9DS1</li></ul></p>\n<p><em>Unproven</em></p>")
-  (fp_text reference U2 (at 0 0) (layer F.SilkS) hide
+  (fp_text reference U2 (at 1.3716 -3.302) (layer F.SilkS) hide
     (effects (font (size 1.27 1.27) (thickness 0.15)) (justify right top))
   )
-  (fp_text value LSM9DS1 (at 0 0) (layer F.SilkS) hide
+  (fp_text value LSM9DS1 (at 4.445 2.159) (layer F.SilkS) hide
     (effects (font (size 1.27 1.27) (thickness 0.15)) (justify right top))
   )
   (fp_line (start -1.75 1.5) (end -1.75 -1.5) (layer F.Fab) (width 0.0508))
@@ -39,15 +39,6 @@
   (fp_line (start 1.85 -1.6) (end 1.85 1.6) (layer F.SilkS) (width 0.1016))
   (fp_line (start 1.85 1.6) (end -1.85 1.6) (layer F.SilkS) (width 0.1016))
   (fp_line (start -1.85 1.6) (end -1.85 -1.6) (layer F.SilkS) (width 0.1016))
-  (fp_text user >Name (at -1.778 -1.778) (layer F.SilkS)
-    (effects (font (size 0.77216 0.77216) (thickness 0.065024)) (justify left bottom))
-  )
-  (fp_text user >Value (at -1.778 1.778) (layer F.Fab)
-    (effects (font (size 0.77216 0.77216) (thickness 0.065024)) (justify left top))
-  )
-  (fp_text user Y (at -0.571 0.647) (layer F.Fab)
-    (effects (font (size 0.285 0.285) (thickness 0.045)) (justify right top))
-  )
   (fp_line (start -1.7 0) (end -1.2 0) (layer Dwgs.User) (width 0.0508))
   (fp_line (start -1.7 0.43) (end -1.2 0.43) (layer Dwgs.User) (width 0.0508))
   (fp_line (start -1.7 -0.43) (end -1.2 -0.43) (layer Dwgs.User) (width 0.0508))
