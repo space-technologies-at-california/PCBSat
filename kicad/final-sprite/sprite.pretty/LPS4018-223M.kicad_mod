@@ -1,15 +1,9 @@
-(module LPS4018-223M (layer F.Cu) (tedit 5B2592E3)
-  (fp_text reference L1 (at -1.7526 0) (layer F.SilkS) hide
+(module LPS4018-223M (layer F.Cu) (tedit 5B260DA8)
+  (fp_text reference L1 (at -1.651 -3.175) (layer F.SilkS)
     (effects (font (size 1.27 1.27) (thickness 0.15)))
   )
-  (fp_text value LPS4018-223M (at -1.7526 0) (layer F.SilkS) hide
+  (fp_text value LPS4018-223M (at -1.651 3.175) (layer F.SilkS) hide
     (effects (font (size 1.27 1.27) (thickness 0.15)))
-  )
-  (fp_text user >Name (at -4.5596 -2.041) (layer F.SilkS)
-    (effects (font (size 0.95 0.95) (thickness 0.08)) (justify left bottom))
-  )
-  (fp_text user >Value (at -4.5476 3.046) (layer F.Fab)
-    (effects (font (size 0.95 0.95) (thickness 0.08)) (justify left bottom))
   )
   (fp_line (start -2.7526 -2) (end -0.7526 -2) (layer F.Fab) (width 0.127))
   (fp_line (start -0.7526 -2) (end 0.2474 -1) (layer F.Fab) (width 0.127))
