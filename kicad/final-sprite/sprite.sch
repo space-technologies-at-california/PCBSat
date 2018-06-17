@@ -472,10 +472,6 @@ Wire Wire Line
 Text Label 10200 2800 0    70   ~ 0
 PGOOD
 Wire Wire Line
-	3200 7200 2700 7200
-Text Label 2700 7200 0    70   ~ 0
-PGOOD
-Wire Wire Line
 	10200 2500 10400 2500
 Wire Wire Line
 	10200 2600 10400 2600
