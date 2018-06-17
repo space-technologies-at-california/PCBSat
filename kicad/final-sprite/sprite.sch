@@ -468,10 +468,6 @@ Wire Wire Line
 Text Label 10200 2400 0    70   ~ 0
 REGGOOD
 Wire Wire Line
-	5000 5700 5600 5700
-Text Label 5125 5700 0    70   ~ 0
-REGGOOD
-Wire Wire Line
 	10200 2800 10600 2800
 Text Label 10200 2800 0    70   ~ 0
 PGOOD
@@ -2070,10 +2066,10 @@ Wire Wire Line
 Wire Wire Line
 	8800 2400 8800 2100
 $Comp
-L sprite-eagle-import:VCCA #U$?
+L sprite-eagle-import:VCCA #U$0101
 U 1 0 5B2CFFE1
 P 6400 6800
-F 0 "#U$?" H 6400 6800 50  0001 C CNN
+F 0 "#U$0101" H 6400 6800 50  0001 C CNN
 F 1 "VCCA" H 6400 6910 59  0000 C BNN
 F 2 "" H 6400 6800 50  0001 C CNN
 F 3 "" H 6400 6800 50  0001 C CNN
@@ -2082,4 +2078,12 @@ F 3 "" H 6400 6800 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	5900 9700 6500 9700
+Wire Wire Line
+	5000 6700 5300 6700
+Text Label 5000 6700 0    50   ~ 0
+REGGOOD
+Wire Wire Line
+	3200 6700 2700 6700
+Text Label 2700 6700 0    50   ~ 0
+PGOOD
 $EndSCHEMATC
