@@ -21,30 +21,27 @@ Eagle
 
 Firmware
 --------
-#. Install `Energia <http://energia.nu/download/>`_.
-   Install alt (unsupported board): clone branch 'Branch_CC430_RF_support' from https://github.com/zacmanchester/Energia.git 
-   for SpriteRadio, SpriteGyro, SpriteMag support.
-   Consider different library or porting to our current board?
+#. Install `MSP430-GCC <http://www.ti.com/tool/msp430-gcc-opensource>`_ and `MSPDebug <https://dlbeer.co.nz/mspdebug/>`_.
 
-#. Install ant.
+#. In *firmware/msp430.mk.inc*, specify the path to your MSP430-GCC
+   installation. For example::
 
-#. navigate to the build folder. To boot up Energia, run::
+    MSP430_TOOLCHAIN=/usr/local/gcc-msp430-ti-toolchain-5.01.02.00
 
-    ant run
-
-#. Obtain a programmer. We use the MSP430F5529 LaunchPad to program our sprite
-   using Spy-Bi-Wire (SBW), but any SBW-compatible programmer should work.
+#. Change to the *firmware/* directory and run ``make`` to build.
 
 Programming
 ~~~~~~~~~~~
+#. Obtain a programmer. We use the MSP430F5529 LaunchPad to program our sprite
+   using Spy-Bi-Wire (SBW), but any SBW-compatible programmer should work.
+
 #. Disconnect the 5V, 3V, GND, SBW RST and TST jumpers from the LaunchPad.
 
 #. Connect the 3V, GND, SBW RST and TST jumpers on the ezFET-lite side to the
    target.
 
-#. Set target to CC430F5135 or CC430F5137.
-
-#. Program as you would a EE 16A microcontroller.
+#. Run ``make prog`` to program, and run ``make verify`` to read back what was
+   programmed.
 
 
 Directory Structure

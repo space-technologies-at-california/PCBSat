@@ -1,10 +1,10 @@
 # You MUST override:
-#DEVICE=msp430f5529
+DEVICE=cc430f5135
 #MAIN=blink
 
 # Override the following, if necessary:
 MSPDEBUG?=mspdebug tilib
-MSP430_TOOLCHAIN?=/usr/local/gcc-msp430-ti-toolchain-5.01.02.00
+include msp430.mk.inc
 MSP430_SUPPORT_DIR?=${MSP430_TOOLCHAIN}/include
 
 # The rest should be fine:
