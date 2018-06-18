@@ -1219,7 +1219,7 @@ L sprite-eagle-import:R-US_R0402 R16
 U 1 0 23AD486D7A1EFB6B
 P 12800 3300
 F 0 "R16" H 12650 3359 59  0000 L BNN
-F 1 "450K" H 12650 3170 59  0000 L BNN
+F 1 "453K" H 12650 3170 59  0000 L BNN
 F 2 "sprite:R0402" H 12800 3300 50  0001 C CNN
 F 3 "" H 12800 3300 50  0001 C CNN
 	1    12800 3300
@@ -1970,7 +1970,7 @@ Text Notes 2900 3100 0    59   ~ 0
 Text Notes 5800 7500 0    59   ~ 0
 1% REQ
 Text Notes 12550 9300 0    127  ~ 0
-All Caps 3.3V\nExcept C21 (16V)\nAll Passives 0402 \nAll Passives (5%)\nExcept R4, R15 - R21 (1%) \nSubject to Change\nR2, R11, R12, R22\nR7, R8\nC3\nMPPT Max efficiency:\nR7/(R7 + R8) = 87%\nVsetsd: \n1V*(1+R18/R19) = 2V\nVbat_term:\n(3/2)V*(1+R20/R21) = 2.7V\nVsetpg_falling: \n1V*(1+(R15/(R16+R17))) = 2.102V\nVsetpg_rising:\n1V*(1+((R15+R16)/R17)) = 2.311V
+All Caps 3.3V\nExcept C21 (16V)\nAll Passives 0402 \nAll Passives (5%)\nExcept R4, R15 - R21 (1%) \nSubject to Change\nR2, R11, R12, R22\nR7, R8\nC3\nMPPT Max efficiency:\nR7/(R7 + R8) = 87%\nVsetsd: \n1V*(1+R18/R19) = 2V\nVbat_term:\n(3/2)V*(1+R20/R21) = 2.7V\nVsetpg_falling: \n1V*(1+(R15/(R16+R17))) = 2.102V\nVsetpg_rising:\n1V*(1+((R15+R16)/R17)) = 2.312V
 Wire Notes Line
 	12200 9900 12200 4800
 Text Notes 12500 5200 0    170  ~ 0
