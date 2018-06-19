@@ -1,1 +1,3 @@
+*.o
+RadioBeacon
 msp430.mk.inc
