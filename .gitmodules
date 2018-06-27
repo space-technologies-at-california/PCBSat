@@ -3,4 +3,4 @@
 	url = https://github.com/space-technologies-at-california/electronics.git
 [submodule "firmware/arduino"]
 	path = firmware/arduino
-	url = git@github.com:space-technologies-at-california/arduino_sprite.git
+	url = https://github.com/space-technologies-at-california/arduino_sprite.git
