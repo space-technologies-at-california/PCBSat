@@ -2913,7 +2913,7 @@
   (gr_line (start 154.432 108.6866) (end 161.036 112.522) (layer Cmts.User) (width 0.15))
   (gr_line (start 151.8411 108.152074) (end 155.8411 108.152074) (layer Edge.Cuts) (width 0.15) (tstamp 836E81600))
   (gr_arc (start 155.321 109.1692) (end 155.321 108.1532) (angle -126.9) (layer Cmts.User) (width 0.15))
-  (gr_text "STACKUP:\nSTANDARD FR4.\n31 MIL OVERALL THICKNESS.\n1.5 OZ COPPER OUTER LAYERS.\n1.0 OZ COPPER INNER LAYERS.\n\nFINISH: ENIG\n\nTRIM COPPER AROUND BOARD\nEDGE AS NEEDED TO FABRICATE\nWITH STANDARD CAPABILITY." (at 78.232 94.488) (layer Cmts.User)
+  (gr_text "STACKUP:\nSTANDARD FR4.\n31 MIL OVERALL THICKNESS.\n1.5 OZ COPPER OUTER LAYERS.\n1.0 OZ COPPER INNER LAYERS.\n\nFINISH: ENIG\n\nTENT ALL VIAS\n\nTRIM COPPER AROUND BOARD\nEDGE AS NEEDED TO FABRICATE\nWITH STANDARD CAPABILITY." (at 78.232 96.52) (layer Cmts.User)
     (effects (font (size 1.5 1.5) (thickness 0.3)) (justify left))
   )
   (gr_line (start 160.782 83.566) (end 154.432 87.63) (layer Cmts.User) (width 0.2))
