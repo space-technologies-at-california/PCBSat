@@ -2,7 +2,7 @@ MAIN=RadioBeacon
 
 CORE=arduino/cores/sprite
 CORE_CFLAGS=-I . -I ${CORE}
-CORE_OBJS!=ls ${CORE}/*.c* | sed -e 's/c$$/o/' -e 's/cpp$$/o/'
+CORE_OBJS:=$(shell ls ${CORE}/*.c* | sed -e 's/c$$/o/' -e 's/cpp$$/o/')
 
 LIB_CFLAGS=-I arduino/libraries/SpriteRadio
 LIB_OBJS=arduino/libraries/SpriteRadio/SpriteRadio.o
