@@ -1,3 +1,5 @@
 *.o
-RadioBeacon
+cscope.out
 msp430.mk.inc
+sprite_main
+tags

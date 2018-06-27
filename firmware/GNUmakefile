@@ -1,4 +1,4 @@
-MAIN=RadioBeacon
+MAIN=sprite_main
 
 CORE=arduino/cores/sprite
 CORE_CFLAGS=-I . -I ${CORE}
@@ -9,9 +9,9 @@ LIB_OBJS=arduino/libraries/SpriteRadio/SpriteRadio.o
 
 CFLAGS=-pipe -O2 ${CORE_CFLAGS} ${LIB_CFLAGS}
 
-OBJS=${CORE_OBJS} ${LIB_OBJS} RadioBeacon.o
+OBJS=${CORE_OBJS} ${LIB_OBJS} sprite_main.o
 
-RadioBeacon: ${OBJS}
+sprite_main: ${OBJS}
 	${CXX} ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS}
 
 include msp430.mk
