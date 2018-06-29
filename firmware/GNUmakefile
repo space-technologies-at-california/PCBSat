@@ -10,8 +10,12 @@ LIB_OBJS=arduino/libraries/SpriteRadio/SpriteRadio.o
 CFLAGS=-pipe -O2 ${CORE_CFLAGS} ${LIB_CFLAGS}
 
 OBJS=${CORE_OBJS} ${LIB_OBJS} sprite_main.o
+PWM_OBJS=sprite_pwm.o
 
 sprite_main: ${OBJS}
 	${CXX} ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS}
+
+sprite_pwm: ${PWM_OBJS}
+	${CXX} ${CFLAGS} ${LDFLAGS} -o $@ ${PWM_OBJS}
 
 include msp430.mk
