@@ -968,7 +968,7 @@ P 4100 2250
 F 0 "U2" H 3600 3000 59  0000 L CNN
 F 1 "LSM9DS1" H 3600 1500 59  0000 L CNN
 F 2 "sprite:LGA24-8X4" H 4100 2250 50  0001 C CNN
-F 3 "" H 4100 2250 50  0001 C CNN
+F 3 "https://www.st.com/resource/en/datasheet/lsm9ds1.pdf" H 4100 2250 50  0001 C CNN
 	1    4100 2250
 	1    0    0    -1  
 $EndComp
@@ -1067,7 +1067,7 @@ P 9200 2850
 F 0 "U5" H 9000 3150 59  0000 L BNN
 F 1 "ADP5092" H 9000 2550 59  0000 L BNN
 F 2 "sprite:QFN50P400X400X100-25N" H 9200 2850 50  0001 C CNN
-F 3 "" H 9200 2850 50  0001 C CNN
+F 3 "http://www.analog.com/media/en/technical-documentation/data-sheets/ADP5091-5092.pdf" H 9200 2850 50  0001 C CNN
 	1    9200 2850
 	1    0    0    -1  
 $EndComp
@@ -2068,4 +2068,19 @@ Wire Wire Line
 Text Label 2400 6450 0    50   ~ 0
 PGOOD
 Connection ~ 9100 3950
+NoConn ~ 8500 3650
+NoConn ~ 2900 6850
+NoConn ~ 2900 6950
+NoConn ~ 2900 7050
+NoConn ~ 2900 7150
+NoConn ~ 2900 7250
+NoConn ~ 2900 7350
+NoConn ~ 4700 7550
+NoConn ~ 4700 6650
+NoConn ~ 4700 6550
+NoConn ~ 4700 6350
+NoConn ~ 4700 5550
+NoConn ~ 4700 5450
+NoConn ~ 2900 7550
+NoConn ~ 4700 2850
 $EndSCHEMATC
