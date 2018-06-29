@@ -2,14 +2,14 @@ EESchema Schematic File Version 4
 LIBS:sprite-cache
 EELAYER 26 0
 EELAYER END
-$Descr User 16797 11668
+$Descr B 17000 11000
 encoding utf-8
 Sheet 1 1
-Title ""
-Date ""
-Rev ""
-Comp ""
-Comment1 ""
+Title "PCBSat"
+Date "2018-06-17"
+Rev "v1.0"
+Comp "Space Technologies at California"
+Comment1 "stac.berkeley.edu"
 Comment2 ""
 Comment3 ""
 Comment4 ""
@@ -1050,17 +1050,6 @@ F 3 "" H 5300 1400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L sprite-eagle-import:A3L-LOC #FRAME1
-U 1 0 95E36ED37D0788B5
-P 900 10900
-F 0 "#FRAME1" H 900 10900 50  0001 C CNN
-F 1 "A3L-LOC" H 900 10900 50  0001 C CNN
-F 2 "" H 900 10900 50  0001 C CNN
-F 3 "" H 900 10900 50  0001 C CNN
-	1    900  10900
-	1    0    0    -1  
-$EndComp
-$Comp
 L sprite-eagle-import:VCCINT #VCC05
 U 1 0 5B36E11081833CC9
 P 14700 2400
@@ -1957,10 +1946,6 @@ Text Notes 1200 5200 0    170  ~ 0
 CORE:
 Text Notes 8200 5200 0    170  ~ 0
 Torque Coils
-Text Notes 12300 10600 0    85   ~ 0
-Space Technologies at California\nstac.berkeley.edu
-Text Notes 12300 10200 0    102  ~ 0
-Design By:
 Text Notes 7500 1100 0    170  ~ 0
 Power
 Text Notes 9000 2200 0    59   ~ 0
