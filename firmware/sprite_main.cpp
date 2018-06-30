@@ -34,14 +34,14 @@ unsigned char prn3[64] = {
 SpriteRadio m_radio = SpriteRadio(prn2, prn3);
 
 void setup() {
-  pinMode(5, OUTPUT);
+  P3OUT = 0;
   m_radio.txInit();
 };
 
-
 void loop() {
   //Blink LED while transmitter is on
-  digitalWrite(5, HIGH);
+  P3OUT = BIT7;
   m_radio.transmit("Hello Earthlings\n", 17);
-  digitalWrite(5, LOW);
+  P3OUT = 0;
+  __delay_cycles(50000000);
 };
