@@ -2,7 +2,7 @@
 #include <HardwareSerial.h>
 #include <SpriteRadio.h>
 #include <Wire.h>
-
+#include <lsm9ds1.h>
 #include "gitrev.h"
 
 /*
@@ -40,12 +40,22 @@ unsigned char prn3[64] = {
 
 // Initialize the radio class, supplying the Gold Codes that correspond to 0 and 1
 SpriteRadio m_radio = SpriteRadio(prn2, prn3);
+lsm9ds1 lsm = lsm9ds1();
 
 static void blink() {
     P3OUT |= BIT7;
     __delay_cycles(SYSTEM_CLK_FREQ / 5);
     P3OUT &= ~BIT7;
     __delay_cycles(SYSTEM_CLK_FREQ / 5);
+}
+
+void setupSensor()
+{
+  // 2.) Set the magnetometer sensitivity
+  lsm.setupMag(lsm.LSM9DS1_MAGGAIN_4GAUSS);
+
+  // 3.) Setup the gyroscope
+  lsm.setupGyro(lsm.LSM9DS1_GYROSCALE_245DPS);
 }
 
 void setup() {
@@ -56,6 +66,10 @@ void setup() {
     Serial.print("init I2C...");
     Wire.begin();
     Serial.println("ok");
+    Serial.println("init LSM9DS1...");
+    lsm.begin();
+    setupSensor();
+    Serial.println("ok");
     Serial.print("init radio...");
     m_radio.txInit();
     Serial.println("ok");
@@ -63,6 +77,23 @@ void setup() {
 }
 
 void loop() {
+     lsm.read();  /* ask it to read in the data */ 
+
+    /* Get a new sensor event */ 
+    sensors_event_t m, g; //temp;
+        
+    lsm.getEvent(&m, &g); 
+     
+/*    Serial.print("M X: "); Serial.print((int)(100*m.magnetic.x));
+    Serial.print("\tY: "); Serial.print((int)(100*m.magnetic.y));  
+    Serial.print("\tZ: "); Serial.print((int)(100*m.magnetic.z));
+    Serial.println();
+
+    Serial.print("G X: "); Serial.print((int)g.gyro.x); 
+    Serial.print("\tY: "); Serial.print((int)g.gyro.y);    
+    Serial.print("\tZ: "); Serial.print((int)g.gyro.z);  
+    Serial.println();
+*/
     __delay_cycles(5 * SYSTEM_CLK_FREQ);
     // Blink LED while transmitter is on
     P3OUT |= BIT7;
