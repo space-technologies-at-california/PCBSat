@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <HardwareSerial.h>
 #include <SpriteRadio.h>
+#include <Wire.h>
 
 #include "gitrev.h"
 
