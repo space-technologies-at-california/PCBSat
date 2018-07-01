@@ -33,15 +33,23 @@ unsigned char prn3[64] = {
 //Initialize the radio class, supplying the Gold Codes that correspond to 0 and 1
 SpriteRadio m_radio = SpriteRadio(prn2, prn3);
 
+static void blink() {
+  P3OUT |= BIT7;
+  __delay_cycles(1000000);
+  P3OUT &= ~BIT7;
+  __delay_cycles(1000000);
+}
+
 void setup() {
-  P3OUT = 0;
+  blink();
   m_radio.txInit();
+  blink();
 };
 
 void loop() {
-  //Blink LED while transmitter is on
-  P3OUT = BIT7;
-  m_radio.transmit("Hello Earthlings\n", 17);
-  P3OUT = 0;
   __delay_cycles(50000000);
+  //Blink LED while transmitter is on
+  P3OUT |= BIT7;
+  m_radio.transmit("Hello Earthlings\n", 17);
+  P3OUT &= ~BIT7;
 };
