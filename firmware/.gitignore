@@ -1,5 +1,6 @@
 *.o
 cscope.out
+gitrev.h
 msp430.mk.inc
 sprite_main
 tags

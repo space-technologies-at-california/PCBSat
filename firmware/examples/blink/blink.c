@@ -1,13 +1,16 @@
 #include <msp430.h>
 
+#define LED BIT7
+
 int main() {
+    WDTCTL = WDTPW | WDTHOLD;
     unsigned long i = 0;
-    P1DIR = 0xff;
+    P3DIR = LED;
 
     while (1) {
-        P1OUT = 0xff;
-        for (i = 0; i < 10000; i++);
-        P1OUT = 0;
-        for (i =0; i < 10000; i++);
+        P3OUT = LED;
+        __delay_cycles(100000);
+        P3OUT = 0;
+        __delay_cycles(100000);
     }
 }
