@@ -1,10 +1,10 @@
-(module SPRITEPIN_SPRITE_PIN (layer F.Cu) (tedit 5B243949)
+(module SPRITEPIN_SPRITE_PIN (layer F.Cu) (tedit 5B3943F1)
   (fp_text reference X1 (at 0 0) (layer F.SilkS) hide
     (effects (font (size 1.27 1.27) (thickness 0.15)))
   )
   (fp_text value SPRITEPIN_SPRITE_PIN (at 0 0) (layer F.SilkS) hide
     (effects (font (size 1.27 1.27) (thickness 0.15)))
   )
-  (pad PIN connect roundrect (at 0 0) (size 2.286 2.286) (layers F.Cu F.Mask) (roundrect_rratio 0.5)
+  (pad PIN connect circle (at 0 0) (size 2.286 2.286) (layers F.Cu F.Mask)
     (solder_mask_margin 0.1016))
 )
