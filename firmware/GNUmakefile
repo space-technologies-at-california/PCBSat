@@ -11,7 +11,7 @@ CFLAGS=-pipe -O2 ${CORE_CFLAGS} ${LIB_CFLAGS}
 
 OBJS=${CORE_OBJS} ${LIB_OBJS} sprite_main.o
 
-sprite_main: ${OBJS}
+sprite_main: ${OBJS} gitrev.h
 	${CXX} ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS}
 
 .PHONY: gitrev.h
