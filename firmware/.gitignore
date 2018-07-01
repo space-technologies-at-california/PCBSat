@@ -1,3 +1,4 @@
+*.map
 *.o
 cscope.out
 gitrev.h
