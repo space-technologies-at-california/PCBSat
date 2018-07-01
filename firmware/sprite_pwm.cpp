@@ -1,5 +1,8 @@
 #include <msp430.h>
 
+#define PWM_PIN1    0
+#define PWM_PIN2    1
+
 int main(void) {
 
     WDTCTL = WDTPW | WDTHOLD;
