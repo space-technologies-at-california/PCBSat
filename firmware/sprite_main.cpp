@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <HardwareSerial.h>
 #include <SpriteRadio.h>
 
 /*
@@ -42,6 +43,9 @@ static void blink() {
 
 void setup() {
   blink();
+  Serial.begin(4800);
+  blink();
+  Serial.println("Hello!");
   m_radio.txInit();
   blink();
 };
@@ -50,6 +54,7 @@ void loop() {
   __delay_cycles(5*SYSTEM_CLK_FREQ);
   //Blink LED while transmitter is on
   P3OUT |= BIT7;
+  Serial.println("TX");
   m_radio.transmit("Hello Earthlings\n", 17);
   P3OUT &= ~BIT7;
 };
