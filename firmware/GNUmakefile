@@ -7,7 +7,8 @@ CORE_OBJS:=$(shell ls ${CORE}/*.c* | sed -e 's/c$$/o/' -e 's/cpp$$/o/')
 LIB_CFLAGS=-I arduino/libraries/SpriteRadio -I arduino/libraries/Wire
 LIB_OBJS=arduino/libraries/SpriteRadio/SpriteRadio.o arduino/libraries/Wire/Wire.o
 
-CFLAGS=-pipe -O2 ${CORE_CFLAGS} ${LIB_CFLAGS}
+CFLAGS=-pipe -O2 ${CORE_CFLAGS} ${LIB_CFLAGS} \
+	   -Wl,-Map,${MAIN}.map
 
 OBJS=${CORE_OBJS} ${LIB_OBJS} sprite_main.o
 
