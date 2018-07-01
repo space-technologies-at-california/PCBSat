@@ -52,8 +52,13 @@ void setup() {
     blink();
     Serial.begin(4800);
     blink();
-    Serial.println("\n\n\nsprite test firmware " GIT_REV);
+    Serial.println("\n\r\nsprite test firmware " GIT_REV);
+    Serial.print("init I2C...");
+    Wire.begin();
+    Serial.println("ok");
+    Serial.print("init radio...");
     m_radio.txInit();
+    Serial.println("ok");
     blink();
 }
 
