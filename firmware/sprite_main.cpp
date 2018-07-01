@@ -2,6 +2,8 @@
 #include <HardwareSerial.h>
 #include <SpriteRadio.h>
 
+#include "gitrev.h"
+
 /*
   This example code will configure the CC1101 radio core in the CC430 to
   repeatedly transmit a text message. The output signal will be MSK modulated
@@ -49,7 +51,7 @@ void setup() {
     blink();
     Serial.begin(4800);
     blink();
-    Serial.println("Hello!");
+    Serial.println("\n\n\nsprite test firmware " GIT_REV);
     m_radio.txInit();
     blink();
 }

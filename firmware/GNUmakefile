@@ -14,4 +14,10 @@ OBJS=${CORE_OBJS} ${LIB_OBJS} sprite_main.o
 sprite_main: ${OBJS}
 	${CXX} ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS}
 
+.PHONY: gitrev.h
+
+gitrev.h:
+	echo "#define GIT_REV \"`git describe --always || echo unknown`\"" \
+		> gitrev.h
+
 include msp430.mk
