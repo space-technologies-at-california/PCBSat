@@ -35,9 +35,9 @@ SpriteRadio m_radio = SpriteRadio(prn2, prn3);
 
 static void blink() {
   P3OUT |= BIT7;
-  __delay_cycles(1000000);
+  __delay_cycles(SYSTEM_CLK_FREQ/5);
   P3OUT &= ~BIT7;
-  __delay_cycles(1000000);
+  __delay_cycles(SYSTEM_CLK_FREQ/5);
 }
 
 void setup() {
@@ -47,7 +47,7 @@ void setup() {
 };
 
 void loop() {
-  __delay_cycles(50000000);
+  __delay_cycles(5*SYSTEM_CLK_FREQ);
   //Blink LED while transmitter is on
   P3OUT |= BIT7;
   m_radio.transmit("Hello Earthlings\n", 17);
