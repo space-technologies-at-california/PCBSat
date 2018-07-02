@@ -6,8 +6,8 @@ $Descr B 17000 11000
 encoding utf-8
 Sheet 1 1
 Title "PCBSat"
-Date "2018-06-17"
-Rev "v1.0"
+Date "2018-07-01"
+Rev "v1.1"
 Comp "Space Technologies at California"
 Comment1 "stac.berkeley.edu"
 Comment2 ""
