@@ -507,7 +507,7 @@
     (fp_text reference R10 (at 1.778 0.508 180) (layer F.SilkS)
       (effects (font (size 1.016 1.016) (thickness 0.1016)) (justify left bottom))
     )
-    (fp_text value 750K (at -0.635 1.905 180) (layer F.Fab)
+    (fp_text value 200k (at -0.635 1.905 180) (layer F.Fab)
       (effects (font (size 1.2065 1.2065) (thickness 0.1016)) (justify left bottom))
     )
     (fp_line (start 1.1684 -0.6096) (end -1.1684 -0.6096) (layer F.CrtYd) (width 0.15))
