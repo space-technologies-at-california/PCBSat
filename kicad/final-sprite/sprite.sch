@@ -1960,7 +1960,7 @@ Wire Notes Line
 	11900 9650 11900 4550
 Text Notes 12200 4950 0    170  ~ 0
 Design Notes
-Text Notes 7900 9150 0    42   ~ 0
+Text Notes 8350 8750 0    42   ~ 0
 PCB Spiral Inductor\nLayers 2 and 3
 Wire Notes Line
 	7100 550  7100 10450
@@ -2026,8 +2026,6 @@ F 3 "~" H 8450 8950 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
-	8550 8850 8550 8800
-Wire Wire Line
 	8850 9750 8250 9750
 Wire Wire Line
 	8250 9750 8250 8950
@@ -2083,4 +2081,16 @@ NoConn ~ 4700 5550
 NoConn ~ 4700 5450
 NoConn ~ 2900 7550
 NoConn ~ 4700 2850
+$Comp
+L Connector:Test_Point TP1
+U 1 1 5B3A87A5
+P 8850 8950
+F 0 "TP1" H 8792 8977 50  0000 R CNN
+F 1 "Test_Point" H 8792 9068 50  0000 R CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 9050 8950 50  0001 C CNN
+F 3 "~" H 9050 8950 50  0001 C CNN
+	1    8850 8950
+	-1   0    0    -1  
+$EndComp
+Connection ~ 8850 8950
 $EndSCHEMATC
