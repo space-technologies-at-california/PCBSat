@@ -1,5 +1,6 @@
 #include <msp430.h>
-#include "pwm.h"
+#include "drvr.h"
+#include "pins.h"
 
 void setup_drvr() {
 

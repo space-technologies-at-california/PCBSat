@@ -1,4 +1,5 @@
 #include <msp430.h>
+#include "pins.h"
 
 #define LED BIT7
 

@@ -19,10 +19,10 @@ all: ${MAIN}
 .SUFFIX: s c
 
 .c.s:
-	${CC} -S ${CFLAGS} $< $(@F)
+	${CC} -S ${CFLAGS} $< 
 
 .c.o:
-	${CC} -c ${CFLAGS} $< -o $(@F)
+	${CC} -c ${CFLAGS} $< -o $@ 
 
 # .cpp.o:
 #	${CXX} -c ${CFLAGS} $< -o $@
