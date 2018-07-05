@@ -6,7 +6,6 @@ int main() {
     WDTCTL = WDTPW | WDTHOLD;
     unsigned long i = 0;
     P3DIR = LED;
-    setup_pwm();
 
     while (1) {
         P3OUT = LED;

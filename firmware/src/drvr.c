@@ -46,7 +46,7 @@ void drvr_on(int drvr, int pwm) {
 
 void drvr_off() {
 
-    TA1CRL = TASSEL_1 | MC_0;
+    TA1CTL = TASSEL_1 | MC_0;
     P2OUT &= BIT3;
     P5OUT &= BIT0 | BIT1;
 
