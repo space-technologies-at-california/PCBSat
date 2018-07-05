@@ -1,13 +1,11 @@
 #include <msp430.h>
 #include "pwm.h"
 
-#define PWM_PIN1    0
-#define PWM_PIN2    1
+void setup_drvr() {
 
-void setup_pwm() {
-
-    // Configure PWM pins to be outputs
-    P2DIR |= PWM_PIN1 | PWM_PIN2; 
+    // Configure DRVR pins to be outputs
+    P2DIR |= BIT1 | BIT2 | BIT3;
+    P5DIR |= BIT0 | BIT1;
 
     //Configure TimerA1
     //Use ACLK, Input Divider=1, Mode=Up (count to TA1CCR0)
@@ -15,12 +13,41 @@ void setup_pwm() {
 
 }
 
-void write_drvr(int drvr, int pwm) {
+void drvr_on(int drvr, int pwm) {
 
     // First enable the specific Driver
-    switch (pwm) {
-        case 1 : 
-            P3DIR |= 1;
+    switch (drvr) {
+        case XAXIS : 
+            P2OUT |= BIT3;
             break;
+        case YAXIS : 
+            P5OUT |= BIT0;
+            break;
+        case ZAXIS : 
+            P5OUT |= BIT1;
     }
+
+    // Enable the timer
+    if (pwm < 0) {
+        TA1CCTL1 |= OUTMOD_4;
+        TA1CCTL2 |= OUTMOD_7;
+        pwm = ~pwm + 1; 
+    } else {
+        TA1CCTL1 |= OUTMOD_7;
+        TA1CCTL2 |= OUTMOD_4;
+    }
+
+    TA1CCR0 = 100;
+    TA1CCR1 = pwm;
+    TA1CCR2 = pwm; 
+    TA1CTL |= MC_1 | TACLR;
+
+}
+
+void drvr_off() {
+
+    TA1CRL = TASSEL_1 | MC_0;
+    P2OUT &= BIT3;
+    P5OUT &= BIT0 | BIT1;
+
 }

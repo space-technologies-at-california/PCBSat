@@ -39,8 +39,8 @@ void setup_pins(void);
 #define pinI2Cconfig()    P1SEL |= BIT3 | BIT4      // Set P1.4 and P1.3 to USCI function
 
 // PWM
-#define pinPWMmap()       P2MAP1 = PM_TA1CCR2A;
-#define pinPWMconfig()    P2SEL |= BIT1 | BIT2; P2DIR |= BIT3; P5DIR |= BIT0 | BIT1
+#define pinPWMmap()       P2MAP1 = PM_TA1CCR2A
+#define pinPWMconfig()    P2SEL |= BIT1 | BIT2
 /*// SPI
 #define pinSPImap()       P1MAP0 = PM_UCB0SIMO; P1MAP1 = PM_UCB0SOMI; P1MAP2 = PM_UCB0CLK
 #define pinSPIconfig()    P1SEL |= BIT0 | BIT1 | BIT2  // Set P1.0, P1.1 and P1.2 to USCI function
