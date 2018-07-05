@@ -10,7 +10,7 @@ CFLAGS=-pipe -O2 ${INCLUDE}\
 	   -Wl,-Map,${@F}.map
 
 main: ${OBJS} gitrev.h
-	${CC} ${CFLAGS} ${LDFLAGS} -o $@ main.o 
+	${CC} ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS} 
 
 .PHONY: gitrev.h
 
