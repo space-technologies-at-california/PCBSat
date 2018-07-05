@@ -12,9 +12,13 @@ CFLAGS=-pipe -O2 ${CORE_CFLAGS} ${LIB_CFLAGS} \
 	   -Wl,-Map,${MAIN}.map
 
 OBJS=${CORE_OBJS} ${LIB_OBJS} sprite_main.o
+PWM_OBJS=sprite_pwm.o
 
 sprite_main: ${OBJS} gitrev.h
 	${CXX} ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS}
+
+sprite_pwm: ${PWM_OBJS}
+	${CXX} ${CFLAGS} ${LDFLAGS} -o $@ ${PWM_OBJS}
 
 .PHONY: gitrev.h
 
