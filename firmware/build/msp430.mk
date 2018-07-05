@@ -22,7 +22,7 @@ all: ${MAIN}
 	${CC} -S ${CFLAGS} $< 
 
 .c.o:
-	${CC} -c ${CFLAGS} $< -o $@
+	${CC} -c ${CFLAGS} $< -o $@ 
 
 # .cpp.o:
 #	${CXX} -c ${CFLAGS} $< -o $@
