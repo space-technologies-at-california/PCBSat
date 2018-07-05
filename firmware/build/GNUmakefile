@@ -1,6 +1,7 @@
-SRC=../src
-MAIN=${SRC}/main
+MAIN=main
 
+SRC=../src
+VPATH=${SRC}
 INCLUDE=-I . -I ${SRC}
 OBJS:=$(shell cd ${SRC} ; ls *.c* | sed -e 's/c$$/o/' -e 's/cpp$$/o/')
 
