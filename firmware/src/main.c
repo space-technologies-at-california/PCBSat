@@ -1,6 +1,5 @@
 #include <msp430.h>
-
-#define LED BIT7
+#include "pins.h"
 
 int main() {
     WDTCTL = WDTPW | WDTHOLD;
