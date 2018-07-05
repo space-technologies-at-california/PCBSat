@@ -1,5 +1,6 @@
-#include <msp430.h>
 #include "pwm.h"
+#include "pins.h"
+#include <msp430.h>
 
 #define PWM_PIN1    0
 #define PWM_PIN2    1

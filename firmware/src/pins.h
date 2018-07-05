@@ -22,10 +22,12 @@
  * Creation date: 06/17/2015
  */
 
+
 #ifndef _PINS_H
 #define _PINS_H
 
 #include <stdint.h>
+#include <msp430.h>
 
 void setup_pins(void);
 
