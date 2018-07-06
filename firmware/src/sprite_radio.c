@@ -345,11 +345,7 @@ void rawTransmit(unsigned char bytes[], unsigned int length) {
 void beginRawTransmit(unsigned char bytes[], unsigned int length) {
     char status;
 
-    // Wait for radio to be in idle state
-    status = Strobe(RF_SIDLE);
-    while (status & 0xF0) {
-        status = Strobe(RF_SNOP);
-    }
+    radio_wait_for_sleeping();
 
     // Clear TX FIFO
     status = Strobe(RF_SFTX);
@@ -438,11 +434,6 @@ void endRawTransmit() {
     return;
 }
 
-void radio_sleep() {
-
-    Strobe(RF_SIDLE); // Put radio back in idle mode
-}
-
 void radio_init(void) {
     // Initialize random number generator
     /*
@@ -462,7 +453,7 @@ void radio_init(void) {
 }
 
 void radio_wait_for_sleeping() {
-    char status = 0;
+    char status = Strobe(RF_SIDLE);
     while (status & 0xF0) {
         status = Strobe(RF_SNOP);
     }

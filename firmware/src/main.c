@@ -65,7 +65,6 @@ void core_radio_init() {
      */
     RF1AIES = BIT0 | BIT9;
 
-    radio_sleep();
     radio_wait_for_sleeping();
 }
 
