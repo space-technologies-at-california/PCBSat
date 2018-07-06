@@ -1,5 +1,6 @@
 *.map
 *.o
+build/main
 cscope.out
 gitrev.h
 msp430.mk.inc
