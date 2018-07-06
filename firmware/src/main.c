@@ -6,21 +6,6 @@
 #include "timer_a.h"
 #include "ucs.h"
 
-void init_radio() {
-    // Increase PMMCOREV level to 2 for proper radio operation
-    SetVCore(2);
-
-    radio_init();
-
-    /*
-     * Select Interrupt edge for PA_PD and SYNC signal:
-     * Interrupt Edge select register: 1 == Interrupt on High to Low transition.
-     */
-    RF1AIES = BIT0 | BIT9;
-
-    radio_wait_for_sleeping();
-}
-
 static void init_core() {
     // Disable WDT
     WDTCTL = WDTPW | WDTHOLD;
@@ -46,18 +31,6 @@ static void init_core() {
     PMMCTL0_H = 0x00;
 
     setup_pins();
-}
-
-void radio_main() {
-    while (1) {
-        deep_sleep(3000);
-        init_radio();
-        // Blink LED while transmitter is on
-        P3OUT |= BIT7;
-        // Serial.println("TX");
-        radio_transmit("Hello Earthlings\n", 17);
-        P3OUT &= ~BIT7;
-    }
 }
 
 void sleep(uint16_t ms, unsigned short mode) {

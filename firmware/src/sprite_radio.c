@@ -434,23 +434,44 @@ void endRawTransmit() {
     return;
 }
 
-void radio_init(void) {
-    // Initialize random number generator
-    /*
-    randomSeed(((int)m_prn0[0]) + ((int)m_prn1[0]) + ((int)m_prn0[1]) +
-               ((int)m_prn1[1]));
-   */
-
-    ResetRadioCore();
-
-    WriteRfSettings(&rfSettings);
-
-    WriteSinglePATable(0xC3);
-}
-
 void radio_wait_for_sleeping() {
     char status = Strobe(RF_SIDLE);
     while (status & 0xF0) {
         status = Strobe(RF_SNOP);
+    }
+}
+
+void init_radio() {
+    // Increase PMMCOREV level to 2 for proper radio operation
+    SetVCore(2);
+
+    ResetRadioCore();
+    WriteRfSettings(&rfSettings);
+    WriteSinglePATable(0xC3);
+
+    /*
+     * Select Interrupt edge for PA_PD and SYNC signal:
+     * Interrupt Edge select register: 1 == Interrupt on High to Low transition.
+     */
+    RF1AIES = BIT0 | BIT9;
+
+    radio_wait_for_sleeping();
+}
+
+void radio_main() {
+    // Initialize random number generator
+    /*
+    randomSeed(((int)m_prn0[0]) + ((int)m_prn1[0]) + ((int)m_prn0[1]) +
+               ((int)m_prn1[1]));
+    */
+
+    while (1) {
+        deep_sleep(3000);
+        init_radio();
+        // Blink LED while transmitter is on
+        P3OUT |= BIT7;
+        // Serial.println("TX");
+        radio_transmit("Hello Earthlings\n", 17);
+        P3OUT &= ~BIT7;
     }
 }
