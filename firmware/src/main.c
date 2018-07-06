@@ -2,6 +2,7 @@
 
 #include "hal_pmm.h"
 #include "pins.h"
+#include "proto.h"
 #include "sprite_radio.h"
 #include "timer_a.h"
 #include "ucs.h"
@@ -57,7 +58,7 @@ static void blink(const uint16_t ms) {
     deep_sleep(ms - 50);
 }
 
-void blink_main() {
+static void blink_main() {
     while (1) blink(1000);
 }
 
