@@ -56,7 +56,6 @@ void core_radio_init() {
     // Increase PMMCOREV level to 2 for proper radio operation
     _SET_VCORE_8MHZ(2);
 
-    ResetRadioCore();
     radio_init();
 
     /*
@@ -85,6 +84,12 @@ static void init_core() {
     ADC12CTL0 &= ~ADC12REFON;
     REFCTL0 &= ~REFON;
     REFCTL0 |= REFTCOFF; // Temp sensor disabled
+
+    // Set the High-Power Mode Request Enable bit so LPM3 can be entered
+    // with active radio enabled
+    PMMCTL0_H = 0xA5;
+    PMMCTL0_L |= PMMHPMRE_L;
+    PMMCTL0_H = 0x00;
 
     setup_pins();
 }
