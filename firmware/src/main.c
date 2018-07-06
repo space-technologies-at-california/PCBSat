@@ -52,17 +52,7 @@ void __inline__ setVcoreMCLK(uint8_t vCore, uint16_t dcorsel, uint16_t flln) {
     setMCLK(dcorsel, flln);
 }
 
-/**
- * init
- *
- * Initialize CC430 core
- * VCORE = 1 and SCLK = 8 MHz when no argument is passed
- *
- * @param vCore VCORE level
- * @param dcorsel CPU DCORSEL value
- * @param flln MCLK multiplier bits
- */
-void core_init() {
+void core_radio_init() {
     // Increase PMMCOREV level to 2 for proper radio operation
     _SET_VCORE_8MHZ(2);
 
@@ -70,16 +60,25 @@ void core_init() {
     radio_init();
 
     /*
-     * Select internal RC oscillator as FLL reference
-     */
-    UCSCTL3 |= SELREF_2; // Set DCO FLL reference = REFO
-    UCSCTL4 |= SELA_2;   // Set ACLK = REFO
-
-    /*
      * Select Interrupt edge for PA_PD and SYNC signal:
      * Interrupt Edge select register: 1 == Interrupt on High to Low transition.
      */
     RF1AIES = BIT0 | BIT9;
+
+    radio_sleep();
+    radio_wait_for_sleeping();
+}
+
+static void init_core() {
+    // Disable WDT
+    WDTCTL = WDTPW | WDTHOLD;
+
+    // Reference FLL to REFO and set MCLK, SMCLK -> 1 MHz
+    UCS_initClockSignal(UCS_FLLREF, UCS_REFOCLK_SELECT, UCS_CLOCK_DIVIDER_1);
+    UCS_initFLL(1000, 1000000/UCS_REFOCLK_FREQUENCY);
+
+    // VLO -> ACLK (note that Zac uses REFO -> ACLK instead)
+    UCS_initClockSignal(UCS_ACLK, UCS_VLOCLK_SELECT, UCS_CLOCK_DIVIDER_1);
 
     // POWER: Turn ADC and reference voltage off to conserve power
     ADC12CTL0 &= ~ADC12ENC;
@@ -88,13 +87,11 @@ void core_init() {
     REFCTL0 &= ~REFON;
     REFCTL0 |= REFTCOFF; // Temp sensor disabled
 
-    radio_sleep();
-    radio_wait_for_sleeping();
-
     // Config pins as outputs by default except P2, wich contains the ADC inputs
     P1DIR = 0xFF;
     P3DIR = 0xFF;
     PJDIR = 0xFF;
+    INIT_ONBOARD_LED();
 }
 
 void radio_main() {
@@ -139,20 +136,10 @@ void blink_main() {
 }
 
 int main() {
-    WDTCTL = WDTPW | WDTHOLD;
-    UCS_initClockSignal(UCS_FLLREF, UCS_REFOCLK_SELECT, UCS_CLOCK_DIVIDER_1);
-    UCS_initFLL(1000, 1000000/UCS_REFOCLK_FREQUENCY); // MCLK, SMCLK -> 1 MHz
-
-    UCS_initClockSignal(UCS_ACLK, UCS_VLOCLK_SELECT, UCS_CLOCK_DIVIDER_1);
-    INIT_ONBOARD_LED();
-
+    init_core();
     blink_main();
 
     /*
-    core_init();
-    __eint();
-    blink();
-
     radio_main();
     */
 }
