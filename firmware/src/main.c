@@ -101,13 +101,7 @@ void radio_main() {
     }
 }
 
-void delayMicroseconds(int us) {
-    for (int i = 0; i < us; i++) {
-        __delay_cycles(1);
-    }
-}
-
-void deep_sleep(uint16_t ms) {
+void sleep(uint16_t ms, unsigned short mode) {
     struct Timer_A_initUpModeParam params = {
         TIMER_A_CLOCKSOURCE_ACLK,
         TIMER_A_CLOCKSOURCE_DIVIDER_10,
@@ -117,7 +111,11 @@ void deep_sleep(uint16_t ms) {
         TIMER_A_DO_CLEAR,
         true};
     Timer_A_initUpMode(TIMER_A0_BASE, &params);
-    __bis_SR_register(LPM4_bits + GIE);
+    __bis_SR_register(mode + GIE);
+}
+
+void deep_sleep(uint16_t ms) {
+    sleep(ms, LPM4_bits);
 }
 
 static void blink(const uint16_t ms) {

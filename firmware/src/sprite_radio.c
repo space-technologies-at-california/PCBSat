@@ -373,7 +373,8 @@ void beginRawTransmit(unsigned char bytes[], unsigned int length) {
         }
 
         while (bytes_to_go) {
-            delayMicroseconds(1000); //Wait for some bytes to be transmitted
+            // Wait for some bytes to be transmitted
+            sleep(1, LPM0_bits);
 
             bytes_free = Strobe(RF_SNOP) & 0x0F;
             bytes_to_write =
@@ -396,7 +397,8 @@ void continueRawTransmit(unsigned char bytes[], unsigned int length) {
 
     if (bytes) {
         while (bytes_to_go) {
-            delayMicroseconds(1000); //Wait for some bytes to be transmitted
+            // Wait for some bytes to be transmitted
+            sleep(1, LPM0_bits);
 
             bytes_free = Strobe(RF_SNOP) & 0x0F;
             bytes_to_write =
@@ -408,7 +410,8 @@ void continueRawTransmit(unsigned char bytes[], unsigned int length) {
         }
     } else {
         while (bytes_to_go) {
-            delayMicroseconds(1000); //Wait for some bytes to be transmitted
+            // Wait for some bytes to be transmitted
+            sleep(1, LPM0_bits);
 
             bytes_free = Strobe(RF_SNOP) & 0x0F;
             bytes_to_write =
