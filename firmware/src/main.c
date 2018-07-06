@@ -87,11 +87,7 @@ static void init_core() {
     REFCTL0 &= ~REFON;
     REFCTL0 |= REFTCOFF; // Temp sensor disabled
 
-    // Config pins as outputs by default except P2, wich contains the ADC inputs
-    P1DIR = 0xFF;
-    P3DIR = 0xFF;
-    PJDIR = 0xFF;
-    INIT_ONBOARD_LED();
+    setup_pins();
 }
 
 void radio_main() {

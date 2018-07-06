@@ -29,7 +29,7 @@
 
 #define __F_CPU                 1000000L
 
-//void setup_pins(void);
+void setup_pins(void);
 
 #define __SPRITE_VERSION_2_0__  1
 
