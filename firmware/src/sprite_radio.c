@@ -462,7 +462,7 @@ void radio_init(void) {
 }
 
 void radio_wait_for_sleeping() {
-    char status;
+    char status = 0;
     while (status & 0xF0) {
         status = Strobe(RF_SNOP);
     }
