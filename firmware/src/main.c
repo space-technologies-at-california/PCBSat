@@ -129,13 +129,18 @@ void blink_main() {
     while (1) blink(1000);
 }
 
+#define BLINK
+
 int main() {
     init_core();
+    blink(200);
+    blink(200);
+    deep_sleep(600);
+#ifdef BLINK
     blink_main();
-
-    /*
+#else
     radio_main();
-    */
+#endif
 }
 
 void __interrupt_vec(TIMER0_A0_VECTOR) isr_timer_a0() {
