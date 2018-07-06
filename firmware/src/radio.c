@@ -1,8 +1,8 @@
 #include <msp430.h>
 
-#include "sprite_radio.h"
-
-extern RF_SETTINGS rfSettings;
+#include "hal_pmm.h"
+#include "proto.h"
+#include "radio.h"
 
 /*
   This example code will configure the CC1101 radio core in the CC430 to
@@ -37,7 +37,7 @@ extern RF_SETTINGS rfSettings;
 // Device address = 0
 // GDO0 signal selection = ( 6) Asserts when sync word has been sent / received,
 // and de-asserts at the end of the packet GDO2 signal selection = (41) RF_RDY
-RF_SETTINGS rfSettings = {
+static RF_SETTINGS rfSettings = {
     0x0E, // FSCTRL1
     0x00, // FSCTRL0
     0x10, // FREQ2
@@ -76,7 +76,7 @@ RF_SETTINGS rfSettings = {
     0xFF  // PKTLEN    Packet Length (Bytes)
 };
 
-unsigned char m_prn0[64] = {
+static unsigned char m_prn0[64] = {
     0b00000001, 0b01011110, 0b11010100, 0b01100001, 0b00001011, 0b11110011,
     0b00110001, 0b01011100, 0b01100110, 0b10010010, 0b01011011, 0b00101010,
     0b11100000, 0b10100011, 0b00000000, 0b11100001, 0b10111011, 0b10011111,
@@ -89,7 +89,7 @@ unsigned char m_prn0[64] = {
     0b10010011, 0b00000000, 0b00010000, 0b10000101, 0b00101000, 0b00011101,
     0b01011100, 0b10101111, 0b01100100, 0b11011010};
 
-unsigned char m_prn1[64] = {
+static unsigned char m_prn1[64] = {
     0b11111101, 0b00111110, 0b01110111, 0b11010101, 0b00100101, 0b11101111,
     0b00101100, 0b01101001, 0b00101010, 0b11101001, 0b00111100, 0b11000100,
     0b00000111, 0b10010011, 0b11000101, 0b00000111, 0b00110111, 0b00011111,
@@ -102,10 +102,10 @@ unsigned char m_prn1[64] = {
     0b11110100, 0b01111010, 0b11001011, 0b00101110, 0b01100011, 0b10111111,
     0b01010100, 0b11000100, 0b11010100, 0b01010100};
 
-int m_power;
+static int m_power;
 
 // Set the output power of the transmitter.
-void radio_set_power(int tx_power_dbm) {
+static void radio_set_power(int tx_power_dbm) {
 
     // These values are from TI Design Note DN013 and are calibrated for
     // operation at 434 MHz.
@@ -214,7 +214,7 @@ void radio_set_power(int tx_power_dbm) {
     }
 }
 
-char fecEncode(char data) {
+static char fecEncode(char data) {
     // Calculate parity bits using a (16,8,5) block code
     // given by the following generator matrix:
     /*unsigned char G[8][16] = {
@@ -255,7 +255,7 @@ char fecEncode(char data) {
     return p;
 }
 
-void radio_transmit(char bytes[], unsigned int length) {
+static void radio_transmit(char bytes[], unsigned int length) {
 #ifdef SR_DEBUG_MODE
 
     for (unsigned int k = 0; k < length; ++k) {
@@ -276,7 +276,7 @@ void radio_transmit(char bytes[], unsigned int length) {
 #endif
 }
 
-void transmitByte(char byte) {
+static void transmitByte(char byte) {
     char parity = fecEncode(byte);
 
     // Transmit preamble (1110010)
@@ -336,16 +336,16 @@ void transmitByte(char byte) {
     endRawTransmit();
 }
 
-void rawTransmit(unsigned char bytes[], unsigned int length) {
+static void rawTransmit(unsigned char bytes[], unsigned int length) {
 
     beginRawTransmit(bytes, length);
     endRawTransmit();
 }
 
-void beginRawTransmit(unsigned char bytes[], unsigned int length) {
+static void beginRawTransmit(unsigned char bytes[], unsigned int length) {
     char status;
 
-    radio_wait_for_sleeping();
+    wait_for_idle();
 
     // Clear TX FIFO
     status = Strobe(RF_SFTX);
@@ -383,7 +383,7 @@ void beginRawTransmit(unsigned char bytes[], unsigned int length) {
     }
 }
 
-void continueRawTransmit(unsigned char bytes[], unsigned int length) {
+static void continueRawTransmit(unsigned char bytes[], unsigned int length) {
 
     unsigned char bytes_free, bytes_to_write;
     unsigned int bytes_to_go, counter;
@@ -422,7 +422,7 @@ void continueRawTransmit(unsigned char bytes[], unsigned int length) {
     return;
 }
 
-void endRawTransmit() {
+static void endRawTransmit() {
 
     char status = Strobe(RF_SNOP);
 
@@ -434,14 +434,14 @@ void endRawTransmit() {
     return;
 }
 
-void radio_wait_for_sleeping() {
+static void wait_for_idle() {
     char status = Strobe(RF_SIDLE);
     while (status & 0xF0) {
         status = Strobe(RF_SNOP);
     }
 }
 
-void init_radio() {
+static void init_radio() {
     // Increase PMMCOREV level to 2 for proper radio operation
     SetVCore(2);
 
@@ -455,7 +455,7 @@ void init_radio() {
      */
     RF1AIES = BIT0 | BIT9;
 
-    radio_wait_for_sleeping();
+    wait_for_idle();
 }
 
 void radio_main() {

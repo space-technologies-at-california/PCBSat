@@ -1,9 +1,7 @@
 #include <msp430.h>
 
-#include "hal_pmm.h"
 #include "pins.h"
 #include "proto.h"
-#include "sprite_radio.h"
 #include "timer_a.h"
 #include "ucs.h"
 
