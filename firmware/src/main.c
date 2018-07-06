@@ -3,6 +3,8 @@
 #include "hal_pmm.h"
 #include "pins.h"
 #include "sprite_radio.h"
+#include "timer_a.h"
+#include "ucs.h"
 
 #define _SET_VCORE_1MHZ(vCore) setVcoreMCLK(vCore, DCORSEL_0, 0x01F)
 #define _SET_VCORE_8MHZ(vCore) setVcoreMCLK(vCore, DCORSEL_5, 0x0F4)
@@ -95,17 +97,6 @@ void core_init() {
     PJDIR = 0xFF;
 }
 
-void blink_main() {
-    unsigned long i = 0;
-    P3DIR = LED;
-    while (1) {
-        P3OUT = LED;
-        __delay_cycles(100000);
-        P3OUT = 0;
-        __delay_cycles(100000);
-    }
-}
-
 void radio_main() {
     while (1) {
         __delay_cycles(24000000);
@@ -123,22 +114,49 @@ void delayMicroseconds(int us) {
     }
 }
 
-static void blink() {
+void deep_sleep(uint16_t ms) {
+    struct Timer_A_initUpModeParam params = {
+        TIMER_A_CLOCKSOURCE_ACLK,
+        TIMER_A_CLOCKSOURCE_DIVIDER_10,
+        ms,
+        TIMER_A_TAIE_INTERRUPT_DISABLE,
+        TIMER_A_CCIE_CCR0_INTERRUPT_ENABLE,
+        TIMER_A_DO_CLEAR,
+        true};
+    Timer_A_initUpMode(TIMER_A0_BASE, &params);
+    __bis_SR_register(LPM4_bits + GIE);
+}
+
+static void blink(const uint16_t ms) {
     P3OUT |= BIT7;
-    __delay_cycles(1000000);
+    deep_sleep(50);
     P3OUT &= ~BIT7;
-    __delay_cycles(1000000);
+    deep_sleep(ms - 50);
+}
+
+void blink_main() {
+    while (1) blink(1000);
 }
 
 int main() {
     WDTCTL = WDTPW | WDTHOLD;
-    INIT_ONBOARD_LED();
-    blink();
+    UCS_initClockSignal(UCS_FLLREF, UCS_REFOCLK_SELECT, UCS_CLOCK_DIVIDER_1);
+    UCS_initFLL(1000, 1000000/UCS_REFOCLK_FREQUENCY); // MCLK, SMCLK -> 1 MHz
 
+    UCS_initClockSignal(UCS_ACLK, UCS_VLOCLK_SELECT, UCS_CLOCK_DIVIDER_1);
+    INIT_ONBOARD_LED();
+
+    blink_main();
+
+    /*
     core_init();
     __eint();
     blink();
 
     radio_main();
-    // blink_main();
+    */
+}
+
+void __interrupt_vec(TIMER0_A0_VECTOR) isr_timer_a0() {
+    LPM4_EXIT;
 }
