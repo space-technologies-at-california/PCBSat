@@ -260,7 +260,7 @@ static void radio_transmit(char bytes[], unsigned int length) {
 
     for (unsigned int k = 0; k < length; ++k) {
         transmitByte(bytes[k]);
-        // delay(1000);
+        delay(1000);
     }
 
 #else

@@ -45,6 +45,10 @@ void sleep(uint16_t ms, unsigned short mode) {
     __bis_SR_register(mode + GIE);
 }
 
+void delay(uint16_t ms) {
+    sleep(ms, LPM0_bits);
+}
+
 void deep_sleep(uint16_t ms) {
     sleep(ms, LPM4_bits);
 }
