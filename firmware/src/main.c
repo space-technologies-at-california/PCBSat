@@ -52,7 +52,7 @@ void __inline__ setVcoreMCLK(uint8_t vCore, uint16_t dcorsel, uint16_t flln) {
     setMCLK(dcorsel, flln);
 }
 
-void core_radio_init() {
+void init_radio() {
     // Increase PMMCOREV level to 2 for proper radio operation
     _SET_VCORE_8MHZ(2);
 
@@ -96,7 +96,8 @@ static void init_core() {
 
 void radio_main() {
     while (1) {
-        __delay_cycles(24000000);
+        deep_sleep(3000);
+        init_radio();
         // Blink LED while transmitter is on
         P3OUT |= BIT7;
         // Serial.println("TX");
