@@ -6,55 +6,9 @@
 #include "timer_a.h"
 #include "ucs.h"
 
-#define _SET_VCORE_1MHZ(vCore) setVcoreMCLK(vCore, DCORSEL_0, 0x01F)
-#define _SET_VCORE_8MHZ(vCore) setVcoreMCLK(vCore, DCORSEL_5, 0x0F4)
-
-/**
- * setMCLK
- *
- * Config MCLK registers
- *
- * @param dcorsel CPU DCORSEL value
- * @param flln MCLK multiplier bits
- */
-void __inline__ setMCLK(uint16_t dcorsel, uint16_t flln) {
-    /**
-     * Configure CPU clock for 8MHz
-     */
-    _BIS_SR(SCG0);           // Disable the FLL control loop
-    UCSCTL0 = 0x0000;        // Set lowest possible DCOx, MODx
-    UCSCTL1 = dcorsel;       // Select suitable range
-    UCSCTL2 = FLLD_1 + flln; // Set DCO Multiplier
-    _BIC_SR(SCG0);           // Enable the FLL control loop
-
-    // Worst-case settling time for the DCO when the DCO range bits have been
-    // changed is n x 32 x 32 x f_MCLK / f_FLL_reference. See UCS chapter in 5xx
-    // UG for optimization.
-    // 32 x 32 x 8 MHz / 32,768 Hz = 250000 = MCLK cycles for DCO to settle
-    //__delay_cycles(250000);
-    __delay_cycles(0xFFFF);
-}
-
-/**
- * setVcoreMCLK
- *
- * Config VCORE and MCLK registers
- *
- * @param vCore VCORE level
- * @param dcorsel CPU DCORSEL value
- * @param flln MCLK multiplier bits
- */
-void __inline__ setVcoreMCLK(uint8_t vCore, uint16_t dcorsel, uint16_t flln) {
-    // Configure PMM
-    SetVCore(vCore);
-
-    // Set MCLK
-    setMCLK(dcorsel, flln);
-}
-
 void init_radio() {
     // Increase PMMCOREV level to 2 for proper radio operation
-    _SET_VCORE_8MHZ(2);
+    SetVCore(2);
 
     radio_init();
 
