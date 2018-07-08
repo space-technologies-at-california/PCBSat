@@ -6,7 +6,7 @@
 #include <stdbool.h>
 
 // Start I2C transaction/
-void beginTransmission(uint16_t slaveAddr) {
+void i2c_begin_transmission(uint16_t slaveAddr) {
   UCB0CTL1 |= UCSWRST;                    // Enable SW reset
   UCB0CTL0 = UCMST + UCMODE_3 + UCSYNC;   // I2C Master, synchronous mode
   UCB0CTL1 = UCSSEL_2 + UCSWRST;          // Use SMCLK
@@ -18,7 +18,7 @@ void beginTransmission(uint16_t slaveAddr) {
 }
 
 // I2C write
-uint16_t write(const uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool stop) {
+uint16_t i2c_write(const uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool stop) {
   uint16_t i, res = len;
   uint32_t timeout;
 
@@ -47,7 +47,7 @@ uint16_t write(const uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool stop) 
 }
 
 // I2C Read
-uint16_t read(uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool stop) 
+uint16_t i2c_read(uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool stop) 
 {
   uint16_t i, res = len;
   uint32_t timeout;
@@ -76,33 +76,33 @@ uint16_t read(uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool stop)
   return res;
 }
 
-void write8(uint8_t saddr, uint8_t reg, uint8_t val) {
-    beginTransmission(saddr);
+void i2c_write8(uint8_t saddr, uint8_t reg, uint8_t val) {
+    i2c_begin_transmission(saddr);
     tx_buff[0] = reg;
     tx_buff[1] = val;
-    uint8_t res = write(tx_buff, 2, saddr, true);
+    uint8_t res = i2c_write(tx_buff, 2, saddr, true);
     tx_buff_len -= res;
 }
 
-uint8_t readBuff(uint8_t saddr, uint8_t reg, uint8_t len, uint8_t *buffer) {
-    beginTransmission(saddr);
+uint8_t i2c_read_buff(uint8_t saddr, uint8_t reg, uint8_t len, uint8_t *buffer) {
+    i2c_begin_transmission(saddr);
     tx_buff[0] = reg;
-    write(tx_buff, 1, saddr, true);
+    i2c_write(tx_buff, 1, saddr, true);
 
-    if (requestFrom(saddr, len, false) != len) {
+    if (i2c_request_from(saddr, len, false) != len) {
         return 0;
     }   
     return len;
 } 
 
-uint8_t requestFrom(uint8_t address, uint16_t quantity, bool sendStop)
+uint8_t i2c_request_from(uint8_t address, uint16_t quantity, bool sendStop)
 {
   // clamp to buffer length
   if(quantity > BUFF_LEN)
     quantity = BUFF_LEN;
 
   // perform blocking read into buffer
-  uint16_t res = read(rx_buff, quantity, address, sendStop);
+  uint16_t res = i2c_read(rx_buff, quantity, address, sendStop);
   // set rx buffer iterator vars
   rx_buff_len = res;
 

@@ -29,7 +29,7 @@
 #include <stdint.h>
 #include <msp430.h>
 
-#define __F_CPU                 1000000L
+#define __F_CPU                 8000000L
 
 void setup_pins(void);
 

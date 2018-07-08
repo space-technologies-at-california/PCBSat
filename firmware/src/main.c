@@ -8,6 +8,8 @@
 #include "timer_a.h"
 #include "ucs.h"
 
+#include "cc430uart.h"
+
 static void init_core() {
     // Disable WDT
     WDTCTL = WDTPW | WDTHOLD;
@@ -33,6 +35,8 @@ static void init_core() {
     PMMCTL0_H = 0x00;
 
     setup_pins();
+    lsm_setup();
+    uart_begin(9600, SERIAL_8N1);
 }
 
 void sleep(uint16_t ms, unsigned short mode) {
@@ -67,17 +71,33 @@ static void blink_main() {
     while (1) blink(1000);
 }
 
-#define BLINK
+//#define BLINK
 
 int main() {
     init_core();
+    
     blink(200);
     blink(200);
     deep_sleep(600);
+    uint16_t data_mag[3];
+    uint16_t data_gyro[3];
+  
 #ifdef BLINK
     blink_main();
 #else
-    radio_main();
+//    radio_main();
+
+/*    readGyro(data_gyro);
+    readMag(data_mag);
+
+    uart_write((uint8_t*)data_mag, 6); 
+    uart_write_byte((uint8_t)('\n'));
+    uart_write((uint8_t*)data_gyro, 6);
+    uart_end(); 
+*/
+    while (1) {
+       uart_write("Hello\n", 6);
+    }
 #endif
 }
 

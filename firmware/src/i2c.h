@@ -26,7 +26,7 @@ static uint8_t rx_buff_len;
  *
  * @param slaAddr I2C slave address
  */
-void beginTransmission(uint16_t slaveAddr);
+void i2c_begin_transmission(uint16_t slaveAddr);
 
 /**
  * write
@@ -39,9 +39,9 @@ void beginTransmission(uint16_t slaveAddr);
  *
  * @return Amount of bytes transmitted
  */
-uint16_t write(const uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool stop);
+uint16_t i2c_write(const uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool stop);
 
-void write8(uint8_t saddr, uint8_t reg, uint8_t val);
+void i2c_write8(uint8_t saddr, uint8_t reg, uint8_t val);
 
 /**
  * read
@@ -54,10 +54,10 @@ void write8(uint8_t saddr, uint8_t reg, uint8_t val);
  *
  * @return Amount of bytes received
  */
-uint16_t read(uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool stop);
+uint16_t i2c_read(uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool stop);
 
-uint8_t readBuff(uint8_t saddr, uint8_t reg, uint8_t len, uint8_t *buffer);
+uint8_t i2c_read_buff(uint8_t saddr, uint8_t reg, uint8_t len, uint8_t *buffer);
 
-uint8_t requestFrom(uint8_t saddr, uint16_t quantity, bool sendStop);
+uint8_t i2c_request_from(uint8_t saddr, uint16_t quantity, bool sendStop);
 #endif
 

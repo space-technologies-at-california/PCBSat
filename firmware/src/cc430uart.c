@@ -1,4 +1,4 @@
-#include <msp430.h>
+#include "cc430f5137.h" 
 #include "cc430uart.h"
 #include <stdint.h>
 #include "pins.h"
@@ -173,12 +173,14 @@ int uart_available(void)
 __attribute__((interrupt(USCI_A0_VECTOR)))
 void uartISR(void)
 {
-  switch (UCA0IV) 
+   P3OUT ^= BIT7;
+   switch (UCA0IV) 
   { 
-    case USCI_UCRXIFG:
+   case USCI_UCRXIFG:
       while (!(UCA0IFG&UCTXIFG));           // USCI_A0 TX buffer ready?
       uart_rxBuffer[uart_rxLength++] = UCA0RXBUF;
-      break;
+    P3OUT ^= BIT7;
+       break;
     case USCI_UCTXIFG:
       UCA0TXBUF = uart_txBuffer[uart_tx_buffer_tail];
 
@@ -188,9 +190,10 @@ void uartISR(void)
         // Buffer empty, so disable interrupts
         UCA0IE &= ~UCTXIE;
       }
-      break;
+    P3OUT ^= BIT7;
+       break;
     default:
       break;
-  }
+ }
 }
 
