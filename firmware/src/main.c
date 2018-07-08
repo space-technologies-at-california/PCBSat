@@ -35,8 +35,9 @@ static void init_core() {
     PMMCTL0_H = 0x00;
 
     setup_pins();
-    lsm_setup();
     uart_begin(9600, SERIAL_8N1);
+    lsm_setup();
+
 }
 
 void sleep(uint16_t ms, unsigned short mode) {
@@ -81,22 +82,22 @@ int main() {
     deep_sleep(600);
     uint16_t data_mag[3];
     uint16_t data_gyro[3];
-  
+    delay(1000);
 #ifdef BLINK
     blink_main();
 #else
 //    radio_main();
 
-/*    readGyro(data_gyro);
+while (1) {
+    readGyro(data_gyro);
     readMag(data_mag);
 
     uart_write((uint8_t*)data_mag, 6); 
-    uart_write_byte((uint8_t)('\n'));
+    uart_write("\n\r", 2);
     uart_write((uint8_t*)data_gyro, 6);
-    uart_end(); 
-*/
-    while (1) {
-       uart_write("Hello\n", 6);
+    uart_write("\n\r", 2);
+
+    delay(1000);
     }
 #endif
 }

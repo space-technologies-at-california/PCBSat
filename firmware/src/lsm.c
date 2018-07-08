@@ -1,37 +1,61 @@
 #include "i2c.h"
 #include "lsm.h"
+#include "cc430uart.h"
+#include <msp430.h>
 
 bool lsm_setup() {
+    P3OUT ^= BIT7;
     // soft reset & reboot accel/gyro
     i2c_write8(SADDR_G, LSM_REG_CTRL_REG8, 0x05);
+    P3OUT ^= BIT7;
     // soft reset & reboot magnetometer
     i2c_write8(SADDR_M, LSM_REG_CTRL_REG2_M, 0x0C);    
+    uart_write("M: reset\n\r", 9);
+
     uint8_t id; 
     i2c_read_buff(SADDR_G, LSM_REG_WHO_AM_I_XG, 1, &id);
+    uart_write("G: id=", 6);
+    uart_write_byte(id);
+
     
     if (id != LSM_XG_ID)
         return false;
 
     i2c_read_buff(SADDR_M, LSM_REG_WHO_AM_I_M, 1, &id);
+    uart_write("M: id=", 6);
+    uart_write_byte(id);
+
     if (id != LSM_MAG_ID)
         return false;
 
     // enable gyro continuous
     i2c_write8(SADDR_G, LSM_REG_CTRL_REG1_G, 0xC0); // on XYZ
+    uart_write("G: en cont\n\r", 11);
+
 
     // Setup Mag
     uint8_t reg;
     i2c_read_buff(SADDR_M, LSM_REG_CTRL_REG2_M, 1, &reg);
+    uart_write("M: reg=", 7);
+    uart_write_byte(reg);
+
     reg &= ~(0b01100000);
     reg |= LSM_MAG_GAIN;
     i2c_write8(SADDR_M, LSM_REG_CTRL_REG2_M, reg);
+    uart_write("M: gain\n\r", 8);
+
 
     // Setup Gyro
     i2c_read_buff(SADDR_G, LSM_REG_CTRL_REG1_G, 1, &reg);
+    uart_write("G: reg=", 7);
+    uart_write_byte(reg);
+
     reg &= ~(0b00011000);
     reg |= LSM_GYRO_SCALE;
     i2c_write8(SADDR_G, LSM_REG_CTRL_REG1_G, reg);
+    uart_write("G: scale\n\r", 8);
 
+    P3OUT ^= BIT7;
     return true;
 
 }

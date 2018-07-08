@@ -74,6 +74,7 @@ uint8_t uart_write_byte(uint8_t c) {
     // Turn on interrupts, since there's a character in the buffer
     UCA0IE |= UCTXIE;
 
+//    while(uart_tx_buffer_head != uart_tx_buffer_tail) {}
     return 1;
 }
 

@@ -4,6 +4,8 @@
 #include "i2c.h"
 #include <msp430.h>
 #include <stdbool.h>
+#include "cc430uart.h"
+#include "pins.h" 
 
 // Start I2C transaction/
 void i2c_begin_transmission(uint16_t slaveAddr) {
@@ -23,11 +25,14 @@ uint16_t i2c_write(const uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool st
   uint32_t timeout;
 
   UCB0I2CSA = slaveAddr;
-  UCB0IFG = 0;                         // Reset interrupt flags
-  UCB0CTL1 |= UCTR + UCTXSTT;          // Send start condition and slave address
+  do {
+    UCB0IFG = 0;                         // Reset interrupt flags
+    UCB0CTL1 |= UCTR + UCTXSTT;          // Send start condition and slave address
   
-  while (!(UCB0IFG & UCTXIFG));       // Wait until start condition is sent
+    while (!(UCB0IFG & UCTXIFG));       // Wait until start condition is sent
 
+  } while (UCB0IFG & UCNACKIFG == 1);   // If slave does not ack, try again 
+     
   // Send bytes
   for(i=0 ; i<len ; i++) {
     timeout = I2C_TIMEOUT;
@@ -37,7 +42,7 @@ uint16_t i2c_write(const uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool st
     if (!timeout)
       res = 0;
   }
-
+  
   if (stop) {
     UCB0CTL1 |= UCTXSTP;               // I2C stop condition
     while ((UCB0CTL1 & UCTXSTP));     // Ensure stop condition got sent
@@ -81,7 +86,7 @@ void i2c_write8(uint8_t saddr, uint8_t reg, uint8_t val) {
     tx_buff[0] = reg;
     tx_buff[1] = val;
     uint8_t res = i2c_write(tx_buff, 2, saddr, true);
-    tx_buff_len -= res;
+    tx_buff_len = 0;
 }
 
 uint8_t i2c_read_buff(uint8_t saddr, uint8_t reg, uint8_t len, uint8_t *buffer) {
@@ -91,7 +96,13 @@ uint8_t i2c_read_buff(uint8_t saddr, uint8_t reg, uint8_t len, uint8_t *buffer) 
 
     if (i2c_request_from(saddr, len, false) != len) {
         return 0;
-    }   
+    }
+    if (len > BUFF_LEN)
+        len = BUFF_LEN;
+    int i;
+    for (i=0; i < len; i++) {
+        buffer[i] = rx_buff[i];
+    }
     return len;
 } 
 
