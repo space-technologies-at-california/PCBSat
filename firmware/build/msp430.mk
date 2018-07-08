@@ -30,7 +30,7 @@ all: ${MAIN}
 .PHONY: clean prog verify
 
 clean:
-	${RM} ${MAIN} ${OBJS}
+	${RM} ${MAIN} ${OBJS} ${MAIN}.map
 
 prog: ${MAIN}
 	${MSPDEBUG} 'prog ${MAIN}'

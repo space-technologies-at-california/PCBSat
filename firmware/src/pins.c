@@ -190,6 +190,11 @@ const uint16_t digital_pin_to_analog_in[] = {
 };
 
 void setup_pins() {
+    // Config pins as outputs by default except P2, wich contains the ADC inputs
+    P1DIR = 0xFF;
+    P3DIR = 0xFF;
+    PJDIR = 0xFF;
+    INIT_ONBOARD_LED();
    
     // Allow port remapping
     PMAPKEYID = PMAPKEY;
@@ -206,4 +211,3 @@ void setup_pins() {
     pinI2Cconfig();
     pinPWMconfig();
 }
-    
