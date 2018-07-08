@@ -29,7 +29,7 @@
 #include <stdint.h>
 #include <msp430.h>
 
-//void setup_pins(void);
+void setup_pins(void);
 
 #define __SPRITE_VERSION_2_0__  1
 
@@ -87,7 +87,7 @@ static const uint8_t A10 = 128 + 10; // special. This is the internal temp senso
 static const uint8_t A11 = 128 + 11; // special. This is Vcc/2
 
 // On-board LED
-#define ONBOARD_LED 23
+#define ONBOARD_LED BIT7
 #define LED      ONBOARD_LED
 #define INIT_ONBOARD_LED()    P3DIR |= BIT7; P3OUT &= ~BIT7
 // Preferred analog pin to measure battery voltage

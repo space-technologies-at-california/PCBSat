@@ -5,7 +5,7 @@
 #include <msp430.h>
 #include <stdbool.h>
 
-// Start I2C transaction
+// Start I2C transaction/
 void beginTransmission(uint16_t slaveAddr) {
   UCB0CTL1 |= UCSWRST;                    // Enable SW reset
   UCB0CTL0 = UCMST + UCMODE_3 + UCSYNC;   // I2C Master, synchronous mode
@@ -76,4 +76,35 @@ uint16_t read(uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool stop)
   return res;
 }
 
+void write8(uint8_t saddr, uint8_t reg, uint8_t val) {
+    beginTransmission(saddr);
+    tx_buff[0] = reg;
+    tx_buff[1] = val;
+    uint8_t res = write(tx_buff, 2, saddr, true);
+    tx_buff_len -= res;
+}
 
+uint8_t readBuff(uint8_t saddr, uint8_t reg, uint8_t len, uint8_t *buffer) {
+    beginTransmission(saddr);
+    tx_buff[0] = reg;
+    write(tx_buff, 1, saddr, true);
+
+    if (requestFrom(saddr, len, false) != len) {
+        return 0;
+    }   
+    return len;
+} 
+
+uint8_t requestFrom(uint8_t address, uint16_t quantity, bool sendStop)
+{
+  // clamp to buffer length
+  if(quantity > BUFF_LEN)
+    quantity = BUFF_LEN;
+
+  // perform blocking read into buffer
+  uint16_t res = read(rx_buff, quantity, address, sendStop);
+  // set rx buffer iterator vars
+  rx_buff_len = res;
+
+  return res;
+}
