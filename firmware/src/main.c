@@ -30,6 +30,7 @@ static void init_core() {
     PMMCTL0_H = 0x00;
 
     setup_pins();
+    __enable_interrupt();
 }
 
 void sleep(uint16_t ms, unsigned short mode) {
@@ -42,7 +43,7 @@ void sleep(uint16_t ms, unsigned short mode) {
         TIMER_A_DO_CLEAR,
         true};
     Timer_A_initUpMode(TIMER_A0_BASE, &params);
-    __bis_SR_register(mode + GIE);
+    __bis_SR_register(mode);
 }
 
 void delay(uint16_t ms) {
