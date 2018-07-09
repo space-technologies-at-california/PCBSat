@@ -31,7 +31,7 @@ uint16_t i2c_write(const uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool st
   
     while (!(UCB0IFG & UCTXIFG));       // Wait until start condition is sent
 
-  } while (UCB0IFG & UCNACKIFG == 1);   // If slave does not ack, try again 
+  } while (UCB0IFG & UCNACKIFG);   // If slave does not ack, try again 
      
   // Send bytes
   for(i=0 ; i<len ; i++) {
