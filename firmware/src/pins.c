@@ -191,7 +191,8 @@ const uint16_t digital_pin_to_analog_in[] = {
 
 void setup_pins() {
     // Config pins as outputs by default except P2, wich contains the ADC inputs
-    P1DIR = 0xFF;
+    P1DIR = ~BIT1; // P1.1 is PGOOD
+    P1REN = ~BIT1; // No PU/PD on PGOOD
     P3DIR = 0xFF;
     PJDIR = 0xFF;
     INIT_ONBOARD_LED();

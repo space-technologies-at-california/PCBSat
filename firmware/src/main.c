@@ -65,11 +65,26 @@ static void blink_main() {
     while (1) blink(1000);
 }
 
+static void check_power() {
+    P1IE = 0;
+    if (P1IN & BIT1) {
+        // PGOOD high, set interrupt to negative edge
+        P1IES = BIT1;
+        P1IE = BIT1;
+    } else {
+        // PGOOD low, set interrupt to positive edge and sleep now
+        P1IES = 0;
+        P1IE = BIT1;
+        LPM4;
+    }
+}
+
 #define BLINK
 
 int main() {
     init_core();
     blink(200);
+    check_power();
     blink(200);
     deep_sleep(600);
 #ifdef BLINK
@@ -81,4 +96,15 @@ int main() {
 
 void __interrupt_vec(TIMER0_A0_VECTOR) isr_timer_a0() {
     LPM4_EXIT;
+}
+
+void __interrupt_vec(PORT1_VECTOR) isr_p1() {
+    switch (__even_in_range(P1IV, P1IV_P1IFG7)) {
+    case P1IV_P1IFG1:
+        check_power();
+        LPM4_EXIT;
+        break;
+    default:
+        break;
+    }
 }
