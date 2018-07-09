@@ -51,7 +51,7 @@ void delay(uint16_t ms) {
 }
 
 void deep_sleep(uint16_t ms) {
-    sleep(ms, LPM4_bits);
+    sleep(ms, LPM3_bits);
 }
 
 static void blink(const uint16_t ms) {
@@ -95,7 +95,7 @@ int main() {
 }
 
 void __interrupt_vec(TIMER0_A0_VECTOR) isr_timer_a0() {
-    LPM4_EXIT;
+    LPM3_EXIT;
 }
 
 void __interrupt_vec(PORT1_VECTOR) isr_p1() {
