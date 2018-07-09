@@ -35,9 +35,6 @@ static void init_core() {
     PMMCTL0_H = 0x00;
 
     setup_pins();
-    uart_begin(9600, SERIAL_8N1);
-    lsm_setup();
-
 }
 
 void sleep(uint16_t ms, unsigned short mode) {
@@ -76,9 +73,12 @@ static void blink_main() {
 
 int main() {
     init_core();
-    
     blink(200);
+    uart_begin(9600, SERIAL_8N1);
     blink(200);
+    lsm_setup();
+    blink(200);
+
     deep_sleep(600);
     uint16_t data_mag[3];
     uint16_t data_gyro[3];
