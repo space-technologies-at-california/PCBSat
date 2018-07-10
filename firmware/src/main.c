@@ -16,7 +16,7 @@ static void init_core() {
 
     // Reference FLL to REFO and set MCLK, SMCLK -> 1 MHz
     UCS_initClockSignal(UCS_FLLREF, UCS_REFOCLK_SELECT, UCS_CLOCK_DIVIDER_1);
-    UCS_initFLL(1000, 1000000/UCS_REFOCLK_FREQUENCY);
+    UCS_initFLLSettle(1000, 1000000/UCS_REFOCLK_FREQUENCY);
 
     // VLO -> ACLK (note that Zac uses REFO -> ACLK instead)
     UCS_initClockSignal(UCS_ACLK, UCS_VLOCLK_SELECT, UCS_CLOCK_DIVIDER_1);
