@@ -174,7 +174,9 @@ int uart_available(void)
 __attribute__((interrupt(USCI_A0_VECTOR)))
 void uartISR(void)
 {
+#ifdef DEBUG_UART
    P3OUT ^= BIT7;
+#endif
    switch (UCA0IV) 
   { 
    case USCI_UCRXIFG:
@@ -191,7 +193,9 @@ void uartISR(void)
         // Buffer empty, so disable interrupts
         UCA0IE &= ~UCTXIE;
       }
+#ifdef DEBUG_UART
     P3OUT ^= BIT7;
+#endif
        break;
     default:
       break;
