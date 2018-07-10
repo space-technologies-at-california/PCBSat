@@ -35,6 +35,7 @@ static void init_core() {
     PMMCTL0_H = 0x00;
 
     setup_pins();
+    __enable_interrupt();
 }
 
 void sleep(uint16_t ms, unsigned short mode) {
@@ -47,7 +48,7 @@ void sleep(uint16_t ms, unsigned short mode) {
         TIMER_A_DO_CLEAR,
         true};
     Timer_A_initUpMode(TIMER_A0_BASE, &params);
-    __bis_SR_register(mode + GIE);
+    __bis_SR_register(mode);
 }
 
 void delay(uint16_t ms) {
@@ -55,7 +56,7 @@ void delay(uint16_t ms) {
 }
 
 void deep_sleep(uint16_t ms) {
-    sleep(ms, LPM4_bits);
+    sleep(ms, LPM3_bits);
 }
 
 static void blink(const uint16_t ms) {
@@ -69,12 +70,26 @@ static void blink_main() {
     while (1) blink(1000);
 }
 
-//#define BLINK
+static void check_power() {
+    P1IE = 0;
+    if (P1IN & BIT1) {
+        // PGOOD high, set interrupt to negative edge
+        P1IES = BIT1;
+        P1IE = BIT1;
+    } else {
+        // PGOOD low, set interrupt to positive edge and sleep now
+        P1IES = 0;
+        P1IE = BIT1;
+        LPM4;
+    }
+}
 
 int main() {
     init_core();
     blink(200);
     uart_begin(9600, SERIAL_8N1);
+    blink(200);
+    check_power();
     blink(200);
     lsm_setup();
     blink(200);
@@ -103,5 +118,16 @@ while (1) {
 }
 
 void __interrupt_vec(TIMER0_A0_VECTOR) isr_timer_a0() {
-    LPM4_EXIT;
+    LPM3_EXIT;
+}
+
+void __interrupt_vec(PORT1_VECTOR) isr_p1() {
+    switch (__even_in_range(P1IV, P1IV_P1IFG7)) {
+    case P1IV_P1IFG1:
+        check_power();
+        LPM4_EXIT;
+        break;
+    default:
+        break;
+    }
 }
