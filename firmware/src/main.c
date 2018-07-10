@@ -1,4 +1,5 @@
 #include <msp430.h>
+#include <string.h>
 
 #include "pins.h"
 #include "i2c.h"
@@ -9,6 +10,10 @@
 #include "ucs.h"
 
 #include "cc430uart.h"
+
+#include "gitrev.h"
+
+const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 
 static void init_core() {
     // Disable WDT
@@ -88,6 +93,7 @@ int main() {
     init_core();
     blink(200);
     uart_begin(9600, SERIAL_8N1);
+    uart_write(VERSION_STR, strlen(VERSION_STR));
     blink(200);
     check_power();
     blink(200);
