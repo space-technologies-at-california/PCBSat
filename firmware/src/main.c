@@ -107,6 +107,11 @@ static void print_state() {
 static void flash_missioninfo(struct missioninfo* new) {
     FlashCtl_eraseSegment(&info);
     FlashCtl_write32(new, &info, 1);
+    if (memcmp(&info, new, sizeof(struct missioninfo)) != 0) {
+        uart_write("flash MISMATCH\r\n", 16);
+    } else {
+        uart_write("flash OK\r\n", 10);
+    }
 }
 
 int main() {
