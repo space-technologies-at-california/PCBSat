@@ -13,7 +13,12 @@
 #include "timer_a.h"
 #include "ucs.h"
 
-uint8_t __attribute__ ((section (".infoB"))) state = 0;
+struct missioninfo {
+    uint8_t state;
+    uint8_t reset_count;
+};
+
+const volatile struct missioninfo __attribute__ ((section (".infoB"))) info = {};
 
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 
@@ -93,8 +98,15 @@ static void check_power() {
 
 static void print_state() {
     char buf[20];
-    snprintf(buf, sizeof(buf), "state %x\r\n", state);
+    snprintf(buf, sizeof(buf), "state %x\r\n", info.state);
     uart_write(buf, strlen(buf));
+    snprintf(buf, sizeof(buf), "counter %x\r\n", info.reset_count);
+    uart_write(buf, strlen(buf));
+}
+
+static void flash_missioninfo(struct missioninfo* new) {
+    FlashCtl_eraseSegment(&info);
+    FlashCtl_write32(new, &info, 1);
 }
 
 int main() {
@@ -103,10 +115,9 @@ int main() {
     uart_begin(9600, SERIAL_8N1);
     uart_write(VERSION_STR, strlen(VERSION_STR));
     print_state();
-    volatile uint8_t next_state = state + 1;
+    struct missioninfo info_next = {info.state, info.reset_count + 1};
+    flash_missioninfo(&info_next);
     blink(200);
-    FlashCtl_eraseSegment(&state);
-    FlashCtl_write8(&next_state, &state, 1);
     check_power();
     blink(200);
     lsm_setup();
