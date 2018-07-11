@@ -1,4 +1,5 @@
 #include <msp430.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "gitrev.h"
@@ -10,6 +11,8 @@
 #include "proto.h"
 #include "timer_a.h"
 #include "ucs.h"
+
+uint8_t __attribute__ ((section (".infoB"))) state = 0;
 
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 
@@ -87,11 +90,18 @@ static void check_power() {
     }
 }
 
+static void print_state() {
+    char buf[20];
+    snprintf(buf, sizeof(buf), "state %x\r\n", state);
+    uart_write(buf, strlen(buf));
+}
+
 int main() {
     init_core();
     blink(200);
     uart_begin(9600, SERIAL_8N1);
     uart_write(VERSION_STR, strlen(VERSION_STR));
+    print_state();
     blink(200);
     check_power();
     blink(200);
