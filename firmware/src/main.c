@@ -5,6 +5,7 @@
 #include "gitrev.h"
 
 #include "cc430uart.h"
+#include "flashctl.h"
 #include "i2c.h"
 #include "lsm.h"
 #include "pins.h"
@@ -102,7 +103,10 @@ int main() {
     uart_begin(9600, SERIAL_8N1);
     uart_write(VERSION_STR, strlen(VERSION_STR));
     print_state();
+    volatile uint8_t next_state = state + 1;
     blink(200);
+    FlashCtl_eraseSegment(&state);
+    FlashCtl_write8(&next_state, &state, 1);
     check_power();
     blink(200);
     lsm_setup();
