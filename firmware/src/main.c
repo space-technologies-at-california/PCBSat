@@ -1,17 +1,15 @@
 #include <msp430.h>
 #include <string.h>
 
-#include "pins.h"
+#include "gitrev.h"
+
+#include "cc430uart.h"
 #include "i2c.h"
 #include "lsm.h"
-
+#include "pins.h"
 #include "proto.h"
 #include "timer_a.h"
 #include "ucs.h"
-
-#include "cc430uart.h"
-
-#include "gitrev.h"
 
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 
