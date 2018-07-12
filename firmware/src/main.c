@@ -76,28 +76,34 @@ int main() {
     blink(200);
     uart_begin(9600, SERIAL_8N1);
     blink(200);
-    lsm_setup();
+    bool lsm_init = lsm_setup();
     blink(200);
 
     deep_sleep(600);
     uint16_t data_mag[3];
+    char str[8];
     uint16_t data_gyro[3];
     delay(1000);
 #ifdef BLINK
     blink_main();
 #else
 //    radio_main();
+    if (lsm_init) 
+        uart_write("true\n\r", 6);
+    else 
+        uart_write("false\n\r", 7);
 
 while (1) {
     readGyro(data_gyro);
-    readMag(data_mag);
+    snprintf(str, 8, "%l\n\r", data_gyro[0]);
+    uart_write(str, strlen(str));
+    snprintf(str, 8, "%l\n\r", data_gyro[1]);
+    uart_write(str, strlen(str));
+    snprintf(str, 8, "%l\n\r", data_gyro[2]);
+    uart_write(str, strlen(str));
+      
+//    readMag(data_mag);
 
-    uart_write((uint8_t*)data_mag, 6); 
-    uart_write("\n\r", 2);
-    uart_write((uint8_t*)data_gyro, 6);
-    uart_write("\n\r", 2);
-
-    delay(1000);
     }
 #endif
 }
