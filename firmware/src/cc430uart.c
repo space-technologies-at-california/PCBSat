@@ -18,7 +18,7 @@ uint8_t uart_tx_buffer_head = 0;
  * Initialize UART port
  *
  * @param baud Serial baudrate
- * @param config additional UART configuration TODO Dafuq does this even do?
+ * @param config additional UART configuration
  */
 void uart_begin(uint32_t baud, uint8_t config) {
 
