@@ -1,4 +1,4 @@
-#include <msp430.h>
+#include "cc430f5137.h" 
 #include "cc430uart.h"
 #include <stdint.h>
 #include "pins.h"
@@ -74,6 +74,7 @@ uint8_t uart_write_byte(uint8_t c) {
     // Turn on interrupts, since there's a character in the buffer
     UCA0IE |= UCTXIE;
 
+//    while(uart_tx_buffer_head != uart_tx_buffer_tail) {}
     return 1;
 }
 
@@ -173,12 +174,16 @@ int uart_available(void)
 __attribute__((interrupt(USCI_A0_VECTOR)))
 void uartISR(void)
 {
-  switch (UCA0IV) 
+#ifdef DEBUG_UART
+   P3OUT ^= BIT7;
+#endif
+   switch (UCA0IV) 
   { 
-    case USCI_UCRXIFG:
+   case USCI_UCRXIFG:
       while (!(UCA0IFG&UCTXIFG));           // USCI_A0 TX buffer ready?
       uart_rxBuffer[uart_rxLength++] = UCA0RXBUF;
-      break;
+    P3OUT ^= BIT7;
+       break;
     case USCI_UCTXIFG:
       UCA0TXBUF = uart_txBuffer[uart_tx_buffer_tail];
 
@@ -188,9 +193,12 @@ void uartISR(void)
         // Buffer empty, so disable interrupts
         UCA0IE &= ~UCTXIE;
       }
-      break;
+#ifdef DEBUG_UART
+    P3OUT ^= BIT7;
+#endif
+       break;
     default:
       break;
-  }
+ }
 }
 
