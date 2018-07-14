@@ -53,4 +53,6 @@ void setup_pins(void);
 #define pinUARTmap()      P1MAP6 = PM_UCA0TXD; P1MAP5 = PM_UCA0RXD
 #define pinUARTconfig()   P1SEL |= BIT6 | BIT5      // Set P1.6 and P1.5 to USCI Mode
 
+#define INIT_ONBOARD_LED()  P3DIR |= BIT7; P3OUT &= ~ BIT7
+
 #endif
