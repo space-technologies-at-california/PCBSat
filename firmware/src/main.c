@@ -203,6 +203,30 @@ int main() {
 #endif
 }
 
+int main_flash() {
+    init_core();
+    while (1) {
+        struct missioninfo info_next = {info.state, info.reset_count + 1};
+        // flash_missioninfo(&info_next);
+        FlashCtl_eraseSegment(&info);
+        //P3OUT |= BIT7;
+        deep_sleep(200);
+        //P3OUT &= ~BIT7;
+        FlashCtl_write32(&info_next, &info, sizeof(struct missioninfo)/4 + 1);
+        //P3OUT |= BIT7;
+        deep_sleep(400);
+        //P3OUT &= ~BIT7;
+        struct missioninfo info_new = info; 
+        //P3OUT |= BIT7;
+        deep_sleep(800);
+        //P3OUT &= ~BIT7;
+    }
+}
+
+int main (void) {
+    main_flash();
+}
+
 void __interrupt_vec(TIMER0_A0_VECTOR) isr_timer_a0() {
     LPM3_EXIT;
 }
