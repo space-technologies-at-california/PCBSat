@@ -18,6 +18,16 @@ struct missioninfo {
     uint8_t reset_count;
 };
 
+enum {
+    RADIO_INIT,
+    RADIO_TX_B0,
+    RADIO_TX_B1,
+    SENSOR_INIT,
+    SENSOR_READ,
+    ACTUATE,
+    NUM_STATES
+};
+
 const volatile struct missioninfo __attribute__ ((section (".infoB"))) info = {};
 
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
@@ -114,18 +124,43 @@ static void flash_missioninfo(struct missioninfo* new) {
     }
 }
 
+static uint8_t state_main(uint8_t curr_state) {
+    uint8_t next_state = 0;
+    switch (*curr_state) {
+    default:
+        next_state = 0;
+    }
+    return next_state;
+}
+
 int main() {
     init_core();
     blink(200);
     uart_begin(9600, SERIAL_8N1);
     uart_write(VERSION_STR, strlen(VERSION_STR));
     print_state();
-    struct missioninfo info_next = {info.state, info.reset_count + 1};
-    flash_missioninfo(&info_next);
-    blink(200);
-    check_power();
-    blink(200);
-    bool lsm_init = lsm_setup();
+
+    /**
+     * Current state, but stored in RAM. Prevents wholesale flash failure
+     * from being fatal.
+     */
+    uint8_t curr_state = info.state;
+    if (curr_state > NUM_STATES) {
+        // Guard against flash inconsistency.
+        curr_state = 0;
+    }
+
+    // FIXME: If ACTUATION causes a power cycle before next state is written
+    // to flash, we get into an infinite loop trying to run ACTUATION.
+
+    while (true) {
+        check_power();
+        curr_state = state_main(curr_state);
+        check_power();
+        struct missioninfo info_next = {curr_state, info.reset_count + 1};
+        flash_missioninfo(&info_next);
+    }
+
     blink(200);
 
     deep_sleep(600);
