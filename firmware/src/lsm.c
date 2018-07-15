@@ -2,6 +2,7 @@
 #include "lsm.h"
 #include "cc430uart.h"
 #include <msp430.h>
+#include <stdio.h>
 
 bool lsm_setup() {
     P3OUT ^= BIT7;
