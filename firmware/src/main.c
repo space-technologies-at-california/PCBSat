@@ -127,7 +127,30 @@ static void flash_missioninfo(struct missioninfo* new) {
 
 static uint8_t state_main(uint8_t curr_state) {
     uint8_t next_state = 0;
-    switch (*curr_state) {
+    switch (curr_state) {
+    case SENSOR_INIT:
+        if (lsm_setup())
+            uart_write("true\n\r", 6);
+        else
+            uart_write("false\n\r", 7);
+        break;
+    case SENSOR_READ:
+    {
+        uint16_t data_mag[3];
+        char str[8];
+        uint16_t data_gyro[3];
+        while (1) {
+            readGyro(data_gyro);
+            snprintf(str, 8, "%l\n\r", data_gyro[0]);
+            uart_write(str, strlen(str));
+            snprintf(str, 8, "%l\n\r", data_gyro[1]);
+            uart_write(str, strlen(str));
+            snprintf(str, 8, "%l\n\r", data_gyro[2]);
+            uart_write(str, strlen(str));
+            //readMag(data_mag);
+        }
+    }
+        break;
     default:
         next_state = 0;
     }
@@ -141,6 +164,10 @@ int main() {
     uart_write(VERSION_STR, strlen(VERSION_STR));
     print_state();
 
+#ifdef BLINK
+    deep_sleep(600);
+    blink_main();
+#else
     /**
      * Current state, but stored in RAM. Prevents wholesale flash failure
      * from being fatal.
@@ -160,35 +187,6 @@ int main() {
         check_power();
         struct missioninfo info_next = {curr_state, info.reset_count + 1};
         flash_missioninfo(&info_next);
-    }
-
-    blink(200);
-
-    deep_sleep(600);
-    uint16_t data_mag[3];
-    char str[8];
-    uint16_t data_gyro[3];
-    delay(1000);
-#ifdef BLINK
-    blink_main();
-#else
-//    radio_main();
-    if (lsm_init) 
-        uart_write("true\n\r", 6);
-    else 
-        uart_write("false\n\r", 7);
-
-while (1) {
-    readGyro(data_gyro);
-    snprintf(str, 8, "%l\n\r", data_gyro[0]);
-    uart_write(str, strlen(str));
-    snprintf(str, 8, "%l\n\r", data_gyro[1]);
-    uart_write(str, strlen(str));
-    snprintf(str, 8, "%l\n\r", data_gyro[2]);
-    uart_write(str, strlen(str));
-      
-//    readMag(data_mag);
-
     }
 #endif
 }
