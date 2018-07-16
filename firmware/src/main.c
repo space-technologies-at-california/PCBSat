@@ -125,8 +125,7 @@ static void flash_missioninfo(struct missioninfo* new) {
     }
 }
 
-static uint8_t state_main(uint8_t curr_state) {
-    uint8_t next_state = 0;
+static void state_main(const uint8_t curr_state) {
     switch (curr_state) {
     case SENSOR_INIT:
         if (lsm_setup())
@@ -151,10 +150,15 @@ static uint8_t state_main(uint8_t curr_state) {
         }
     }
         break;
-    default:
-        next_state = 0;
     }
-    return next_state;
+}
+
+static uint8_t state_next(const uint8_t curr_state) {
+    if (curr_state + 1 != NUM_STATES) {
+        return curr_state + 1;
+    } else {
+        return 0;
+    }
 }
 
 int main() {
@@ -178,15 +182,14 @@ int main() {
         curr_state = 0;
     }
 
-    // FIXME: If ACTUATION causes a power cycle before next state is written
-    // to flash, we get into an infinite loop trying to run ACTUATION.
-
     while (true) {
         check_power();
-        curr_state = state_main(curr_state);
-        check_power();
-        struct missioninfo info_next = {curr_state, info.reset_count + 1};
+        uint8_t next_state = state_next(curr_state);
+        struct missioninfo info_next = {next_state, info.reset_count + 1};
         flash_missioninfo(&info_next);
+        check_power();
+        state_main(curr_state);
+        curr_state = next_state;
     }
 #endif
 }
