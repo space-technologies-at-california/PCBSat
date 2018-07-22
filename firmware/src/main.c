@@ -136,18 +136,17 @@ static void state_main(const uint8_t curr_state) {
     case SENSOR_READ:
     {
         uint16_t data_mag[3];
-        char str[8];
+        char str[16];
         uint16_t data_gyro[3];
         readGyro(data_gyro);
-        uart_write(data_gyro[0], 2);
-        uart_write(data_gyro[1], 2);
-        uart_write(data_gyro[2], 2);
+        snprintf(str, sizeof(str), "%u, %u, %u\r\n",
+                data_gyro[0], data_gyro[1], data_gyro[2]);
+        uart_write(str, strlen(str));
 
         readMag(data_mag);
-        uart_write(data_mag[0], 2);
-        uart_write(data_mag[1], 2);
-        uart_write(data_mag[2], 2);
-        
+        snprintf(str, sizeof(str), "%u, %u, %u\r\n",
+                data_mag[0], data_mag[1], data_mag[2]);
+        uart_write(str, strlen(str));
     }
         break;
     }
