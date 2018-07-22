@@ -164,12 +164,16 @@ static uint8_t state_next(const uint8_t curr_state) {
     }
 }
 
-int main() {
-    init_core();
+static void init_debug() {
     blink(200);
     uart_begin(9600, SERIAL_8N1);
     uart_write(VERSION_STR, strlen(VERSION_STR));
     print_state();
+}
+
+int main() {
+    init_core();
+    init_debug();
 
 #ifdef BLINK
     deep_sleep(600);
