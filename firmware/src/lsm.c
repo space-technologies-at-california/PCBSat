@@ -47,63 +47,36 @@ bool lsm_setup() {
 
 }
 
-void readGyro(int16_t* data) {
+void readGyro(uint16_t* data) {
 
     // Read gyro
     uint8_t buffer[6];
     char str[6];
     i2c_read_buff(SADDR_G, 0x80 | LSM_REG_OUT_X_L_G, 6, buffer);
-    snprintf(str, 6, "%d\n\r", buffer[0]);
-    uart_write(str, 6);  
-    snprintf(str, 6, "%d\n\r", buffer[1]);
-    uart_write(str, 6);  
-    snprintf(str, 6, "%d\n\r", buffer[2]);
-    uart_write(str, 6);  
-    snprintf(str, 6, "%d\n\r", buffer[3]);
-    uart_write(str, 6);  
-    snprintf(str, 6, "%d\n\r", buffer[4]);
-    uart_write(str, 6);  
-    snprintf(str, 6, "%d\n\r", buffer[5]);
-    uart_write(str, 6);  
-         
-    uint8_t xlo = buffer[0];
-    int16_t xhi = buffer[1];
-    uint8_t ylo = buffer[2];
-    int16_t yhi = buffer[3];
-    uint8_t zlo = buffer[4];
-    int16_t zhi = buffer[5];
+        
+    uint16_t x = (buffer[1] << 8) | buffer[0];
+    uint16_t y = (buffer[3] << 8) | buffer[2];
+    uint16_t z = (buffer[5] << 8) | buffer[4];
 
-    // Shift values to create properly formed integer (low byte first)
-    xhi <<= 8; xhi |= xlo;
-    yhi <<= 8; yhi |= ylo;
-    zhi <<= 8; zhi |= zlo;
-
-    data[0] = xhi;
-    data[1] = yhi;
-    data[2] = zhi;
+    data[0] = x;
+    data[1] = y;
+    data[2] = z;
 
 }
 
-void readMag(int16_t* data) {
+void readMag(uint16_t* data) {
 
     // Read the magnetometer
     uint8_t buffer[6];
     i2c_read_buff(SADDR_M, 0x80 | LSM_REG_OUT_X_L_M, 6, buffer);
 
-    uint8_t xlo = 0xf;// buffer[0];
-    uint16_t xhi = 0xff;// buffer[1];
-    uint8_t ylo = 0x1; //buffer[2];
-    uint16_t yhi = 0x0; //buffer[3];
-    uint8_t zlo = 0x2; //buffer[4];
-    uint16_t zhi = 0xfc;// buffer[5];
+    uint16_t x = (buffer[1] << 8) | buffer[0];
+    uint16_t y = (buffer[3] << 8) | buffer[2];
+    uint16_t z = (buffer[5] << 8) | buffer[4];
 
-    // Shift values to create properly formed integer (low byte first)
-    xhi <<= 8; xhi |= xlo;
-    yhi <<= 8; yhi |= ylo;
-    zhi <<= 8; zhi |= zlo;
 
-    data[0] = xhi;
-    data[1] = yhi;
-    data[2] = zhi;
+    data[0] = x;
+    data[1] = y;
+    data[2] = z;
 
 }

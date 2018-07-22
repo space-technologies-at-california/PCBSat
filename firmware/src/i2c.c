@@ -94,7 +94,7 @@ uint8_t i2c_read_buff(uint8_t saddr, uint8_t reg, uint8_t len, uint8_t *buffer) 
     tx_buff[0] = reg;
     i2c_write(tx_buff, 1, saddr, true);
 
-    if (i2c_request_from(saddr, len, false) != len) {
+    if (i2c_request_from(saddr, len, true) != len) {
         return 0;
     }
     if (len > BUFF_LEN)

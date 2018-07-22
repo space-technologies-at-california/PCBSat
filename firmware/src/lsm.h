@@ -72,7 +72,7 @@
 
     bool lsm_setup();
 
-    void readGyro(int16_t* data);
+    void readGyro(uint16_t* data);
 
-    void readMag(int16_t* data);
+    void readMag(uint16_t* data);
 #endif

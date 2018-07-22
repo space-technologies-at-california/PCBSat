@@ -138,23 +138,26 @@ static void state_main(const uint8_t curr_state) {
         uint16_t data_mag[3];
         char str[8];
         uint16_t data_gyro[3];
-        while (1) {
-            readGyro(data_gyro);
-            snprintf(str, 8, "%l\n\r", data_gyro[0]);
-            uart_write(str, strlen(str));
-            snprintf(str, 8, "%l\n\r", data_gyro[1]);
-            uart_write(str, strlen(str));
-            snprintf(str, 8, "%l\n\r", data_gyro[2]);
-            uart_write(str, strlen(str));
-            //readMag(data_mag);
-        }
+        readGyro(data_gyro);
+        uart_write(data_gyro[0], 2);
+        uart_write(data_gyro[1], 2);
+        uart_write(data_gyro[2], 2);
+
+        readMag(data_mag);
+        uart_write(data_mag[0], 2);
+        uart_write(data_mag[1], 2);
+        uart_write(data_mag[2], 2);
+        
     }
         break;
     }
 }
 
 static uint8_t state_next(const uint8_t curr_state) {
-    if (curr_state + 1 != NUM_STATES) {
+    if (curr_state == SENSOR_READ) {
+        return SENSOR_INIT;
+    }
+    else if (curr_state + 1 != NUM_STATES) {
         return curr_state + 1;
     } else {
         return 0;
@@ -176,17 +179,20 @@ int main() {
      * Current state, but stored in RAM. Prevents wholesale flash failure
      * from being fatal.
      */
-    uint8_t curr_state = info.state;
+    uint8_t curr_state = SENSOR_INIT;   //info.state;
     if (curr_state > NUM_STATES) {
         // Guard against flash inconsistency.
         curr_state = 0;
     }
 
     while (true) {
+        delay(1000);
         check_power();
         uint8_t next_state = state_next(curr_state);
+        uart_write_byte(curr_state);
+        uart_write("\r\n", 2);
         struct missioninfo info_next = {next_state, info.reset_count + 1};
-        flash_missioninfo(&info_next);
+//        flash_missioninfo(&info_next);
         check_power();
         state_main(curr_state);
         curr_state = next_state;
