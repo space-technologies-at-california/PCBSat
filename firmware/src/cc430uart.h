@@ -89,7 +89,7 @@ void uart_end(void);
  *
  * @return Amount of bytes transmitted
  */
-uint8_t uart_write_byte(uint8_t c);
+uint8_t uart_write_byte(const uint8_t c);
 
 /**
  * write
@@ -101,7 +101,7 @@ uint8_t uart_write_byte(uint8_t c);
  *
  * @return Amount of bytes transmitted
  */
-uint16_t uart_write(uint8_t *buf, uint16_t len);
+uint16_t uart_write(const uint8_t *buf, uint16_t len);
 
 /**
  * read

@@ -53,7 +53,7 @@ void uart_begin(uint32_t baud, uint8_t config) {
  *
  * @return Amount of bytes transmitted
  */
-uint8_t uart_write_byte(uint8_t c) {
+uint8_t uart_write_byte(const uint8_t c) {
 
     // If the buffer and the data register are empty, just write the byte
     // to the data register and be done.
@@ -88,8 +88,7 @@ uint8_t uart_write_byte(uint8_t c) {
  *
  * @return Amount of bytes transmitted
  */
-uint16_t uart_write(uint8_t *buf, uint16_t len) 
-{ 
+uint16_t uart_write(const uint8_t *buf, uint16_t len) {
   uint16_t i;
 
   // Send bytes
