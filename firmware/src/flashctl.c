@@ -263,6 +263,13 @@ void FlashCtl_lockInfoA (void)
     HWREG16(FLASH_BASE + OFS_FCTL3) = FWKEY
         + ((HWREG16(FLASH_BASE + OFS_FCTL3) ^ LOCKA) & 0xFF);
 
+    //Set the LOCKA bit in FCTL3.
+    //Since LOCKA toggles when you write a 1 (and writing 0 has no effect),
+    //read the register, XOR with LOCKA mask, mask the lower byte
+    //and write it back.
+    HWREG16(FLASH_BASE + OFS_FCTL3) = FWKEY
+        + ((HWREG16(FLASH_BASE + OFS_FCTL3) ^ LOCKA) & 0xFF);
+
     //Reinstate SR register to restore global interrupt enable status
     __bis_SR_register(gieStatus);
 }

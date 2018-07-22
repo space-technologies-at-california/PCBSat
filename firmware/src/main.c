@@ -4,6 +4,8 @@
 
 #include "gitrev.h"
 
+#include "adc12_a.h"
+#include "ref.h"
 #include "cc430uart.h"
 #include "flashctl.h"
 #include "i2c.h"
@@ -31,6 +33,46 @@ enum {
 const volatile struct missioninfo __attribute__ ((section (".infoB"))) info = {};
 
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
+
+ADC12_A_configureMemoryParam ADC_config = {ADC12_A_MEMORY_0,
+                                           ADC12_A_INPUT_BATTERYMONITOR,
+                                           ADC12_A_VREFPOS_INT,
+                                           ADC12_A_VREFNEG_AVSS,
+                                           ADC12_A_NOTENDOFSEQUENCE};
+
+volatile uint8_t adc_result;
+
+static void setup_adc() {
+    while (REF_ACTIVE == Ref_isRefGenBusy(REF_BASE));
+    
+    Ref_setReferenceVoltage(REF_BASE, REF_VREF1_5V);
+    Ref_enableReferenceVoltage(REF_BASE);
+    
+    __delay_cycles(75);
+    ADC12_A_init(ADC12_A_BASE, 
+                 ADC12_A_SAMPLEHOLDSOURCE_SC,
+                 ADC12_A_CLOCKSOURCE_ADC12OSC,
+                 ADC12_A_CLOCKDIVIDER_32);
+    ADC12_A_enable(ADC12_A_BASE);
+    ADC12_A_setResolution(ADC12_A_BASE, 
+                          ADC12_A_RESOLUTION_8BIT);
+    ADC12_A_setupSamplingTimer(ADC12_A_BASE,
+                               ADC12_A_CYCLEHOLD_256_CYCLES,
+                               ADC12_A_CYCLEHOLD_256_CYCLES,
+                               ADC12_A_MULTIPLESAMPLESENABLE);
+    ADC12_A_configureMemory(ADC12_A_BASE,
+                            &ADC_config);
+}
+
+static void start_conversions() {
+    adc_result = 0;
+    ADC12_A_clearInterrupt(ADC12_A_BASE, ADC12IFG0);
+    ADC12_A_enableInterrupt(ADC12_A_BASE, ADC12IFG0);
+    ADC12_A_startConversion(ADC12_A_BASE,
+                            ADC12_A_MEMORY_0,
+                            ADC12_A_REPEATED_SINGLECHANNEL);
+}
+
 
 static void init_core() {
     // Disable WDT
@@ -214,6 +256,21 @@ int main_flash() {
     }
 }
 
+void main_adc (void) {
+    init_core();
+    uart_begin(9600, SERIAL_8N1);
+    setup_adc();
+    start_conversions();
+    while (1) {
+        delay(500);
+        char str[8];
+        snprintf(str, 8, "%l\n\r", adc_result);
+        delay(500);
+        uart_write("data  \r\n", 10);
+        uart_write(str, strlen(str));
+    }
+}
+
 int main (void) {
     main_flash();
 }
@@ -230,5 +287,15 @@ void __interrupt_vec(PORT1_VECTOR) isr_p1() {
         break;
     default:
         break;
+    }
+}
+
+void __interrupt_vec(ADC12_VECTOR) isr_adc() {
+    switch (__even_in_range(ADC12IV, 0x24)) {
+        case ADC12IV_ADC12IFG11:
+            adc_result = ADC12_A_getResults(ADC12_A_BASE,
+                                           ADC12_A_MEMORY_0);
+            break;
+        default: break;
     }
 }
