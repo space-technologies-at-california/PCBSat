@@ -136,7 +136,7 @@ static void state_main(const uint8_t curr_state) {
     case SENSOR_READ:
     {
         uint16_t data_mag[3];
-        char str[16];
+        char str[30];
         uint16_t data_gyro[3];
         readGyro(data_gyro);
         snprintf(str, sizeof(str), "%u, %u, %u\r\n",
