@@ -60,6 +60,13 @@
       LSM_REG_INT_SRC_M          = 0x31,
     } LSMMagRegisters_t;
 
+    typedef enum 
+    {
+     
+     LSM_FIFO_CTRL                  = 0x2E,
+     LSM_FIFO_SRC                   = 0x2F,
+    } LSMGeneralRegisters_t;
+
     typedef enum
     {
       LSM_MAGDATARATE_3_125HZ          = (0b000 << 2),
@@ -75,4 +82,6 @@
     void readGyro(uint16_t* data);
 
     void readMag(uint16_t* data);
+    
+    void readGyroFifo(uint16_t* data);
 #endif

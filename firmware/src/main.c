@@ -34,6 +34,8 @@ const volatile uint8_t __attribute__ ((section (".infoB"))) staterec_arr[STATERE
 
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 
+uint16_t data_gyro_fifo[96];
+
 static void init_core() {
     // Disable WDT
     WDTCTL = WDTPW | WDTHOLD;
@@ -295,6 +297,9 @@ void __interrupt_vec(PORT1_VECTOR) isr_p1() {
     case P1IV_P1IFG1:
         check_power();
         LPM4_EXIT;
+        break;
+    case P1IV_P1IFG7:
+        readGyroFifo(data_gyro_fifo);
         break;
     default:
         break;
