@@ -34,7 +34,8 @@ bool lsm_setup() {
     reg &= ~(0b01100000);
     reg |= LSM_MAG_GAIN;
     i2c_write8(SADDR_M, LSM_REG_CTRL_REG2_M, reg);
-
+    
+    i2c_write8(SADDR_M, LSM_REG_CTRL_REG3_M, 0x1);
 
     // Setup Gyro
     i2c_read_buff(SADDR_G, LSM_REG_CTRL_REG1_G, 1, &reg);
