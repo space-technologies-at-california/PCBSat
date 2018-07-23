@@ -13,22 +13,24 @@
 #include "timer_a.h"
 #include "ucs.h"
 
-struct missioninfo {
-    uint8_t state;
-    uint8_t reset_count;
-};
+#undef BREAK_FLASH    // < disable flash operations (simulate flash failure)
+#define PLANNER_DEBUG // < extra messages from the planner
+#undef SR_DEBUG       // < extra messages from the state recorder
 
 enum {
+    ST_EXIT,
     RADIO_INIT,
     RADIO_TX_B0,
     RADIO_TX_B1,
     SENSOR_INIT,
     SENSOR_READ,
     ACTUATE,
-    NUM_STATES
+    NUM_STATES,
+    ERASED = 0xff
 };
 
-const volatile struct missioninfo __attribute__ ((section (".infoB"))) info = {};
+#define STATEREC_LEN 128
+const volatile uint8_t __attribute__ ((section (".infoB"))) staterec_arr[STATEREC_LEN];
 
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 
@@ -106,25 +108,6 @@ static void check_power() {
     }
 }
 
-static void print_state() {
-    char buf[20];
-    snprintf(buf, sizeof(buf), "state %x\r\n", info.state);
-    uart_write(buf, strlen(buf));
-    snprintf(buf, sizeof(buf), "counter %x\r\n", info.reset_count);
-    uart_write(buf, strlen(buf));
-}
-
-static void flash_missioninfo(struct missioninfo* new) {
-    FlashCtl_eraseSegment((uint8_t*)&info);
-    FlashCtl_write32((uint32_t*)new, (uint32_t*)&info,
-                     sizeof(struct missioninfo) / 4 + 1);
-    if (memcmp(&info, new, sizeof(struct missioninfo)) != 0) {
-        uart_write("flash MISMATCH\r\n", 16);
-    } else {
-        uart_write("flash OK\r\n", 10);
-    }
-}
-
 static void state_main(const uint8_t curr_state) {
     switch (curr_state) {
     case SENSOR_INIT:
@@ -167,39 +150,139 @@ static void init_debug() {
     blink(200);
     uart_begin(9600, SERIAL_8N1);
     uart_write(VERSION_STR, strlen(VERSION_STR));
-    print_state();
+}
+
+uint8_t staterec_next; // < index of next free position in staterec_arr or -1
+uint8_t staterec_prev; // < previous state
+bool staterec_exited;  // < true if previous state was exited cleanly
+
+/**
+ * Read state records from flash.
+ */
+void staterec_read() {
+    // Find index of next free byte and store as staterec_next.
+    staterec_next = STATEREC_LEN;
+    for (uint8_t i = 0; i < STATEREC_LEN; i++) {
+        if (staterec_arr[i] == ERASED) {
+            staterec_next = i;
+            break;
+        }
+    }
+
+#ifdef SR_DEBUG
+    char buf[20];
+    snprintf(buf, sizeof(buf), "next free %u\r\n", staterec_next);
+    uart_write(buf, sizeof(buf));
+#endif
+
+    // If freshly erased, assume last exit was successful.
+    if (staterec_next > 0)
+        staterec_exited = (staterec_arr[staterec_next - 1] == ST_EXIT);
+    else
+        staterec_exited = true;
+
+    // If freshly erased, can't tell what last state was.
+    if (staterec_exited) {
+        staterec_prev =
+            (staterec_next - 2 >= 0) ? staterec_arr[staterec_next - 2] : ERASED;
+    } else {
+        staterec_prev =
+            (staterec_next - 1 >= 0) ? staterec_arr[staterec_next - 1] : ERASED;
+    }
+
+    // Check if last recorded state is valid. Will occur after programming.
+    if (staterec_prev == 0) {
+        staterec_prev = ERASED;
+    }
+}
+
+void staterec_write(uint8_t state) {
+    // Check if erase is required.
+    if (staterec_next == STATEREC_LEN) {
+        check_power();
+#ifndef BREAK_FLASH
+        FlashCtl_eraseSegment((unsigned char*)staterec_arr);
+#endif
+        staterec_next = 0;
+    }
+
+    uint8_t* dst = (uint8_t*)&staterec_arr[staterec_next];
+    check_power();
+#ifndef BREAK_FLASH
+    FlashCtl_write8(&state, dst, 1);
+#endif
+    if (*dst != state) {
+        // TODO: flash readback failure
+        char buf[30];
+        snprintf(buf, sizeof(buf), "!! flash write %u failed !!\r\n", *dst);
+        uart_write(buf, sizeof(buf));
+    } else {
+#ifdef SR_DEBUG
+        char buf[20];
+        snprintf(buf, sizeof(buf), "wrote %u to ind %u\r\n", state,
+                 staterec_next);
+        uart_write(buf, sizeof(buf));
+#endif
+        staterec_next += 1;
+    }
+}
+
+/**
+ * Record state entry in flash.
+ */
+void staterec_enter(uint8_t state) {
+    staterec_write(state);
+    staterec_prev = state;
+    staterec_exited = false;
+}
+
+/**
+ * Record exit from previously-entered state.
+ */
+void staterec_finish() {
+    staterec_write(ST_EXIT);
+    staterec_exited = true;
+}
+
+uint8_t planner_next_state() {
+#ifdef PLANNER_DEBUG
+    char buf[20];
+    snprintf(buf, sizeof(buf), "last state %u, %u\r\n", staterec_prev,
+             staterec_exited);
+    uart_write(buf, strlen(buf));
+#endif
+    if (staterec_prev == ERASED) {
+        return RADIO_INIT;
+    } else {
+        return state_next(staterec_prev);
+    }
+}
+
+void planner_main() {
+    while (true) {
+        uint8_t state = planner_next_state();
+        staterec_enter(state);
+        check_power();
+#ifdef PLANNER_DEBUG
+        char buf[20];
+        snprintf(buf, sizeof(buf), "running %d\r\n", state);
+        uart_write(buf, strlen(buf));
+#endif
+        state_main(state);
+        // TODO: checkpoint data
+        staterec_finish();
+    }
 }
 
 int main() {
     init_core();
-    init_debug();
-
 #ifdef BLINK
     deep_sleep(600);
     blink_main();
 #else
-    /**
-     * Current state, but stored in RAM. Prevents wholesale flash failure
-     * from being fatal.
-     */
-    uint8_t curr_state = SENSOR_INIT;   //info.state;
-    if (curr_state > NUM_STATES) {
-        // Guard against flash inconsistency.
-        curr_state = 0;
-    }
-
-    while (true) {
-        delay(1000);
-        check_power();
-        uint8_t next_state = state_next(curr_state);
-        uart_write_byte(curr_state);
-        uart_write("\r\n", 2);
-        struct missioninfo info_next = {next_state, info.reset_count + 1};
-//        flash_missioninfo(&info_next);
-        check_power();
-        state_main(curr_state);
-        curr_state = next_state;
-    }
+    init_debug();
+    staterec_read();
+    planner_main();
 #endif
 }
 
