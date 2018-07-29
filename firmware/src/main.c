@@ -12,6 +12,7 @@
 #include "proto.h"
 #include "timer_a.h"
 #include "ucs.h"
+#include "battery_mon.h"
 
 #undef BREAK_FLASH    // < disable flash operations (simulate flash failure)
 #define PLANNER_DEBUG // < extra messages from the planner
