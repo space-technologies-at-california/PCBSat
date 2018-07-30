@@ -15,26 +15,16 @@
 #include "ucs.h"
 #include "battery_mon.h"
 
-#undef BREAK_FLASH    // < disable flash operations (simulate flash failure)
-#define PLANNER_DEBUG // < extra messages from the planner
-#undef SR_DEBUG       // < extra messages from the state recorder
+uint8_t faults = FAULT_RECENT_POR;
 
-enum {
-    ST_EXIT,
-    RADIO_INIT,
-    RADIO_TX_B0,
-    RADIO_TX_B1,
-    SENSOR_INIT,
-    SENSOR_READ,
-    ACTUATE,
-    NUM_STATES,
-    ERASED = 0xff
-};
+#define DEC_OR_ZERO(x) x = (x > 0) ? x - 1 : 0;
 
-uint8_t faults = 0;
-
-#define STATEREC_LEN 128
-const volatile uint8_t __attribute__ ((section (".infoB"))) staterec_arr[STATEREC_LEN];
+#ifdef DEBUG
+unsigned char counter_debug = 0;
+#endif
+unsigned char counter_por = 15;
+unsigned char counter_tx = 0;
+unsigned char counter_lsm = 0;
 
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 
@@ -98,56 +88,45 @@ static void blink_main() {
     while (1) blink(1000);
 }
 
+/**
+ * Call this once after init_core(). After that, only from the PGOOD ISR.
+ */
 static void check_power() {
     P1IE = 0;
     if (P1IN & BIT1) {
         // PGOOD high, set interrupt to negative edge
+        faults &= ~FAULT_POWER;
         P1IES = BIT1;
         P1IE = BIT1;
     } else {
-        // PGOOD low, set interrupt to positive edge and sleep now
+        // PGOOD low, set interrupt to positive edge
+        faults |= FAULT_POWER;
         P1IES = 0;
         P1IE = BIT1;
-        LPM4;
     }
 }
 
-static void state_main(const uint8_t curr_state) {
-    switch (curr_state) {
-    case SENSOR_INIT:
-        if (lsm_setup())
-            uart_write("true\n\r", 6);
-        else
-            uart_write("false\n\r", 7);
-        break;
-    case SENSOR_READ:
-    {
-        uint16_t data_mag[3];
-        char str[30];
-        uint16_t data_gyro[3];
-        readGyro(data_gyro);
-        snprintf(str, sizeof(str), "%u, %u, %u\r\n",
-                data_gyro[0], data_gyro[1], data_gyro[2]);
-        uart_write(str, strlen(str));
+static void run_lsm() {
+    if (!lsm_setup()) {
+#ifdef DEBUG
+        uart_write("lsm setup failed\n\r", 18);
+        faults |= FAULT_LSM_SETUP;
+        return;
+#endif
+    }
 
-        readMag(data_mag);
-        snprintf(str, sizeof(str), "%u, %u, %u\r\n",
-                data_mag[0], data_mag[1], data_mag[2]);
-        uart_write(str, strlen(str));
-    }
-        break;
-    }
-}
+    uint16_t data_mag[3];
+    char str[30];
+    uint16_t data_gyro[3];
+    readGyro(data_gyro);
+    snprintf(str, sizeof(str), "%u, %u, %u\r\n",
+            data_gyro[0], data_gyro[1], data_gyro[2]);
+    uart_write(str, strlen(str));
 
-static uint8_t state_next(const uint8_t curr_state) {
-    if (curr_state == SENSOR_READ) {
-        return SENSOR_INIT;
-    }
-    else if (curr_state + 1 != NUM_STATES) {
-        return curr_state + 1;
-    } else {
-        return 0;
-    }
+    readMag(data_mag);
+    snprintf(str, sizeof(str), "%u, %u, %u\r\n",
+            data_mag[0], data_mag[1], data_mag[2]);
+    uart_write(str, strlen(str));
 }
 
 static void init_debug() {
@@ -156,138 +135,56 @@ static void init_debug() {
     uart_write(VERSION_STR, strlen(VERSION_STR));
 }
 
-uint8_t staterec_next; // < index of next free position in staterec_arr or -1
-uint8_t staterec_prev; // < previous state
-bool staterec_exited;  // < true if previous state was exited cleanly
-
-/**
- * Read state records from flash.
- */
-void staterec_read() {
-    // Find index of next free byte and store as staterec_next.
-    staterec_next = STATEREC_LEN;
-    for (uint8_t i = 0; i < STATEREC_LEN; i++) {
-        if (staterec_arr[i] == ERASED) {
-            staterec_next = i;
-            break;
-        }
-    }
-
-#ifdef SR_DEBUG
-    char buf[20];
-    snprintf(buf, sizeof(buf), "next free %u\r\n", staterec_next);
-    uart_write(buf, sizeof(buf));
+void tick() {
+#ifdef DEBUG
+    DEC_OR_ZERO(counter_debug);
 #endif
+    DEC_OR_ZERO(counter_por);
+    DEC_OR_ZERO(counter_tx);
+    DEC_OR_ZERO(counter_lsm);
 
-    // If freshly erased, assume last exit was successful.
-    if (staterec_next > 0)
-        staterec_exited = (staterec_arr[staterec_next - 1] == ST_EXIT);
-    else
-        staterec_exited = true;
-
-    // If freshly erased, can't tell what last state was.
-    if (staterec_exited) {
-        staterec_prev =
-            (staterec_next - 2 >= 0) ? staterec_arr[staterec_next - 2] : ERASED;
-    } else {
-        staterec_prev =
-            (staterec_next - 1 >= 0) ? staterec_arr[staterec_next - 1] : ERASED;
-    }
-
-    // Check if last recorded state is valid. Will occur after programming.
-    if (staterec_prev == 0) {
-        staterec_prev = ERASED;
-    }
+    if (counter_por == 0)
+        faults &= ~FAULT_RECENT_POR;
 }
 
-void staterec_write(uint8_t state) {
-    // Check if erase is required.
-    if (staterec_next == STATEREC_LEN) {
-        check_power();
-#ifndef BREAK_FLASH
-        FlashCtl_eraseSegment((unsigned char*)staterec_arr);
-#endif
-        staterec_next = 0;
-    }
-
-    uint8_t* dst = (uint8_t*)&staterec_arr[staterec_next];
-    check_power();
-#ifndef BREAK_FLASH
-    FlashCtl_write8(&state, dst, 1);
-#endif
-    if (*dst != state) {
-        // TODO: flash readback failure
-        char buf[30];
-        snprintf(buf, sizeof(buf), "!! flash write %u failed !!\r\n", *dst);
-        uart_write(buf, sizeof(buf));
-    } else {
-#ifdef SR_DEBUG
-        char buf[20];
-        snprintf(buf, sizeof(buf), "wrote %u to ind %u\r\n", state,
-                 staterec_next);
-        uart_write(buf, sizeof(buf));
-#endif
-        staterec_next += 1;
-    }
+bool radio_precond() {
+    return !(faults & FAULT_POWER);
 }
 
-/**
- * Record state entry in flash.
- */
-void staterec_enter(uint8_t state) {
-    staterec_write(state);
-    staterec_prev = state;
-    staterec_exited = false;
+bool lsm_precond() {
+    return !(faults & FAULT_POWER);
 }
 
-/**
- * Record exit from previously-entered state.
- */
-void staterec_finish() {
-    staterec_write(ST_EXIT);
-    staterec_exited = true;
-}
-
-uint8_t planner_next_state() {
-#ifdef PLANNER_DEBUG
-    char buf[20];
-    snprintf(buf, sizeof(buf), "last state %u, %u\r\n", staterec_prev,
-             staterec_exited);
-    uart_write(buf, strlen(buf));
-#endif
-    if (staterec_prev == ERASED) {
-        return RADIO_INIT;
-    } else {
-        return state_next(staterec_prev);
-    }
-}
-
-void planner_main() {
-    while (true) {
-        uint8_t state = planner_next_state();
-        staterec_enter(state);
-        check_power();
-#ifdef PLANNER_DEBUG
-        char buf[20];
-        snprintf(buf, sizeof(buf), "running %d\r\n", state);
-        uart_write(buf, strlen(buf));
-#endif
-        state_main(state);
-        // TODO: checkpoint data
-        staterec_finish();
-    }
+bool actuate_precond() {
+    return lsm_precond() && !(faults & FAULT_RECENT_POR);
 }
 
 int main() {
     init_core();
-#ifdef BLINK
-    deep_sleep(600);
-    blink_main();
-#else
     init_debug();
-    staterec_read();
-    planner_main();
+    check_power();
+
+    while (true) {
+        if (counter_tx == 0 && radio_precond()) {
+            run_radio();
+            counter_tx = 10; // TODO: random delay goes here
+        } else if (counter_lsm == 0 && lsm_precond()) {
+            run_lsm();
+            counter_lsm = 5;
+#ifdef DEBUG
+        } else if (counter_debug == 0) {
+            char buf[32];
+            snprintf(buf, sizeof(buf), "faults: 0x%x\r\n", faults);
+            uart_write(buf, strlen(buf));
+            counter_debug = 2;
 #endif
+        } else if (actuate_precond()) {
+            // TODO: Actuation code goes here
+        }
+        // FIXME: get a real way of timekeeping
+        tick();
+        deep_sleep(1000);
+    }
 }
 
 void __interrupt_vec(TIMER0_A0_VECTOR) isr_timer_a0() {
@@ -298,7 +195,6 @@ void __interrupt_vec(PORT1_VECTOR) isr_p1() {
     switch (__even_in_range(P1IV, P1IV_P1IFG7)) {
     case P1IV_P1IFG1:
         check_power();
-        LPM4_EXIT;
         break;
     default:
         break;

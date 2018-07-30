@@ -1,8 +1,10 @@
 #include <stdint.h>
 
 enum {
-    FAULT_POWER = 1,
-    FAULT_RADIO = 2,
+    FAULT_RECENT_POR = 1,
+    FAULT_POWER = 2,
+    FAULT_RADIO = 3,
+    FAULT_LSM_SETUP = 4,
 };
 
 extern uint8_t faults;

@@ -15,6 +15,7 @@
 */
 
 static jmp_buf fault_buf;
+static unsigned char fault_count = 0;
 
 // Chipcon
 // Product = CC430Fx13x
@@ -262,8 +263,12 @@ static char fecEncode(char data) {
 
 static void radio_transmit(char bytes[], unsigned int length) {
     for (unsigned int k = 0; k < length; ++k) {
-        if (faults & FAULT_POWER)
+        if (faults & FAULT_POWER) {
+#ifdef DEBUG
+            uart_write("TX early exit\r\n", 15);
+#endif
             break;
+        }
         transmitByte(bytes[k]);
     }
 }
@@ -340,7 +345,7 @@ static void wait_for_status(unsigned char s) {
         if (status & s) {
             status = Strobe(RF_SNOP);
         } else {
-            break;
+            return;
         }
     }
     longjmp(fault_buf, 1);
@@ -461,6 +466,7 @@ static void init_radio() {
 void run_radio() {
     static bool has_rng_init = false;
     static bool has_radio_init = false;
+    fault_count = 0;
 
     if (!has_rng_init) {
         // Initialize random number generator
@@ -471,15 +477,17 @@ void run_radio() {
         has_rng_init = true;
     }
 
-    unsigned char fault_count = 0;
     if (setjmp(fault_buf)) {
         // We are handling a radio error. Try resetting radio.
         faults |= FAULT_RADIO;
         has_radio_init = false;
         fault_count += 1;
+#ifdef DEBUG
+        uart_write("radio fault\r\n", 13);
+#endif
     }
 
-    if (fault_count > 3) {
+    if (fault_count >= 3) {
         // Give up after a number of tries.
         return;
     }
@@ -489,13 +497,13 @@ void run_radio() {
         has_radio_init = true;
     }
 
-#ifdef RADIO_DEBUG
+#ifdef DEBUG
     // Blink LED while transmitter is on
     P3OUT |= BIT7;
-    Serial.println("TX");
+    uart_write("TX\r\n", 4);
 #endif
     radio_transmit("Hello Earthlings\n", 17);
-#ifdef RADIO_DEBUG
+#ifdef DEBUG
     P3OUT &= ~BIT7;
 #endif
 }
