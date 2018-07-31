@@ -2,7 +2,6 @@
 * Battery Monitor Code
 *******************************************************/
 
-#include <msp430.h>
 #include "adc12_a.h"
 #include "ref.h"
 

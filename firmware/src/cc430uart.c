@@ -1,8 +1,5 @@
-#include "cc430f5137.h" 
 #include "cc430uart.h"
-#include <stdint.h>
 #include "pins.h"
-
 
 uint8_t uart_rxBuffer[SERIAL_BUFFER_SIZE];
 uint8_t uart_rxLength = 0;

@@ -28,7 +28,6 @@
 #define SERIAL_BUFFER_SIZE 64
 
 #include <stdint.h>
-#include <pins.h>
 
 // Define config for Serial.begin(baud, config);
 #define SERIAL_7N1 0x10
