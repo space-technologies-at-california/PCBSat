@@ -3,7 +3,7 @@ MAIN=main
 SRC=../src
 VPATH=${SRC}
 INCLUDE=-I . -I ${SRC}
-OBJS:=$(shell cd ${SRC} ; ls *.c* | sed -e 's/c$$/o/' -e 's/cpp$$/o/')
+OBJS:=$(shell cd ${SRC} ; ls *.c | sed -e 's/c$$/o/' -e 's/cpp$$/o/')
 
 CFLAGS=-pipe -O2 ${INCLUDE}\
        -ffunction-sections -fdata-sections -Xlinker --gc-sections \
