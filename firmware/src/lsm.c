@@ -58,8 +58,9 @@ bool lsm_setup() {
 
     i2c_write8(SADDR_G, LSM_FIFO_CTRL, 0xC0);
 
+    // Enable interrupts
+    P1IE |= BIT2 | BIT7;
     return true;
-
 }
 
 void readGyro(uint16_t* data) {
@@ -97,6 +98,10 @@ void readMag(uint16_t* data) {
 }
 
 void run_lsm() {
+#ifdef DEBUG
+    uart_write("read lsm\n\r", 10);
+#endif
+
     if (!lsm_setup()) {
 #ifdef DEBUG
         uart_write("lsm setup failed\n\r", 18);
