@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "fault.h"
 #include "gitrev.h"
 
 #include "cc430uart.h"
@@ -29,6 +30,8 @@ enum {
     NUM_STATES,
     ERASED = 0xff
 };
+
+uint8_t faults = 0;
 
 #define STATEREC_LEN 128
 const volatile uint8_t __attribute__ ((section (".infoB"))) staterec_arr[STATEREC_LEN];

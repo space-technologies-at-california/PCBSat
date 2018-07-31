@@ -1,5 +1,8 @@
 #include <msp430.h>
+#include <setjmp.h>
+#include <stdbool.h>
 
+#include "fault.h"
 #include "hal_pmm.h"
 #include "proto.h"
 #include "radio.h"
@@ -10,6 +13,8 @@
   at 64 kbps on a 437.24 MHz carrier and bits are encoded by alternating between
   two different 511 bit Gold codes.
 */
+
+static jmp_buf fault_buf;
 
 // Chipcon
 // Product = CC430Fx13x
@@ -342,6 +347,23 @@ static void rawTransmit(unsigned char bytes[], unsigned int length) {
     endRawTransmit();
 }
 
+static void wait_for_status(unsigned char s) {
+    char status = Strobe(RF_SNOP);
+    for (int i = 0; i < 100; i++) {
+        if (status & s) {
+            status = Strobe(RF_SNOP);
+        } else {
+            break;
+        }
+    }
+    longjmp(fault_buf, 1);
+}
+
+static void wait_for_idle() {
+    Strobe(RF_SIDLE);
+    wait_for_status(0xF0);
+}
+
 static void beginRawTransmit(unsigned char bytes[], unsigned int length) {
     char status;
 
@@ -364,9 +386,7 @@ static void beginRawTransmit(unsigned char bytes[], unsigned int length) {
         status = Strobe(RF_STX); // Turn on transmitter
 
         // Wait for oscillator to stabilize
-        while (status & 0xC0) {
-            status = Strobe(RF_SNOP);
-        }
+        wait_for_status(0xC0);
 
         while (bytes_to_go) {
             // Wait for some bytes to be transmitted
@@ -434,13 +454,6 @@ static void endRawTransmit() {
     return;
 }
 
-static void wait_for_idle() {
-    char status = Strobe(RF_SIDLE);
-    while (status & 0xF0) {
-        status = Strobe(RF_SNOP);
-    }
-}
-
 static void init_radio() {
     // Increase PMMCOREV level to 2 for proper radio operation
     SetVCore(2);
@@ -458,20 +471,44 @@ static void init_radio() {
     wait_for_idle();
 }
 
-void radio_main() {
-    // Initialize random number generator
-    /*
-    randomSeed(((int)m_prn0[0]) + ((int)m_prn1[0]) + ((int)m_prn0[1]) +
-               ((int)m_prn1[1]));
-    */
+void run_radio() {
+    static bool has_rng_init = false;
+    static bool has_radio_init = false;
 
-    while (1) {
-        deep_sleep(3000);
-        init_radio();
-        // Blink LED while transmitter is on
-        P3OUT |= BIT7;
-        // Serial.println("TX");
-        radio_transmit("Hello Earthlings\n", 17);
-        P3OUT &= ~BIT7;
+    if (!has_rng_init) {
+        // Initialize random number generator
+        /*
+        randomSeed(((int)m_prn0[0]) + ((int)m_prn1[0]) + ((int)m_prn0[1]) +
+                   ((int)m_prn1[1]));
+        */
+        has_rng_init = true;
     }
+
+    unsigned char fault_count = 0;
+    if (setjmp(fault_buf)) {
+        // We are handling a radio error. Try resetting radio.
+        faults |= FAULT_RADIO;
+        has_radio_init = false;
+        fault_count += 1;
+    }
+
+    if (fault_count > 3) {
+        // Give up after a number of tries.
+        return;
+    }
+
+    if (!has_radio_init) {
+        init_radio();
+        has_radio_init = true;
+    }
+
+#ifdef RADIO_DEBUG
+    // Blink LED while transmitter is on
+    P3OUT |= BIT7;
+    Serial.println("TX");
+#endif
+    radio_transmit("Hello Earthlings\n", 17);
+#ifdef RADIO_DEBUG
+    P3OUT &= ~BIT7;
+#endif
 }
