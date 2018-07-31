@@ -261,24 +261,11 @@ static char fecEncode(char data) {
 }
 
 static void radio_transmit(char bytes[], unsigned int length) {
-#ifdef SR_DEBUG_MODE
-
     for (unsigned int k = 0; k < length; ++k) {
+        if (faults & FAULT_POWER)
+            break;
         transmitByte(bytes[k]);
-        delay(1000);
     }
-
-#else
-
-    // delay(random(0, 2000));
-
-    for (unsigned int k = 0; k < length; ++k) {
-        transmitByte(bytes[k]);
-
-        // delay(random(8000, 12000));
-    }
-
-#endif
 }
 
 static void transmitByte(char byte) {
