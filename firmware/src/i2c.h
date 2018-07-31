@@ -1,10 +1,4 @@
-/**************************
- *      I2C include
- */
-
-#ifndef _I2C_H
-#define _I2C_H
-
+#pragma once
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -12,12 +6,6 @@
 #define SADDR_G         0x6B
 #define SADDR_M         0x1E
 #define BUFF_LEN        32
-
-static uint8_t tx_buff[BUFF_LEN];
-static uint8_t tx_buff_len;
-
-static uint8_t rx_buff[BUFF_LEN];
-static uint8_t rx_buff_len;
 
 /**
  * beginTransmission
@@ -59,5 +47,3 @@ uint16_t i2c_read(uint8_t *buf, uint16_t len, uint16_t slaveAddr, bool stop);
 uint8_t i2c_read_buff(uint8_t saddr, uint8_t reg, uint8_t len, uint8_t *buffer);
 
 uint8_t i2c_request_from(uint8_t saddr, uint16_t quantity, bool sendStop);
-#endif
-

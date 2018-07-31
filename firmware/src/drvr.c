@@ -3,7 +3,6 @@
 
 #include "cc430uart.h"
 #include "drvr.h"
-#include "pins.h"
 
 void setup_drvr() {
 

@@ -1,11 +1,15 @@
 /***********************************
  *       I2C code for PCBSat
  */
-#include "i2c.h"
 #include <msp430.h>
-#include <stdbool.h>
-#include "cc430uart.h"
-#include "pins.h" 
+
+#include "i2c.h"
+
+static uint8_t tx_buff[BUFF_LEN];
+static uint8_t tx_buff_len;
+
+static uint8_t rx_buff[BUFF_LEN];
+static uint8_t rx_buff_len;
 
 // Start I2C transaction/
 void i2c_begin_transmission(uint16_t slaveAddr) {

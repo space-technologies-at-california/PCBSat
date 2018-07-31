@@ -22,11 +22,8 @@
  * Creation date: 06/17/2015
  */
 
+#pragma once
 
-#ifndef _PINS_H
-#define _PINS_H
-
-#include <stdint.h>
 #include <msp430.h>
 
 #define __F_CPU                 1000000L
@@ -48,11 +45,8 @@ void setup_pins(void);
 /*// SPI
 #define pinSPImap()       P1MAP0 = PM_UCB0SIMO; P1MAP1 = PM_UCB0SOMI; P1MAP2 = PM_UCB0CLK
 #define pinSPIconfig()    P1SEL |= BIT0 | BIT1 | BIT2  // Set P1.0, P1.1 and P1.2 to USCI function
-<<<<<<< HEAD
 */// UART
 #define pinUARTmap()      P1MAP6 = PM_UCA0TXD; P1MAP5 = PM_UCA0RXD
 #define pinUARTconfig()   P1SEL |= BIT6 | BIT5      // Set P1.6 and P1.5 to USCI Mode
 
 #define INIT_ONBOARD_LED()  P3DIR |= BIT7; P3OUT &= ~ BIT7
-
-#endif
