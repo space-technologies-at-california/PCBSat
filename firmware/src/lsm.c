@@ -7,6 +7,9 @@
 #include "i2c.h"
 #include "lsm.h"
 
+uint16_t data_gyro_fifo[96];
+uint16_t data_mag[3];
+
 bool lsm_setup() {
     P3OUT ^= BIT7;
     // soft reset & reboot accel/gyro
@@ -28,7 +31,7 @@ bool lsm_setup() {
         return false;
 
     // enable gyro continuous
-    i2c_write8(SADDR_G, LSM_REG_CTRL_REG1_G, 0xC0); // on XYZ
+    i2c_write8(SADDR_G, LSM_REG_CTRL_REG1_G, 0x40);     // ODR = 59.5Hz
 
     // Setup Mag
     uint8_t reg;
@@ -38,6 +41,9 @@ bool lsm_setup() {
     reg |= LSM_MAG_GAIN;
     i2c_write8(SADDR_M, LSM_REG_CTRL_REG2_M, reg);
 
+    i2c_write8(SADDR_M, LSM_REG_CTRL_REG1_M, 0x94);     // Temp Comp, ODR = 20Hz
+    i2c_write8(SADDR_M, LSM_REG_CTRL_REG3_M, 0x1);      // ADC single conversion
+    i2c_write8(SADDR_M, LSM_REG_CTRL_REG5_M, 0x40);     // Block data update (BDU)
 
     // Setup Gyro
     i2c_read_buff(SADDR_G, LSM_REG_CTRL_REG1_G, 1, &reg);
@@ -45,6 +51,12 @@ bool lsm_setup() {
     reg &= ~(0b00011000);
     reg |= LSM_GYRO_SCALE;
     i2c_write8(SADDR_G, LSM_REG_CTRL_REG1_G, reg);
+
+    i2c_write8(SADDR_G, LSM_REG_CTRL_REG3_G, 0x80);
+    i2c_write8(SADDR_G, LSM_REG_CTRL_REG8, 0x74);
+    i2c_write8(SADDR_G, LSM_REG_CTRL_REG9, 0x0A);
+
+    i2c_write8(SADDR_G, LSM_FIFO_CTRL, 0xC0);
 
     return true;
 
@@ -93,16 +105,30 @@ void run_lsm() {
         return;
     }
 
-    uint16_t data_mag[3];
-    char str[30];
-    uint16_t data_gyro[3];
-    readGyro(data_gyro);
-    snprintf(str, sizeof(str), "%u, %u, %u\r\n",
-            data_gyro[0], data_gyro[1], data_gyro[2]);
-    uart_write(str, strlen(str));
+    char str[32];
+    if (data_gyro_fifo[0] && data_gyro_fifo[1] && data_gyro_fifo[2]) {
+        snprintf(str, sizeof(str), "%u, %u, %u\r\n",
+                data_gyro_fifo[0], data_gyro_fifo[1], data_gyro_fifo[2]);
+        uart_write(str, strlen(str));
+        memset(data_gyro_fifo, 0, sizeof(data_gyro_fifo));
+    }
 
-    readMag(data_mag);
-    snprintf(str, sizeof(str), "%u, %u, %u\r\n",
-            data_mag[0], data_mag[1], data_mag[2]);
-    uart_write(str, strlen(str));
+    if (data_mag[0] && data_mag[1] && data_mag[2]) {
+        snprintf(str, sizeof(str), "%u, %u, %u\r\n",
+                data_mag[0], data_mag[1], data_mag[2]);
+        uart_write(str, strlen(str));
+        memset(data_mag, 0, sizeof(data_mag));
+    }
+}
+
+void readGyroFifo(uint16_t* data) {
+    int i;
+    for (i = 0; i < 32; i++) {
+        readGyro(data + 3*i);
+    }
+}
+
+void lsm_off(void) {
+    i2c_write8(SADDR_G, LSM_REG_CTRL_REG1_G, 0x00);     // Turn off XL and G
+    i2c_write8(SADDR_G, LSM_REG_CTRL_REG3_M, 0x03);     // Turn off M
 }
