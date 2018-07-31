@@ -13,7 +13,7 @@
 #include "timer_a.h"
 #include "ucs.h"
 
-#undef BREAK_FLASH    // < disable flash operations (simulate flash failure)
+#define BREAK_FLASH    // < disable flash operations (simulate flash failure)
 #define PLANNER_DEBUG // < extra messages from the planner
 #undef SR_DEBUG       // < extra messages from the state recorder
 
@@ -35,6 +35,8 @@ const volatile uint8_t __attribute__ ((section (".infoB"))) staterec_arr[STATERE
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 
 uint16_t data_gyro_fifo[96];
+
+uint16_t data_mag[3];
 
 static void init_core() {
     // Disable WDT
@@ -117,31 +119,31 @@ static void state_main(const uint8_t curr_state) {
             uart_write("true\n\r", 6);
         else
             uart_write("false\n\r", 7);
+        delay(10000);
         break;
     case SENSOR_READ:
-    {
-        uint16_t data_mag[3];
+        {
         char str[32];
-        uint16_t data_gyro[3];
-        readGyro(data_gyro);
-        snprintf(str, sizeof(str), "%u, %u, %u\r\n",
-                data_gyro[0], data_gyro[1], data_gyro[2]);
-        uart_write(str, strlen(str));
-
-        readMag(data_mag);
-        snprintf(str, sizeof(str), "%u, %u, %u\r\n",
-                data_mag[0], data_mag[1], data_mag[2]);
-        uart_write(str, strlen(str));
-    }
+        if (data_gyro_fifo[0] && data_gyro_fifo[1] && data_gyro_fifo[2]) {
+            snprintf(str, sizeof(str), "%u, %u, %u\r\n",
+                    data_gyro_fifo[0], data_gyro_fifo[1], data_gyro_fifo[2]);
+            uart_write(str, strlen(str));
+            memset(data_gyro_fifo, 0, sizeof(data_gyro_fifo));
+        } 
+        
+        if (data_mag[0] && data_mag[1] && data_mag[2]) {
+            snprintf(str, sizeof(str), "%u, %u, %u\r\n",
+                    data_mag[0], data_mag[1], data_mag[2]);
+            uart_write(str, strlen(str));
+            memset(data_mag, 0, sizeof(data_mag));
+        }
         break;
+        }
     }
 }
 
 static uint8_t state_next(const uint8_t curr_state) {
-    if (curr_state == SENSOR_READ) {
-        return SENSOR_INIT;
-    }
-    else if (curr_state + 1 != NUM_STATES) {
+    if (curr_state + 1 != NUM_STATES) {
         return curr_state + 1;
     } else {
         return 0;
@@ -264,7 +266,7 @@ void planner_main() {
     while (true) {
         uint8_t state = planner_next_state();
         staterec_enter(state);
-        check_power();
+        //check_power();
 #ifdef PLANNER_DEBUG
         char buf[20];
         snprintf(buf, sizeof(buf), "running %d\r\n", state);
@@ -298,6 +300,8 @@ void __interrupt_vec(PORT1_VECTOR) isr_p1() {
         check_power();
         LPM4_EXIT;
         break;
+    case P1IV_P1IFG2:
+        readMag(data_mag);
     case P1IV_P1IFG7:
         readGyroFifo(data_gyro_fifo);
         break;
