@@ -1,4 +1,7 @@
 #include <msp430.h>
+#include <stdbool.h>
+
+#include "cc430uart.h"
 #include "drvr.h"
 #include "pins.h"
 
@@ -51,4 +54,16 @@ void drvr_off() {
     P2OUT &= BIT3;
     P5OUT &= BIT0 | BIT1;
 
+}
+
+void run_actuation() {
+#ifdef DEBUG
+    uart_write("actuating\r\n", 11);
+#endif
+    static bool has_setup = false;
+    if (!has_setup) {
+        setup_drvr();
+    }
+
+    // TODO: Driver actuation code goes here
 }

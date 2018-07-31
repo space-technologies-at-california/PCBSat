@@ -2,18 +2,18 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "fault.h"
-#include "gitrev.h"
-
+#include "battery_mon.h"
 #include "cc430uart.h"
+#include "drvr.h"
+#include "fault.h"
 #include "flashctl.h"
+#include "gitrev.h"
 #include "i2c.h"
 #include "lsm.h"
 #include "pins.h"
 #include "proto.h"
 #include "timer_a.h"
 #include "ucs.h"
-#include "battery_mon.h"
 
 uint8_t faults = FAULT_RECENT_POR;
 
@@ -106,29 +106,6 @@ static void check_power() {
     }
 }
 
-static void run_lsm() {
-    if (!lsm_setup()) {
-#ifdef DEBUG
-        uart_write("lsm setup failed\n\r", 18);
-        faults |= FAULT_LSM_SETUP;
-        return;
-#endif
-    }
-
-    uint16_t data_mag[3];
-    char str[30];
-    uint16_t data_gyro[3];
-    readGyro(data_gyro);
-    snprintf(str, sizeof(str), "%u, %u, %u\r\n",
-            data_gyro[0], data_gyro[1], data_gyro[2]);
-    uart_write(str, strlen(str));
-
-    readMag(data_mag);
-    snprintf(str, sizeof(str), "%u, %u, %u\r\n",
-            data_mag[0], data_mag[1], data_mag[2]);
-    uart_write(str, strlen(str));
-}
-
 static void init_debug() {
     blink(200);
     uart_begin(9600, SERIAL_8N1);
@@ -179,7 +156,7 @@ int main() {
             counter_debug = 2;
 #endif
         } else if (actuate_precond()) {
-            // TODO: Actuation code goes here
+            run_actuation();
         }
         // FIXME: get a real way of timekeeping
         tick();

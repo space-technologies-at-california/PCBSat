@@ -7,6 +7,8 @@ void drvr_on(int drvr, int pwm);
 
 void drvr_off(void);
 
+void run_actuation(void);
+
 enum Driver {
     XAXIS = 0,
     YAXIS = 1,

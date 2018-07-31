@@ -2,6 +2,7 @@
 #include <setjmp.h>
 #include <stdbool.h>
 
+#include "cc430uart.h"
 #include "fault.h"
 #include "hal_pmm.h"
 #include "proto.h"

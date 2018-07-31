@@ -1,8 +1,11 @@
-#include "i2c.h"
-#include "lsm.h"
-#include "cc430uart.h"
 #include <msp430.h>
 #include <stdio.h>
+#include <string.h>
+
+#include "cc430uart.h"
+#include "fault.h"
+#include "i2c.h"
+#include "lsm.h"
 
 bool lsm_setup() {
     P3OUT ^= BIT7;
@@ -79,4 +82,27 @@ void readMag(uint16_t* data) {
     data[1] = y;
     data[2] = z;
 
+}
+
+void run_lsm() {
+    if (!lsm_setup()) {
+#ifdef DEBUG
+        uart_write("lsm setup failed\n\r", 18);
+#endif
+        faults |= FAULT_LSM_SETUP;
+        return;
+    }
+
+    uint16_t data_mag[3];
+    char str[30];
+    uint16_t data_gyro[3];
+    readGyro(data_gyro);
+    snprintf(str, sizeof(str), "%u, %u, %u\r\n",
+            data_gyro[0], data_gyro[1], data_gyro[2]);
+    uart_write(str, strlen(str));
+
+    readMag(data_mag);
+    snprintf(str, sizeof(str), "%u, %u, %u\r\n",
+            data_mag[0], data_mag[1], data_mag[2]);
+    uart_write(str, strlen(str));
 }

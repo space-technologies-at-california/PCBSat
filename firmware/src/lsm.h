@@ -75,4 +75,6 @@
     void readGyro(uint16_t* data);
 
     void readMag(uint16_t* data);
+
+    void run_lsm(void);
 #endif
