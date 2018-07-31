@@ -5,7 +5,7 @@ VPATH=${SRC}
 INCLUDE=-I . -I ${SRC}
 OBJS:=$(shell cd ${SRC} ; ls *.c | sed -e 's/c$$/o/' -e 's/cpp$$/o/')
 
-CFLAGS=-pipe -O2 ${INCLUDE}\
+CFLAGS=-pipe -O2 ${INCLUDE} -DDEBUG \
        -ffunction-sections -fdata-sections -Xlinker --gc-sections \
 	   -Wl,-Map,${@F}.map
 
