@@ -5,7 +5,6 @@
 #include "drvr.h"
 
 void setup_drvr() {
-
     // Configure DRVR pins to be outputs
     P2DIR |= BIT1 | BIT2 | BIT3;
     P5DIR |= BIT0 | BIT1;
@@ -13,11 +12,9 @@ void setup_drvr() {
     //Configure TimerA1
     //Use ACLK, Input Divider=1, Mode=Up (count to TA1CCR0)
     TA1CTL |= TASSEL_1 | MC_0;
-
 }
 
 void drvr_on(int drvr, int pwm) {
-
     // First enable the specific Driver
     switch (drvr) {
         case XAXIS : 
@@ -44,15 +41,12 @@ void drvr_on(int drvr, int pwm) {
     TA1CCR1 = pwm;
     TA1CCR2 = pwm; 
     TA1CTL |= MC_1 | TACLR;
-
 }
 
 void drvr_off() {
-
     TA1CTL = TASSEL_1 | MC_0;
     P2OUT &= BIT3;
     P5OUT &= BIT0 | BIT1;
-
 }
 
 void run_actuation() {
