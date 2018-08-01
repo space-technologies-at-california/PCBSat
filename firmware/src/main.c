@@ -172,6 +172,7 @@ void __interrupt_vec(PORT1_VECTOR) isr_p1() {
     switch (__even_in_range(P1IV, P1IV_P1IFG7)) {
     case P1IV_P1IFG1:
         check_power();
+        LPM3_EXIT; // exit early from pending delays
         break;
     default:
         break;

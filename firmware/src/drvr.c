@@ -58,5 +58,7 @@ void run_actuation() {
         setup_drvr();
     }
 
-    // TODO: Driver actuation code goes here
+    drvr_on(XAXIS, 100);
+    deep_sleep(500);
+    drvr_off();
 }
