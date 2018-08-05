@@ -10,8 +10,11 @@ void setup_drvr() {
     P5DIR |= BIT0 | BIT1;
 
     //Configure TimerA1
-    //Use SMCLK, Input Divider=1, Mode=Up (count to TA1CCR0)
+    // Use SMCLK, Input Divider=1, Mode=Up (count to TA1CCR0)
     TA1CTL |= TASSEL_2 | MC_0;
+
+    P1OUT |= BIT0;  // REG_D0 HIGH
+    P3OUT &= ~BIT6; // REG_D1 LOW
 }
 
 void drvr_on(int drvr, int pwm) {
