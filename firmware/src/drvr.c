@@ -61,7 +61,7 @@ void run_actuation() {
         setup_drvr();
     }
 
-    drvr_on(XAXIS, 100);
-    deep_sleep(500);
+    drvr_on(XAXIS, 50);
+    sleep(500, LPM1_bits);
     drvr_off();
 }
