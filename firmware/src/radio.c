@@ -18,32 +18,15 @@
 static jmp_buf fault_buf;
 static unsigned char fault_count = 0;
 
-// Chipcon
 // Product = CC430Fx13x
-// Chip version = C   (PG 0.7)
-// Crystal accuracy = 10 ppm
 // X-tal frequency = 26 MHz
 // RF output power = 0 dBm
-// RX filterbandwidth = 101.562500 kHz
-// Deviation = 19 kHz
-// Datarate = 38.383484 kBaud
-// Modulation = (1) GFSK
+// Datarate = 64.0717 kBaud
+// Modulation = MSK
 // Manchester enable = (0) Manchester disabled
-// RF Frequency = 914.999969 MHz
-// Channel spacing = 199.951172 kHz
+// RF Frequency = 437.240 MHz
+// Channel spacing = 49.99 kHz
 // Channel number = 0
-// Optimization = -
-// Sync mode = (3) 30/32 sync word bits detected
-// Format of RX/TX data = (0) Normal mode, use FIFOs for RX and TX
-// CRC operation = (1) CRC calculation in TX and CRC check in RX enabled
-// Forward Error Correction =
-// Length configuration = (0) Fixed packet length, packet length configured by
-// PKTLEN Packetlength = 61 Preamble count = (2)  4 bytes Append status = 1
-// Address check = (0) No address check
-// FIFO autoflush = 0
-// Device address = 0
-// GDO0 signal selection = ( 6) Asserts when sync word has been sent / received,
-// and de-asserts at the end of the packet GDO2 signal selection = (41) RF_RDY
 static RF_SETTINGS rfSettings = {
     0x0E, // FSCTRL1
     0x00, // FSCTRL0
