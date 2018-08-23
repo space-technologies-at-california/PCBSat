@@ -1,37 +1,44 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# CPH3225A_CPH3225A
+# Connector:Test_Point
 #
-DEF CPH3225A_CPH3225A C 0 40 Y Y 1 L N
-F0 "C" 40 25 50 H V L BNN
-F1 "CPH3225A_CPH3225A" 40 -166 50 H V L BNN
-F2 "CAPCP3225X100N" 0 0 50 H I L BNN
-F3 "Seiko" 0 0 50 H I L BNN
-F4 "1210 Seiko" 0 0 50 H I L BNN
-F5 "https://www.digikey.com/product-detail/en/seiko-instruments/CPH3225A/728-1127-1-ND/8692445?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" 0 0 50 H I L BNN
-F6 "728-1127-1-ND" 0 0 50 H I L BNN
-F7 "Cap 11mf 3.3v Surface Mount" 0 0 50 H I L BNN
-F8 "CPH3225A" 0 0 50 H I L BNN
+DEF Connector:Test_Point TP 0 30 N N 1 F N
+F0 "TP" 0 270 50 H V C CNN
+F1 "Connector:Test_Point" 0 200 50 H V C CNN
+F2 "" 200 0 50 H I C CNN
+F3 "" 200 0 50 H I C CNN
+$FPLIST
+ Pin*
+ Test*
+$ENDFPLIST
 DRAW
-A 0 -200 160 -1270 -900 0 0 10 N 0 -40 -97 -73
-A 0 -199 160 -900 -520 0 0 10 N 98 -73 0 -39
-S -88 26 -53 31 0 0 0 F
-S -73 11 -68 46 0 0 0 F
-P 2 0 0 10 -100 0 0 0 N
-P 2 0 0 6 0 -40 0 -300 N
-P 2 0 0 10 0 0 100 0 N
-P 2 0 0 6 0 200 0 0 N
-X + 1 0 300 100 D 40 40 0 0 P
-X - 2 0 -400 100 U 40 40 0 0 P
+C 0 130 30 0 1 0 N
+X 1 1 0 0 100 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_ADP5092
+# Mechanical:Mounting_Hole
 #
-DEF sprite-eagle-import_ADP5092 U 0 40 Y Y 1 L N
+DEF Mechanical:Mounting_Hole MK 0 40 Y Y 1 F N
+F0 "MK" 0 200 50 H V C CNN
+F1 "Mechanical:Mounting_Hole" 0 125 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Mounting?Hole*
+ Hole*
+$ENDFPLIST
+DRAW
+C 0 0 50 0 1 50 N
+ENDDRAW
+ENDDEF
+#
+# sprite-eagle-import:ADP5092
+#
+DEF sprite-eagle-import:ADP5092 U 0 40 Y Y 1 L N
 F0 "U" -100 50 59 H V L BNN
-F1 "sprite-eagle-import_ADP5092" -200 -50 59 H V L BNN
+F1 "sprite-eagle-import:ADP5092" -200 -50 59 H V L BNN
 F2 "sprite:QFN50P400X400X100-25N" -200 -50 50 H I C CNN
 F3 "http://www.analog.com/media/en/technical-documentation/data-sheets/ADP5091-5092.pdf" -100 50 50 H I C CNN
 DRAW
@@ -67,11 +74,11 @@ X MPPT 9 -700 -300 100 R 50 50 1 0 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_C-EUC0402
+# sprite-eagle-import:C-EUC0402
 #
-DEF sprite-eagle-import_C-EUC0402 C 0 40 Y Y 1 L N
+DEF sprite-eagle-import:C-EUC0402 C 0 40 Y Y 1 L N
 F0 "C" 60 15 59 H V L BNN
-F1 "sprite-eagle-import_C-EUC0402" 60 -185 59 H V L BNN
+F1 "sprite-eagle-import:C-EUC0402" 60 -185 59 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -84,11 +91,11 @@ X 2 2 0 -200 100 U 0 0 1 0 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_C-USC0402
+# sprite-eagle-import:C-USC0402
 #
-DEF sprite-eagle-import_C-USC0402 C 0 40 Y Y 1 L N
+DEF sprite-eagle-import:C-USC0402 C 0 40 Y Y 1 L N
 F0 "C" 40 25 59 H V L BNN
-F1 "sprite-eagle-import_C-USC0402" 40 -165 59 H V L BNN
+F1 "sprite-eagle-import:C-USC0402" 40 -165 59 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -101,11 +108,11 @@ X 2 2 0 -200 100 U 0 0 1 0 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_CC430F513X
+# sprite-eagle-import:CC430F513X
 #
-DEF ~sprite-eagle-import_CC430F513X U 0 40 Y Y 1 L N
+DEF ~sprite-eagle-import:CC430F513X U 0 40 Y Y 1 L N
 F0 "U" -329 1354 150 H V L BNN
-F1 "sprite-eagle-import_CC430F513X" 0 0 50 H I C CNN
+F1 "sprite-eagle-import:CC430F513X" 0 0 50 H I C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -216,11 +223,11 @@ X 49 TP 900 1200 200 L 50 0 1 0 W
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_DRV8837
+# sprite-eagle-import:DRV8837
 #
-DEF sprite-eagle-import_DRV8837 U 0 40 Y Y 1 L N
+DEF sprite-eagle-import:DRV8837 U 0 40 Y Y 1 L N
 F0 "U" -400 -400 42 H V L BNN
-F1 "sprite-eagle-import_DRV8837" -400 300 42 H V L BNN
+F1 "sprite-eagle-import:DRV8837" -400 300 42 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -240,11 +247,11 @@ X TP 9 0 -400 100 U 50 50 1 0 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_GND
+# sprite-eagle-import:GND
 #
-DEF sprite-eagle-import_GND #GND 0 40 Y Y 1 L P
+DEF sprite-eagle-import:GND #GND 0 40 Y Y 1 L P
 F0 "#GND" 0 0 50 H I C CNN
-F1 "sprite-eagle-import_GND" -100 -100 59 H V L BNN
+F1 "sprite-eagle-import:GND" -100 -100 59 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -253,11 +260,11 @@ X GND 1 0 100 100 D 0 0 1 0 W
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_INDUCTOR0603
+# sprite-eagle-import:INDUCTOR0603
 #
-DEF sprite-eagle-import_INDUCTOR0603 L 0 40 Y Y 1 L N
+DEF sprite-eagle-import:INDUCTOR0603 L 0 40 Y Y 1 L N
 F0 "L" 100 200 59 H V L BNN
-F1 "sprite-eagle-import_INDUCTOR0603" 100 -200 59 H V L BNN
+F1 "sprite-eagle-import:INDUCTOR0603" 100 -200 59 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -274,11 +281,11 @@ X 2 2 0 -300 100 U 0 0 1 0 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_LED0603
+# sprite-eagle-import:LED0603
 #
-DEF sprite-eagle-import_LED0603 LED 0 40 Y Y 1 L N
+DEF sprite-eagle-import:LED0603 LED 0 40 Y Y 1 L N
 F0 "LED" 140 -180 59 V V L BNN
-F1 "sprite-eagle-import_LED0603" 225 -180 59 V V L BNN
+F1 "sprite-eagle-import:LED0603" 225 -180 59 V V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -298,11 +305,11 @@ X C C 0 -200 100 U 0 0 1 0 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_LPS4018-223M
+# sprite-eagle-import:LPS4018-223M
 #
-DEF sprite-eagle-import_LPS4018-223M L 0 40 Y Y 1 L N
+DEF sprite-eagle-import:LPS4018-223M L 0 40 Y Y 1 L N
 F0 "L" 0 0 50 H I C CNN
-F1 "sprite-eagle-import_LPS4018-223M" -200 -100 42 H V L BNN
+F1 "sprite-eagle-import:LPS4018-223M" -200 -100 42 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -316,11 +323,11 @@ X P$2 P$2 300 0 100 L 0 0 1 0 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_LSM9DS1
+# sprite-eagle-import:LSM9DS1
 #
-DEF sprite-eagle-import_LSM9DS1 U 0 40 Y Y 1 L N
+DEF sprite-eagle-import:LSM9DS1 U 0 40 Y Y 1 L N
 F0 "U" -500 750 59 H V L CNN
-F1 "sprite-eagle-import_LSM9DS1" -500 -750 59 H V L CNN
+F1 "sprite-eagle-import:LSM9DS1" -500 -750 59 H V L CNN
 F2 "sprite:LGA24-8X4" -600 650 50 H I C CNN
 F3 "https://www.st.com/resource/en/datasheet/lsm9ds1.pdf" 0 0 50 H I C CNN
 DRAW
@@ -355,11 +362,11 @@ X DRDY_M 9 600 -500 100 L 50 50 1 0 O
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_M20-7910442R
+# sprite-eagle-import:M20-7910442R
 #
-DEF sprite-eagle-import_M20-7910442R J 0 40 Y Y 1 L N
+DEF sprite-eagle-import:M20-7910442R J 0 40 Y Y 1 L N
 F0 "J" 0 -500 42 H V L BNN
-F1 "sprite-eagle-import_M20-7910442R" -200 350 42 H V L BNN
+F1 "sprite-eagle-import:M20-7910442R" -200 350 42 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -376,11 +383,11 @@ X P$6 6 -200 -300 100 R 50 0 1 0 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_PCBSAT-TORQUECOIL
+# sprite-eagle-import:PCBSAT-TORQUECOIL
 #
-DEF sprite-eagle-import_PCBSAT-TORQUECOIL L 0 40 Y Y 1 L N
+DEF sprite-eagle-import:PCBSAT-TORQUECOIL L 0 40 Y Y 1 L N
 F0 "L" -200 0 42 H V L BNN
-F1 "sprite-eagle-import_PCBSAT-TORQUECOIL" -200 -200 42 H V L BNN
+F1 "sprite-eagle-import:PCBSAT-TORQUECOIL" -200 -200 42 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -394,11 +401,11 @@ X P$2 2 200 0 0 L 0 0 1 0 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_R-US_R0402
+# sprite-eagle-import:R-US_R0402
 #
-DEF sprite-eagle-import_R-US_R0402 R 0 40 Y Y 1 L N
+DEF sprite-eagle-import:R-US_R0402 R 0 40 Y Y 1 L N
 F0 "R" -150 59 59 H V L BNN
-F1 "sprite-eagle-import_R-US_R0402" -150 -130 59 H V L BNN
+F1 "sprite-eagle-import:R-US_R0402" -150 -130 59 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -416,11 +423,11 @@ X 2 2 200 0 100 L 0 0 1 0 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_SPRITEANTENNA_ANTENNA
+# sprite-eagle-import:SPRITEANTENNA_ANTENNA
 #
-DEF ~sprite-eagle-import_SPRITEANTENNA_ANTENNA A 0 40 Y Y 1 L N
+DEF ~sprite-eagle-import:SPRITEANTENNA_ANTENNA A 0 40 Y Y 1 L N
 F0 "A" 0 0 50 H I C CNN
-F1 "sprite-eagle-import_SPRITEANTENNA_ANTENNA" 0 0 50 H I C CNN
+F1 "sprite-eagle-import:SPRITEANTENNA_ANTENNA" 0 0 50 H I C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -434,11 +441,11 @@ X IN IN3 0 -200 0 R 0 0 1 0 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_SPRITEPIN_SPRITE_PIN
+# sprite-eagle-import:SPRITEPIN_SPRITE_PIN
 #
-DEF ~sprite-eagle-import_SPRITEPIN_SPRITE_PIN X 0 40 Y Y 1 L N
+DEF ~sprite-eagle-import:SPRITEPIN_SPRITE_PIN X 0 40 Y Y 1 L N
 F0 "X" 0 0 50 H I C CNN
-F1 "sprite-eagle-import_SPRITEPIN_SPRITE_PIN" 0 0 50 H I C CNN
+F1 "sprite-eagle-import:SPRITEPIN_SPRITE_PIN" 0 0 50 H I C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -447,11 +454,11 @@ X PIN PIN 200 0 200 L 0 0 1 0 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_SPRITETCXO_TCXO_7Z
+# sprite-eagle-import:SPRITETCXO_TCXO_7Z
 #
-DEF ~sprite-eagle-import_SPRITETCXO_TCXO_7Z U 0 40 Y Y 1 L N
+DEF ~sprite-eagle-import:SPRITETCXO_TCXO_7Z U 0 40 Y Y 1 L N
 F0 "U" 0 0 50 H I C CNN
-F1 "sprite-eagle-import_SPRITETCXO_TCXO_7Z" 0 0 50 H I C CNN
+F1 "sprite-eagle-import:SPRITETCXO_TCXO_7Z" 0 0 50 H I C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -475,11 +482,11 @@ X VCC VCC -300 -200 0 U 50 0 1 0 W
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_TRISOLX-WINGSTRAIGHT-RS
+# sprite-eagle-import:TRISOLX-WINGSTRAIGHT-RS
 #
-DEF sprite-eagle-import_TRISOLX-WINGSTRAIGHT-RS D 0 40 Y Y 1 L N
+DEF sprite-eagle-import:TRISOLX-WINGSTRAIGHT-RS D 0 40 Y Y 1 L N
 F0 "D" 100 19 59 H V L BNN
-F1 "sprite-eagle-import_TRISOLX-WINGSTRAIGHT-RS" 100 -91 59 H V L BNN
+F1 "sprite-eagle-import:TRISOLX-WINGSTRAIGHT-RS" 100 -91 59 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -503,11 +510,27 @@ X C P$2 200 0 200 L 0 0 1 0 P
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_VCC
+# sprite-eagle-import:UMAC_UMAC
 #
-DEF sprite-eagle-import_VCC #P+ 0 40 Y Y 1 L P
+DEF ~sprite-eagle-import:UMAC_UMAC B 0 40 Y Y 1 L N
+F0 "B" 0 0 50 H I C CNN
+F1 "sprite-eagle-import:UMAC_UMAC" 0 0 50 H I C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 1 0 0 -300 100 300 100 N
+P 2 1 0 0 -200 0 200 0 N
+P 2 1 0 0 -100 -100 100 -100 N
+X V+ V+ 0 300 200 D 50 0 1 0 w
+X V- V- 0 -300 200 U 50 0 1 0 w
+ENDDRAW
+ENDDEF
+#
+# sprite-eagle-import:VCC
+#
+DEF sprite-eagle-import:VCC #P+ 0 40 Y Y 1 L P
 F0 "#P+" 0 0 50 H I C CNN
-F1 "sprite-eagle-import_VCC" -40 140 59 H V L BNN
+F1 "sprite-eagle-import:VCC" -40 140 59 H V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -517,11 +540,11 @@ X VCC 1 0 0 100 U 0 0 1 0 W
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_VCCA
+# sprite-eagle-import:VCCA
 #
-DEF sprite-eagle-import_VCCA ~ 0 40 Y Y 1 L P
+DEF sprite-eagle-import:VCCA ~ 0 40 Y Y 1 L P
 F0 "" 0 0 50 H I C CNN
-F1 "sprite-eagle-import_VCCA" 0 110 59 H V C BNN
+F1 "sprite-eagle-import:VCCA" 0 110 59 H V C BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -531,11 +554,11 @@ X VCCA 1 0 0 100 U 0 0 1 0 W
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_VCCINT
+# sprite-eagle-import:VCCINT
 #
-DEF sprite-eagle-import_VCCINT #VCC 0 40 Y Y 1 L P
+DEF sprite-eagle-import:VCCINT #VCC 0 40 Y Y 1 L P
 F0 "#VCC" 0 0 50 H I C CNN
-F1 "sprite-eagle-import_VCCINT" -100 -100 59 V V L BNN
+F1 "sprite-eagle-import:VCCINT" -100 -100 59 V V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -546,11 +569,11 @@ X VCCINT 1 0 -100 100 U 0 0 1 0 W
 ENDDRAW
 ENDDEF
 #
-# sprite-eagle-import_VCCIO
+# sprite-eagle-import:VCCIO
 #
-DEF sprite-eagle-import_VCCIO #VCC 0 40 Y Y 1 L P
+DEF sprite-eagle-import:VCCIO #VCC 0 40 Y Y 1 L P
 F0 "#VCC" 0 0 50 H I C CNN
-F1 "sprite-eagle-import_VCCIO" -100 -100 59 V V L BNN
+F1 "sprite-eagle-import:VCCIO" -100 -100 59 V V L BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -558,39 +581,6 @@ T 0 -20 10 27 0 1 0 IO Normal 0 L B
 P 2 1 0 0 0 0 -50 -75 N
 P 2 1 0 0 50 -75 0 0 N
 X VCCIO 1 0 -100 100 U 0 0 1 0 W
-ENDDRAW
-ENDDEF
-#
-# sprite-rescue_Mounting_Hole-Mechanical
-#
-DEF sprite-rescue_Mounting_Hole-Mechanical MK 0 40 Y Y 1 F N
-F0 "MK" 0 200 50 H V C CNN
-F1 "sprite-rescue_Mounting_Hole-Mechanical" 0 125 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-$FPLIST
- Mounting?Hole*
- Hole*
-$ENDFPLIST
-DRAW
-C 0 0 50 0 1 50 N
-ENDDRAW
-ENDDEF
-#
-# sprite-rescue_Test_Point-Connector
-#
-DEF sprite-rescue_Test_Point-Connector TP 0 30 N N 1 F N
-F0 "TP" 0 270 50 H V C CNN
-F1 "sprite-rescue_Test_Point-Connector" 0 200 50 H V C CNN
-F2 "" 200 0 50 H I C CNN
-F3 "" 200 0 50 H I C CNN
-$FPLIST
- Pin*
- Test*
-$ENDFPLIST
-DRAW
-C 0 130 30 0 1 0 N
-X 1 1 0 0 100 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
