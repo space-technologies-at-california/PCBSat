@@ -1,6 +1,32 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
+# CPH3225A-CPH3225A
+#
+DEF CPH3225A-CPH3225A C 0 40 Y Y 1 L N
+F0 "C" 40 25 50 H V L BNN
+F1 "CPH3225A-CPH3225A" 40 -166 50 H V L BNN
+F2 "CAPCP3225X100N" 0 0 50 H I L BNN
+F3 "Seiko" 0 0 50 H I L BNN
+F4 "1210 Seiko" 0 0 50 H I L BNN
+F5 "https://www.digikey.com/product-detail/en/seiko-instruments/CPH3225A/728-1127-1-ND/8692445?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" 0 0 50 H I L BNN
+F6 "728-1127-1-ND" 0 0 50 H I L BNN
+F7 "Cap 11mf 3.3v Surface Mount" 0 0 50 H I L BNN
+F8 "CPH3225A" 0 0 50 H I L BNN
+DRAW
+A 0 -200 160 -1270 -900 0 0 10 N 0 -40 -97 -73
+A 0 -199 160 -900 -520 0 0 10 N 98 -73 0 -39
+S -88 26 -53 31 0 0 0 F
+S -73 11 -68 46 0 0 0 F
+P 2 0 0 10 -100 0 0 0 N
+P 2 0 0 6 0 -40 0 -300 N
+P 2 0 0 10 0 0 100 0 N
+P 2 0 0 6 0 200 0 0 N
+X + 1 0 300 100 D 40 40 0 0 P
+X - 2 0 -400 100 U 40 40 0 0 P
+ENDDRAW
+ENDDEF
+#
 # Mounting_Hole-Mechanical
 #
 DEF Mounting_Hole-Mechanical MK 0 40 Y Y 1 F N

@@ -1,4 +1,4 @@
-(kicad_pcb (version 20171130) (host pcbnew 6.0.0-rc1-unknown-3eb3db0~66~ubuntu16.04.1)
+(kicad_pcb (version 20171130) (host pcbnew "(5.1.0-dev-136-geef31e476)")
 
   (general
     (thickness 0.7874)
@@ -265,7 +265,7 @@
     (add_net VCCIO)
   )
 
-  (module CAPCP3225X100N (layer Bottom) (tedit 0) (tstamp 5B7F3D0B)
+  (module sprite:CAPCP3225X100N (layer Bottom) (tedit 0) (tstamp 5B7FBDC1)
     (at 153.67 99.441)
     (path /5B82E146)
     (fp_text reference C10 (at -1.50651 1.50651) (layer B.SilkS)

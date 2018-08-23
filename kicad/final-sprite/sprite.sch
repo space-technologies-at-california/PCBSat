@@ -2102,12 +2102,12 @@ PGOOD
 Text Label 2250 8400 0    50   ~ 0
 ~RST
 $Comp
-L CPH3225A:CPH3225A C10
+L sprite-rescue:CPH3225A-CPH3225A C10
 U 1 1 5B82E146
 P 11700 3850
 F 0 "C10" H 11830 3846 50  0000 L CNN
 F 1 "CPH3225A" H 11830 3755 50  0000 L CNN
-F 2 "CAPCP3225X100N" H 11700 3850 50  0001 L BNN
+F 2 "sprite:CAPCP3225X100N" H 11700 3850 50  0001 L BNN
 F 3 "Seiko" H 11700 3850 50  0001 L BNN
 F 4 "1210 Seiko" H 11700 3850 50  0001 L BNN "Field4"
 F 5 "https://www.digikey.com/product-detail/en/seiko-instruments/CPH3225A/728-1127-1-ND/8692445?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" H 11700 3850 50  0001 L BNN "Field5"
