@@ -2093,4 +2093,23 @@ F 3 "~" H 9050 8950 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 Connection ~ 8850 8950
+$Comp
+L sprite-eagle-import:R-US_R0402 R23
+U 1 0 5B3C09A9
+P 2000 8400
+F 0 "R23" H 1850 8459 59  0000 L BNN
+F 1 "0" H 1850 8270 59  0000 L BNN
+F 2 "sprite:R0402" H 2000 8400 50  0001 C CNN
+F 3 "" H 2000 8400 50  0001 C CNN
+	1    2000 8400
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2200 8400 2450 8400
+Wire Wire Line
+	1800 8400 1550 8400
+Text Label 1550 8400 0    50   ~ 0
+PGOOD
+Text Label 2250 8400 0    50   ~ 0
+~RST
 $EndSCHEMATC

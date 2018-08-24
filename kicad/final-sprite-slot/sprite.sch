@@ -1967,7 +1967,7 @@ Wire Notes Line
 Wire Notes Line
 	800  4550 15700 4550
 $Comp
-L Mechanical:Mounting_Hole MK1
+L sprite-rescue:Mounting_Hole-Mechanical MK1
 U 1 1 5B277BCA
 P 13650 850
 F 0 "MK1" H 13750 896 50  0000 L CNN
@@ -2015,7 +2015,7 @@ $EndComp
 Wire Wire Line
 	9750 8700 10000 8700
 $Comp
-L Connector:Test_Point TP2
+L sprite-rescue:Test_Point-Connector TP2
 U 1 1 5B335398
 P 8250 8950
 F 0 "TP2" H 8192 8977 50  0000 R CNN
@@ -2082,7 +2082,7 @@ NoConn ~ 4700 5450
 NoConn ~ 2900 7550
 NoConn ~ 4700 2850
 $Comp
-L Connector:Test_Point TP1
+L sprite-rescue:Test_Point-Connector TP1
 U 1 1 5B3A87A5
 P 8850 8950
 F 0 "TP1" H 8792 8977 50  0000 R CNN
