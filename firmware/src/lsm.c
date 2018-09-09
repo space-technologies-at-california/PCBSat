@@ -35,8 +35,11 @@ bool lsm_setup() {
     i2c_read_buff(SADDR_M, LSM_REG_CTRL_REG2_M, 1, &reg);
 
     reg &= ~(0b01100000);
-    reg |= LSM_MAG_GAIN;
+    reg |= LSM_MAG_GAIN | (1 << 3);                     // Apparently reboot is
+                                                        // required, fuck ST
     i2c_write8(SADDR_M, LSM_REG_CTRL_REG2_M, reg);
+    i2c_write8(SADDR_M, LSM_REG_CTRL_REG1_M, 0x94);     // Temp Comp, ODR = 20Hz
+    i2c_write8(SADDR_M, LSM_REG_CTRL_REG5_M, 0x40);     // Block data update (BDU)
 
 
     // Setup Gyro
@@ -77,7 +80,6 @@ void readMag(uint16_t* data) {
     uint16_t y = (buffer[3] << 8) | buffer[2];
     uint16_t z = (buffer[5] << 8) | buffer[4];
 
-
     data[0] = x;
     data[1] = y;
     data[2] = z;
@@ -97,12 +99,12 @@ void run_lsm() {
     char str[30];
     uint16_t data_gyro[3];
     readGyro(data_gyro);
-    snprintf(str, sizeof(str), "%u, %u, %u\r\n",
-            data_gyro[0], data_gyro[1], data_gyro[2]);
+    snprintf(str, sizeof(str), "%d, %d, %d\r\n",
+            (int16_t) data_gyro[0], (int16_t) data_gyro[1], (int16_t) data_gyro[2]);
     uart_write(str, strlen(str));
 
     readMag(data_mag);
-    snprintf(str, sizeof(str), "%u, %u, %u\r\n",
-            data_mag[0], data_mag[1], data_mag[2]);
+    snprintf(str, sizeof(str), "%d, %d, %d\r\n",
+            (int16_t) data_mag[0], (int16_t) data_mag[1], (int16_t) data_mag[2]);
     uart_write(str, strlen(str));
 }
