@@ -8,9 +8,6 @@
 #include "lsm.h"
 
 bool lsm_setup() {
-    // soft reset & reboot magnetometer
-    i2c_write8(SADDR_M, LSM_REG_CTRL_REG2_M, 0x0C);    
-
     uint8_t id; 
     i2c_read_buff(SADDR_G, LSM_REG_WHO_AM_I_XG, 1, &id);
     if (id != LSM_XG_ID)
