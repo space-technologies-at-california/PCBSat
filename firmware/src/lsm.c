@@ -28,14 +28,14 @@ bool lsm_setup() {
         return false;
 
     // enable gyro continuous
-    i2c_write8(SADDR_G, LSM_REG_CTRL_REG1_G, 0xC0); // on XYZ
+    i2c_write8(SADDR_G, LSM_REG_CTRL_REG1_G, 0x40); // on XYZ
 
     // Setup Mag
     uint8_t reg;
     i2c_read_buff(SADDR_M, LSM_REG_CTRL_REG2_M, 1, &reg);
 
     reg &= ~(0b01100000);
-    reg |= LSM_MAG_GAIN | (1 << 3);                     // Apparently reboot is
+    reg |= LSM_MAG_GAIN //| (1 << 3);                     // Apparently reboot is
                                                         // required, fuck ST
     i2c_write8(SADDR_M, LSM_REG_CTRL_REG2_M, reg);
     i2c_write8(SADDR_M, LSM_REG_CTRL_REG1_M, 0x94);     // Temp Comp, ODR = 20Hz
@@ -48,7 +48,8 @@ bool lsm_setup() {
     reg &= ~(0b00011000);
     reg |= LSM_GYRO_SCALE;
     i2c_write8(SADDR_G, LSM_REG_CTRL_REG1_G, reg);
-
+    i2c_write8(SADDR_G, LSM_REG_CTRL_REG2_G, 0x02);
+    i2c_write8(SADDR_G, LSM_REG_CTRL_REG3_G, 0x40);
     return true;
 
 }
@@ -87,17 +88,17 @@ void readMag(uint16_t* data) {
 }
 
 void run_lsm() {
-    if (!lsm_setup()) {
+    //if (!lsm_setup()) {
 #ifdef DEBUG
-        uart_write("lsm setup failed\n\r", 18);
+    //    uart_write("lsm setup failed\n\r", 18);
 #endif
-        faults |= FAULT_LSM_SETUP;
-        return;
-    }
+    //    faults |= FAULT_LSM_SETUP;
+    //    return;
+    //}
 
     uint16_t data_mag[3];
     char str[30];
-    uint16_t data_gyro[3];
+    volatile uint16_t data_gyro[3];
     readGyro(data_gyro);
     snprintf(str, sizeof(str), "%d, %d, %d\r\n",
             (int16_t) data_gyro[0], (int16_t) data_gyro[1], (int16_t) data_gyro[2]);
