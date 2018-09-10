@@ -74,7 +74,7 @@ struct vec3_s {
     uint16_t x, y, z;
 };
 
-bool lsm_setup();
+bool lsm_setup(void);
 
 void readGyro(struct vec3_s[static 1]);
 
