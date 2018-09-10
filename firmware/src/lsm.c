@@ -88,13 +88,17 @@ void readMag(uint16_t* data) {
 }
 
 void run_lsm() {
-    //if (!lsm_setup()) {
+    static bool has_lsm_setup = false;
+    if (!has_lsm_setup) {
+        if (!lsm_setup()) {
 #ifdef DEBUG
-    //    uart_write("lsm setup failed\n\r", 18);
+            uart_write("lsm setup failed\n\r", 18);
 #endif
-    //    faults |= FAULT_LSM_SETUP;
-    //    return;
-    //}
+            faults |= FAULT_LSM_SETUP;
+            return;
+        }
+        has_lsm_setup = true;
+    }
 
     uint16_t data_mag[3];
     char str[30];
