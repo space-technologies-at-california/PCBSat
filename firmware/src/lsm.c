@@ -35,11 +35,12 @@ bool lsm_setup() {
     i2c_read_buff(SADDR_M, LSM_REG_CTRL_REG2_M, 1, &reg);
 
     reg &= ~(0b01100000);
-    reg |= LSM_MAG_GAIN //| (1 << 3);                     // Apparently reboot is
+    reg |= LSM_MAG_GAIN; //| (1 << 3);                     // Apparently reboot is
                                                         // required, fuck ST
     i2c_write8(SADDR_M, LSM_REG_CTRL_REG2_M, reg);
     i2c_write8(SADDR_M, LSM_REG_CTRL_REG1_M, 0x94);     // Temp Comp, ODR = 20Hz
     i2c_write8(SADDR_M, LSM_REG_CTRL_REG5_M, 0x40);     // Block data update (BDU)
+    i2c_write8(SADDR_M, LSM_REG_CTRL_REG3_M, 0x00);
 
 
     // Setup Gyro
