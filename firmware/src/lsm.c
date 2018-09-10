@@ -46,33 +46,23 @@ bool lsm_setup() {
     return true;
 }
 
-void readGyro(uint16_t* data) {
-    // Read gyro
+void readGyro(struct vec3_s data[static 1]) {
     uint8_t buffer[6];
     char str[6];
     i2c_read_buff(SADDR_G, 0x80 | LSM_REG_OUT_X_L_G, 6, buffer);
         
-    uint16_t x = (buffer[1] << 8) | buffer[0];
-    uint16_t y = (buffer[3] << 8) | buffer[2];
-    uint16_t z = (buffer[5] << 8) | buffer[4];
-
-    data[0] = x;
-    data[1] = y;
-    data[2] = z;
+    data->x = (buffer[1] << 8) | buffer[0];
+    data->y = (buffer[3] << 8) | buffer[2];
+    data->z = (buffer[5] << 8) | buffer[4];
 }
 
-void readMag(uint16_t* data) {
-    // Read the magnetometer
+void readMag(struct vec3_s data[static 1]) {
     uint8_t buffer[6];
     i2c_read_buff(SADDR_M, 0x80 | LSM_REG_OUT_X_L_M, 6, buffer);
 
-    uint16_t x = (buffer[1] << 8) | buffer[0];
-    uint16_t y = (buffer[3] << 8) | buffer[2];
-    uint16_t z = (buffer[5] << 8) | buffer[4];
-
-    data[0] = x;
-    data[1] = y;
-    data[2] = z;
+    data->x = (buffer[1] << 8) | buffer[0];
+    data->y = (buffer[3] << 8) | buffer[2];
+    data->z = (buffer[5] << 8) | buffer[4];
 }
 
 void run_lsm() {
@@ -88,16 +78,16 @@ void run_lsm() {
         has_lsm_setup = true;
     }
 
-    uint16_t data_mag[3];
     char str[30];
-    volatile uint16_t data_gyro[3];
-    readGyro(data_gyro);
+    struct vec3_s data_gyro;
+    readGyro(&data_gyro);
     snprintf(str, sizeof(str), "%d, %d, %d\r\n",
-            (int16_t) data_gyro[0], (int16_t) data_gyro[1], (int16_t) data_gyro[2]);
+            (int16_t) data_gyro.x, (int16_t) data_gyro.y, (int16_t) data_gyro.z);
     uart_write(str, strlen(str));
 
-    readMag(data_mag);
+    struct vec3_s data_mag;
+    readMag(&data_mag);
     snprintf(str, sizeof(str), "%d, %d, %d\r\n",
-            (int16_t) data_mag[0], (int16_t) data_mag[1], (int16_t) data_mag[2]);
+            (int16_t) data_mag.x, (int16_t) data_mag.y, (int16_t) data_mag.z);
     uart_write(str, strlen(str));
 }

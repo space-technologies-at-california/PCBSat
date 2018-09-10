@@ -70,10 +70,14 @@ typedef enum
   LSM_MAGDATARATE_100HZ            = (0b101 << 2)
 } LSMMagDataRate_t;
 
+struct vec3_s {
+    uint16_t x, y, z;
+};
+
 bool lsm_setup();
 
-void readGyro(uint16_t* data);
+void readGyro(struct vec3_s[static 1]);
 
-void readMag(uint16_t* data);
+void readMag(struct vec3_s[static 1]);
 
 void run_lsm(void);
