@@ -7,4 +7,4 @@ enum {
     FAULT_LSM_SETUP = 4,
 };
 
-extern uint8_t faults;
+extern volatile uint8_t faults;

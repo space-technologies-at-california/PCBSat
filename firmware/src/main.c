@@ -15,7 +15,7 @@
 #include "timer_a.h"
 #include "ucs.h"
 
-uint8_t faults = FAULT_RECENT_POR;
+volatile uint8_t faults = FAULT_RECENT_POR;
 
 #define DEC_OR_ZERO(x) x = (x > 0) ? x - 1 : 0;
 
