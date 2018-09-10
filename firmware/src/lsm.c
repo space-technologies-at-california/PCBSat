@@ -8,10 +8,6 @@
 #include "lsm.h"
 
 bool lsm_setup() {
-    P3OUT ^= BIT7;
-    // soft reset & reboot accel/gyro
-    i2c_write8(SADDR_G, LSM_REG_CTRL_REG8, 0x05);
-    P3OUT ^= BIT7;
     // soft reset & reboot magnetometer
     i2c_write8(SADDR_M, LSM_REG_CTRL_REG2_M, 0x0C);    
 
