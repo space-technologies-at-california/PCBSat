@@ -48,8 +48,8 @@ void drvr_on(int drvr, int pwm) {
 
 void drvr_off() {
     TA1CTL = TASSEL_1 | MC_0;
-    P2OUT &= BIT3;
-    P5OUT &= BIT0 | BIT1;
+    P2OUT &= ~BIT3;
+    P5OUT &= ~(BIT0 | BIT1);
 }
 
 void run_actuation() {
@@ -61,7 +61,7 @@ void run_actuation() {
         setup_drvr();
     }
 
-    drvr_on(XAXIS, 50);
+    drvr_on(ZAXIS, 50);
     sleep(500, LPM1_bits);
     drvr_off();
 }
