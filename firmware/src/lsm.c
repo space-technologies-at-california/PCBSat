@@ -13,13 +13,10 @@ bool lsm_setup() {
 
     uint8_t id; 
     i2c_read_buff(SADDR_G, LSM_REG_WHO_AM_I_XG, 1, &id);
-
-    
     if (id != LSM_XG_ID)
         return false;
 
     i2c_read_buff(SADDR_M, LSM_REG_WHO_AM_I_M, 1, &id);
-
     if (id != LSM_MAG_ID)
         return false;
 
@@ -38,7 +35,6 @@ bool lsm_setup() {
     i2c_write8(SADDR_M, LSM_REG_CTRL_REG5_M, 0x40);     // Block data update (BDU)
     i2c_write8(SADDR_M, LSM_REG_CTRL_REG3_M, 0x00);
 
-
     // Setup Gyro
     i2c_read_buff(SADDR_G, LSM_REG_CTRL_REG1_G, 1, &reg);
 
@@ -48,11 +44,9 @@ bool lsm_setup() {
     i2c_write8(SADDR_G, LSM_REG_CTRL_REG2_G, 0x02);
     i2c_write8(SADDR_G, LSM_REG_CTRL_REG3_G, 0x40);
     return true;
-
 }
 
 void readGyro(uint16_t* data) {
-
     // Read gyro
     uint8_t buffer[6];
     char str[6];
@@ -65,11 +59,9 @@ void readGyro(uint16_t* data) {
     data[0] = x;
     data[1] = y;
     data[2] = z;
-
 }
 
 void readMag(uint16_t* data) {
-
     // Read the magnetometer
     uint8_t buffer[6];
     i2c_read_buff(SADDR_M, 0x80 | LSM_REG_OUT_X_L_M, 6, buffer);
@@ -81,7 +73,6 @@ void readMag(uint16_t* data) {
     data[0] = x;
     data[1] = y;
     data[2] = z;
-
 }
 
 void run_lsm() {
