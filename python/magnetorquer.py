@@ -59,6 +59,14 @@ def choose_coil(effective_torques, angular_velocities):
         if val == best:
             return i
 
+def main(b_vec, a_vec, coils_Vec):
+    best_coil = choose_coil(calculate_torque_effectiveness(b_vec,coils_Vec), a_vect)
+    return best_coil
+
+b_vec = [.9,.8,.3]
+a_vec = [.1,.2,.3]
+print(main(b_vec, a_vec, coils))
+
 
 # def pitch():
 #     pass
