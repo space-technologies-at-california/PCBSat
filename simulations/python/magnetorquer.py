@@ -23,6 +23,12 @@ def calculate_torque_effectiveness(b_vec, coils):
     """
     Calculate the effectiveness of each torque coil based on its properties and
     the b-field in a body-standard x-y-z frame
+
+    :param lst b_vec: Magnitudes of the earth's B field in the x-y-z
+        body-centered coordinate scheme.
+    :param lst coils: Array of Coil objects, each element represents a
+        magnetorquer coil in x-y-z order.
+    :return lst: Array of coil effectivenesses / torques if pulsed.
     """
     torque_1 = b_vec[2] * coils[1].effectiveness + b_vec[1] * coils[2].effectiveness
     torque_2 = -b_vec[0] * coils[0].effectiveness + b_vec[2] * coils[2].effectiveness
@@ -36,6 +42,14 @@ def choose_coil(effective_torques, angular_velocities):
     Return the index of the torque coil to used and sign of the voltage through
     each coil based on their effective torques around each body-centered
     cartesian axis and the angular velocities around each axis.
+
+    :param lst effective_torques: Returned array from
+        calculate_torque_effectiveness representing the torque able to be
+        exerted by each coil.
+    :param lst angular_velocities: Array of angular velocity readings in the
+        body-centered x-y-z coordinate scheme from the MEMS gyros.
+    :return int: Array position of the coil which will torque against the
+        angular velocity in that axis the most.
     """
     effectiveness = [t * w for t, w
                      in zip(effective_torques, angular_velocities)]
@@ -44,6 +58,14 @@ def choose_coil(effective_torques, angular_velocities):
     for i, val in enumerate(effectiveness):
         if val == best:
             return i
+
+def main(b_vec, a_vec, coils_Vec):
+    best_coil = choose_coil(calculate_torque_effectiveness(b_vec,coils_Vec), a_vect)
+    return best_coil
+
+b_vec = [.9,.8,.3]
+a_vec = [.1,.2,.3]
+print(main(b_vec, a_vec, coils))
 
 
 # def pitch():
