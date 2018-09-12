@@ -71,6 +71,11 @@ void sleep(uint16_t ms, unsigned short mode) {
         true};
     Timer_A_initUpMode(TIMER_A0_BASE, &params);
     __bis_SR_register(mode);
+
+    for (; ms >= 1000; ms -= 1000) {
+        // Long sleeps should tick to keep timing reasonable.
+        tick();
+    }
 }
 
 void deep_sleep(uint16_t ms) {
@@ -173,8 +178,6 @@ int main() {
         } else if (actuate_precond()) {
             run_actuation(ZAXIS, -50);
         }
-        // FIXME: get a real way of timekeeping
-        tick();
         deep_sleep(1000);
     }
 }
