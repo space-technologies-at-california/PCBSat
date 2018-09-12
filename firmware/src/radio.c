@@ -1,6 +1,7 @@
 #include <msp430.h>
 #include <setjmp.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "cc430uart.h"
 #include "fault.h"
@@ -419,17 +420,15 @@ static void init_radio() {
     wait_for_idle();
 }
 
-void run_radio() {
+void run_radio(char *tx_msg, unsigned int len) {
     static bool has_rng_init = false;
     static bool has_radio_init = false;
     fault_count = 0;
 
     if (!has_rng_init) {
         // Initialize random number generator
-        /*
-        randomSeed(((int)m_prn0[0]) + ((int)m_prn1[0]) + ((int)m_prn0[1]) +
-                   ((int)m_prn1[1]));
-        */
+        srand(((int)m_prn0[0]) + ((int)m_prn1[0]) + ((int)m_prn0[1]) +
+              ((int)m_prn1[1]));
         has_rng_init = true;
     }
 
@@ -458,7 +457,7 @@ void run_radio() {
     P3OUT |= BIT7;
     uart_write("TX\r\n", 4);
 #endif
-    radio_transmit("Hello Earthlings\n", 17);
+    radio_transmit(tx_msg, len);
 #ifdef DEBUG
     P3OUT &= ~BIT7;
 #endif

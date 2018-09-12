@@ -1,5 +1,6 @@
 #include <msp430.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "battery_mon.h"
@@ -32,6 +33,9 @@ const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 struct vec3_s global_omega;
 struct vec3_s meas_alpha;
 struct vec3_s torqued_alpha;
+uint16_t sleep_counter = 0;
+
+void tick(void);
 
 static void init_core() {
     // WDT intervals 1/(10 kHz/512K) = 51.2 secs
@@ -74,10 +78,7 @@ void sleep(uint16_t ms, unsigned short mode) {
         true};
     Timer_A_initUpMode(TIMER_A0_BASE, &params);
     __bis_SR_register(mode);
-}
-
-void delay(uint16_t ms) {
-    sleep(ms, LPM0_bits);
+    sleep_counter += ms;
 }
 
 void deep_sleep(uint16_t ms) {
@@ -132,18 +133,19 @@ void tick() {
 }
 
 bool radio_precond() {
-    //return !(faults & FAULT_POWER);
-    return false;
+    return !(faults & FAULT_POWER);
 }
 
 bool lsm_precond() {
-    //return !(faults & FAULT_POWER);
-    return true;
+    return !(faults & FAULT_POWER);
 }
 
 bool actuate_precond() {
-    //return lsm_precond() && !(faults & FAULT_RECENT_POR);
-    return false;
+    return lsm_precond() && !(faults & FAULT_RECENT_POR);
+}
+
+int rand_int(int min, int incr) {
+    return min + rand()/(RAND_MAX/incr);
 }
 
 uint32_t norm(struct vec3_s *x) {
@@ -152,7 +154,9 @@ uint32_t norm(struct vec3_s *x) {
 
 int main() {
     init_core();
+#ifdef DEBUG
     init_debug();
+#endif
     setup_bat_monitor();
     start_bat_monitor();
     check_power();
@@ -160,11 +164,24 @@ int main() {
     while (true) {
         WDT_A_resetTimer(WDT_A_BASE);
         if (counter_tx == 0 && radio_precond()) {
-            run_radio();
-            counter_tx = 10; // TODO: random delay goes here
+            char tx_msg[7];
+            tx_msg[0] = 0;
+            tx_msg[1] = faults;
+            tx_msg[2] = batt_voltage;
+            tx_msg[3] = temp_measure;
+            tx_msg[4] = 0;
+            tx_msg[5] = 0;
+            tx_msg[6] = 0;
+            run_radio(tx_msg, 7);
+            counter_tx = rand_int(10, 4);
+#ifdef DEBUG
+            char buf[32];
+            snprintf(buf, sizeof(buf), "sleeping %d\r\n", counter_tx);
+            uart_write(buf, strlen(buf));
+#endif
         } else if (counter_lsm == 0 && lsm_precond()) {
             run_lsm(&meas_alpha);
-            counter_lsm = 2;
+            counter_lsm = 15;
 #ifdef DEBUG
         } else if (counter_debug == 0) {
             char buf[32];
@@ -174,15 +191,23 @@ int main() {
             uart_write(buf, strlen(buf));
             snprintf(buf, sizeof(buf), "temp: %u\r\n", temp_measure);
             uart_write(buf, strlen(buf));
-            counter_debug = 100;
+            counter_debug = 3;
 #endif
         } else if (actuate_precond()) {
             uint8_t axis = pick_torquer();
             run_actuation(axis, 50, &torqued_alpha);
         }
-        // FIXME: get a real way of timekeeping
-        tick();
-        deep_sleep(1000);
+
+        // Wait at least 1 second before looping.
+        if (sleep_counter < 1000) {
+            deep_sleep(1000 - sleep_counter);
+        }
+
+        for (; sleep_counter >= 1000; sleep_counter -= 1000) {
+            // Long sleeps should tick to keep timing reasonable.
+            tick();
+        }
+        sleep_counter = 0;
     }
 }
 

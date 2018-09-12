@@ -7,6 +7,7 @@
 #include "i2c.h"
 #include "lsm.h"
 #include "drvr.h"
+#include "proto.h"
 
 static int16_t mag_x_arr[5];
 static int16_t mag_y_arr[5];
