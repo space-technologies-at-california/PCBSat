@@ -14,6 +14,7 @@
 #include "proto.h"
 #include "timer_a.h"
 #include "ucs.h"
+#include "wdt_a.h"
 
 volatile uint8_t faults = FAULT_RECENT_POR;
 
@@ -29,14 +30,15 @@ unsigned char counter_lsm = 0;
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 
 static void init_core() {
-    // Disable WDT
-    WDTCTL = WDTPW | WDTHOLD;
+    // WDT intervals 1/(10 kHz/512K) = 51.2 secs
+    WDT_A_initWatchdogTimer(WDT_A_BASE, WDT_A_CLOCKSOURCE_ACLK,
+                            WDT_A_CLOCKDIVIDER_512K);
 
     // Reference FLL to REFO and set MCLK, SMCLK -> 1 MHz
     UCS_initClockSignal(UCS_FLLREF, UCS_REFOCLK_SELECT, UCS_CLOCK_DIVIDER_1);
     UCS_initFLLSettle(1000, 1000000/UCS_REFOCLK_FREQUENCY);
 
-    // VLO -> ACLK (note that Zac uses REFO -> ACLK instead)
+    // VLO (10 kHz) -> ACLK
     UCS_initClockSignal(UCS_ACLK, UCS_VLOCLK_SELECT, UCS_CLOCK_DIVIDER_1);
 
     // POWER: Turn ADC and reference voltage off to conserve power
@@ -53,6 +55,7 @@ static void init_core() {
     PMMCTL0_H = 0x00;
 
     setup_pins();
+    WDT_A_start(WDT_A_BASE);
     __enable_interrupt();
 }
 
