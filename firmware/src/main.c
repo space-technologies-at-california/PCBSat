@@ -128,15 +128,18 @@ void tick() {
 }
 
 bool radio_precond() {
-    return !(faults & FAULT_POWER);
+    //return !(faults & FAULT_POWER);
+    return false;
 }
 
 bool lsm_precond() {
-    return !(faults & FAULT_POWER);
+    //return !(faults & FAULT_POWER);
+    return false;
 }
 
 bool actuate_precond() {
-    return lsm_precond() && !(faults & FAULT_RECENT_POR);
+    //return lsm_precond() && !(faults & FAULT_RECENT_POR);
+    return false;
 }
 
 int main() {
@@ -153,7 +156,7 @@ int main() {
             counter_tx = 10; // TODO: random delay goes here
         } else if (counter_lsm == 0 && lsm_precond()) {
             run_lsm();
-            counter_lsm = 5;
+            counter_lsm = 2;
 #ifdef DEBUG
         } else if (counter_debug == 0) {
             char buf[32];
@@ -161,10 +164,12 @@ int main() {
             uart_write(buf, strlen(buf));
             snprintf(buf, sizeof(buf), "vbat: %u\r\n", batt_voltage);
             uart_write(buf, strlen(buf));
-            counter_debug = 2;
+            snprintf(buf, sizeof(buf), "temp: %u\r\n", temp_measure);
+            uart_write(buf, strlen(buf));
+            counter_debug = 1;
 #endif
         } else if (actuate_precond()) {
-            run_actuation();
+            run_actuation(ZAXIS, -50);
         }
         // FIXME: get a real way of timekeeping
         tick();

@@ -7,10 +7,23 @@
 #include "ref.h"
 
 volatile uint8_t batt_voltage; //< number between 0-255, 255 is 3V at VDD
+volatile uint8_t temp_measure;
 
-ADC12_A_configureMemoryParam ADC_config = {
-    ADC12_A_MEMORY_0, ADC12_A_INPUT_BATTERYMONITOR, ADC12_A_VREFPOS_INT,
-    ADC12_A_VREFNEG_AVSS, ADC12_A_NOTENDOFSEQUENCE};
+static ADC12_A_configureMemoryParam batt_config = {
+    ADC12_A_MEMORY_0, 
+    ADC12_A_INPUT_BATTERYMONITOR, 
+    ADC12_A_VREFPOS_INT,
+    ADC12_A_VREFNEG_AVSS, 
+    ADC12_A_NOTENDOFSEQUENCE
+};
+
+static ADC12_A_configureMemoryParam temp_config = {
+    ADC12_A_MEMORY_1, 
+    ADC12_A_INPUT_TEMPSENSOR, 
+    ADC12_A_VREFPOS_INT,
+    ADC12_A_VREFNEG_AVSS, 
+    ADC12_A_ENDOFSEQUENCE
+};
 
 // This function sets up internal battery monitor functionality, 
 // but does not start battery monitoring. Note calling this function
@@ -22,6 +35,7 @@ void setup_bat_monitor(void) {
     
     Ref_setReferenceVoltage(REF_BASE, REF_VREF1_5V);
     Ref_enableReferenceVoltage(REF_BASE);
+    Ref_enableTempSensor(REF_BASE);
     
     __delay_cycles(75);
 
@@ -37,7 +51,8 @@ void setup_bat_monitor(void) {
     ADC12_A_setupSamplingTimer(ADC12_A_BASE, ADC12_A_CYCLEHOLD_1024_CYCLES,
                                ADC12_A_CYCLEHOLD_1024_CYCLES,
                                ADC12_A_MULTIPLESAMPLESENABLE);
-    ADC12_A_configureMemory(ADC12_A_BASE, &ADC_config);
+    ADC12_A_configureMemory(ADC12_A_BASE, &batt_config);
+    ADC12_A_configureMemory(ADC12_A_BASE, &temp_config);
 
     // Set the buffer to be in lower power burst mode, only
     // turning on when necessary
@@ -49,18 +64,18 @@ void setup_bat_monitor(void) {
 // This function enables battery monitoring functionality
 void start_bat_monitor(void) {
     batt_voltage = 0;
-    ADC12_A_clearInterrupt(ADC12_A_BASE, ADC12IFG0);
-    ADC12_A_enableInterrupt(ADC12_A_BASE, ADC12IFG0);
+    ADC12_A_clearInterrupt(ADC12_A_BASE, ADC12IFG1);
+    ADC12_A_enableInterrupt(ADC12_A_BASE, ADC12IFG1);
     // We will use repeated single channel conversion mode to
     // get this working in the background
     ADC12_A_startConversion(ADC12_A_BASE, ADC12_A_MEMORY_0,
-                            ADC12_A_REPEATED_SINGLECHANNEL);
+                            ADC12_A_REPEATED_SEQOFCHANNELS);
 }
 
 // This function disables battery monitoring functionality
 void stop_bat_monitor(void) {
-    ADC12_A_clearInterrupt(ADC12_A_BASE, ADC12IFG0);
-    ADC12_A_disableInterrupt(ADC12_A_BASE, ADC12IFG0);
+    ADC12_A_clearInterrupt(ADC12_A_BASE, ADC12IFG1);
+    ADC12_A_disableInterrupt(ADC12_A_BASE, ADC12IFG1);
     ADC12_A_disableConversions(ADC12_A_BASE, ADC12_A_COMPLETECONVERSION);
 }
 
@@ -72,8 +87,9 @@ void shutdown_bat_monitor(void) {
 
 void __interrupt_vec(ADC12_VECTOR) isr_adc() {
     switch (__even_in_range(ADC12IV, 0x24)) {
-        case ADC12IV_ADC12IFG0:
+        case ADC12IV_ADC12IFG1:
             batt_voltage = ADC12_A_getResults(ADC12_A_BASE, ADC12_A_MEMORY_0);
+            temp_measure = ADC12_A_getResults(ADC12_A_BASE, ADC12_A_MEMORY_1);
             if (batt_voltage > 170 && faults & FAULT_POWER) {
                 // ADC thinks battery voltage is okay, but FAULT_POWER is set.
                 // Most likely a problem with MPPT PGOOD.
