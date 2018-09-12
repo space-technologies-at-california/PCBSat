@@ -233,6 +233,9 @@ static void radio_transmit(char bytes[], unsigned int length) {
     }
 }
 
+/**
+ * Transmit a byte. Without pauses, each byte takes (30*64*8)/64000 = 0.24 s.
+ */
 static void transmitByte(char byte) {
     char parity = fecEncode(byte);
 
