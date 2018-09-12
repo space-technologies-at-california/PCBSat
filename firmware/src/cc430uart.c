@@ -18,11 +18,8 @@ uint8_t uart_tx_buffer_head = 0;
  * @param config additional UART configuration
  */
 void uart_begin(uint32_t baud, uint8_t config) {
-
 	uint16_t ucbrf, divider;
     uint32_t clkfreq = __F_CPU;
-
-    pinUARTconfig();
 
 	UCA0CTL1 = UCSWRST;
 	UCA0CTL1 |= UCSSEL_2;  // SMCLK
