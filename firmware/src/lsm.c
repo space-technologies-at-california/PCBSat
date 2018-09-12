@@ -79,7 +79,6 @@ bool lsm_setup() {
 
 void readGyro(struct vec3_s data[static 1]) {
     uint8_t buffer[6];
-    char str[6];
     i2c_read_buff(SADDR_G, 0x80 | LSM_REG_OUT_X_L_G, 6, buffer);
         
     data->x = moving_average((buffer[1] << 8) | buffer[0], gyro_x_arr);

@@ -43,23 +43,9 @@
 #define SERIAL_7O2 0x98
 #define SERIAL_8O2 0x88
 
-static uint8_t rxBuffer[SERIAL_BUFFER_SIZE];
-
-/**
- * Number of bytes in Rx Buffer
- */
-static uint8_t rxLength;
-
-/**
- * Index in the rxBuffer
- */
-static uint8_t rxIndex;
-
 /**
  * TxBuffer
  */
-static uint8_t txBuffer[SERIAL_BUFFER_SIZE];
-static uint8_t tx_buffer_head;
 static volatile uint8_t tx_buffer_tail;
 
 /**

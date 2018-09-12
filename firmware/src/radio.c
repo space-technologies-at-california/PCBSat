@@ -293,12 +293,6 @@ static void transmitByte(char byte) {
     endRawTransmit();
 }
 
-static void rawTransmit(unsigned char bytes[], unsigned int length) {
-
-    beginRawTransmit(bytes, length);
-    endRawTransmit();
-}
-
 static void wait_for_status(unsigned char s) {
     char status = Strobe(RF_SNOP);
     for (int i = 0; i < 100; i++) {
@@ -318,7 +312,6 @@ static void wait_for_idle() {
 
 static void beginRawTransmit(unsigned char bytes[], unsigned int length) {
     char status;
-
     wait_for_idle();
 
     // Clear TX FIFO

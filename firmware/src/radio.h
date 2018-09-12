@@ -23,7 +23,6 @@ static void radio_set_power(int tx_power_dbm);
 static char fecEncode(char data);
 static void radio_transmit(char bytes[], unsigned int length);
 static void transmitByte(char byte);
-static void rawTransmit(unsigned char bytes[], unsigned int length);
 static void beginRawTransmit(unsigned char bytes[], unsigned int length);
 static void continueRawTransmit(unsigned char bytes[], unsigned int length);
 static void endRawTransmit(void);
