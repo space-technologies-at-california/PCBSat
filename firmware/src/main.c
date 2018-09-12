@@ -173,7 +173,7 @@ int main() {
             tx_msg[3] = (uint8_t)(global_val >> 8);
             tx_msg[4] = (uint8_t)(global_val & 0xFF);
             tx_msg[5] = (int8_t)(norm(&torqued_alpha) - norm(&meas_alpha));
-            tx_msg[6] = (uint8_t)(run_time ;
+            tx_msg[6] = (uint8_t)(run_time);
             run_radio(tx_msg, 7);
             counter_tx = rand_int(10, 4);
 #ifdef DEBUG
