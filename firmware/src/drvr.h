@@ -6,7 +6,5 @@ enum Driver {
     ZAXIS = 2, // EN_1, Back left
 };
 
-void drvr_off(void);
-void drvr_on(int drvr, int pwm);
 void run_actuation(void);
 void setup_pwm(void);

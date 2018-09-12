@@ -21,7 +21,7 @@ void setup_drvr() {
     has_setup = true;
 }
 
-void drvr_on(int drvr, int pwm) {
+static void drvr_on(int drvr, int pwm) {
     // First enable the specific Driver
     switch (drvr) {
         case XAXIS : 
@@ -55,7 +55,7 @@ void drvr_on(int drvr, int pwm) {
     TA1CTL |= MC_1 | TACLR;
 }
 
-void drvr_off() {
+static void drvr_off() {
     TA1CTL = TASSEL_1 | MC_0;
     P2OUT &= ~BIT3;
     P5OUT &= ~(BIT0 | BIT1);
@@ -74,8 +74,4 @@ void run_actuation() {
     drvr_on(ZAXIS, -1);
     sleep(1000, LPM1_bits);
     drvr_off();
-    //sleep(1000, LPM1_bits);
-    //drvr_on(ZAXIS, 50);
-    //sleep(5000, LPM1_bits);
-    //drvr_off();
 }
