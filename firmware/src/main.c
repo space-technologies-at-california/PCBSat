@@ -1,5 +1,6 @@
 #include <msp430.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "battery_mon.h"
@@ -153,7 +154,12 @@ int main() {
         WDT_A_resetTimer(WDT_A_BASE);
         if (counter_tx == 0 && radio_precond()) {
             run_radio();
-            counter_tx = 10; // TODO: random delay goes here
+            counter_tx = 10 + rand()/(RAND_MAX/4);
+#ifdef DEBUG
+            char buf[32];
+            snprintf(buf, sizeof(buf), "sleeping %d\r\n", counter_tx);
+            uart_write(buf, strlen(buf));
+#endif
         } else if (counter_lsm == 0 && lsm_precond()) {
             run_lsm();
             counter_lsm = 2;

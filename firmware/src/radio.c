@@ -1,6 +1,7 @@
 #include <msp430.h>
 #include <setjmp.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "cc430uart.h"
 #include "fault.h"
@@ -426,10 +427,8 @@ void run_radio() {
 
     if (!has_rng_init) {
         // Initialize random number generator
-        /*
-        randomSeed(((int)m_prn0[0]) + ((int)m_prn1[0]) + ((int)m_prn0[1]) +
-                   ((int)m_prn1[1]));
-        */
+        srand(((int)m_prn0[0]) + ((int)m_prn1[0]) + ((int)m_prn0[1]) +
+              ((int)m_prn1[1]));
         has_rng_init = true;
     }
 
