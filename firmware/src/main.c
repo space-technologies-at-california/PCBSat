@@ -139,10 +139,9 @@ bool actuate_precond() {
 int main() {
     init_core();
     init_debug();
-    check_power();
-
     setup_bat_monitor();
     start_bat_monitor();
+    check_power();
 
     while (true) {
         if (counter_tx == 0 && radio_precond()) {

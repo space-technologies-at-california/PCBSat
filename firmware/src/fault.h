@@ -5,6 +5,7 @@ enum {
     FAULT_POWER = 2,
     FAULT_RADIO = 4,
     FAULT_LSM_SETUP = 8,
+    FAULT_MPPT = 16,
 };
 
 extern volatile uint8_t faults;

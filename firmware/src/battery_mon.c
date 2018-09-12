@@ -3,6 +3,7 @@
 *******************************************************/
 
 #include "adc12_a.h"
+#include "fault.h"
 #include "ref.h"
 
 volatile uint16_t batt_voltage; //< number between 0-100, 100 is 3V at VDD
@@ -84,6 +85,13 @@ void __interrupt_vec(ADC12_VECTOR) isr_adc() {
             adc_result = ADC12_A_getResults(ADC12_A_BASE,
                                             ADC12_A_MEMORY_0);
             batt_voltage = adc_result * 100 / 255;
+
+            if (batt_voltage > 60 && faults & FAULT_POWER) {
+                // ADC thinks battery voltage is okay, but FAULT_POWER is set.
+                // Most likely a problem with MPPT PGOOD.
+                faults |= FAULT_MPPT;
+                faults &= ~FAULT_POWER;
+            }
             break;
         default: break;
     }
