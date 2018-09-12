@@ -141,6 +141,9 @@ int main() {
     init_debug();
     check_power();
 
+    setup_bat_monitor();
+    start_bat_monitor();
+
     while (true) {
         if (counter_tx == 0 && radio_precond()) {
             run_radio();
@@ -152,6 +155,8 @@ int main() {
         } else if (counter_debug == 0) {
             char buf[32];
             snprintf(buf, sizeof(buf), "faults: 0x%x\r\n", faults);
+            uart_write(buf, strlen(buf));
+            snprintf(buf, sizeof(buf), "vbat: %u\r\n", batt_voltage);
             uart_write(buf, strlen(buf));
             counter_debug = 2;
 #endif
