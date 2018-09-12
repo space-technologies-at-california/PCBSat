@@ -82,7 +82,7 @@ uint8_t uart_write_byte(const uint8_t c) {
  *
  * @return Amount of bytes transmitted
  */
-uint16_t uart_write(const uint8_t *buf, uint16_t len) {
+uint16_t uart_write(const char *buf, uint16_t len) {
   uint16_t i;
 
   // Send bytes
