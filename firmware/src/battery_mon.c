@@ -8,7 +8,7 @@
 
 volatile uint8_t batt_voltage; //< number between 0-255, 255 is 3V at VDD
 
-const ADC12_A_configureMemoryParam ADC_config = {
+ADC12_A_configureMemoryParam ADC_config = {
     ADC12_A_MEMORY_0, ADC12_A_INPUT_BATTERYMONITOR, ADC12_A_VREFPOS_INT,
     ADC12_A_VREFNEG_AVSS, ADC12_A_NOTENDOFSEQUENCE};
 

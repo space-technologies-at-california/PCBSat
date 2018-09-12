@@ -3,6 +3,7 @@
 
 #include "cc430uart.h"
 #include "drvr.h"
+#include "proto.h"
 
 static bool has_setup = false;
 
