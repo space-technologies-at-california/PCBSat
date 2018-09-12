@@ -8,11 +8,9 @@
 
 volatile uint8_t batt_voltage; //< number between 0-255, 255 is 3V at VDD
 
-const ADC12_A_configureMemoryParam ADC_config = {ADC12_A_MEMORY_0,
-                                                        ADC12_A_INPUT_BATTERYMONITOR,
-                                                        ADC12_A_VREFPOS_INT,
-                                                        ADC12_A_VREFNEG_AVSS,
-                                                        ADC12_A_NOTENDOFSEQUENCE};
+const ADC12_A_configureMemoryParam ADC_config = {
+    ADC12_A_MEMORY_0, ADC12_A_INPUT_BATTERYMONITOR, ADC12_A_VREFPOS_INT,
+    ADC12_A_VREFNEG_AVSS, ADC12_A_NOTENDOFSEQUENCE};
 
 // This function sets up internal battery monitor functionality, 
 // but does not start battery monitoring. Note calling this function
@@ -32,21 +30,16 @@ void setup_bat_monitor(void) {
     // The ADC is pulse sampled, and a pulse occurs
     // every 1024 cycles. The effective sample rate is
     // 0.3Hz
-    ADC12_A_init(ADC12_A_BASE, 
-                 ADC12_A_SAMPLEHOLDSOURCE_SC,
-                 ADC12_A_CLOCKSOURCE_ACLK,
-                 ADC12_A_CLOCKDIVIDER_32);
+    ADC12_A_init(ADC12_A_BASE, ADC12_A_SAMPLEHOLDSOURCE_SC,
+                 ADC12_A_CLOCKSOURCE_ACLK, ADC12_A_CLOCKDIVIDER_32);
     ADC12_A_enable(ADC12_A_BASE);
-    ADC12_A_setResolution(ADC12_A_BASE, 
-                          ADC12_A_RESOLUTION_8BIT);
-    ADC12_A_setupSamplingTimer(ADC12_A_BASE,
-                               ADC12_A_CYCLEHOLD_1024_CYCLES,
+    ADC12_A_setResolution(ADC12_A_BASE, ADC12_A_RESOLUTION_8BIT);
+    ADC12_A_setupSamplingTimer(ADC12_A_BASE, ADC12_A_CYCLEHOLD_1024_CYCLES,
                                ADC12_A_CYCLEHOLD_1024_CYCLES,
                                ADC12_A_MULTIPLESAMPLESENABLE);
-    ADC12_A_configureMemory(ADC12_A_BASE,
-                            &ADC_config);
+    ADC12_A_configureMemory(ADC12_A_BASE, &ADC_config);
 
-    // Set the buffer to be in lower power burst mode, only 
+    // Set the buffer to be in lower power burst mode, only
     // turning on when necessary
     ADC12_A_setReferenceBufferSamplingRate(ADC12_A_BASE,
                                            ADC12_A_MAXSAMPLINGRATE_50KSPS);
@@ -60,8 +53,7 @@ void start_bat_monitor(void) {
     ADC12_A_enableInterrupt(ADC12_A_BASE, ADC12IFG0);
     // We will use repeated single channel conversion mode to
     // get this working in the background
-    ADC12_A_startConversion(ADC12_A_BASE,
-                            ADC12_A_MEMORY_0,
+    ADC12_A_startConversion(ADC12_A_BASE, ADC12_A_MEMORY_0,
                             ADC12_A_REPEATED_SINGLECHANNEL);
 }
 
