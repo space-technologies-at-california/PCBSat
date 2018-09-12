@@ -29,6 +29,8 @@ unsigned char counter_lsm = 0;
 
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 
+struct vec3_s global_omega;
+
 static void init_core() {
     // WDT intervals 1/(10 kHz/512K) = 51.2 secs
     WDT_A_initWatchdogTimer(WDT_A_BASE, WDT_A_CLOCKSOURCE_ACLK,
@@ -134,12 +136,16 @@ bool radio_precond() {
 
 bool lsm_precond() {
     //return !(faults & FAULT_POWER);
-    return false;
+    return true;
 }
 
 bool actuate_precond() {
     //return lsm_precond() && !(faults & FAULT_RECENT_POR);
     return false;
+}
+
+uint32_t norm(struct vec3_s *x) {
+    return x->x * x->y * x->z
 }
 
 int main() {
@@ -155,7 +161,7 @@ int main() {
             run_radio();
             counter_tx = 10; // TODO: random delay goes here
         } else if (counter_lsm == 0 && lsm_precond()) {
-            run_lsm();
+            run_lsm(&global_omega);
             counter_lsm = 2;
 #ifdef DEBUG
         } else if (counter_debug == 0) {
@@ -166,10 +172,11 @@ int main() {
             uart_write(buf, strlen(buf));
             snprintf(buf, sizeof(buf), "temp: %u\r\n", temp_measure);
             uart_write(buf, strlen(buf));
-            counter_debug = 1;
+            counter_debug = 100;
 #endif
         } else if (actuate_precond()) {
-            run_actuation(ZAXIS, -50);
+            uint8_t axis = pick_torquer();
+            run_actuation(axis, 50, &global_omega);
         }
         // FIXME: get a real way of timekeeping
         tick();

@@ -5,6 +5,7 @@
 #include "drvr.h"
 #include "battery_mon.h"
 #include "proto.h"
+#include "lsm.h"
 
 static bool has_setup = false;
 
@@ -64,29 +65,37 @@ static void drvr_off() {
     P2OUT |= BIT1 | BIT2;
 }
 
-void run_actuation(uint8_t axis, int8_t power) {
+uint8_t run_actuation(uint8_t axis, int8_t power, struct vec3_s *data) {
 #ifdef DEBUG
     uart_write("actuating\r\n", 11);
 #endif
     if (!has_setup) {
         setup_drvr();
     }
-
+    struct vec3_s data_gyro_init;
+    struct vec3_s data_gyro_dump;
+    readGyro(&data_gyro_init);
     drvr_on(axis, power);
-    uint8_t i = 0;
-    // TODO set this to like 200
+    uint8_t i;
     for (i = 0; i < 100; i++) {
         if (batt_voltage < 179) {
             break;
         }
-        sleep(100, LPM1_bits);
+        readGyro(&data_gyro_dump);
+        sleep(50, LPM3_bits);
     }
-    #ifdef DEBUG
+    drvr_off();
+    struct vec3_s data_gyro_final;
+    readGyro(&data_gyro_final);
+    data->x = data_gyro_final.x - data_gyro_init.x;
+    data->y = data_gyro_final.y - data_gyro_init.y;
+    data->z = data_gyro_final.z - data_gyro_init.z;
+#ifdef DEBUG
     if (i < 100) {
         uart_write("early\r\n", 11);
     } else { 
         uart_write("done\r\n", 11);
     }
-    #endif
-    drvr_off();
+#endif
+    return i;
 }

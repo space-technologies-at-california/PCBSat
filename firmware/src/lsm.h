@@ -81,4 +81,6 @@ void readGyro(struct vec3_s[static 1]);
 
 void readMag(struct vec3_s[static 1]);
 
-void run_lsm(void);
+uint8_t pick_torquer(void);
+
+void run_lsm(struct vec3_s *data);

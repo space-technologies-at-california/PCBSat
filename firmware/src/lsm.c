@@ -6,6 +6,7 @@
 #include "fault.h"
 #include "i2c.h"
 #include "lsm.h"
+#include "drvr.h"
 
 static int16_t mag_x_arr[5];
 static int16_t mag_y_arr[5];
@@ -95,7 +96,20 @@ void readMag(struct vec3_s data[static 1]) {
     data->z = moving_average((int16_t)((buffer[5] << 8) | buffer[4]), mag_z_arr);
 }
 
-void run_lsm() {
+uint8_t pick_torquer() {
+    struct vec3_s data;
+    readMag(&data);
+    uint32_t magx = data->y*data->y + data->z*data->z;
+    uint16_t magy = data->x*data->x + data->z*data->z;
+    uint16_t magz = data->y*data->y + data->z*data->z;
+    magz = magz / (10000);
+    if (magx > magy && magx > magz) return XAXIS;
+    if (magy > magx && magy > magz) return YAXIS;
+    if (magz > magx && magz > magy) return ZAXIS;
+    return XAXIS;
+}
+
+void run_lsm(struct vec3_s *data) {
     static bool has_lsm_setup = false;
     if (!has_lsm_setup) {
         if (!lsm_setup()) {
@@ -115,19 +129,15 @@ void run_lsm() {
     uint8_t i;
     for (i = 0; i < 100; i++) {
         readGyro(&data_gyro_dump);
-        sleep(50);
+        sleep(50, LPM3_bits);
     }
     struct vec3_s data_gyro_final;
     readGyro(&data_gyro_final);
-    int16_t a_x = data_gyro_final.x - data_gyro_init.x;
-    int16_t a_y = data_gyro_final.y - data_gyro_init.y;
-    int16_t a_z = data_gyro_final.z - data_gyro_init.z;
+    data->x = data_gyro_final.x - data_gyro_init.x;
+    data->y = data_gyro_final.y - data_gyro_init.y;
+    data->z = data_gyro_final.z - data_gyro_init.z;
+#ifdef DEBUG
     snprintf(str, sizeof(str), "%d, %d, %d\r\n", a_x, a_y, a_z);
     uart_write(str, strlen(str));
-
-//    struct vec3_s data_mag;
-//    readMag(&data_mag);
-//    snprintf(str, sizeof(str), "%d, %d, %d\r\n",
-//            (int16_t) data_mag.x, (int16_t) data_mag.y, (int16_t) data_mag.z);
-//    uart_write(str, strlen(str));
+#endif
 }
