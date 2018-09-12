@@ -65,7 +65,7 @@ static void drvr_off() {
     P2OUT |= BIT1 | BIT2;
 }
 
-uint8_t run_actuation(uint8_t axis, int8_t power, struct vec3_s *data) {
+uint8_t run_actuation(uint8_t axis, int8_t power, struct vec3_s data[static 1]) {
 #ifdef DEBUG
     uart_write("actuating\r\n", 11);
 #endif

@@ -30,6 +30,8 @@ unsigned char counter_lsm = 0;
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 
 struct vec3_s global_omega;
+struct vec3_s meas_alpha;
+struct vec3_s torqued_alpha;
 
 static void init_core() {
     // WDT intervals 1/(10 kHz/512K) = 51.2 secs
@@ -145,7 +147,7 @@ bool actuate_precond() {
 }
 
 uint32_t norm(struct vec3_s *x) {
-    return x->x * x->y * x->z
+    return x->x * x->y * x->z;
 }
 
 int main() {
@@ -161,7 +163,7 @@ int main() {
             run_radio();
             counter_tx = 10; // TODO: random delay goes here
         } else if (counter_lsm == 0 && lsm_precond()) {
-            run_lsm(&global_omega);
+            run_lsm(&meas_alpha);
             counter_lsm = 2;
 #ifdef DEBUG
         } else if (counter_debug == 0) {
@@ -176,7 +178,7 @@ int main() {
 #endif
         } else if (actuate_precond()) {
             uint8_t axis = pick_torquer();
-            run_actuation(axis, 50, &global_omega);
+            run_actuation(axis, 50, &torqued_alpha);
         }
         // FIXME: get a real way of timekeeping
         tick();

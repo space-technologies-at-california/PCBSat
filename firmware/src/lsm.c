@@ -99,9 +99,9 @@ void readMag(struct vec3_s data[static 1]) {
 uint8_t pick_torquer() {
     struct vec3_s data;
     readMag(&data);
-    uint32_t magx = data->y*data->y + data->z*data->z;
-    uint16_t magy = data->x*data->x + data->z*data->z;
-    uint16_t magz = data->y*data->y + data->z*data->z;
+    uint32_t magx = data.y*data.y + data.z*data.z;
+    uint16_t magy = data.x*data.x + data.z*data.z;
+    uint16_t magz = data.y*data.y + data.z*data.z;
     magz = magz / (10000);
     if (magx > magy && magx > magz) return XAXIS;
     if (magy > magx && magy > magz) return YAXIS;
@@ -137,7 +137,7 @@ void run_lsm(struct vec3_s *data) {
     data->y = data_gyro_final.y - data_gyro_init.y;
     data->z = data_gyro_final.z - data_gyro_init.z;
 #ifdef DEBUG
-    snprintf(str, sizeof(str), "%d, %d, %d\r\n", a_x, a_y, a_z);
+    snprintf(str, sizeof(str), "%d, %d, %d\r\n", data->x, data->y, data->z);
     uart_write(str, strlen(str));
 #endif
 }
