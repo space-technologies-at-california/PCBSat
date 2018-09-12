@@ -125,11 +125,10 @@ void run_lsm(struct vec3_s *data) {
 
     char str[30];
     struct vec3_s data_gyro_init;
-    struct vec3_s data_gyro_dump;
     readGyro(&data_gyro_init);
     uint8_t i;
     for (i = 0; i < 100; i++) {
-        readGyro(&data_gyro_dump);
+        readGyro(&global_omega);
         sleep(50, LPM3_bits);
     }
     struct vec3_s data_gyro_final;

@@ -34,6 +34,7 @@ struct vec3_s global_omega;
 struct vec3_s meas_alpha;
 struct vec3_s torqued_alpha;
 uint16_t sleep_counter = 0;
+uint8_t run_time = 0;
 
 void tick(void);
 
@@ -166,12 +167,13 @@ int main() {
         if (counter_tx == 0 && radio_precond()) {
             char tx_msg[7];
             tx_msg[0] = 0;
-            tx_msg[1] = faults;
-            tx_msg[2] = batt_voltage;
-            tx_msg[3] = temp_measure;
-            tx_msg[4] = 0;
-            tx_msg[5] = 0;
-            tx_msg[6] = 0;
+            tx_msg[1] = (faults << 5) | (((batt_voltage - 127)>>5) & 0x07);
+            tx_msg[2] = temp_measure;
+            uint16_t global_val = (uint16_t) norm(&global_omega);
+            tx_msg[3] = (uint8_t)(global_val >> 8);
+            tx_msg[4] = (uint8_t)(global_val & 0xFF);
+            tx_msg[5] = (int8_t)(norm(&torqued_alpha) - norm(&meas_alpha));
+            tx_msg[6] = (uint8_t)(run_time ;
             run_radio(tx_msg, 7);
             counter_tx = rand_int(10, 4);
 #ifdef DEBUG
@@ -195,7 +197,7 @@ int main() {
 #endif
         } else if (actuate_precond()) {
             uint8_t axis = pick_torquer();
-            run_actuation(axis, 50, &torqued_alpha);
+            run_time = run_actuation(axis, 50, &torqued_alpha);
         }
 
         // Wait at least 1 second before looping.
