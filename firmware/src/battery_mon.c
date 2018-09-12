@@ -6,7 +6,7 @@
 #include "fault.h"
 #include "ref.h"
 
-volatile uint16_t batt_voltage; //< number between 0-100, 100 is 3V at VDD
+volatile uint8_t batt_voltage; //< number between 0-255, 255 is 3V at VDD
 
 const ADC12_A_configureMemoryParam ADC_config = {ADC12_A_MEMORY_0,
                                                         ADC12_A_INPUT_BATTERYMONITOR,
@@ -79,14 +79,10 @@ void shutdown_bat_monitor(void) {
 }
 
 void __interrupt_vec(ADC12_VECTOR) isr_adc() {
-    uint8_t adc_result;
     switch (__even_in_range(ADC12IV, 0x24)) {
         case ADC12IV_ADC12IFG0:
-            adc_result = ADC12_A_getResults(ADC12_A_BASE,
-                                            ADC12_A_MEMORY_0);
-            batt_voltage = adc_result * 100 / 255;
-
-            if (batt_voltage > 60 && faults & FAULT_POWER) {
+            batt_voltage = ADC12_A_getResults(ADC12_A_BASE, ADC12_A_MEMORY_0);
+            if (batt_voltage > 170 && faults & FAULT_POWER) {
                 // ADC thinks battery voltage is okay, but FAULT_POWER is set.
                 // Most likely a problem with MPPT PGOOD.
                 faults |= FAULT_MPPT;
