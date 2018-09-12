@@ -158,7 +158,7 @@ int main() {
     while (true) {
         WDT_A_resetTimer(WDT_A_BASE);
         if (counter_tx == 0 && radio_precond()) {
-            run_radio();
+            run_radio("Hello Earthlings\n", 17);
             counter_tx = rand_int(10, 4);
 #ifdef DEBUG
             char buf[32];

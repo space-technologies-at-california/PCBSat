@@ -420,7 +420,7 @@ static void init_radio() {
     wait_for_idle();
 }
 
-void run_radio() {
+void run_radio(char *tx_msg, unsigned int len) {
     static bool has_rng_init = false;
     static bool has_radio_init = false;
     fault_count = 0;
@@ -457,7 +457,7 @@ void run_radio() {
     P3OUT |= BIT7;
     uart_write("TX\r\n", 4);
 #endif
-    radio_transmit("Hello Earthlings\n", 17);
+    radio_transmit(tx_msg, len);
 #ifdef DEBUG
     P3OUT &= ~BIT7;
 #endif
