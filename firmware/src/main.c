@@ -30,6 +30,8 @@ unsigned char counter_lsm = 0;
 
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 
+void tick(void);
+
 static void init_core() {
     // WDT intervals 1/(10 kHz/512K) = 51.2 secs
     WDT_A_initWatchdogTimer(WDT_A_BASE, WDT_A_CLOCKSOURCE_ACLK,
