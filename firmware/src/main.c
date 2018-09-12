@@ -30,6 +30,8 @@ unsigned char counter_lsm = 0;
 
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
 
+uint16_t sleep_counter = 0;
+
 void tick(void);
 
 static void init_core() {
@@ -73,11 +75,7 @@ void sleep(uint16_t ms, unsigned short mode) {
         true};
     Timer_A_initUpMode(TIMER_A0_BASE, &params);
     __bis_SR_register(mode);
-
-    for (; ms >= 1000; ms -= 1000) {
-        // Long sleeps should tick to keep timing reasonable.
-        tick();
-    }
+    sleep_counter += ms;
 }
 
 void deep_sleep(uint16_t ms) {
@@ -176,7 +174,7 @@ int main() {
 #endif
         } else if (counter_lsm == 0 && lsm_precond()) {
             run_lsm();
-            counter_lsm = 2;
+            counter_lsm = 15;
 #ifdef DEBUG
         } else if (counter_debug == 0) {
             char buf[32];
@@ -186,12 +184,22 @@ int main() {
             uart_write(buf, strlen(buf));
             snprintf(buf, sizeof(buf), "temp: %u\r\n", temp_measure);
             uart_write(buf, strlen(buf));
-            counter_debug = 1;
+            counter_debug = 3;
 #endif
         } else if (actuate_precond()) {
             run_actuation(ZAXIS, -50);
         }
-        deep_sleep(1000);
+
+        // Wait at least 1 second before looping.
+        if (sleep_counter < 1000) {
+            deep_sleep(1000 - sleep_counter);
+        }
+
+        for (; sleep_counter >= 1000; sleep_counter -= 1000) {
+            // Long sleeps should tick to keep timing reasonable.
+            tick();
+        }
+        sleep_counter = 0;
     }
 }
 
