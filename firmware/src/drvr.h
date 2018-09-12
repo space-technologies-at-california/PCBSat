@@ -6,5 +6,5 @@ enum Driver {
     ZAXIS = 2, // EN_1, Back left
 };
 
-void run_actuation(void);
+void run_actuation(uint8_t axis, int8_t power);
 void setup_pwm(void);

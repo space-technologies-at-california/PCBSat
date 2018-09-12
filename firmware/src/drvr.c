@@ -3,6 +3,7 @@
 
 #include "cc430uart.h"
 #include "drvr.h"
+#include "battery_mon.h"
 #include "proto.h"
 
 static bool has_setup = false;
@@ -21,7 +22,7 @@ void setup_drvr() {
     has_setup = true;
 }
 
-static void drvr_on(int drvr, int pwm) {
+static void drvr_on(uint8_t drvr, int8_t pwm) {
     // First enable the specific Driver
     switch (drvr) {
         case XAXIS : 
@@ -63,7 +64,7 @@ static void drvr_off() {
     P2OUT |= BIT1 | BIT2;
 }
 
-void run_actuation() {
+void run_actuation(uint8_t axis, int8_t power) {
 #ifdef DEBUG
     uart_write("actuating\r\n", 11);
 #endif
@@ -71,7 +72,21 @@ void run_actuation() {
         setup_drvr();
     }
 
-    drvr_on(ZAXIS, -1);
-    sleep(1000, LPM1_bits);
+    drvr_on(axis, power);
+    uint8_t i = 0;
+    // TODO set this to like 200
+    for (i = 0; i < 100; i++) {
+        if (batt_voltage < 179) {
+            break;
+        }
+        sleep(100, LPM1_bits);
+    }
+    #ifdef DEBUG
+    if (i < 100) {
+        uart_write("early\r\n", 11);
+    } else { 
+        uart_write("done\r\n", 11);
+    }
+    #endif
     drvr_off();
 }
