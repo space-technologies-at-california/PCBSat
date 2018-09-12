@@ -130,18 +130,15 @@ void tick() {
 }
 
 bool radio_precond() {
-    //return !(faults & FAULT_POWER);
-    return false;
+    return !(faults & FAULT_POWER);
 }
 
 bool lsm_precond() {
-    //return !(faults & FAULT_POWER);
-    return false;
+    return !(faults & FAULT_POWER);
 }
 
 bool actuate_precond() {
-    //return lsm_precond() && !(faults & FAULT_RECENT_POR);
-    return false;
+    return lsm_precond() && !(faults & FAULT_RECENT_POR);
 }
 
 int rand_int(int min, int incr) {
