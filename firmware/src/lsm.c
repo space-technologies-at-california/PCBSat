@@ -111,13 +111,17 @@ void run_lsm() {
     char str[30];
     struct vec3_s data_gyro;
     readGyro(&data_gyro);
+#ifdef DEBUG
     snprintf(str, sizeof(str), "%d, %d, %d\r\n",
             (int16_t) data_gyro.x, (int16_t) data_gyro.y, (int16_t) data_gyro.z);
     uart_write(str, strlen(str));
+#endif
 
     struct vec3_s data_mag;
     readMag(&data_mag);
+#ifdef DEBUG
     snprintf(str, sizeof(str), "%d, %d, %d\r\n",
             (int16_t) data_mag.x, (int16_t) data_mag.y, (int16_t) data_mag.z);
     uart_write(str, strlen(str));
+#endif
 }
