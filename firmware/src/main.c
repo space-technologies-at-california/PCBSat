@@ -147,6 +147,7 @@ int main() {
     check_power();
 
     while (true) {
+        WDT_A_resetTimer(WDT_A_BASE);
         if (counter_tx == 0 && radio_precond()) {
             run_radio();
             counter_tx = 10; // TODO: random delay goes here
