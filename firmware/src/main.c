@@ -144,6 +144,10 @@ bool actuate_precond() {
     return false;
 }
 
+int rand_int(int min, int incr) {
+    return min + rand()/(RAND_MAX/incr);
+}
+
 int main() {
     init_core();
     init_debug();
@@ -155,7 +159,7 @@ int main() {
         WDT_A_resetTimer(WDT_A_BASE);
         if (counter_tx == 0 && radio_precond()) {
             run_radio();
-            counter_tx = 10 + rand()/(RAND_MAX/4);
+            counter_tx = rand_int(10, 4);
 #ifdef DEBUG
             char buf[32];
             snprintf(buf, sizeof(buf), "sleeping %d\r\n", counter_tx);
