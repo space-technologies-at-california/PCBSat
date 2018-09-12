@@ -109,15 +109,25 @@ void run_lsm() {
     }
 
     char str[30];
-    struct vec3_s data_gyro;
-    readGyro(&data_gyro);
-    snprintf(str, sizeof(str), "%d, %d, %d\r\n",
-            (int16_t) data_gyro.x, (int16_t) data_gyro.y, (int16_t) data_gyro.z);
+    struct vec3_s data_gyro_init;
+    struct vec3_s data_gyro_dump;
+    readGyro(&data_gyro_init);
+    uint8_t i;
+    for (i = 0; i < 100; i++) {
+        readGyro(&data_gyro_dump);
+        sleep(50);
+    }
+    struct vec3_s data_gyro_final;
+    readGyro(&data_gyro_final);
+    int16_t a_x = data_gyro_final.x - data_gyro_init.x;
+    int16_t a_y = data_gyro_final.y - data_gyro_init.y;
+    int16_t a_z = data_gyro_final.z - data_gyro_init.z;
+    snprintf(str, sizeof(str), "%d, %d, %d\r\n", a_x, a_y, a_z);
     uart_write(str, strlen(str));
 
-    struct vec3_s data_mag;
-    readMag(&data_mag);
-    snprintf(str, sizeof(str), "%d, %d, %d\r\n",
-            (int16_t) data_mag.x, (int16_t) data_mag.y, (int16_t) data_mag.z);
-    uart_write(str, strlen(str));
+//    struct vec3_s data_mag;
+//    readMag(&data_mag);
+//    snprintf(str, sizeof(str), "%d, %d, %d\r\n",
+//            (int16_t) data_mag.x, (int16_t) data_mag.y, (int16_t) data_mag.z);
+//    uart_write(str, strlen(str));
 }

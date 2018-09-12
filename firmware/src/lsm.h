@@ -72,7 +72,7 @@ typedef enum
 } LSMMagDataRate_t;
 
 struct vec3_s {
-    uint16_t x, y, z;
+    int16_t x, y, z;
 };
 
 bool lsm_setup(void);
