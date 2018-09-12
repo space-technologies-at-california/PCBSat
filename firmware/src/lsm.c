@@ -81,18 +81,18 @@ void readGyro(struct vec3_s data[static 1]) {
     uint8_t buffer[6];
     i2c_read_buff(SADDR_G, 0x80 | LSM_REG_OUT_X_L_G, 6, buffer);
         
-    data->x = moving_average((buffer[1] << 8) | buffer[0], gyro_x_arr);
-    data->y = moving_average((buffer[3] << 8) | buffer[2], gyro_y_arr);
-    data->z = moving_average((buffer[5] << 8) | buffer[4], gyro_z_arr);
+    data->x = moving_average((int16_t)((buffer[1] << 8) | buffer[0]), gyro_x_arr);
+    data->y = moving_average((int16_t)((buffer[3] << 8) | buffer[2]), gyro_y_arr);
+    data->z = moving_average((int16_t)((buffer[5] << 8) | buffer[4]), gyro_z_arr);
 }
 
 void readMag(struct vec3_s data[static 1]) {
     uint8_t buffer[6];
     i2c_read_buff(SADDR_M, 0x80 | LSM_REG_OUT_X_L_M, 6, buffer);
 
-    data->x = moving_average((buffer[1] << 8) | buffer[0], mag_x_arr);
-    data->y = moving_average((buffer[3] << 8) | buffer[2], mag_y_arr);
-    data->z = moving_average((buffer[5] << 8) | buffer[4], mag_z_arr);
+    data->x = moving_average((int16_t)((buffer[1] << 8) | buffer[0]), mag_x_arr);
+    data->y = moving_average((int16_t)((buffer[3] << 8) | buffer[2]), mag_y_arr);
+    data->z = moving_average((int16_t)((buffer[5] << 8) | buffer[4]), mag_z_arr);
 }
 
 void run_lsm() {

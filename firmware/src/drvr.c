@@ -72,10 +72,10 @@ void run_actuation() {
     }
 
     drvr_on(ZAXIS, -1);
-    sleep(5000, LPM1_bits);
-    drvr_off();
     sleep(1000, LPM1_bits);
+    drvr_off();
+    //sleep(1000, LPM1_bits);
     //drvr_on(ZAXIS, 50);
     //sleep(5000, LPM1_bits);
-    drvr_off();
+    //drvr_off();
 }
