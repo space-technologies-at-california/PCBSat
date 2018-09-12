@@ -5,7 +5,7 @@
 #include "adc12_a.h"
 #include "ref.h"
 
-volatile uint16_t batt_voltage;
+volatile uint16_t batt_voltage; //< number between 0-100, 100 is 3V at VDD
 
 const ADC12_A_configureMemoryParam ADC_config = {ADC12_A_MEMORY_0,
                                                         ADC12_A_INPUT_BATTERYMONITOR,
