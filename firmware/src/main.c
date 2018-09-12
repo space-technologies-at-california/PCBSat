@@ -150,7 +150,9 @@ int rand_int(int min, int incr) {
 
 int main() {
     init_core();
+#ifdef DEBUG
     init_debug();
+#endif
     setup_bat_monitor();
     start_bat_monitor();
     check_power();
