@@ -1,4 +1,3 @@
 (fp_lib_table
-  (lib (name sprite)(type KiCad)(uri "$(KIPRJMOD)/sprite.pretty")(options "")(descr ""))
-  (lib (name CPH3225A)(type Eagle)(uri /home/aviral/Downloads/CPH3225A.lbr)(options "")(descr ""))
+  (lib (name sprite)(type KiCad)(uri "$(KIPRJMOD)/../sprite.pretty")(options "")(descr ""))
 )
