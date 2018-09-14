@@ -8,3 +8,4 @@ int main(void);
 void run_radio(char *, unsigned int);
 
 struct vec3_s global_omega;
+extern char tx_msg[7];

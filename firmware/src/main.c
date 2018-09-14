@@ -29,6 +29,7 @@ unsigned char counter_tx = 0;
 unsigned char counter_lsm = 0;
 
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
+char tx_msg[7];
 
 struct vec3_s global_omega;
 struct vec3_s meas_alpha;
@@ -158,10 +159,11 @@ int main() {
     while (true) {
         WDT_A_resetTimer(WDT_A_BASE);
         if (counter_tx == 0 && radio_precond()) {
-            char tx_msg[7];
             tx_msg[0] = 0;
             tx_msg[1] = (faults << 5) | (((batt_voltage - 127)>>5) & 0x07);
             tx_msg[2] = temp_measure;
+            // tx_msg[3-6] set in lsm.c
+            // FIXME
             uint16_t global_val = (uint16_t) norm(&global_omega);
             tx_msg[3] = (uint8_t)(global_val >> 8);
             tx_msg[4] = (uint8_t)(global_val & 0xFF);
