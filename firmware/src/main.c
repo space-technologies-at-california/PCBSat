@@ -136,7 +136,8 @@ bool lsm_precond() {
 }
 
 bool actuate_precond() {
-    return lsm_precond() && !(faults & FAULT_RECENT_POR) && !(faults & FAULT_LSM_SETUP);
+    return radio_precond() && !(faults & FAULT_RECENT_POR) &&
+           !(faults & FAULT_LSM_SETUP);
 }
 
 int rand_int(int min, int incr) {
