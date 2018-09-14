@@ -50,13 +50,6 @@ static void init_core() {
     // VLO (10 kHz) -> ACLK
     UCS_initClockSignal(UCS_ACLK, UCS_VLOCLK_SELECT, UCS_CLOCK_DIVIDER_1);
 
-    // POWER: Turn ADC and reference voltage off to conserve power
-    ADC12CTL0 &= ~ADC12ENC;
-    ADC12CTL0 &= ~ADC12ON;
-    ADC12CTL0 &= ~ADC12REFON;
-    REFCTL0 &= ~REFON;
-    REFCTL0 |= REFTCOFF; // Temp sensor disabled
-
     // Set the High-Power Mode Request Enable bit so LPM3 can be entered
     // with active radio enabled
     PMMCTL0_H = 0xA5;
