@@ -58,7 +58,6 @@ static void init_core() {
 
     setup_pins();
     WDT_A_start(WDT_A_BASE);
-    __enable_interrupt();
 }
 
 void sleep(uint16_t ms, unsigned short mode) {
@@ -148,10 +147,11 @@ uint32_t norm(struct vec3_s *x) {
 
 int main() {
     init_core();
+    setup_bat_monitor();
+    __enable_interrupt();
 #ifdef DEBUG
     init_debug();
 #endif
-    setup_bat_monitor();
     start_bat_monitor();
     check_power();
 
