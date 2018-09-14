@@ -74,9 +74,10 @@ bool setup_bat_monitor(void) {
 // This function enables battery monitoring functionality
 void start_bat_monitor(void) {
     batt_voltage = 0;
+    temp_measure = 0;
     ADC12_A_clearInterrupt(ADC12_A_BASE, ADC12IFG1);
     ADC12_A_enableInterrupt(ADC12_A_BASE, ADC12IFG1);
-    // We will use repeated single channel conversion mode to
+    // We will use repeated sequence of channels conversion mode to
     // get this working in the background
     ADC12_A_startConversion(ADC12_A_BASE, ADC12_A_MEMORY_0,
                             ADC12_A_REPEATED_SEQOFCHANNELS);
@@ -105,7 +106,6 @@ void __interrupt_vec(ADC12_VECTOR) isr_adc() {
                 // 2.31V), but FAULT_POWER is set. Most likely a problem with
                 // MPPT PGOOD.
                 faults |= FAULT_MPPT;
-                faults &= ~FAULT_POWER;
             }
             break;
         default: break;
