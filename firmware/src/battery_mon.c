@@ -90,9 +90,10 @@ void __interrupt_vec(ADC12_VECTOR) isr_adc() {
         case ADC12IV_ADC12IFG1:
             batt_voltage = ADC12_A_getResults(ADC12_A_BASE, ADC12_A_MEMORY_0);
             temp_measure = ADC12_A_getResults(ADC12_A_BASE, ADC12_A_MEMORY_1);
-            if (batt_voltage > 170 && faults & FAULT_POWER) {
-                // ADC thinks battery voltage is okay, but FAULT_POWER is set.
-                // Most likely a problem with MPPT PGOOD.
+            if (batt_voltage > 213 && faults & FAULT_POWER) {
+                // ADC thinks battery voltage > 2.5V (vs PGOOD high thresh of
+                // 2.31V), but FAULT_POWER is set. Most likely a problem with
+                // MPPT PGOOD.
                 faults |= FAULT_MPPT;
                 faults &= ~FAULT_POWER;
             }

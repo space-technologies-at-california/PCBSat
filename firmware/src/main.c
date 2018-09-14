@@ -127,11 +127,12 @@ void tick() {
 }
 
 bool radio_precond() {
-    return !(faults & FAULT_POWER);
+    // Ignore FAULT_POWER if FAULT_MPPT is set
+    return !(faults & FAULT_POWER) || (faults & FAULT_MPPT);
 }
 
 bool lsm_precond() {
-    return !(faults & FAULT_POWER);
+    return radio_precond();
 }
 
 bool actuate_precond() {
