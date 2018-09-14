@@ -4,6 +4,7 @@
 
 #include "adc12_a.h"
 #include "fault.h"
+#include "proto.h"
 #include "ref.h"
 
 volatile uint8_t batt_voltage; //< number between 0-255, 255 is 3V at VDD
@@ -29,9 +30,17 @@ static ADC12_A_configureMemoryParam temp_config = {
 // but does not start battery monitoring. Note calling this function
 // and not using battery monitoring is wasteful as it turns on the 
 // reference. 
-void setup_bat_monitor(void) {
+bool setup_bat_monitor(void) {
     // Turn on the Reference
-    while (REF_ACTIVE == Ref_isRefGenBusy(REF_BASE));
+    unsigned char i = 0;
+    for (; i < 10; i++) {
+        if (!(REF_ACTIVE == Ref_isRefGenBusy(REF_BASE))) {
+            // RefGen shouldn't be busy but just in case
+            break;
+        }
+        deep_sleep(5);
+    }
+    if (i == 10) return false;
     
     Ref_setReferenceVoltage(REF_BASE, REF_VREF1_5V);
     Ref_enableReferenceVoltage(REF_BASE);
@@ -59,6 +68,7 @@ void setup_bat_monitor(void) {
     ADC12_A_setReferenceBufferSamplingRate(ADC12_A_BASE,
                                            ADC12_A_MAXSAMPLINGRATE_50KSPS);
     ADC12_A_enableReferenceBurst(ADC12_A_BASE);
+    return true;
 }
 
 // This function enables battery monitoring functionality

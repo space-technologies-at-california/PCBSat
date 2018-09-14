@@ -150,19 +150,22 @@ uint32_t norm(struct vec3_s *x) {
 
 int main() {
     init_core();
-    setup_bat_monitor();
     __enable_interrupt();
 #ifdef DEBUG
     init_debug();
 #endif
-    start_bat_monitor();
+    if (setup_bat_monitor()) {
+        start_bat_monitor();
+    } else {
+        faults |= FAULT_GPF;
+    }
     check_power();
 
     while (true) {
         WDT_A_resetTimer(WDT_A_BASE);
         if (counter_tx == 0 && radio_precond()) {
             tx_msg[0] = 0;
-            tx_msg[1] = (faults << 5) | (((batt_voltage - 127)>>5) & 0x07);
+            tx_msg[1] = (faults << 2) | (((batt_voltage - 127)>>6) & 0x03);
             tx_msg[2] = temp_measure;
             // tx_msg[3-6] set in lsm.c
             // FIXME
