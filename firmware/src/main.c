@@ -212,7 +212,7 @@ void __interrupt_vec(TIMER0_A0_VECTOR) isr_timer_a0() {
     LPM3_EXIT;
 }
 
-void __interrupt_vec(PORT1_VECTOR) isr_p1() {
+void __attribute__((critical)) __interrupt_vec(PORT1_VECTOR) isr_p1() {
     switch (__even_in_range(P1IV, P1IV_P1IFG7)) {
     case P1IV_P1IFG1:
         check_power();
