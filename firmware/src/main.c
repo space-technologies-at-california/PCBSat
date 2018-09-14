@@ -174,7 +174,7 @@ int main() {
             tx_msg[4] = (uint8_t)(global_val & 0xFF);
             tx_msg[5] = (int8_t)(norm(&torqued_alpha) - norm(&meas_alpha));
             tx_msg[6] = (uint8_t)(run_time);
-            run_radio(tx_msg, 7);
+            run_radio();
             counter_tx = rand_int(10, 4);
 #ifdef DEBUG
             char buf[32];

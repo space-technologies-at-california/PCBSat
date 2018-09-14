@@ -224,7 +224,7 @@ static char fecEncode(char data) {
 
 static void radio_transmit(char bytes[], unsigned int length) {
     for (unsigned int k = 0; k < length; ++k) {
-        if (faults & FAULT_POWER) {
+        if (!radio_precond()) {
 #ifdef DEBUG
             uart_write("TX early exit\r\n", 15);
 #endif
@@ -420,7 +420,7 @@ static void init_radio() {
     wait_for_idle();
 }
 
-void run_radio(char *tx_msg, unsigned int len) {
+void run_radio() {
     static bool has_rng_init = false;
     static bool has_radio_init = false;
     fault_count = 0;
@@ -457,7 +457,7 @@ void run_radio(char *tx_msg, unsigned int len) {
     P3OUT |= BIT7;
     uart_write("TX\r\n", 4);
 #endif
-    radio_transmit(tx_msg, len);
+    radio_transmit(tx_msg, sizeof(tx_msg)/sizeof(char));
 #ifdef DEBUG
     P3OUT &= ~BIT7;
 #endif
