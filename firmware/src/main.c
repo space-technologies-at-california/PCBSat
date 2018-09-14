@@ -144,7 +144,7 @@ int rand_int(int min, int incr) {
 }
 
 uint32_t norm(struct vec3_s *x) {
-    return x->x * x->y * x->z;
+    return (x->x * x->x) + (x->y * x->y) + (x->z * x-> z);
 }
 
 int main() {
