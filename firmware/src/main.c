@@ -94,7 +94,7 @@ static void blink_main() {
  * Call this once after init_core(). After that, only from the PGOOD ISR.
  */
 static void check_power() {
-    P1IE &= ~BIT1;
+    P1IE &= ~BIT1; // Changing P1IES could result in extra interrupt
     if (P1IN & BIT1) {
         // PGOOD high, set interrupt to negative edge
         faults &= ~FAULT_POWER;
