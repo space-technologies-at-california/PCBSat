@@ -1,0 +1,14 @@
+(module ANTENNA (layer F.Cu) (tedit 0)
+  (fp_text reference ANT-P (at 0 0) (layer F.SilkS) hide
+    (effects (font (size 1.27 1.27) (thickness 0.15)))
+  )
+  (fp_text value ANTENNA (at 0 0) (layer F.SilkS) hide
+    (effects (font (size 1.27 1.27) (thickness 0.15)))
+  )
+  (pad IN3 thru_hole rect (at -1.27 0) (size 1.27 1.27) (drill 0.5) (layers *.Cu *.Mask)
+    (solder_mask_margin 0.0762))
+  (pad IN2 thru_hole rect (at 0 0) (size 1.27 1.27) (drill 0.5) (layers *.Cu *.Mask)
+    (solder_mask_margin 0.0762))
+  (pad IN1 thru_hole rect (at 1.27 0) (size 1.27 1.27) (drill 0.5) (layers *.Cu *.Mask)
+    (solder_mask_margin 0.0762))
+)

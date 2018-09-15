@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name sprite-eagle-import)(type Legacy)(uri ${KIPRJMOD}/sprite-eagle-import.lib)(options "")(descr ""))
+  (lib (name sprite-rescue)(type Legacy)(uri ${KIPRJMOD}/sprite-rescue.lib)(options "")(descr ""))
+  (lib (name CPH3225A)(type Legacy)(uri /home/aviral/Downloads/CPH3225A/CPH3225A.lib)(options "")(descr ""))
+)
