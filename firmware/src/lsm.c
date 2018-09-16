@@ -9,14 +9,14 @@
 #include "drvr.h"
 #include "proto.h"
 
-static int16_t mag_x_arr[5];
-static int16_t mag_y_arr[5];
-static int16_t mag_z_arr[5];
-static int16_t gyro_x_arr[5];
-static int16_t gyro_y_arr[5];
-static int16_t gyro_z_arr[5];
+static int16_t mag_x_arr[MOVING_AVG_FILTER_LEN];
+static int16_t mag_y_arr[MOVING_AVG_FILTER_LEN];
+static int16_t mag_z_arr[MOVING_AVG_FILTER_LEN];
+static int16_t gyro_x_arr[MOVING_AVG_FILTER_LEN];
+static int16_t gyro_y_arr[MOVING_AVG_FILTER_LEN];
+static int16_t gyro_z_arr[MOVING_AVG_FILTER_LEN];
 
-// 5 Point Moving average function
+// MOVING_AVG_FILTER_LEN Point Moving average function
 // arr[0] is always most recent sample
 static int16_t moving_average(int16_t sample, int16_t arr[MOVING_AVG_FILTER_LEN]) {
     uint8_t i;
@@ -27,7 +27,7 @@ static int16_t moving_average(int16_t sample, int16_t arr[MOVING_AVG_FILTER_LEN]
     }
     arr[0] = sample;
     sum += sample;
-    return (int16_t) (sum / 5);
+    return (int16_t) (sum / MOVING_AVG_FILTER_LEN);
 }
 
 static void setup_filters(int16_t filter[MOVING_AVG_FILTER_LEN]) {
@@ -45,7 +45,7 @@ bool lsm_setup() {
     setup_filters(gyro_y_arr);
     setup_filters(gyro_z_arr);
 
-    uint8_t id; 
+    uint8_t id;
     i2c_read_buff(SADDR_G, LSM_REG_WHO_AM_I_XG, 1, &id);
     if (id != LSM_XG_ID)
         return false;
@@ -108,6 +108,47 @@ uint8_t pick_torquer() {
     if (magy > magx && magy > magz) return YAXIS;
     if (magz > magx && magz > magy) return ZAXIS;
     return XAXIS;
+}
+
+
+
+void magnetorquer_out(uint8_t *axis, int8_t *power) {
+    // everything is a integer? but assuming that int32 will be scaler linearly to floats
+
+    struct vec3_s m_data;
+    readMag(&m_data);
+    struct vec3_s g_data;
+    readGyro(&g_data);
+
+    uint32_t m_norm = m_data.x * m_data.x + m_data.y * m_data.y + m_data.z * m_data.z;
+    int32_t scalar_coeff = - CONTROLLER_GAIN / m_norm;
+
+    struct vec3_s mag_dipoles;
+    mag_dipoles.x = scalar_coeff * (m_data[1] * g_data[2] - m_data[2] * g_data[1]);
+    mag_dipoles.y = scalar_coeff * (m_data[2] * g_data[0] - m_data[0] * g_data[2]);
+    mag_dipoles.z = scalar_coeff * (m_data[0] * g_data[1] - m_data[1] * g_data[0]);
+
+    struct vec3_s torques;
+    torques.x = mag_dipoles[1] * m_data[2] - mag_dipoles[2] * m_data[1];
+    torques.y = mag_dipoles[2] * m_data[0] - mag_dipoles[0] * m_data[2];
+    torques.z = mag_dipoles[0] * m_data[1] - mag_dipoles[1] * m_data[0];
+
+    uint32_t magx = torques.y * torques.y + torques.z * torques.z;
+    uint16_t magy = torques.x * torques.x + torques.z * torques.z;
+    uint16_t magz = torques.y * torques.y + torques.z * torques.z;
+    magz = magz / (10000);
+    if (magx > magy && magx > magz) {
+        &axis = XAXIS;
+        &power = torques.x;
+    }
+    if (magy > magx && magy > magz) {
+        &axis = YAXIS;
+        &power = torques.y;
+    }
+    if (magz > magx && magz > magy) {
+        &axis = ZAXIS;
+        &power = torques.z;
+    }
 }
 
 void run_lsm(struct vec3_s *data) {
