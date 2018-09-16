@@ -72,6 +72,13 @@ uint8_t run_actuation(uint8_t axis, int8_t power, struct vec3_s data[static 1]) 
     if (!has_setup) {
         setup_drvr();
     }
+
+    if (power > 100) {
+        power = 100;
+    } else if (power < -100) {
+        power = -100;
+    }
+
     struct vec3_s data_gyro_init;
     struct vec3_s data_gyro_dump;
     readGyro(&data_gyro_init);
