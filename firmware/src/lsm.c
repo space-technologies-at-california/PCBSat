@@ -9,14 +9,14 @@
 #include "drvr.h"
 #include "proto.h"
 
-static int16_t mag_x_arr[5];
-static int16_t mag_y_arr[5];
-static int16_t mag_z_arr[5];
-static int16_t gyro_x_arr[5];
-static int16_t gyro_y_arr[5];
-static int16_t gyro_z_arr[5];
+static int16_t mag_x_arr[MOVING_AVG_FILTER_LEN];
+static int16_t mag_y_arr[MOVING_AVG_FILTER_LEN];
+static int16_t mag_z_arr[MOVING_AVG_FILTER_LEN];
+static int16_t gyro_x_arr[MOVING_AVG_FILTER_LEN];
+static int16_t gyro_y_arr[MOVING_AVG_FILTER_LEN];
+static int16_t gyro_z_arr[MOVING_AVG_FILTER_LEN];
 
-// 5 Point Moving average function
+// MOVING_AVG_FILTER_LEN Point Moving average function
 // arr[0] is always most recent sample
 static int16_t moving_average(int16_t sample, int16_t arr[MOVING_AVG_FILTER_LEN]) {
     uint8_t i;
@@ -27,7 +27,7 @@ static int16_t moving_average(int16_t sample, int16_t arr[MOVING_AVG_FILTER_LEN]
     }
     arr[0] = sample;
     sum += sample;
-    return (int16_t) (sum / 5);
+    return (int16_t) (sum / MOVING_AVG_FILTER_LEN);
 }
 
 static void setup_filters(int16_t filter[MOVING_AVG_FILTER_LEN]) {
