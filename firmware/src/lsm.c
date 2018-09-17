@@ -102,7 +102,7 @@ uint8_t pick_torquer() {
     readMag(&data);
     uint32_t magx = data.y*data.y + data.z*data.z;
     uint16_t magy = data.x*data.x + data.z*data.z;
-    uint16_t magz = data.y*data.y + data.z*data.z;
+    uint16_t magz = data.x*data.x + data.y*data.y;
     magz = magz / (10000);
     if (magx > magy && magx > magz) return XAXIS;
     if (magy > magx && magy > magz) return YAXIS;
@@ -110,6 +110,16 @@ uint8_t pick_torquer() {
     return XAXIS;
 }
 
+
+void vec_cross(struct vec3_s a, struct vec3_s b, struct vec3_s res[static 1]) {
+    res->x = a.y * b.z - a.z * b.y;
+    res->y = a.z * b.x - a.x * b.z;
+    res->z = a.x * b.y - a.y * b.x;
+}
+
+int32_t vec_dot(struct vec3_s a, struct vec3_s b) {
+    return a.x * b.x + a.y + b.y + a.z * b.z;
+}
 
 
 void magnetorquer_out(uint8_t *axis, int8_t *power) {
@@ -120,34 +130,40 @@ void magnetorquer_out(uint8_t *axis, int8_t *power) {
     struct vec3_s g_data;
     readGyro(&g_data);
 
-    uint32_t m_norm = m_data.x * m_data.x + m_data.y * m_data.y + m_data.z * m_data.z;
-    int32_t scalar_coeff = - CONTROLLER_GAIN / m_norm;
+    uint32_t magnetorquer_properties = {100, 100, 200};
 
-    struct vec3_s mag_dipoles;
-    mag_dipoles.x = scalar_coeff * (m_data[1] * g_data[2] - m_data[2] * g_data[1]);
-    mag_dipoles.y = scalar_coeff * (m_data[2] * g_data[0] - m_data[0] * g_data[2]);
-    mag_dipoles.z = scalar_coeff * (m_data[0] * g_data[1] - m_data[1] * g_data[0]);
+    struct vec3_s unit_dir[3];
+    for (int i = 0; i < 3, i++) {
+        unit_dir[i].x = 0;
+        unit_dir[i].y = 0;
+        unit_dir[i].z = 0;
+    }
+    unit_dir[0].x = 1;
+    unit_dir[1].y = 1;
+    unit_dir[2].z = 1;
 
-    struct vec3_s torques;
-    torques.x = mag_dipoles[1] * m_data[2] - mag_dipoles[2] * m_data[1];
-    torques.y = mag_dipoles[2] * m_data[0] - mag_dipoles[0] * m_data[2];
-    torques.z = mag_dipoles[0] * m_data[1] - mag_dipoles[1] * m_data[0];
+    uint32_t similarity[3];
+    for (int i = 0; i < 3, i++) {
+        struct vec3_s angular_acceleration;
+        vec_cross(unit_dir[0], b, &angular_acceleration);
+        similarity[i] = vec_dot(angular_acceleration, g_data) * magnetorquer_properties[i];
+    }
 
-    uint32_t magx = torques.y * torques.y + torques.z * torques.z;
-    uint16_t magy = torques.x * torques.x + torques.z * torques.z;
-    uint16_t magz = torques.y * torques.y + torques.z * torques.z;
-    magz = magz / (10000);
-    if (magx > magy && magx > magz) {
+    uint32_t sx = similarity[0] * similarity[0];
+    uint32_t sy = similarity[1] * similarity[1];
+    uint32_t sz = similarity[2] * similarity[2];
+
+    if (sx > sy && sx > sz) {
         &axis = XAXIS;
-        &power = torques.x;
+        &power = similarity[0] * CONTROLLER_GAIN;
     }
-    if (magy > magx && magy > magz) {
+    if (sy > sx && sy > sz) {
         &axis = YAXIS;
-        &power = torques.y;
+        &power = similarity[1] * CONTROLLER_GAIN;
     }
-    if (magz > magx && magz > magy) {
+    if (sz > sx && sz > sy) {
         &axis = ZAXIS;
-        &power = torques.z;
+        &power = similarity[2] * CONTROLLER_GAIN;
     }
 }
 
