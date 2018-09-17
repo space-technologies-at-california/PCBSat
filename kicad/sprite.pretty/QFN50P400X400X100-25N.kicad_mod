@@ -1,6 +1,6 @@
-(module QFN50P400X400X100-25N (layer F.Cu) (tedit 5B25AAEC)
+(module QFN50P400X400X100-25N (layer F.Cu) (tedit 5B9F3B5A)
   (fp_text reference U5 (at -0.762 -2.794) (layer F.SilkS)
-    (effects (font (size 0.665774 0.665774) (thickness 0.056065)) (justify left bottom))
+    (effects (font (size 0.635 0.635) (thickness 0.127)) (justify left bottom))
   )
   (fp_text value ADP5092 (at -2.286 3.375709) (layer F.Fab)
     (effects (font (size 0.666127 0.666127) (thickness 0.056094)) (justify left bottom))
