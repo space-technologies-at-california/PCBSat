@@ -130,7 +130,7 @@ void magnetorquer_out(uint8_t *axis, int8_t *power) {
     struct vec3_s g_data;
     readGyro(&g_data);
 
-    uint32_t magnetorquer_properties = {100, 100, 200};
+    uint32_t magnetorquer_properties[3] = {100, 100, 200};
 
     struct vec3_s unit_dir[3];
     for (int i = 0; i < 3; i++) {
@@ -145,7 +145,7 @@ void magnetorquer_out(uint8_t *axis, int8_t *power) {
     uint32_t similarity[3];
     for (int i = 0; i < 3; i++) {
         struct vec3_s angular_acceleration;
-        vec_cross(unit_dir[0], b, &angular_acceleration);
+        vec_cross(unit_dir[0], m_data, &angular_acceleration);
         similarity[i] = vec_dot(angular_acceleration, g_data) * magnetorquer_properties[i];
     }
 
