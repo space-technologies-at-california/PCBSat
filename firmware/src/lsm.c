@@ -133,7 +133,7 @@ void magnetorquer_out(uint8_t *axis, int8_t *power) {
     uint32_t magnetorquer_properties = {100, 100, 200};
 
     struct vec3_s unit_dir[3];
-    for (int i = 0; i < 3, i++) {
+    for (int i = 0; i < 3; i++) {
         unit_dir[i].x = 0;
         unit_dir[i].y = 0;
         unit_dir[i].z = 0;
@@ -143,7 +143,7 @@ void magnetorquer_out(uint8_t *axis, int8_t *power) {
     unit_dir[2].z = 1;
 
     uint32_t similarity[3];
-    for (int i = 0; i < 3, i++) {
+    for (int i = 0; i < 3; i++) {
         struct vec3_s angular_acceleration;
         vec_cross(unit_dir[0], b, &angular_acceleration);
         similarity[i] = vec_dot(angular_acceleration, g_data) * magnetorquer_properties[i];
@@ -154,16 +154,16 @@ void magnetorquer_out(uint8_t *axis, int8_t *power) {
     uint32_t sz = similarity[2] * similarity[2];
 
     if (sx > sy && sx > sz) {
-        &axis = XAXIS;
-        &power = similarity[0] * CONTROLLER_GAIN;
+        *axis = XAXIS;
+        *power = similarity[0] * CONTROLLER_GAIN;
     }
     if (sy > sx && sy > sz) {
-        &axis = YAXIS;
-        &power = similarity[1] * CONTROLLER_GAIN;
+        *axis = YAXIS;
+        *power = similarity[1] * CONTROLLER_GAIN;
     }
     if (sz > sx && sz > sy) {
-        &axis = ZAXIS;
-        &power = similarity[2] * CONTROLLER_GAIN;
+        *axis = ZAXIS;
+        *power = similarity[2] * CONTROLLER_GAIN;
     }
 }
 
