@@ -2041,7 +2041,6 @@ F 8 "CPH3225A" H 13100 3800 50  0001 L BNN "Field8"
 $EndComp
 Wire Wire Line
 	11700 3500 12400 3500
-Connection ~ 12400 3500
 Wire Wire Line
 	12400 3500 13100 3500
 Text Label 11950 3500 0    50   ~ 0
@@ -2133,9 +2132,6 @@ Wire Wire Line
 	14500 3500 15200 3500
 Wire Wire Line
 	13800 3500 13100 3500
-Connection ~ 13800 3500
-Connection ~ 13100 3500
-Connection ~ 14500 3500
 $Comp
 L sprite-eagle-import:GND #GND0107
 U 1 0 5B823DAB
@@ -2352,4 +2348,188 @@ Wire Wire Line
 	15250 2950 15950 2950
 Text Label 8350 8950 0    50   ~ 0
 SPIRAL
+Connection ~ 14500 3500
+Connection ~ 12400 3500
+Connection ~ 13800 3500
+Connection ~ 13100 3500
+Wire Notes Line
+	10150 10600 10150 5500
+Text Notes 10450 5900 0    170  ~ 0
+Design Notes
+$Comp
+L sprite-eagle-import:GND #GND0112
+U 1 0 5BA7FDCD
+P 9950 5250
+F 0 "#GND0112" H 9950 5250 50  0001 C CNN
+F 1 "GND" H 9850 5150 59  0000 L BNN
+F 2 "" H 9950 5250 50  0001 C CNN
+F 3 "" H 9950 5250 50  0001 C CNN
+	1    9950 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L sprite-rescue:CPH3225A-CPH3225A C28
+U 1 1 5BA7FDD8
+P 9950 4750
+F 0 "C28" H 10080 4746 50  0000 L CNN
+F 1 "CPH3225A" H 10080 4655 50  0000 L CNN
+F 2 "sprite:CAPCP3225X100N" H 9950 4750 50  0001 L BNN
+F 3 "Seiko" H 9950 4750 50  0001 L BNN
+F 4 "1210 Seiko" H 9950 4750 50  0001 L BNN "Field4"
+F 5 "https://www.digikey.com/product-detail/en/seiko-instruments/CPH3225A/728-1127-1-ND/8692445?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" H 9950 4750 50  0001 L BNN "Field5"
+F 6 "728-1127-1-ND" H 9950 4750 50  0001 L BNN "Field6"
+F 7 "Cap 11mf 3.3v Surface Mount" H 9950 4750 50  0001 L BNN "Field7"
+F 8 "CPH3225A" H 9950 4750 50  0001 L BNN "Field8"
+	1    9950 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L sprite-eagle-import:GND #GND0113
+U 1 0 5BA7FDDE
+P 10650 5250
+F 0 "#GND0113" H 10650 5250 50  0001 C CNN
+F 1 "GND" H 10550 5150 59  0000 L BNN
+F 2 "" H 10650 5250 50  0001 C CNN
+F 3 "" H 10650 5250 50  0001 C CNN
+	1    10650 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L sprite-rescue:CPH3225A-CPH3225A C29
+U 1 1 5BA7FDE9
+P 10650 4750
+F 0 "C29" H 10780 4746 50  0000 L CNN
+F 1 "CPH3225A" H 10780 4655 50  0000 L CNN
+F 2 "sprite:CAPCP3225X100N" H 10650 4750 50  0001 L BNN
+F 3 "Seiko" H 10650 4750 50  0001 L BNN
+F 4 "1210 Seiko" H 10650 4750 50  0001 L BNN "Field4"
+F 5 "https://www.digikey.com/product-detail/en/seiko-instruments/CPH3225A/728-1127-1-ND/8692445?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" H 10650 4750 50  0001 L BNN "Field5"
+F 6 "728-1127-1-ND" H 10650 4750 50  0001 L BNN "Field6"
+F 7 "Cap 11mf 3.3v Surface Mount" H 10650 4750 50  0001 L BNN "Field7"
+F 8 "CPH3225A" H 10650 4750 50  0001 L BNN "Field8"
+	1    10650 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L sprite-eagle-import:GND #GND0114
+U 1 0 5BA7FDEF
+P 11350 5250
+F 0 "#GND0114" H 11350 5250 50  0001 C CNN
+F 1 "GND" H 11250 5150 59  0000 L BNN
+F 2 "" H 11350 5250 50  0001 C CNN
+F 3 "" H 11350 5250 50  0001 C CNN
+	1    11350 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L sprite-rescue:CPH3225A-CPH3225A C30
+U 1 1 5BA7FDFA
+P 11350 4750
+F 0 "C30" H 11480 4746 50  0000 L CNN
+F 1 "CPH3225A" H 11480 4655 50  0000 L CNN
+F 2 "sprite:CAPCP3225X100N" H 11350 4750 50  0001 L BNN
+F 3 "Seiko" H 11350 4750 50  0001 L BNN
+F 4 "1210 Seiko" H 11350 4750 50  0001 L BNN "Field4"
+F 5 "https://www.digikey.com/product-detail/en/seiko-instruments/CPH3225A/728-1127-1-ND/8692445?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" H 11350 4750 50  0001 L BNN "Field5"
+F 6 "728-1127-1-ND" H 11350 4750 50  0001 L BNN "Field6"
+F 7 "Cap 11mf 3.3v Surface Mount" H 11350 4750 50  0001 L BNN "Field7"
+F 8 "CPH3225A" H 11350 4750 50  0001 L BNN "Field8"
+	1    11350 4750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9950 4450 10650 4450
+Wire Wire Line
+	10650 4450 11350 4450
+Text Label 10200 4450 0    50   ~ 0
+VBAT
+Connection ~ 10650 4450
+$Comp
+L sprite-eagle-import:GND #GND0115
+U 1 0 5BABD0FA
+P 14800 7300
+F 0 "#GND0115" H 14800 7300 50  0001 C CNN
+F 1 "GND" H 14700 7200 59  0000 L BNN
+F 2 "" H 14800 7300 50  0001 C CNN
+F 3 "" H 14800 7300 50  0001 C CNN
+	1    14800 7300
+	1    0    0    -1  
+$EndComp
+$Comp
+L sprite-rescue:CPH3225A-CPH3225A C31
+U 1 1 5BABD105
+P 14800 6800
+F 0 "C31" H 14930 6796 50  0000 L CNN
+F 1 "CPH3225A" H 14930 6705 50  0000 L CNN
+F 2 "sprite:CAPCP3225X100N" H 14800 6800 50  0001 L BNN
+F 3 "Seiko" H 14800 6800 50  0001 L BNN
+F 4 "1210 Seiko" H 14800 6800 50  0001 L BNN "Field4"
+F 5 "https://www.digikey.com/product-detail/en/seiko-instruments/CPH3225A/728-1127-1-ND/8692445?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" H 14800 6800 50  0001 L BNN "Field5"
+F 6 "728-1127-1-ND" H 14800 6800 50  0001 L BNN "Field6"
+F 7 "Cap 11mf 3.3v Surface Mount" H 14800 6800 50  0001 L BNN "Field7"
+F 8 "CPH3225A" H 14800 6800 50  0001 L BNN "Field8"
+	1    14800 6800
+	1    0    0    -1  
+$EndComp
+$Comp
+L sprite-eagle-import:GND #GND0116
+U 1 0 5BABD10B
+P 15500 7300
+F 0 "#GND0116" H 15500 7300 50  0001 C CNN
+F 1 "GND" H 15400 7200 59  0000 L BNN
+F 2 "" H 15500 7300 50  0001 C CNN
+F 3 "" H 15500 7300 50  0001 C CNN
+	1    15500 7300
+	1    0    0    -1  
+$EndComp
+$Comp
+L sprite-rescue:CPH3225A-CPH3225A C32
+U 1 1 5BABD116
+P 15500 6800
+F 0 "C32" H 15630 6796 50  0000 L CNN
+F 1 "CPH3225A" H 15630 6705 50  0000 L CNN
+F 2 "sprite:CAPCP3225X100N" H 15500 6800 50  0001 L BNN
+F 3 "Seiko" H 15500 6800 50  0001 L BNN
+F 4 "1210 Seiko" H 15500 6800 50  0001 L BNN "Field4"
+F 5 "https://www.digikey.com/product-detail/en/seiko-instruments/CPH3225A/728-1127-1-ND/8692445?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" H 15500 6800 50  0001 L BNN "Field5"
+F 6 "728-1127-1-ND" H 15500 6800 50  0001 L BNN "Field6"
+F 7 "Cap 11mf 3.3v Surface Mount" H 15500 6800 50  0001 L BNN "Field7"
+F 8 "CPH3225A" H 15500 6800 50  0001 L BNN "Field8"
+	1    15500 6800
+	1    0    0    -1  
+$EndComp
+$Comp
+L sprite-eagle-import:GND #GND0117
+U 1 0 5BABD11C
+P 16200 7300
+F 0 "#GND0117" H 16200 7300 50  0001 C CNN
+F 1 "GND" H 16100 7200 59  0000 L BNN
+F 2 "" H 16200 7300 50  0001 C CNN
+F 3 "" H 16200 7300 50  0001 C CNN
+	1    16200 7300
+	1    0    0    -1  
+$EndComp
+$Comp
+L sprite-rescue:CPH3225A-CPH3225A C33
+U 1 1 5BABD127
+P 16200 6800
+F 0 "C33" H 16330 6796 50  0000 L CNN
+F 1 "CPH3225A" H 16330 6705 50  0000 L CNN
+F 2 "sprite:CAPCP3225X100N" H 16200 6800 50  0001 L BNN
+F 3 "Seiko" H 16200 6800 50  0001 L BNN
+F 4 "1210 Seiko" H 16200 6800 50  0001 L BNN "Field4"
+F 5 "https://www.digikey.com/product-detail/en/seiko-instruments/CPH3225A/728-1127-1-ND/8692445?utm_source=snapeda&utm_medium=aggregator&utm_campaign=symbol" H 16200 6800 50  0001 L BNN "Field5"
+F 6 "728-1127-1-ND" H 16200 6800 50  0001 L BNN "Field6"
+F 7 "Cap 11mf 3.3v Surface Mount" H 16200 6800 50  0001 L BNN "Field7"
+F 8 "CPH3225A" H 16200 6800 50  0001 L BNN "Field8"
+	1    16200 6800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	14800 6500 15500 6500
+Wire Wire Line
+	15500 6500 16200 6500
+Text Label 15050 6500 0    50   ~ 0
+VBAT
+Connection ~ 15500 6500
 $EndSCHEMATC
