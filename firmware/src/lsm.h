@@ -84,4 +84,6 @@ void readMag(struct vec3_s[static 1]);
 
 uint8_t pick_torquer(void);
 
+void magnetorquer_out(uint8_t *axis, int8_t *power);
+
 void run_lsm(struct vec3_s *data);
