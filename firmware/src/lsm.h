@@ -9,7 +9,7 @@
 #define LSM_GYRO_SCALE                 (0b00 << 3)  // +/- 245 degrees per second rotation
 
 #define MOVING_AVG_FILTER_LEN          5
-#define CONTROLLER_GAIN                50
+#define CONTROLLER_GAIN                10000
 typedef enum
 {
   LSM_REG_WHO_AM_I_XG         = 0x0F,
