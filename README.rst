@@ -23,12 +23,12 @@ Firmware
 --------
 #. Install `MSP430-GCC <http://www.ti.com/tool/msp430-gcc-opensource>`_ and `MSPDebug <https://dlbeer.co.nz/mspdebug/>`_.
 
-#. In *firmware/msp430.mk.inc*, specify the path to your MSP430-GCC
+#. In *firmware/build/* make a new file called *msp430.mk.inc*, specify the path to your MSP430-GCC
    installation. For example::
 
     MSP430_TOOLCHAIN=/usr/local/gcc-msp430-ti-toolchain-5.01.02.00
 
-#. Change to the *firmware/* directory and run ``make`` to build.
+#. Make sure you are in the *firmware/build/* directory and run ``make`` to build.
 
 Programming
 ~~~~~~~~~~~
