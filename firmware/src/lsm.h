@@ -84,6 +84,10 @@ void readMag(struct vec3_s[static 1]);
 
 uint8_t pick_torquer(void);
 
+void vec_cross(struct vec3_s a, struct vec3_s b, struct vec3_s res[static 1]);
+
+int32_t vec_dot(struct vec3_s a, struct vec3_s b);
+
 void magnetorquer_out(uint8_t *axis, int8_t *power);
 
 void run_lsm(struct vec3_s *data);
