@@ -130,7 +130,7 @@ void magnetorquer_out(uint8_t *axis, int8_t *power) {
     struct vec3_s g_data;
     readGyro(&g_data);
 
-    uint32_t magnetorquer_properties[3] = {100, 100, 200};
+    uint32_t magnetorquer_properties[3] = {100, 100, 200}; // TODO DOUBLE CHECK VALUES using python file
 
     struct vec3_s unit_dir[3];
     for (int i = 0; i < 3; i++) {
