@@ -129,6 +129,13 @@ void magnetorquer_out(uint8_t *axis, int8_t *power) {
     readMag(&m_data);
     struct vec3_s g_data;
     readGyro(&g_data);
+#ifdef DEBUG
+    char str[30];
+    snprintf(str, sizeof(str), "mag %d, %d, %d\r\n", m_data.x, m_data.y, m_data.z);
+    uart_write(str, strlen(str));
+    snprintf(str, sizeof(str), "gyro %d, %d, %d\r\n", g_data.x, g_data.y, g_data.z);
+    uart_write(str, strlen(str));
+#endif
 
     uint32_t magnetorquer_properties[3] = {100, 100, 200}; // TODO DOUBLE CHECK VALUES using python file
 
@@ -180,7 +187,6 @@ void run_lsm(struct vec3_s *data) {
         has_lsm_setup = true;
     }
 
-    char str[30];
     struct vec3_s data_gyro_init;
     readGyro(&data_gyro_init);
     uint8_t i;
@@ -194,7 +200,8 @@ void run_lsm(struct vec3_s *data) {
     data->y = data_gyro_final.y - data_gyro_init.y;
     data->z = data_gyro_final.z - data_gyro_init.z;
 #ifdef DEBUG
-    snprintf(str, sizeof(str), "%d, %d, %d\r\n", data->x, data->y, data->z);
+    char str[30];
+    snprintf(str, sizeof(str), "delta gyro %d, %d, %d\r\n", data->x, data->y, data->z);
     uart_write(str, strlen(str));
 #endif
 }
