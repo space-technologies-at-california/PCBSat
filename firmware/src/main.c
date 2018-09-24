@@ -126,18 +126,22 @@ void tick() {
         faults &= ~FAULT_RECENT_POR;
 }
 
-bool radio_precond() {
+static bool check_power_ok() {
     // Ignore FAULT_POWER if FAULT_MPPT is set
     return !(faults & FAULT_POWER) || (faults & FAULT_MPPT);
 }
 
+bool radio_precond() {
+    return check_power_ok();
+}
+
 bool lsm_precond() {
-    return radio_precond();
+    return !(faults & FAULT_SAFEMODE) && check_power_ok();
 }
 
 bool actuate_precond() {
-    return radio_precond() && !(faults & FAULT_RECENT_POR) &&
-           !(faults & FAULT_LSM_SETUP);
+    return lsm_precond() &&
+        !(faults & FAULT_RECENT_POR) && !(faults & FAULT_LSM_SETUP);
 }
 
 int rand_int(int min, int incr) {
