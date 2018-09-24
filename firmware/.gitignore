@@ -1,5 +1,5 @@
+*.[do]
 *.map
-*.o
 build/main
 cscope.out
 gitrev.h

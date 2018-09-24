@@ -30,14 +30,23 @@ SRCS = \
 
 VPATH = ${SRCDIR}
 OBJS = $(SRCS:.c=.o)
+DEPS = $(OBJS:.o=.d)
 
 main: ${OBJS} gitrev.h
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS}
 
-.PHONY: gitrev.h
+-include $(DEPS)
+
+%.d: %.c
+	$(CPP) $(CFLAGS) $< -MM -MT $(@:.d=.o) > $@
+
+.PHONY: gitrev.h cleandep
 
 gitrev.h:
 	echo "#define GIT_REV \"`git describe --always || echo unknown`\"" \
 		> gitrev.h
+
+cleandep:
+	$(RM) $(DEPS)
 
 include msp430.mk
