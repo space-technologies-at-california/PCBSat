@@ -227,6 +227,11 @@ int main() {
             uint8_t axis;
             int8_t power;
             magnetorquer_out(&axis, &power);
+#ifdef DEBUG
+            char buf[32];
+            snprintf(buf, sizeof(buf), "axis %u power %d\r\n", axis, power);
+            uart_write(buf, strlen(buf));
+#endif
             run_time = run_actuation(axis, power, &torqued_alpha);
         }
 
