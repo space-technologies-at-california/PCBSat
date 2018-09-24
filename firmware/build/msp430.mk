@@ -19,9 +19,11 @@ all: ${MAIN}
 .SUFFIX: s c
 
 .c.s:
+	@mkdir -p $(@D)
 	${CC} -S ${CFLAGS} $< 
 
 .c.o:
+	@mkdir -p $(@D)
 	${CC} -c ${CFLAGS} $< -o $@ 
 
 # .cpp.o:
