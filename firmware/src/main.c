@@ -148,8 +148,32 @@ uint32_t norm(struct vec3_s *x) {
     return (x->x * x->x) + (x->y * x->y) + (x->z * x-> z);
 }
 
+/**
+ * Determine whether to enter safe mode or not. Always enter safe mode, unless
+ * system reset was caused by a whitelisted trigger.
+ */
+static bool check_enter_safemode() {
+    switch (__even_in_range(SYSRSTIV, SYSRSTIV_PMMKEY)) {
+        case SYSRSTIV_NONE:
+            return false;
+        case SYSRSTIV_BOR:
+            return false;
+        case SYSRSTIV_RSTNMI:
+            return false;
+        case SYSRSTIV_SVSL:
+            return false;
+        case SYSRSTIV_SVSH:
+            return false;
+        default:
+            return true;
+    }
+}
+
 int main() {
     init_core();
+    if (check_enter_safemode()) {
+        faults |= FAULT_SAFEMODE;
+    }
     __enable_interrupt();
 #ifdef DEBUG
     init_debug();
