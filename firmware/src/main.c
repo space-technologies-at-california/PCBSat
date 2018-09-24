@@ -224,8 +224,6 @@ int main() {
             counter_debug = 3;
 #endif
         } else if (actuate_precond()) {
-            /* uint8_t axis = pick_torquer(); */
-            /* int8_t power = 50; */
             uint8_t axis;
             int8_t power;
             magnetorquer_out(&axis, &power);
