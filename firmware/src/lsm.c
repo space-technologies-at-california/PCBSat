@@ -127,8 +127,14 @@ void magnetorquer_out(uint8_t *axis, int8_t *power) {
 
     struct vec3_s m_data;
     readMag(&m_data);
+    m_data.x = m_data.x/100;
+    m_data.y = m_data.y/100;
+    m_data.z = m_data.z/100;
     struct vec3_s g_data;
     readGyro(&g_data);
+    g_data.x = g_data.x/100;
+    g_data.y = g_data.y/100;
+    g_data.z = g_data.z/100;
 #ifdef DEBUG
     char str[30];
     snprintf(str, sizeof(str), "mag %d, %d, %d\r\n", m_data.x, m_data.y, m_data.z);
