@@ -203,7 +203,7 @@ int main() {
             tx_msg[5] = (int8_t)(norm(&torqued_alpha) - norm(&meas_alpha));
             tx_msg[6] = (uint8_t)(run_time);
             run_radio();
-            counter_tx = rand_int(10, 4);
+            counter_tx = rand_int(20, 9);
 #ifdef DEBUG
             char buf[32];
             snprintf(buf, sizeof(buf), "sleeping %d\r\n", counter_tx);

@@ -231,7 +231,14 @@ static void radio_transmit(char bytes[], unsigned int length) {
             break;
         }
         transmitByte(bytes[k]);
+#ifdef DEBUG
+            uart_write(".", 1);
+#endif
+        sleep(1000, LPM0_bits);
     }
+#ifdef DEBUG
+            uart_write("\r\n", 2);
+#endif
 }
 
 /**
