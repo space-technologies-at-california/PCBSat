@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "battery_mon.h"
+#include "calc.h"
 #include "cc430uart.h"
 #include "drvr.h"
 #include "fault.h"
@@ -224,9 +225,13 @@ int main() {
             counter_debug = 3;
 #endif
         } else if (actuate_precond()) {
+            struct vec3_s m_data;
+            readMag(&m_data);
+            struct vec3_s g_data;
+            readGyro(&g_data);
             uint8_t axis;
             int8_t power;
-            magnetorquer_out(&axis, &power);
+            magnetorquer_out(m_data, g_data, &axis, &power);
 #ifdef DEBUG
             char buf[32];
             snprintf(buf, sizeof(buf), "axis %u power %d\r\n", axis, power);

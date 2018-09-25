@@ -10,6 +10,7 @@ CFLAGS = -DDEBUG -DDEBUGPRN \
 
 SRCS = \
 	battery_mon.c \
+	calc.c \
 	cc430radio.c \
 	cc430uart.c \
 	drvr.c \

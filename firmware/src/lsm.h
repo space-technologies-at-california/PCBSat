@@ -1,15 +1,16 @@
 #pragma once
 
 #include <stdbool.h>
-#include <stdint.h>
+
+#include "calc.h"
+
+#define MOVING_AVG_FILTER_LEN          5
 
 #define LSM_XG_ID                      (0b01101000)
 #define LSM_MAG_ID                     (0b00111101)
 #define LSM_MAG_GAIN                   (0b00 << 5)  // +/- 4 gauss
 #define LSM_GYRO_SCALE                 (0b00 << 3)  // +/- 245 degrees per second rotation
 
-#define MOVING_AVG_FILTER_LEN          5
-#define CONTROLLER_GAIN                10000 // TODO DOUBLE CHECK VALUE
 typedef enum
 {
   LSM_REG_WHO_AM_I_XG         = 0x0F,
@@ -72,22 +73,7 @@ typedef enum
   LSM_MAGDATARATE_100HZ            = (0b101 << 2)
 } LSMMagDataRate_t;
 
-struct vec3_s {
-    int16_t x, y, z;
-};
-
 bool lsm_setup(void);
-
 void readGyro(struct vec3_s[static 1]);
-
 void readMag(struct vec3_s[static 1]);
-
-uint8_t pick_torquer(void);
-
-void vec_cross(struct vec3_s a, struct vec3_s b, struct vec3_s res[static 1]);
-
-int32_t vec_dot(struct vec3_s a, struct vec3_s b);
-
-void magnetorquer_out(uint8_t *axis, int8_t *power);
-
 void run_lsm(struct vec3_s *data);
