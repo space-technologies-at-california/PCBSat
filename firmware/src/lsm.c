@@ -118,7 +118,7 @@ void vec_cross(struct vec3_s a, struct vec3_s b, struct vec3_s res[static 1]) {
 }
 
 int32_t vec_dot(struct vec3_s a, struct vec3_s b) {
-    return a.x * b.x + a.y + b.y + a.z * b.z;
+    return a.x * b.x + a.y * b.y + a.z * b.z;
 }
 
 
