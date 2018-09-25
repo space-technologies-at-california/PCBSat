@@ -6,3 +6,4 @@ gitrev.h
 msp430.mk.inc
 sprite_main
 tags
+test/test
