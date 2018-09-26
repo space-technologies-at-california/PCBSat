@@ -46,7 +46,7 @@ void magnetorquer_out(struct vec3_s m_data, struct vec3_s g_data, uint8_t *axis,
     g_data.y = g_data.y/100;
     g_data.z = g_data.z/100;
 
-    uint32_t magnetorquer_properties[3] = {100, 100, 200}; // TODO DOUBLE CHECK VALUES using python file
+    int32_t magnetorquer_properties[3] = {100, 100, 200}; // TODO DOUBLE CHECK VALUES using python file
 
     struct vec3_s unit_dir[3];
     for (int i = 0; i < 3; i++) {
@@ -58,16 +58,16 @@ void magnetorquer_out(struct vec3_s m_data, struct vec3_s g_data, uint8_t *axis,
     unit_dir[1].y = 1;
     unit_dir[2].z = 1;
 
-    uint32_t similarity[3];
+    int32_t similarity[3];
     for (int i = 0; i < 3; i++) {
         struct vec3_s angular_acceleration;
         vec_cross(unit_dir[0], m_data, &angular_acceleration);
         similarity[i] = vec_dot(angular_acceleration, g_data) * magnetorquer_properties[i];
     }
 
-    uint32_t sx = similarity[0] * similarity[0];
-    uint32_t sy = similarity[1] * similarity[1];
-    uint32_t sz = similarity[2] * similarity[2];
+    int32_t sx = similarity[0] * similarity[0];
+    int32_t sy = similarity[1] * similarity[1];
+    int32_t sz = similarity[2] * similarity[2];
 
     if (sx > sy && sx > sz) {
         *axis = XAXIS;
