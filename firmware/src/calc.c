@@ -4,7 +4,7 @@
 #include "drvr.h"
 #include "stdio.h"
 
-#define CONTROLLER_GAIN                10000 // TODO DOUBLE CHECK VALUE
+#define CONTROLLER_GAIN                1000// TODO DOUBLE CHECK VALUE
 
 // MOVING_AVG_FILTER_LEN Point Moving average function
 // arr[0] is always most recent sample
@@ -40,12 +40,6 @@ int32_t vec_dot(struct vec3_s a, struct vec3_s b) {
 void magnetorquer_out(struct vec3_s m_data, struct vec3_s g_data, uint8_t *axis, int8_t *power) {
     // everything is a integer? but assuming that int32 will be scaler linearly to floats
 
-    // m_data.x = m_data.x/100;
-    // m_data.y = m_data.y/100;
-    // m_data.z = m_data.z/100;
-    // g_data.x = g_data.x/100;
-    // g_data.y = g_data.y/100;
-    // g_data.z = g_data.z/100;
 
     int32_t magnetorquer_properties[3] = {100, 100, 200}; // TODO DOUBLE CHECK VALUES using python file
 
@@ -65,12 +59,6 @@ void magnetorquer_out(struct vec3_s m_data, struct vec3_s g_data, uint8_t *axis,
         vec_cross(unit_dir[i], m_data, &angular_acceleration);
         similarity[i] = vec_dot(angular_acceleration, g_data) * magnetorquer_properties[i];
     }
-    printf("similarity 0: %d\n", similarity[0]);
-    printf("power 0: %d\n", similarity[0]/CONTROLLER_GAIN);
-    printf("similarity 1: %d\n", similarity[1]);
-    printf("power 1: %d\n", similarity[1]/CONTROLLER_GAIN);
-    printf("similarity 2: %d\n", similarity[2]);
-    printf("power 2: %d\n", similarity[2]/CONTROLLER_GAIN);
 
     int32_t sx = similarity[0] * similarity[0];
     int32_t sy = similarity[1] * similarity[1];
