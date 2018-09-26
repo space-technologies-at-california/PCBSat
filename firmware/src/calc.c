@@ -65,12 +65,12 @@ void magnetorquer_out(struct vec3_s m_data, struct vec3_s g_data, uint8_t *axis,
         vec_cross(unit_dir[i], m_data, &angular_acceleration);
         similarity[i] = vec_dot(angular_acceleration, g_data) * magnetorquer_properties[i];
     }
-    printf("similarity 0: %u\n", similarity[0]);
-    printf("power 0: %u\n", similarity[0]/CONTROLLER_GAIN);
-    printf("similarity 1: %u\n", similarity[1]);
-    printf("power 1: %u\n", similarity[1]/CONTROLLER_GAIN);
-    printf("similarity 2: %u\n", similarity[2]);
-    printf("power 2: %u\n", similarity[2]/CONTROLLER_GAIN);
+    printf("similarity 0: %d\n", similarity[0]);
+    printf("power 0: %d\n", similarity[0]/CONTROLLER_GAIN);
+    printf("similarity 1: %d\n", similarity[1]);
+    printf("power 1: %d\n", similarity[1]/CONTROLLER_GAIN);
+    printf("similarity 2: %d\n", similarity[2]);
+    printf("power 2: %d\n", similarity[2]/CONTROLLER_GAIN);
 
     int32_t sx = similarity[0] * similarity[0];
     int32_t sy = similarity[1] * similarity[1];
