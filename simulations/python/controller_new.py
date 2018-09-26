@@ -142,8 +142,8 @@ if __name__ == '__main__':
   time = 0.1
   Is = l**4 / 3 * m
 
-  u = [26, 16, -18]
-  v = [95, 27, -33]
+  u = [3, 2, 5]
+  v = [6, 3, 6]
   # torque_coil = choose_coil(v)
   axis, power = magnetorquer_out(u, v, 1000.0)
   print("axis", axis, "power", power)

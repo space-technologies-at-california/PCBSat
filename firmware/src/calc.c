@@ -2,8 +2,9 @@
 
 #include "calc.h"
 #include "drvr.h"
+#include "stdio.h"
 
-#define CONTROLLER_GAIN                10000 // TODO DOUBLE CHECK VALUE
+#define CONTROLLER_GAIN                1000// TODO DOUBLE CHECK VALUE
 
 // MOVING_AVG_FILTER_LEN Point Moving average function
 // arr[0] is always most recent sample
@@ -39,14 +40,8 @@ int32_t vec_dot(struct vec3_s a, struct vec3_s b) {
 void magnetorquer_out(struct vec3_s m_data, struct vec3_s g_data, uint8_t *axis, int8_t *power) {
     // everything is a integer? but assuming that int32 will be scaler linearly to floats
 
-    m_data.x = m_data.x/100;
-    m_data.y = m_data.y/100;
-    m_data.z = m_data.z/100;
-    g_data.x = g_data.x/100;
-    g_data.y = g_data.y/100;
-    g_data.z = g_data.z/100;
 
-    uint32_t magnetorquer_properties[3] = {100, 100, 200}; // TODO DOUBLE CHECK VALUES using python file
+    int32_t magnetorquer_properties[3] = {100, 100, 200}; // TODO DOUBLE CHECK VALUES using python file
 
     struct vec3_s unit_dir[3];
     for (int i = 0; i < 3; i++) {
@@ -58,27 +53,27 @@ void magnetorquer_out(struct vec3_s m_data, struct vec3_s g_data, uint8_t *axis,
     unit_dir[1].y = 1;
     unit_dir[2].z = 1;
 
-    uint32_t similarity[3];
+    int32_t similarity[3];
     for (int i = 0; i < 3; i++) {
         struct vec3_s angular_acceleration;
-        vec_cross(unit_dir[0], m_data, &angular_acceleration);
+        vec_cross(unit_dir[i], m_data, &angular_acceleration);
         similarity[i] = vec_dot(angular_acceleration, g_data) * magnetorquer_properties[i];
     }
 
-    uint32_t sx = similarity[0] * similarity[0];
-    uint32_t sy = similarity[1] * similarity[1];
-    uint32_t sz = similarity[2] * similarity[2];
+    int32_t sx = similarity[0] * similarity[0];
+    int32_t sy = similarity[1] * similarity[1];
+    int32_t sz = similarity[2] * similarity[2];
 
     if (sx > sy && sx > sz) {
         *axis = XAXIS;
-        *power = similarity[0] * CONTROLLER_GAIN;
+        *power = similarity[0] / CONTROLLER_GAIN;
     }
     if (sy > sx && sy > sz) {
         *axis = YAXIS;
-        *power = similarity[1] * CONTROLLER_GAIN;
+        *power = similarity[1] / CONTROLLER_GAIN;
     }
     if (sz > sx && sz > sy) {
         *axis = ZAXIS;
-        *power = similarity[2] * CONTROLLER_GAIN;
+        *power = similarity[2] / CONTROLLER_GAIN;
     }
 }
