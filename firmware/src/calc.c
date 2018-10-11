@@ -10,10 +10,10 @@
 // arr[0] is always most recent sample
 int16_t moving_average(int16_t sample, int16_t arr[MOVING_AVG_FILTER_LEN]) {
     uint8_t i;
-    int32_t sum = 0;
-    for (i = 1; i < MOVING_AVG_FILTER_LEN; i++) {
-        arr[i] = arr[i-1];
+    int32_t sum = arr[0];
+    for (i = 1; i < MOVING_AVG_FILTER_LEN - 1; i++) {
         sum += arr[i];
+        arr[i] = arr[i-1];
     }
     arr[0] = sample;
     sum += sample;
