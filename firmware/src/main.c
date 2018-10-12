@@ -204,8 +204,8 @@ int main() {
             tx_msg[3] = (uint8_t)(global_val >> 8);
             tx_msg[4] = (uint8_t)(global_val & 0xFF);
             // tx_msg[5] = (int8_t)(norm(&torqued_alpha) - norm(&meas_alpha));
-            tx_msg[5] = (int8_t)(norm(&meas_alpha));
-            tx_msg[6] = (int8_t)(norm(&m_data));
+            tx_msg[5] = (int16_t)(&meas_alpha);
+            tx_msg[6] = (int16_t)(&m_data);
             run_radio();
             counter_tx = rand_int(20, 9);
 #ifdef DEBUG
