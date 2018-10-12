@@ -36,6 +36,7 @@ struct vec3_s global_omega;
 struct vec3_s meas_alpha;
 struct vec3_s torqued_alpha;
 struct vec3_s temp_alpha;
+struct vec3_s m_data;
 uint16_t sleep_counter = 0;
 uint8_t run_time = 0;
 
@@ -202,8 +203,9 @@ int main() {
             uint16_t global_val = (uint16_t) norm(&global_omega);
             tx_msg[3] = (uint8_t)(global_val >> 8);
             tx_msg[4] = (uint8_t)(global_val & 0xFF);
-            tx_msg[5] = (int8_t)(norm(&torqued_alpha) - norm(&meas_alpha));
-            tx_msg[6] = (uint8_t)(run_time);
+            // tx_msg[5] = (int8_t)(norm(&torqued_alpha) - norm(&meas_alpha));
+            tx_msg[5] = (int8_t)(norm(&meas_alpha));
+            tx_msg[6] = (int8_t)(norm(&m_data));
             run_radio();
             counter_tx = rand_int(20, 9);
 #ifdef DEBUG
@@ -213,6 +215,7 @@ int main() {
 #endif
         } else if (counter_lsm == 0 && lsm_precond()) {
             run_lsm(&meas_alpha);
+            readMag(&m_data);
             counter_lsm = 15;
 #ifdef DEBUG
         } else if (counter_debug == 0) {
@@ -223,24 +226,29 @@ int main() {
             uart_write(buf, strlen(buf));
             snprintf(buf, sizeof(buf), "temp: %u\r\n", temp_measure);
             uart_write(buf, strlen(buf));
-            counter_debug = 3;
-#endif
-        } else if (actuate_precond()) {
-            run_lsm(&temp_alpha); // temp_alpha needed but not actually used
-            struct vec3_s m_data;
-            readMag(&m_data);
-            struct vec3_s g_data;
-            readGyro(&g_data);
-            uint8_t axis;
-            int8_t power;
-            magnetorquer_out(m_data, g_data, &axis, &power);
-#ifdef DEBUG
-            char buf[32];
-            snprintf(buf, sizeof(buf), "axis %u power %d\r\n", axis, power);
+            snprintf(buf, sizeof(buf), "meas_alpha %d\r\n", meas_alpha);
+            uart_write(buf, strlen(buf));            
+            snprintf(buf, sizeof(buf), "m_data %d\r\n", m_data);
             uart_write(buf, strlen(buf));
+            counter_debug = 5;
 #endif
-            run_time = run_actuation(axis, power, &torqued_alpha);
-        }
+        } 
+//         else if (actuate_precond()) {
+//             run_lsm(&temp_alpha); // temp_alpha needed but not actually used
+//             struct vec3_s m_data;
+//             readMag(&m_data);
+//             struct vec3_s g_data;
+//             readGyro(&g_data);
+//             uint8_t axis;
+//             int8_t power;
+//             magnetorquer_out(m_data, g_data, &axis, &power);
+// #ifdef DEBUG
+//             char buf[32];
+//             snprintf(buf, sizeof(buf), "axis %u power %d\r\n", axis, power);
+//             uart_write(buf, strlen(buf));
+// #endif
+//             run_time = run_actuation(axis, power, &torqued_alpha);
+//         }
 
         // Wait at least 1 second before looping.
         if (sleep_counter < 1000) {
