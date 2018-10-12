@@ -10,16 +10,13 @@
 // arr[0] is always most recent sample
 int16_t moving_average(int16_t sample, int16_t arr[MOVING_AVG_FILTER_LEN]) {
     // Shift, must happen in reverse or will overwrite each other
+    int16_t sum = 0;
     for (unsigned int i = MOVING_AVG_FILTER_LEN - 1; i > 0; i--) {
         arr[i] = arr[i-1];
-    }
-    arr[0] = sample;
-
-    // Sum
-    int16_t sum = 0;
-    for (unsigned int i = 0; i < MOVING_AVG_FILTER_LEN; i++) {
         sum += arr[i];
     }
+    arr[0] = sample;
+    sum += sample;
     return sum / MOVING_AVG_FILTER_LEN;
 }
 
