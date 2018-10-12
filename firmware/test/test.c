@@ -9,4 +9,14 @@ int main() {
     int8_t power;
     magnetorquer_out(m_data, g_data, &axis, &power);
     printf("axis: %u, power: %d\n", axis, power);
+
+    puts("moving average step response:");
+    int16_t thing[5];
+    setup_filters(thing);
+    printf("%d\n", moving_average(100, thing));
+    printf("%d\n", moving_average(100, thing));
+    printf("%d\n", moving_average(100, thing));
+    printf("%d\n", moving_average(100, thing));
+    printf("%d\n", moving_average(100, thing));
+    printf("%d\n", moving_average(100, thing));
 }
