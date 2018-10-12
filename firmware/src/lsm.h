@@ -4,8 +4,6 @@
 
 #include "calc.h"
 
-#define MOVING_AVG_FILTER_LEN          5
-
 #define LSM_XG_ID                      (0b01101000)
 #define LSM_MAG_ID                     (0b00111101)
 #define LSM_MAG_GAIN                   (0b00 << 5)  // +/- 4 gauss

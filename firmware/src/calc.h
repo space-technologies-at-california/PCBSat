@@ -1,6 +1,8 @@
 #pragma once
 #include <stdint.h>
 
+#define MOVING_AVG_FILTER_LEN          5
+
 struct vec3_s {
     int16_t x, y, z;
 };
