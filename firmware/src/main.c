@@ -35,6 +35,7 @@ char tx_msg[7];
 struct vec3_s global_omega;
 struct vec3_s meas_alpha;
 struct vec3_s torqued_alpha;
+struct vec3_s temp_alpha;
 uint16_t sleep_counter = 0;
 uint8_t run_time = 0;
 
@@ -225,6 +226,7 @@ int main() {
             counter_debug = 3;
 #endif
         } else if (actuate_precond()) {
+            run_lsm(&temp_alpha); // temp_alpha needed but not actually used
             struct vec3_s m_data;
             readMag(&m_data);
             struct vec3_s g_data;
