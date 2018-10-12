@@ -9,15 +9,18 @@
 // MOVING_AVG_FILTER_LEN Point Moving average function
 // arr[0] is always most recent sample
 int16_t moving_average(int16_t sample, int16_t arr[MOVING_AVG_FILTER_LEN]) {
-    uint8_t i;
-    int32_t sum = arr[0];
-    for (i = 1; i < MOVING_AVG_FILTER_LEN - 1; i++) {
-        sum += arr[i];
+    // Shift, must happen in reverse or will overwrite each other
+    for (unsigned int i = MOVING_AVG_FILTER_LEN - 1; i > 0; i--) {
         arr[i] = arr[i-1];
     }
     arr[0] = sample;
-    sum += sample;
-    return (int16_t) (sum / MOVING_AVG_FILTER_LEN);
+
+    // Sum
+    int16_t sum = 0;
+    for (unsigned int i = 0; i < MOVING_AVG_FILTER_LEN; i++) {
+        sum += arr[i];
+    }
+    return sum / MOVING_AVG_FILTER_LEN;
 }
 
 void setup_filters(int16_t filter[MOVING_AVG_FILTER_LEN]) {
