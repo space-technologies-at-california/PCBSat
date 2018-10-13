@@ -204,8 +204,8 @@ int main() {
             tx_msg[3] = (uint8_t)(global_val >> 8);
             tx_msg[4] = (uint8_t)(global_val & 0xFF);
             // tx_msg[5] = (int8_t)(norm(&torqued_alpha) - norm(&meas_alpha));
-            tx_msg[5] = (int16_t)(&meas_alpha);
-            tx_msg[6] = (int16_t)(&m_data);
+            tx_msg[5] = (int16_t)(&meas_alpha); //TODO fix int call to handle values like: {1,2,3} and to handle negatives
+            tx_msg[6] = (int16_t)(&m_data); //TODO fix int call to handle values like: {1,2,3} and to handle negatives
             run_radio();
             counter_tx = rand_int(20, 9);
 #ifdef DEBUG
@@ -226,9 +226,9 @@ int main() {
             uart_write(buf, strlen(buf));
             snprintf(buf, sizeof(buf), "temp: %u\r\n", temp_measure);
             uart_write(buf, strlen(buf));
-            snprintf(buf, sizeof(buf), "meas_alpha %d\r\n", meas_alpha);
+            snprintf(buf, sizeof(buf), "meas_alpha %d,%d,%d\r\n", meas_alpha.x,meas_alpha.y,meas_alpha.z);
             uart_write(buf, strlen(buf));            
-            snprintf(buf, sizeof(buf), "m_data %d\r\n", m_data);
+            snprintf(buf, sizeof(buf), "m_data %d,%d,%d\r\n", m_data.x,m_data.y,m_data.z);
             uart_write(buf, strlen(buf));
             counter_debug = 5;
 #endif
