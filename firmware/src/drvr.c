@@ -75,8 +75,18 @@ uint8_t run_actuation(uint8_t axis, int8_t power, struct vec3_s data[static 1]) 
 
     if (power > 100) {
         power = 100;
+    } else if (power <= 50 && power > 0) {
+        power = 50;
+    } else if (power >= -50 && power < 0) {
+        power = -50;
     } else if (power < -100) {
         power = -100;
+    } else if (power == 0) {
+#ifdef ZERO_POWER
+        power = 0;
+#else
+        power = 10;
+#endif
     }
 
     struct vec3_s data_gyro_init;
