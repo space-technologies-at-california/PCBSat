@@ -11,4 +11,8 @@ int main(void);
 void run_radio(void);
 
 struct vec3_s global_omega;
+#ifdef NO_ACTUATE
+extern char tx_msg[10];
+#else
 extern char tx_msg[7];
+#endif
