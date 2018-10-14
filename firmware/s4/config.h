@@ -1,0 +1,5 @@
+#undef DEBUG
+#define SPRITE4
+#undef ALWAYS_SAFEMODE
+#undef DEBUG_UART
+#define DRVR_ZERO_POWER
