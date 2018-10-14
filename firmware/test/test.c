@@ -10,6 +10,8 @@ int main() {
     magnetorquer_out(m_data, g_data, &axis, &power);
     printf("axis: %u, power: %d\n", axis, power);
 
+    printf("norm (expect 81): %d\n", norm(&g_data));
+
     puts("moving average step response:");
     int16_t thing[5];
     setup_filters(thing);
