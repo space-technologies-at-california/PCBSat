@@ -36,7 +36,11 @@ unsigned char counter_tx = 0;
 unsigned char counter_lsm = 0;
 
 const char* VERSION_STR = "Spinor DEBUG (" GIT_REV ")\r\n";
+#ifdef NO_ACTUATE
+char tx_msg[10];
+#else
 char tx_msg[7];
+#endif
 
 struct vec3_s global_omega;
 struct vec3_s meas_alpha;
@@ -204,9 +208,12 @@ int main() {
 #ifdef NO_ACTUATE
             struct vec3_s m_data;
             readMag(&m_data);
-            tx_msg[4] = m_data.x & 0xff;
-            tx_msg[5] = m_data.y & 0xff;
-            tx_msg[6] = m_data.z & 0xff;
+            tx_msg[4] = m_data.x >> 8;
+            tx_msg[5] = m_data.x & 0xff;
+            tx_msg[6] = m_data.y >> 8;
+            tx_msg[7] = m_data.y & 0xff;
+            tx_msg[8] = m_data.z >> 8;
+            tx_msg[9] = m_data.z & 0xff;
 #else
             tx_msg[4] = (uint8_t)(global_val & 0xFF);
             tx_msg[5] = (int8_t)(norm(&torqued_alpha) - norm(&meas_alpha));
