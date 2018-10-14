@@ -207,9 +207,17 @@ int main() {
             // FIXME
             uint16_t global_val = (uint16_t) norm(&global_omega);
             tx_msg[3] = (uint8_t)(global_val >> 8);
+#ifdef NO_ACTUATE
+            struct vec3_s m_data;
+            readMag(&m_data);
+            tx_msg[4] = m_data.x & 0xff;
+            tx_msg[5] = m_data.y & 0xff;
+            tx_msg[6] = m_data.z & 0xff;
+#else
             tx_msg[4] = (uint8_t)(global_val & 0xFF);
             tx_msg[5] = (int8_t)(norm(&torqued_alpha) - norm(&meas_alpha));
             tx_msg[6] = (uint8_t)(run_time);
+#endif
             run_radio();
             counter_tx = rand_int(20, 9);
 #ifdef DEBUG
@@ -232,6 +240,7 @@ int main() {
             counter_debug = 3;
 #endif
         } else if (actuate_precond()) {
+#ifndef NO_ACTUATE
             run_lsm(&temp_alpha); // temp_alpha needed but not actually used
             struct vec3_s m_data;
             readMag(&m_data);
@@ -246,6 +255,7 @@ int main() {
             uart_write(buf, strlen(buf));
 #endif
             run_time = run_actuation(axis, power, &torqued_alpha);
+#endif
         }
 
         // Wait at least 1 second before looping.
