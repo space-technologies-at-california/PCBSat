@@ -1,5 +1,7 @@
 #include <msp430.h>
 
+#include "config.h"
+
 #include "pins.h"
 
 void setup_pins() {

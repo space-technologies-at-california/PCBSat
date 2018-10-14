@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "config.h"
+
 #include "battery_mon.h"
 #include "calc.h"
 #include "cc430uart.h"

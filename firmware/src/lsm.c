@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "config.h"
+
 #include "cc430uart.h"
 #include "fault.h"
 #include "i2c.h"

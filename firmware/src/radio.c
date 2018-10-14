@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#include "config.h"
+
 #include "cc430uart.h"
 #include "fault.h"
 #include "hal_pmm.h"

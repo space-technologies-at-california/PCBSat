@@ -1,3 +1,5 @@
+#include "config.h"
+
 #include "cc430uart.h"
 #include "pins.h"
 

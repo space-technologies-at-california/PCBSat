@@ -1,6 +1,8 @@
 #include <msp430.h>
 #include <stdbool.h>
 
+#include "config.h"
+
 #include "cc430uart.h"
 #include "drvr.h"
 #include "battery_mon.h"
