@@ -203,8 +203,6 @@ int main() {
             tx_msg[0] = 0;
             tx_msg[1] = (faults << 2) | (((batt_voltage - 127)>>6) & 0x03);
             tx_msg[2] = temp_measure;
-            // tx_msg[3-6] set in lsm.c
-            // FIXME
             uint16_t global_val = (uint16_t) norm(&global_omega);
             tx_msg[3] = (uint8_t)(global_val >> 8);
 #ifdef NO_ACTUATE
