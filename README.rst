@@ -21,14 +21,21 @@ Eagle
 
 Firmware
 --------
-#. Install `MSP430-GCC <http://www.ti.com/tool/msp430-gcc-opensource>`_ and `MSPDebug <https://dlbeer.co.nz/mspdebug/>`_.
+#. Install `MSP430-GCC <http://www.ti.com/tool/msp430-gcc-opensource>`_ and
+   `MSPDebug <https://dlbeer.co.nz/mspdebug/>`_.
 
-#. In *firmware/build/* make a new file called *msp430.mk.inc*, specify the path to your MSP430-GCC
-   installation. For example::
+#. In *firmware/*, make a new file called *msp430.mk.inc* and specify the path
+   to your MSP430-GCC installation. For example::
 
     MSP430_TOOLCHAIN=/usr/local/gcc-msp430-ti-toolchain-5.01.02.00
 
-#. Make sure you are in the *firmware/build/* directory and run ``make`` to build.
+#. Run ``make`` from *firmware/* to build all firmware configurations. To
+   build a specific configuration, change to the appropriate subdirectory (for
+   example, *debug/*) and run ``make``. If ``make`` complains about a missing
+   *gitrev.h*, type ``make gitrev.h`` and re-run.
+
+#. To change a build configuration, edit *config.h* in the appropriate
+   subdirectory.
 
 Programming
 ~~~~~~~~~~~
