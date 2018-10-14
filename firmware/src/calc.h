@@ -13,3 +13,4 @@ void setup_filters(int16_t filter[5]);
 void vec_cross(struct vec3_s a, struct vec3_s b, struct vec3_s res[static 1]);
 int32_t vec_dot(struct vec3_s a, struct vec3_s b);
 void magnetorquer_out(struct vec3_s m_data, struct vec3_s g_data, uint8_t *axis, int8_t *power);
+uint32_t norm(struct vec3_s *x);

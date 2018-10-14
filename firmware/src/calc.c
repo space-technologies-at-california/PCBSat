@@ -27,6 +27,10 @@ void setup_filters(int16_t filter[MOVING_AVG_FILTER_LEN]) {
     }
 }
 
+uint32_t norm(struct vec3_s *x) {
+    return (x->x * x->x) + (x->y * x->y) + (x->z * x-> z);
+}
+
 void vec_cross(struct vec3_s a, struct vec3_s b, struct vec3_s res[static 1]) {
     res->x = a.y * b.z - a.z * b.y;
     res->y = a.z * b.x - a.x * b.z;
