@@ -1,9 +1,8 @@
 *.[do]
 *.map
-build/main
 cscope.out
 gitrev.h
+main
 msp430.mk.inc
-sprite_main
 tags
 test/test

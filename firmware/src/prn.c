@@ -1,3 +1,5 @@
+#include "config.h"
+
 #if defined(DEBUGPRN)
 unsigned char m_prn0[64] = {
     0b00000001, 0b01011110, 0b11010100, 0b01100001, 0b00001011, 0b11110011,

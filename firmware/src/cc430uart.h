@@ -29,6 +29,8 @@
 
 #include <stdint.h>
 
+#include "config.h"
+
 // Define config for Serial.begin(baud, config);
 #define SERIAL_7N1 0x10
 #define SERIAL_8N1 0x00

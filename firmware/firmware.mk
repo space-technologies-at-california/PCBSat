@@ -3,8 +3,7 @@ MAIN = main
 SRCDIR = ../src
 
 INCLUDE = -I . -I ${SRCDIR} -I ${SRCDIR}/tilib/
-CFLAGS = -DDEBUG -DDEBUGPRN \
-		 -pipe -O2 ${INCLUDE} \
+CFLAGS = -pipe -O2 ${INCLUDE} \
 		 -ffunction-sections -fdata-sections -Xlinker --gc-sections \
          -Wl,-Map,${@F}.map
 
@@ -49,5 +48,3 @@ gitrev.h:
 
 cleandep:
 	$(RM) $(DEPS)
-
-include msp430.mk

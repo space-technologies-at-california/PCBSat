@@ -18,7 +18,11 @@
 #include "ucs.h"
 #include "wdt_a.h"
 
+#ifdef ALWAYS_SAFEMODE
+volatile uint8_t faults = FAULT_RECENT_POR | FAULT_SAFEMODE;
+#else
 volatile uint8_t faults = FAULT_RECENT_POR;
+#endif
 
 #define DEC_OR_ZERO(x) x = (x > 0) ? x - 1 : 0;
 

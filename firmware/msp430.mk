@@ -4,7 +4,6 @@ DEVICE=cc430f5135
 
 # Override the following, if necessary:
 MSPDEBUG?=mspdebug tilib
-include msp430.mk.inc
 MSP430_SUPPORT_DIR?=${MSP430_TOOLCHAIN}/include
 
 # The rest should be fine:
