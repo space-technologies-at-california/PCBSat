@@ -50,6 +50,12 @@ Programming
 #. Run ``make prog`` to program, and run ``make verify`` to read back what was
    programmed.
 
+Simulation
+~~~~~~~~~~~
+#. Install the igrf12 library using the instructions outlined in their github: https://github.com/scivision/igrf12
+#. Navigate to simulations/python/ and run ``python3 tf_data_gen.py`` 
+#. The current version outputs 5 pairs of (magnetometer data (x,y,z), gyrometer data (x,y,z), expected axis output, expected power output) to the console. 
+
 
 Directory Structure
 ===================
