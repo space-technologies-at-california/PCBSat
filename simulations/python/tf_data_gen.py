@@ -107,4 +107,6 @@ def random_m_g():
         print("G_Data: {}".format(v))
         print("Axis: {}".format(axis))
         print("Power: {}\n".format(power))
-random_m_g()
+
+if __name__ == "__main__":
+    random_m_g()
