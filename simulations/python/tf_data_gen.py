@@ -1,5 +1,6 @@
 import numpy as np
 import random
+import igrf12
 
 magnetorquer_properties = [100, 100, 200] 
 CONTROLLER_GAIN = 1000
@@ -10,22 +11,58 @@ def cross(a,b):
 def dot(a,b):
     return sum([i * j for i, j in zip(a, b)])
 
+
 def generate_m_data():
     '''
     #FIXME: Check if these are logical bounds
-    int16_t range: -32,768 .. 32,767
+        
+    1) Pull random datapoint from https://natronics.github.io/ISS-photo-locations/
+    2) Create igrf model at lat and lon specified by #1 and at alt_km = between 330-435km (https://en.wikipedia.org/wiki/International_Space_Station)
+    3) Convert igrf north, east, down -> x,y,z (nT to gauss)
+
+    According to http://geomag.nrcan.gc.ca/mag_fld/comp-en.php: 
+    X is positive northward
+    Y is positive eastward
+    Z is positive downward
+
+    4) Return expected (x,y,z) + random noise 
+
     '''
-    low = -32768
-    high = 32767
-    return [random.randint(low,high) for _ in range(3)]
+    
+    # TODO: Instead of random selection from a single csv, could use the entire dataset. 
+    lines = open('data/ISS001.csv').read().splitlines()
+    line = random.choice(lines)
+
+    columns = line.split(',')
+    latitude = float(columns[1])
+    longitude = float(columns[2])
+
+    altitude = random.randint(330,435)
+
+    #TODO: Instead of the 2010 model, could use the 2015 model. 
+    mag = igrf12.igrf('2010-07-12', glat=latitude, glon=longitude, alt_km=altitude)
+
+    #Convert nT to Gauss
+    x = mag.north.values[0] / 100000
+    y = mag.east.values[0] / 100000
+    z = mag.down.values[0] / 100000
+
+    #Add random noise
+    x = x + random.uniform(-0.01, 0.01)
+    y = y + random.uniform(-0.01, 0.01)
+    z = z + random.uniform(-0.01, 0.01)
+
+    return [x,y,z]
 
 def generate_g_data():
     '''
     #FIXME: Check if these are logical bounds
-    int16_t range: -32,768 .. 32,767
+
+    deg/s 
+    [-90...90] range assumed from video of pcbsat deployment
     '''
-    low = -32768
-    high = 32767
+    low = -90
+    high = 90
     return [random.randint(low,high) for _ in range(3)]
 
 def magnetorquer_output(m_data, g_data):
@@ -57,7 +94,7 @@ def hardcoded_m_g():
     print("M_Data: {}".format(u))
     print("G_Data: {}".format(v))
     print("Axis: {}".format(axis))
-    print("Power: {}".format(power))
+    print("Power: {}\n".format(power))
 
 def random_m_g():
     for _ in range(5):
@@ -69,4 +106,5 @@ def random_m_g():
         print("M_Data: {}".format(u))
         print("G_Data: {}".format(v))
         print("Axis: {}".format(axis))
-        print("Power: {}".format(power))
+        print("Power: {}\n".format(power))
+random_m_g()
