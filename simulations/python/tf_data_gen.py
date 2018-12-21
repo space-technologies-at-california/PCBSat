@@ -14,7 +14,6 @@ def dot(a,b):
 
 def generate_m_data():
     '''
-    #FIXME: Check if these are logical bounds
         
     1) Pull random datapoint from https://natronics.github.io/ISS-photo-locations/
     2) Create igrf model at lat and lon specified by #1 and at alt_km = between 330-435km (https://en.wikipedia.org/wiki/International_Space_Station)
@@ -56,14 +55,20 @@ def generate_m_data():
 
 def generate_g_data():
     '''
-    #FIXME: Check if these are logical bounds
+    #FIXME: Rotation along z is a lot more complex so need to change. 
 
     deg/s 
     [-90...90] range assumed from video of pcbsat deployment
     '''
-    low = -90
-    high = 90
-    return [random.randint(low,high) for _ in range(3)]
+    x = random.uniform(-1, 1)
+    y = random.uniform(-1, 1)
+
+    z_range_one = random.uniform(-90, -60) 
+    z_range_two = random.uniform(60, 90)
+    out = np.stack((z_range_one,z_range_two))
+    z = np.random.choice(out)
+
+    return [x,y,z]
 
 def magnetorquer_output(m_data, g_data):
     
@@ -109,4 +114,9 @@ def random_m_g():
         print("Power: {}\n".format(power))
 
 if __name__ == "__main__":
+    '''
+    #TODO: The dataset created through random_m_g() is only individual points to test a model of
+    (magnetometer, gyro data) -> (axis, power). The next step is creating a dataset of a 
+    trajectory of points where the gyro,mag data would change per timestep. 
+    '''
     random_m_g()
