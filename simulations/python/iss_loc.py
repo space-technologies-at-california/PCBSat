@@ -4,11 +4,14 @@ import threading
 from time import time
 import csv
 
+counter = 0 
+ret_lst = []
 
 def pull_iss_data():
+	global counter
 	t = threading.Timer(10.0, pull_iss_data)
 	t.start()
-	if time() - doc_id > 10000:
+	if time() - doc_id > 32400:
 		t.cancel()
 
 		doc_name = "{}.csv".format(("iss_loc_data_{}".format(doc_id)).split(".")[0])
@@ -29,9 +32,10 @@ def pull_iss_data():
 
 		row = "{},{},{}\n".format(ts, lat, lon)
 
+		print('Counter: {}'.format(counter))
+		counter += 1
 		print(row)
 		ret_lst.append(row)
 
 doc_id = time()
-ret_lst = []
 pull_iss_data()
