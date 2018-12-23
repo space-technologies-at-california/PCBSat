@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import random
 import argparse
+import math 
 
 import igrf12
 
@@ -27,8 +28,17 @@ def magnetorquer_output(m_data, g_data):
 	angular = [cross(mu, m_data) for mu in unit_dir]
 	similarity = [dot(angular[i], g_data)*magnetorquer_properties[i] for i in range(len(angular))]
 
+	print("M_Data: {}".format(m_data))
+	print("G_Data: {}".format(g_data))
+	print("angular: {}".format(angular))
+	print("similarity: {}".format(similarity))
+	
 	axis = np.argmax(np.abs(similarity))
 	power = similarity[axis] / CONTROLLER_GAIN
+
+	print("axis: {}".format(axis))
+	print("power: {}\n".format(power))
+
 	return axis,power
 
 
@@ -56,9 +66,9 @@ def add_gyro(df):
     out = np.stack((z_range_one,z_range_two))
     gyro_z = np.random.choice(out)
 
-    df['gyro_x'] = gyro_x
-    df['gyro_y'] = gyro_y
-    df['gyro_z'] = gyro_z
+    df['gyro_x'] = math.radians(gyro_x)
+    df['gyro_y'] = math.radians(gyro_y)
+    df['gyro_z'] = math.radians(gyro_z)
 
     return True
 
@@ -78,6 +88,10 @@ def add_axis_power(df):
 	df['power'] = powerLst
 
 	return True
+
+def plot_mag():
+	df = pd.read_csv("exp_1.csv")
+	df.plot(x="timestamp", y=["mag_x", "mag_y", "mag_z"])
 
 if __name__ == "__main__":
     '''
