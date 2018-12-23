@@ -52,21 +52,10 @@ Programming
 
 Simulation
 ----------
-#. Install the igrf12 library using the instructions outlined in their github: https://github.com/scivision/igrf12
+Dependencies: igrf12 (https://github.com/scivision/igrf12)
 
-Individual Points
-~~~~~~~~~~~~~~~~~
-
-#. Navigate to simulations/python/ and run ``python3 tf_data_gen.py``. This will generate initialization points for the magnetometer and gyrometer data and output the appropriate axis and power output for each pair. The current version will create five sets of initialization points but this can be configured. 
-
-Trajectories 
-~~~~~~~~~~~~
-
-In order to generate trajectories of magnetometer data and gyrometer data, 
-
-#. Run ``python3 iss_loc.py``. This will collect (timestamp, latitude,longitude) data of the ISS for 9 hours at 10 second increments. This will create an output file in the current directory titled ``iss_loc_data_{timestamp}.csv``.  
-#. Run ``python3 merge_iss_data.py -f iss_loc_data_{timestamp}.csv`` where timestamp corresponds to the file created in the previous step. This will create an output file in the current directory that contains the magnetometer data for x, y, and z in addition to the previous contents. This output file will be titled ``iss_loc_data_{timestamp}_merged.csv``. The units for the magnetometer data are Gauss. 
-#. Run ``python3 add_gyro_data.py -f iss_loc_data_{timestamp}_merged.csv`` where timestamp corresponds to the file created in the previous step. This will create a random initialization of gyrometer data (x,y,z) within logical bounds and then add that to the contents of the previous csv. It will create an output file in the current directory titled ``iss_loc_data_{timestamp}_full.csv``. The units for the gyrometer data are degrees/second. 
+#. Run ``python3 pull_iss_locdata.py``. This will collect (timestamp, latitude,longitude) data of the ISS for 9 hours at 10 second increments. This will create an output file in the current directory titled ``iss_loc_data_{timestamp}.csv``.  
+#. Run ``python3 data_gen.py -f iss_loc_data_{timestamp}.csv`` where timestamp corresponds to the file created in the previous step. This will create an output file in the current directory that contains magnetometer data (x,y,z), gyrometer data (x,y,z), and the expected axis and power that the PCBSat should rotate along in addition to the file's previous contents. This output file will be titled ``full_{timestamp}.csv``. The units for the magnetometer data are Gauss and the units for the gyrometer data are degrees/second.  
 
 
 Directory Structure
