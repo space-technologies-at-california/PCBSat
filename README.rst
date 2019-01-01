@@ -55,7 +55,7 @@ Simulation
 Dependencies: igrf12 (https://github.com/scivision/igrf12)
 
 #. Run ``python3 pull_iss_locdata.py``. This will collect (timestamp, latitude,longitude) data of the ISS for 9 hours at 10 second increments. This will create an output file in the current directory titled ``iss_loc_data_{timestamp}.csv``.  
-#. Run ``python3 data_gen.py -f iss_loc_data_{timestamp}.csv`` where timestamp corresponds to the file created in the previous step. This will create an output file in the current directory that contains magnetometer data (x,y,z), gyrometer data (x,y,z), and the expected axis and power that the PCBSat should rotate along in addition to the file's previous contents. This output file will be titled ``full_{timestamp}.csv``. The units for the magnetometer data are Gauss and the units for the gyrometer data are degrees/second.  
+#. Run ``python3 data_gen.py -f iss_loc_data_{timestamp}.csv`` where timestamp corresponds to the file created in the previous step. This will create an output file in the current directory that contains magnetometer data (x,y,z), gyrometer data (x,y,z), and the expected axis and power that the PCBSat should rotate along in addition to the file's previous contents. This output file will be titled ``full_{timestamp}.csv``. The units for the magnetometer data are Gauss and the units for the gyrometer data are radians/second.  
 
 
 Directory Structure
