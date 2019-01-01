@@ -52,7 +52,7 @@ def add_mag(df):
     	longitude = df.iloc[i][2]
     	mag = igrf12.igrf('2010-07-12', glat=latitude,
     	                  glon=longitude, alt_km=altitude)
-    	df.at[i, 'mag_x'] = mag.north.values[0] / 100000
+    	df.at[i, 'mag_x'] = mag.north.values[0] / 100000 - 0.2 #FIXME: Remove 0.2, it's just a temporary test 
     	df.at[i, 'mag_y'] = mag.east.values[0] / 100000
     	df.at[i, 'mag_z'] = mag.down.values[0] / 100000
 
@@ -134,14 +134,9 @@ if __name__ == "__main__":
     df = pd.read_csv(file_name)
 
     add_mag(df)
-    add_gyro_sep(df)
+    add_gyro(df)
     add_axis_power(df)
 
     input_file_name = "full_{}".format(file_name.split("_")[3])
 
     df.to_csv(input_file_name, index=False)
-
-
-
-
-
