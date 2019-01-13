@@ -3,8 +3,8 @@ import pandas as pd
 import random
 import argparse
 import math
-
 import igrf12
+from sklearn.preprocessing import MinMaxScaler
 
 
 # ----- Utility functions ----- #
@@ -22,23 +22,23 @@ def dot(a, b):
 def magnetorquer_output(m_data, g_data):
 
 	magnetorquer_properties = [100, 100, 200]
-	CONTROLLER_GAIN = 2000
+	CONTROLLER_GAIN = 1 #2000
 
 	unit_dir = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
 	angular = [cross(mu, m_data) for mu in unit_dir]
 	similarity = [dot(angular[i], g_data)*magnetorquer_properties[i]
 	                  for i in range(len(angular))]
 
-	print("M_Data: {}".format(m_data))
-	print("G_Data: {}".format(g_data))
-	print("angular: {}".format(angular))
-	print("similarity: {}".format(similarity))
+	#print("M_Data: {}".format(m_data))
+	#print("G_Data: {}".format(g_data))
+	#print("angular: {}".format(angular))
+	#print("similarity: {}".format(similarity))
 
 	axis = np.argmax(np.abs(similarity))
 	power = similarity[axis] / CONTROLLER_GAIN
 
-	print("axis: {}".format(axis))
-	print("power: {}\n".format(power))
+	#print("axis: {}".format(axis))
+	#print("power: {}\n".format(power))
 
 	return axis, power
 
@@ -113,11 +113,30 @@ def add_axis_power(df):
 	df['axis'] = axisLst
 	df['power'] = powerLst
 
+	scaler = MinMaxScaler()
+	df['power_norm'] = scaler.fit_transform(df['power'].values.reshape(-1, 1))
+	df['power_norm'] = df['power_norm'].apply(lambda x: x*100)
+
 	return True
 
 def plot_mag():
-	df = pd.read_csv("exp_1.csv")
+	df = pd.read_csv("exp_1.csv") #FIXME: Replace exp_1.csv with param
 	df.plot(x="timestamp", y=["mag_x", "mag_y", "mag_z"])
+
+
+def atmospheric_drag_ds(df):
+	'''
+	1) Create new df
+	2) It should contain 3 sets of points:
+		-Current location (lat, lon, altitude of current timestamp)
+		-Expected location (lat, lon, altitude of next timestamp)
+		-Actual location (lat, lon, altitude of next timestamp + drag noise)
+
+	This will only generate predictions of drag for the next timestamp. 
+	If we want to create predictions for a sequence of timestamps then will need to iterate through 2) by adding more drag noise to each timestamped location. 
+	'''
+	return 
+
 
 if __name__ == "__main__":
     '''
