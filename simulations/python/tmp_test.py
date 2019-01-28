@@ -16,7 +16,7 @@ N = 200
 l = .035
 m = 0.005
 
-torque_time = 0.1 # seconds
+torque_time = 0.1 # seconds #TODO: We pull mag_data at 10 second intervals so need to update
 
 def torque(N, I, A, B, theta):
 	return N * I * A * B * np.sin(theta)
