@@ -71,7 +71,8 @@ def updateGyro(df):
 def plotvsTime(g_data_arr):
 	g_data = np.array(g_data_arr)
 	df = pd.DataFrame(g_data, columns=['gyro_x', 'gyro_y', 'gyro_z'])
-	df.plot(subplots=True)
+	#df.plot(subplots=True)
+	df.plot(y=['gyro_x', 'gyro_y'])
 	plt.show()
 
 if __name__ == "__main__":
